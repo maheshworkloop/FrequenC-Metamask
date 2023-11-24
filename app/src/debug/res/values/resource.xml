@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RoundedBottom">
+        <item name="cornerSizeBottomLeft">@dimen/_60sdp</item>
+        <item name="cornerSizeBottomRight">@dimen/_60sdp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="RoundCorner">
+        <item name="cornerSize">@dimen/_8sdp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="RoundCorner2">
+        <item name="cornerSize">@dimen/_12sdp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="BottomNavigationActive" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:textSize">@dimen/_9sdp</item>
+        <item name="font">@font/robotocondensed_regular </item>
+        <item name="android:textColor">@color/font_color</item>
+        <item name="iconTint">@color/font_color</item>
+    </style>
+
+    <style name="BottomNavigationViewInActive" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:textSize">@dimen/_9sdp</item>
+        <item name="font">@font/robotocondensed_regular </item>
+    </style>
+
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:height">@dimen/_70sdp</item> <!-- Set your desired height here -->
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+
+</resources>

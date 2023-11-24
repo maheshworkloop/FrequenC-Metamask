@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#E6FFFFFF"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.1"
+            android:id="@+id/ivItemImage"
+            app:layout_constraintTop_toTopOf="@id/tvItemDetail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tvItemDetail"
+            android:src="@color/black_blur" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_13sdp"
+            android:id="@+id/tvItemDetail"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@id/ivItemImage"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toStartOf="@id/tvTime"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.05"
+            app:layout_constraintTop_toTopOf="@id/tvItemDetail"
+            app:layout_constraintBottom_toBottomOf="@id/tvItemDetail"
+            android:elevation="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/dislike"
+            app:layout_constraintDimensionRatio="1:1"
+            android:id="@+id/btnRead" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            app:layout_constraintBottom_toTopOf="@id/btnRead"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tvTime"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@id/tvItemDetail"
+            android:textSize="13sp"
+            android:text="2 min ago"
+            android:textColor="@color/gray_light"
+            android:fontFamily="@font/robotocondensed_regular" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/gray_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivItemImage"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

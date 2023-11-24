@@ -1,0 +1,32 @@
+package com.dev.frequenc.ui_codes.data
+
+class ArtistResponse(
+    val tags: List<String>,
+    val _id: String,
+    val status: String,
+    val sub_category: List<String>,
+    val managed_by: String,
+    val event: List<String>,
+    val bank_id: List<String>,
+    val kyc_id: List<String>,
+    val manager: List<String>,
+    val trendingScore: Int,
+    val created_at: String,
+    val updated_at: String,
+    val __v: Int,
+    val address: String,
+    val artist_name: String,
+    val banner_pic: String,
+    val bio_description: String,
+    val category: String,
+    val city: String,
+    val country: String,
+    val email: String,
+    val firstName: String,
+    val gender: String,
+    val lastName: String,
+    val nationality: String,
+    val price: Double,
+    val profile_pic: String,
+    val state: String
+)

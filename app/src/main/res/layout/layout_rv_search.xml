@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:id="@+id/cvEvent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivEvent"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/nature"
+        android:scaleType="fitXY"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        app:shapeAppearance="@style/RoundCorner"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvEventName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/ivEvent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Artisan Food Festival"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/robotocondensed_bold"
+        android:textColor="@drawable/font_color"
+        android:letterSpacing="0.02"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:maxLines="1"
+        />
+
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="wrap_content"
+        android:text="Event"
+        app:layout_constraintLeft_toLeftOf="@id/tvEventName"
+        app:layout_constraintTop_toTopOf="@id/tvDescription"
+        app:layout_constraintBottom_toBottomOf="@id/tvDescription"
+        android:maxLines="1"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/robotocondensed_regular"
+        android:textColor="@color/black"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_3sdp"
+        app:layout_constraintLeft_toRightOf="@id/tvType"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvEventName"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="62, Bory , Dr Depew, New York"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/robotocondensed_regular"
+        android:textColor="@color/black"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:maxLines="1"
+        />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
