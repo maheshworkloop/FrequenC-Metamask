@@ -70,19 +70,10 @@ class MainActivity  : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_marketplace ->
-                {
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
-//                    binding.bottomNavigationView.getMenu().clear(); //clear old inflated items.
-//                    binding.bottomNavigationView.inflateMenu(R.menu.menu_bottom_connect)
-                }
                 R.id.bottom_create      -> setCurrentFragment(createFragment, "CreateFragment")
                 R.id.bottom_connect     ->
-//                      startActivity(Intent(this,ConnectHomeActivity::class.java))
-                {
                     setCurrentFragment(connectFragment, "ConnectFragment")
-//                    binding.bottomNavigationView.getMenu().clear(); //clear old inflated items.
-//                    binding.bottomNavigationView.inflateMenu(R.menu.menu_bottom_connect)
-                }
                 R.id.bottom_wallet      -> setCurrentFragment(walletFragment, "WalletFragment")
             }
 
