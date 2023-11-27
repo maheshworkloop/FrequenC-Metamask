@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +58,16 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     ): View? {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_connect_home, container, false)
+
+        val ivConnectSplash = root.findViewById<GifImageView>(R.id.ivAnimSplash)
+
+
+
+        val rl_splash = root.findViewById<RelativeLayout>(R.id.rl_splash)
+
+        Handler().postDelayed({
+            rl_splash.visibility =View.GONE
+        }, 3000)
 
         tabLayout = root.findViewById(R.id.tabLayout)
         viewPager = root.findViewById(R.id.viewPager)
