@@ -22,6 +22,11 @@
         <item name="cornerFamily">rounded</item>
     </style>
 
+    <style name="RoundCorner3">
+        <item name="cornerSize">@dimen/_10sdp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
     <style name="BottomNavigationActive" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:textSize">@dimen/_9sdp</item>
         <item name="font">@font/robotocondensed_regular </item>

@@ -35,6 +35,7 @@ class KeysConstant {
 
         const val BOOKMARK_EVENT = "bookmark/savedEvents"
         const val Register_attendee = "auth/registerAttendee"
+        const val Initiate_payment = "payments/initiate-payment"
 
     }
 

@@ -30,8 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import io.metamask.androidsdk.Ethereum
-import io.metamask.androidsdk.EthereumState
 
 
 @Composable
@@ -61,12 +59,13 @@ fun DappActionsScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Send transaction button
             DappButton(buttonText = stringResource(R.string.sign)) {
                 onSignMessage()
             }
 
             Spacer(modifier = Modifier.height(12.dp))
+
+
             // Send transaction button
             DappButton(buttonText = stringResource(R.string.send)) {
                 onSendTransaction()

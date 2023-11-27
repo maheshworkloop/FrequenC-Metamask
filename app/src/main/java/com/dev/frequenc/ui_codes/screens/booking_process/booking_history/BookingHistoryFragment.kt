@@ -254,7 +254,6 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
         binding.upcomingTab.background = resources.getDrawable(R.drawable.transparent_bg)
     }
 
-
     override fun onResume() {
         super.onResume()
         binding.headerLays.tvHeader.text = "Booking History"

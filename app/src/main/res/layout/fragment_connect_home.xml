@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui_codes.connect.home.ConnectHomeFragment">
+
+
+    <RelativeLayout
+            android:id="@+id/rl_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <include layout="@layout/layout_header"
+          android:id="@+id/rl_top"
+            />
+
+
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/material_red_500"
+            app:tabIndicatorColor="@color/material_red_500"
+            style="@style/TabLayout"
+            android:layout_below="@id/rl_top"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tabLayout"
+
+            />
+
+   <RelativeLayout
+           android:id="@+id/rl_splash"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="@color/white"
+           android:elevation="@dimen/_5sdp"
+           android:gravity="center"
+           >
+
+       <pl.droidsonroids.gif.GifImageView
+               android:id="@+id/ivConnectSplash"
+               android:layout_width="@dimen/_90sdp"
+               android:layout_height="@dimen/_50sdp"
+               android:scaleType="fitCenter"
+               android:layout_centerInParent="true"
+               android:elevation="@dimen/_10sdp"
+               android:src="@drawable/frequenc_loader"
+               />
+
+       <TextView
+               android:id="@+id/tvConnectSplash"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="FrequenC"
+               android:background="@drawable/bg_location"
+               android:textColor="@color/black"
+               android:layout_marginTop="@dimen/_5sdp"
+               android:layout_marginLeft="@dimen/_10sdp"
+               android:layout_marginRight="@dimen/_4sdp"
+               android:layout_centerVertical="true"
+               android:textSize="@dimen/_18sdp"
+               android:maxLines="1"
+               android:ellipsize="end"
+               android:fontFamily="@font/epilogueregular"
+               android:layout_below="@id/ivConnectSplash"
+               android:layout_centerHorizontal="true"
+               />
+
+       <TextView
+               android:id="@+id/tvConnectSplashTag"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Where Hearts Connect, Love finds Its Sync."
+               android:background="@drawable/bg_location"
+               android:layout_marginLeft="@dimen/_10sdp"
+               android:layout_marginRight="@dimen/_4sdp"
+               android:layout_centerVertical="true"
+               android:textSize="@dimen/_12sdp"
+               android:maxLines="1"
+               android:ellipsize="end"
+               android:fontFamily="@font/epilogueregular"
+               android:layout_below="@id/tvConnectSplash"
+               android:layout_centerHorizontal="true"
+               android:textColor="@color/material_grey_500"
+               android:layout_marginTop="@dimen/_8sdp"
+               />
+
+   </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

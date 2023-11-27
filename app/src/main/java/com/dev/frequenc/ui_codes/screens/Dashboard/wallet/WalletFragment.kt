@@ -60,6 +60,7 @@ class WalletFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         walletBinding.btnConnect.setOnClickListener {
+
             try {
                 if (walletViewModel.connectedVals.value == false) {
                     walletViewModel.connect(dapp) { result ->
@@ -86,7 +87,6 @@ class WalletFragment : Fragment() {
     private fun showMessage(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
-
 
     override fun onResume() {
         super.onResume()

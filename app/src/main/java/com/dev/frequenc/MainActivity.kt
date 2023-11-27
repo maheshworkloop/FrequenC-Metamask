@@ -23,7 +23,6 @@ import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 

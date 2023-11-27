@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/bottom_marketplace"
+            android:title="Market Place"
+            android:icon="@drawable/ic_marketplace"/>
+
+    <item
+            android:id="@+id/bottom_create"
+            android:title="Connect"
+            android:icon="@drawable/ic_heart"/>
+    <item
+            android:id="@+id/bottom_connect"
+            android:title="Connect"
+            android:icon="@drawable/chat"/>
+
+
+
+    <item
+            android:id="@+id/bottom_wallet"
+            android:title="Wallet"
+            android:icon="@drawable/wallet"/>
+
+</menu>

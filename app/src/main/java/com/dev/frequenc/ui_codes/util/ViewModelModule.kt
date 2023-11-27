@@ -9,19 +9,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityScoped
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
-
-@Module
-@InstallIn(ActivityComponent::class)
-internal object ViewModelModule {
-
-    @Provides
-    fun provideSharedViewModel(activity: FragmentActivity): WalletViewModel {
-        return ViewModelProvider(activity).get(WalletViewModel::class.java)
-    }
-}
-
+//
+//@Module
+//@InstallIn(ActivityComponent::class)
+//object ViewModelModule {
+//
+//    @Provides
+//    @ActivityScoped
+//    fun provideSharedViewModel(): WalletViewModel {
+//        return ViewModelProvider().get(WalletViewModel::class.java)
+//    }
+//}

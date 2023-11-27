@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
@@ -26,7 +27,6 @@ import com.dev.frequenc.ui_codes.screens.Dashboard.CreateFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.MarketPlaceFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.savedevent.SavedEventFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletFragment
-import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletViewModel
 import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.booking_process.booking_history.BookingHistoryFragment
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
@@ -65,7 +65,7 @@ class MainActivity  : AppCompatActivity() {
         binding.drawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
 
         val createFragment = CreateFragment()
-        val connectFRagment = ConnectFragment()
+        val connectFragment = ConnectHomeFragment()
         val marketPlace = MarketPlaceFragment()
         val walletFragment = WalletFragment()
         val savedEventFragment = SavedEventFragment()
@@ -76,8 +76,11 @@ class MainActivity  : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.bottom_marketplace -> setCurrentFragment(marketPlace, "MarketPlaceFragment")
-                R.id.bottom_create -> setCurrentFragment(createFragment, "CreateFragment")
+                R.id.bottom_marketplace ->
+                    setCurrentFragment(marketPlace, "MarketPlaceFragment")
+                R.id.bottom_create      -> setCurrentFragment(createFragment, "CreateFragment")
+                R.id.bottom_connect     ->
+                    setCurrentFragment(connectFragment, "ConnectFragment")
                 R.id.bottom_wallet -> startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
 //                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
             }

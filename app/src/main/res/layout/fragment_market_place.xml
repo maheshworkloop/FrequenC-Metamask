@@ -151,10 +151,10 @@
 
           <pl.droidsonroids.gif.GifImageView
               android:id="@+id/ivAnimSplash"
-              android:layout_width="@dimen/_93sdp"
+              android:layout_width="wrap_content"
               android:layout_height="@dimen/_32sdp"
               android:scaleType="fitCenter"
-              android:layout_marginLeft="@dimen/_10sdp"
+              android:layout_marginLeft="@dimen/_30sdp"
               android:layout_centerVertical="true"
               />
 
