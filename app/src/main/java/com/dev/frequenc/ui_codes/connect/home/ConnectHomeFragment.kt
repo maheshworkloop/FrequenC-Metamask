@@ -1,15 +1,19 @@
 package com.dev.frequenc.ui_codes.connect.home
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.connect.events.EventsFragment
+import com.dev.frequenc.ui_codes.connect.yourvibes.ShareVibesAdapter
 import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibeFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -26,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ConnectHomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ConnectHomeFragment : Fragment() {
+class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +39,7 @@ class ConnectHomeFragment : Fragment() {
 
     lateinit var tabLayout : TabLayout
     lateinit var viewPager : ViewPager
-
+    lateinit var dialog : Dialog
     lateinit var gifImageView : GifImageView
 
 
@@ -84,6 +88,10 @@ class ConnectHomeFragment : Fragment() {
 //            override fun onTabUnselected(tab: TabLayout.Tab) {}
 //            override fun onTabReselected(tab: TabLayout.Tab) {}
 //        })
+        Handler().postDelayed({
+            showPopUp()
+        }, 10000)
+
 
         return root
     }
@@ -110,6 +118,39 @@ class ConnectHomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
     }
+
+
+
+    private fun showPopUp()
+    {
+        dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.layout_dialog_share_your_vibes)
+
+        dialog.setCancelable(false)
+
+        var gifImage = dialog.findViewById<GifImageView>(R.id.ivAnimSplash)
+
+        Glide.with(requireContext()).load(R.drawable.frequenc_loader).into(gifImage)
+
+        var rvShareVibe = dialog.findViewById<RecyclerView>(R.id.rvShareVibes)
+
+        var item1 = YourVibeResponse(R.drawable.lookingforlove,"Looking For Love")
+        var item2 = YourVibeResponse(R.drawable.lookingforlove,"Free Tonight")
+        var item3 = YourVibeResponse(R.drawable.lookingforlove,"Let's be friend")
+        val mlist = listOf(item1,item2,item3)
+
+        rvShareVibe.apply {
+            layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
+            adapter = ShareVibesAdapter(mlist,this@ConnectHomeFragment)
+        }
+
+//        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.show()
+    }
+
+    override fun onClickAtShareVibe(item: YourVibeResponse) {
+        dialog.cancel()
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.dev.frequenc.ui_codes.connect.yourvibes
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
+import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.VibesProfileList.VibesUserListFragment
 import com.dev.frequenc.ui_codes.connect.home.YourVibeResponse
 import pl.droidsonroids.gif.GifImageView
@@ -26,14 +29,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [YourVibeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener,ShareVibesAdapter.ListAdapterListener {
+class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     lateinit var root : View
     lateinit var recyclerView: RecyclerView
     lateinit var mlist : List<YourVibeResponse>
-    lateinit var dialog : Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -55,13 +57,16 @@ class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener,ShareV
         var item3 = YourVibeResponse(R.drawable.lookingforlove,"Let's be friend")
          mlist = listOf(item1,item2,item3)
 
+
+
+
         recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false)
             adapter = YourVibesAdapter(mlist,this@YourVibeFragment)
         }
 
 
-        showPopUp()
+//        showPopUp()
 
         return root
     }
@@ -87,27 +92,7 @@ class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener,ShareV
     }
 
 
-    private fun showPopUp()
-    {
-        dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.layout_dialog_share_your_vibes)
 
-        dialog.setCancelable(false)
-
-        var gifImage = dialog.findViewById<GifImageView>(R.id.ivAnimSplash)
-
-        Glide.with(requireContext()).load(R.drawable.frequenc_loader).into(gifImage)
-
-        var rvShareVibe = dialog.findViewById<RecyclerView>(R.id.rvShareVibes)
-
-        rvShareVibe.apply {
-            layoutManager = GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false)
-            adapter = ShareVibesAdapter(mlist,this@YourVibeFragment)
-        }
-
-//        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
-        dialog.show()
-    }
 
     override fun onClickAtVibe(item: YourVibeResponse) {
 
@@ -117,10 +102,7 @@ class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener,ShareV
        addToBackStack("YourVibeFragment")    .commit()
     }
 
-    override fun onClickAtShareVibe(item: YourVibeResponse) {
-        dialog.cancel()
 
-    }
 
 
 
