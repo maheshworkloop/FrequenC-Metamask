@@ -1,5 +1,6 @@
 package com.dev.frequenc
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -7,17 +8,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dev.frequenc.DappScreen.*
+import com.dev.frequenc.util.Constants
 import io.metamask.androidsdk.*
-import okhttp3.internal.notifyAll
 
 @Composable
 fun Setup(
     ethereumViewModel: EthereumViewModel,
     screenViewModel: ScreenViewModel,
+    sharedPreferences: SharedPreferences,
     onBackPressed: () -> Unit
 ) {
     val navController = rememberNavController()
     val ethereumState by ethereumViewModel.ethereumState.observeAsState(EthereumState("", "", ""))
+    val sharedPreferencesEditor = sharedPreferences.edit()
 
     NavHost(navController = navController, startDestination = CONNECT.name) {
         composable(CONNECT.name) {
@@ -26,7 +29,9 @@ fun Setup(
                 onConnect = { dapp, onError ->
                     ethereumViewModel.connect(
                         dapp,
-                        onSuccess = { screenViewModel.setScreen(ACTIONS) },
+                        onSuccess = { if (it!= null && it.toString().length>6 ) {sharedPreferencesEditor.putString(Constants.MetaMaskWalletAddress,it.toString()).apply()}
+                            screenViewModel.setScreen(ACTIONS)
+                                    },
                         onError
                     )
                 },

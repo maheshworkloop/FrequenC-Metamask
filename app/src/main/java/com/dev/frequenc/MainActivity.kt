@@ -1,6 +1,8 @@
 package com.dev.frequenc
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dev.frequenc.theme.MetaMaskAndroidSDKClientTheme
 import com.dev.frequenc.ui_codes.MainActivity
+import com.dev.frequenc.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +42,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        Setup(ethereumViewModel, screenViewModel) {
+                        val sharedPreferences:SharedPreferences = this.getSharedPreferences(Constants.SharedPreference , Context.MODE_PRIVATE)
+                        Setup(ethereumViewModel, screenViewModel, sharedPreferences) {
                             // Update the activity key when starting another activity
 //                            activityKey++
                             startActivity(Intent(this@MainActivity, MainActivity::class.java))

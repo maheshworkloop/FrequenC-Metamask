@@ -30,14 +30,19 @@ class EthereumViewModel @Inject constructor(
         }
     }
 
-    fun connect(dapp: Dapp, onSuccess: () -> Unit, onError: (message: String) -> Unit) {
+    fun connect(dapp: Dapp, onSuccess: (metamaskAddress: Any?) -> Unit, onError: (message: String) -> Unit) {
         ethereum.connect(dapp) { result ->
             if (result is RequestError) {
                 Logger.log("Ethereum connection error: ${result.message}")
                 onError(result.message)
             } else {
                 Logger.log("Ethereum connection result: $result")
-                onSuccess()
+                try {
+                    onSuccess(result.toString())
+                }
+                catch (ex: Exception ) {
+                    onSuccess(null)
+                }
             }
         }
     }
