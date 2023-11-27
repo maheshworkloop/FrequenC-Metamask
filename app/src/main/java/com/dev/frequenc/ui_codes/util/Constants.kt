@@ -4,6 +4,7 @@ class Constants {
 
     companion object
     {
+        val MetaMaskWalletAddress = "PublicAddress"
         const val AudienceId = "_id"
         const val Authorization = "Authorization"
         const val ApiError = "ApiError"

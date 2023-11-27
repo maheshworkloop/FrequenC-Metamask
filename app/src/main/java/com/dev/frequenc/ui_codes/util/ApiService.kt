@@ -22,6 +22,7 @@ import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.ui_codes.data.TrendingEventsTokenResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
 import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
+import com.dev.frequenc.ui_codes.data.WalletBalenceData
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
@@ -39,6 +40,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -143,6 +145,8 @@ interface ApiService {
 
     @POST(KeysConstant.Register_attendee)
     fun registerAttendee(@Body phone_no: JSONObject): Call<Any>?
+    @GET("contract/getTokens/{eth_address}")
+    fun metamaskBalence(@Path("eth_address") et_r: String): Call<WalletBalenceData>?
 
 
 }

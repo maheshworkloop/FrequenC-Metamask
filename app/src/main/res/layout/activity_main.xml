@@ -1,56 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/drawerLayout"
-    tools:openDrawer="start"
-    tools:context=".ui_codes.MainActivity"
-    >
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawerLayout"
+        tools:openDrawer="start"
+        tools:context=".ui_codes.MainActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    <FrameLayout
-    android:id="@+id/flFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-        />
+        <FrameLayout
+                android:id="@+id/flFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            style="@style/BottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:padding="0dp"
-            app:itemIconSize="@dimen/_14sdp"
-            app:itemTextAppearanceActive="@style/BottomNavigationActive"
-            app:itemTextAppearanceInactive="@style/BottomNavigationViewInActive"
-            app:labelVisibilityMode="labeled"
-            app:itemTextColor="@color/bnv_icon_color_selector"
-            app:itemIconTint="@color/bnv_icon_color_selector"
-            app:menu="@menu/menu_bottom_nav" />
+                android:id="@+id/bottomNavigationView"
+                style="@style/BottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:padding="0dp"
+                app:itemIconSize="@dimen/_14sdp"
+                app:itemTextAppearanceActive="@style/BottomNavigationActive"
+                app:itemTextAppearanceInactive="@style/BottomNavigationViewInActive"
+                app:labelVisibilityMode="labeled"
+                app:itemTextColor="@color/bnv_icon_color_selector"
+                app:itemIconTint="@color/bnv_icon_color_selector"
+                app:menu="@menu/menu_bottom_nav" />
 
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                app:cardElevation="@dimen/_7sdp"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                app:cardCornerRadius="@dimen/_7sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Connect to Metamask "
+                        android:textAlignment="center"
+                        android:textSize="17sp"
+                        android:id="@+id/headMetamask"
+                        android:fontFamily="@font/robotocondensed_bold"
+                        android:layout_marginTop="@dimen/_10sdp" />
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/headMetamask"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:textSize="13sp"
+                        android:text="It seems you are not connected to the metamask . It is required to connect to metamask in order to use metamask wallet .\n Do You want to Connect: "
+                        android:id="@+id/tvConnectDesc" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Connect"
+                        app:layout_constraintStart_toStartOf="@id/headMetamask"
+                        android:id="@+id/btnConnect"
+                        android:layout_marginVertical="@dimen/_20sdp"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toBottomOf="@id/tvConnectDesc"
+                        android:fontFamily="@font/robotocondensed_regular"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toStartOf="@id/btnSkip"
+                        android:background="@drawable/purple_corner_cut_bg"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Skip"
+                        app:layout_constraintEnd_toEndOf="@id/headMetamask"
+                        android:id="@+id/btnSkip"
+                        android:layout_marginVertical="@dimen/_20sdp"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toTopOf="@id/btnConnect"
+                        android:fontFamily="@font/robotocondensed_regular"
+                        android:textColor="@color/white"
+                        android:background="@drawable/purple_corner_cut_bg"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        app:layout_constraintStart_toEndOf="@id/btnConnect"
+                        app:layout_constraintBottom_toBottomOf="@id/btnConnect" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
 
-  <include layout="@layout/layout_navigation"
-      android:id="@+id/navbar"
+    <include
+            layout="@layout/layout_navigation"
+            android:id="@+id/navbar"
 
-      />
+            />
 
 </androidx.drawerlayout.widget.DrawerLayout>
