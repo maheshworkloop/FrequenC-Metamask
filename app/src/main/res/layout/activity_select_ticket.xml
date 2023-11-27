@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui_codes.screens.SelectTicket.SelectTicketActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:elevation="@dimen/_5sdp"
+            android:indeterminateTint="@color/grey"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/icon_left_arrow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSelectTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Ticket"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTicket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSelectTicket"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNumberofSeatsTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of Seats: 1"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintTop_toBottomOf="@id/rvTicket"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTotalSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50 seats"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintTop_toTopOf="@id/tvNumberofSeatsTag"
+            app:layout_constraintBottom_toBottomOf="@id/tvNumberofSeatsTag"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNumberofSeatsTag"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:progress="1"
+            android:thumb="@drawable/seekbar_thumb"
+            android:min="1"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNumberofSeatsTag"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:visibility="invisible"
+
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAmountTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintTop_toBottomOf="@id/tvSeekBar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:letterSpacing="0.01"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FRQ "
+            android:textSize="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintTop_toBottomOf="@id/tvSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:letterSpacing="0.02"
+            android:textColor="@color/font_color"
+            />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvAmountEther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(0.5 Ether)"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/robotocondensed_bold"
+            app:layout_constraintTop_toBottomOf="@id/tvAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:letterSpacing="0.05"
+            android:visibility="gone"
+            />
+
+
+        <TextView
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:background="@drawable/bg_btn"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textStyle="bold"
+
+            />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

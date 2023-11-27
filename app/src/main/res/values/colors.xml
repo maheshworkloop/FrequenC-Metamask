@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black_blur">#181725</color>
+
+    <color name="light_green">#F1F8FD</color>
+    <color name="light_pink">#F7F1FE</color>
+
+    <color name="font_color">#7A46D7</color>
+    <color name="font_color2">#89298B</color>
+    <color name="font_color_purple">#8023EB</color>
+
+    <color name="light_blue_bg">#EEF4FF</color>
+
+    <color name="silver">#E6E3F5</color>
+    <color name="gray2">#434E5E</color>
+
+    <color name="colorPrimary">#1e3c72</color>
+    <color name="colorPrimaryDark">#8C1717</color>
+    <color name="colorAccent">#A12B2B</color>
+    <color name="status_bar">#303F9F</color>
+    <color name="orange">#FFA500</color>
+    <color name="blue">#303F9F</color>
+    <color name="bg_all">#EDEDED</color>
+    <color name="dark_blue_color">#225675</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="occur_yellow">#EB9500</color>
+
+    <color name="material_red_500">#ffdb4437</color>
+    <color name="material_red_700">#ffc53929</color>
+
+    <color name="material_blue_500">#ff4285f4</color>
+    <color name="material_blue_700">#ff3367d6</color>
+    <color name="material_blue_A200">#ff448aff</color>
+
+
+    <!-- Accent color used by Settings -->
+
+    <color name="material_green_500">#ff0f9d58</color>
+    <color name="material_green_700">#ff0b8043</color>
+
+    <color name="material_yellow_700">#fff09300</color>
+
+    <color name="material_orange_700">#fff57c00</color>
+
+    <!-- Neutral colors -->
+
+    <color name="material_grey_500">#ffa3a3a3</color>
+    <color name="offwhite">#E6DFDF</color>
+    <color name="material_grey_700">#ff717171</color>
+    <color name="material_grey_800">#424242</color>
+    <color name="colorBg">#80B0C4DE</color>
+
+    <color name="app_color">#1e3c72</color>
+    <color name="bg_icon_color">#E7EFFF</color>
+    <color name="bg_profile_icon_color">#3858BE</color>
+    <color name="bottom_navigation_color">#3858BE</color>
+
+
+    <color name="material_blue_grey_300">#ff90a4ae</color>
+    <color name="material_blue_grey_500">#ff607d8b</color>
+
+    <color name="light_blue">#CCD7FF</color>
+<!--    <color name="light_pink">#FFDDDD</color>-->
+    <color name="dark_pink">#FFCBD1</color>
+
+
+    <color name="status_active">#1DD75B</color>
+    <color name="status_inactive">#DEE1E6</color>
+
+
+
+    <color name="colorLabel">#000000</color>
+    <color name="app_color_gradient">#D16954</color>
+    <color name="dark_blue">#235977</color>
+
+    <color name="login_1">#DBF0FC</color>
+    <color name="login_2">#DEDBFC</color>
+
+    <color name="btn_green">#13ca7a</color>
+    <color name="sky_blue">#87ceeb</color>
+    <color name="off_white">#CDCDCD</color>
+    <color name="grey_circle">#E7E8EB</color>
+    <color name="amber">#FFBF00</color>
+    <color name="recharge_status_bar">#C2185B</color>
+
+    <color name="green">#4cc08f</color>
+    <color name="dark_green_status">#3A8E45</color>
+
+    <color name="blue_background">#159AE8</color>
+    <color name="enable">#000000</color>
+    <color name="color_green">#3bd391</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+
+    <color name="new_app_color">#159AE8</color>
+    <color name="backgroundColor">#eef2f5</color>
+    <color name="appColor">#163a63</color>
+
+
+
+    <color name="Pending">#FFA726</color>
+    <color name="Success">#66BB6A</color>
+    <color name="Failed">#EF5350</color>
+    <color name="Opening_Balance">#29B6F6</color>
+    <color name="Debited">#C2185B</color>
+
+
+    <color name="colorMain">#2e2f9d</color>
+    <color name="colorBackground">#e9edf0</color>
+    <color name="colorMainLight">#7072EF</color>
+
+    <color name="kyc_background">#f5f7fa</color>
+
+    <color name="invisible_color">#A2AFF6</color>
+    <color name="grey">#616161</color>
+    <color name="gray_light">#656565</color>
+    <color name="gray_2">#DBD7F1</color>
+    <color name="black_blur_light">#DBD7F1</color>
+    <color name="orange_light">#FF1B88</color>
+    <color name="light_gray2">#E8E6EA</color>
+    <color name="_828282">#828282</color>
+
+
+</resources>

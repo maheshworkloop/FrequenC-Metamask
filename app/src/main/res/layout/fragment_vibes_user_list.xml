@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui_codes.connect.VibesProfileList.VibesUserListFragment">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+    <include layout="@layout/layout_header"
+            android:id="@+id/rl_top"
+            />
+
+
+        <RelativeLayout
+                android:id="@+id/rlConnection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_top"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                >
+
+            <TextView
+                    android:id="@+id/tvConnectionTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Connection"
+                    android:background="@drawable/bg_location"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_16sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textStyle="bold"
+                    />
+
+            <TextView
+                    android:id="@+id/tvConnection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(0)"
+                    android:background="@drawable/bg_location"
+                    android:textColor="@color/font_color_purple"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_16sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:layout_toRightOf="@id/tvConnectionTag"
+                    />
+
+            <TextView
+                    android:id="@+id/tvViewAllConnection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View All"
+                    android:background="@drawable/bg_location"
+                    android:textColor="@color/font_color_purple"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_11sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:layout_alignParentRight="true"
+                    />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+                android:id="@+id/rlConnectionList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlConnection"
+                android:layout_marginTop="@dimen/_15sdp"
+                >
+
+            <TextView
+                    android:id="@+id/tvNoConnection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The more you connect, the more you get the vibes..."
+                    android:background="@drawable/bg_textview_connection"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/epilogueregular"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:visibility="gone"
+                    />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvConnection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    />
+
+        </RelativeLayout>
+
+
+        <TextView
+                android:id="@+id/tvVibeTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Looking For Love !"
+                android:background="@drawable/bg_location"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_16sdp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/epilogueregular"
+                android:layout_below="@id/rlConnectionList"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textStyle="bold"
+                />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvVibeUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tvVibeTag"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+
+
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

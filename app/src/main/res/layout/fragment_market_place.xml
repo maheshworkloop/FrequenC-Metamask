@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui_codes.screens.Dashboard.MarketPlaceFragment"
+
+    >
+
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:elevation="@dimen/_5sdp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/grey"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:background="@drawable/bg_main"
+            />
+
+
+      <RelativeLayout
+          android:id="@+id/rl_top"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/_20sdp"
+          android:elevation="@dimen/_5sdp"
+          >
+
+          <ImageView
+              android:id="@+id/ivHamburger"
+              android:layout_width="@dimen/_20sdp"
+              android:layout_height="@dimen/_20sdp"
+              android:layout_alignParentRight="true"
+              android:src="@drawable/ic_hamburger"
+              android:layout_centerVertical="true"
+              app:tint="@color/white"
+              android:layout_marginRight="@dimen/_20sdp"
+
+              />
+
+          <ImageView
+              android:id="@+id/ivNotification"
+              android:layout_width="@dimen/_20sdp"
+              android:layout_height="@dimen/_20sdp"
+              android:layout_toStartOf="@id/ivHamburger"
+              android:src="@drawable/notification"
+              android:layout_centerVertical="true"
+              android:layout_marginEnd="@dimen/_20sdp"
+              app:tint="@color/white"
+
+              />
+          <TextView
+              android:id="@+id/btnLogin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Login"
+              android:background="@drawable/bg_btn2"
+              android:paddingHorizontal="@dimen/_14sdp"
+              android:paddingVertical="@dimen/_4sdp"
+              android:textColor="@color/black"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:layout_marginRight="@dimen/_20sdp"
+              android:textSize="@dimen/_10sdp"
+              />
+
+
+
+
+          <RelativeLayout
+              android:id="@+id/rlLocation"
+              android:layout_width="@dimen/_120sdp"
+              android:layout_height="wrap_content"
+              android:layout_toStartOf="@id/btnLogin"
+              android:layout_marginRight="@dimen/_15sdp"
+              android:layout_centerVertical="true"
+              android:visibility="invisible"
+              >
+              <RelativeLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="@dimen/_25sdp"
+                  android:text="Login"
+                  android:layout_centerHorizontal="true"
+                  >
+
+                  <ImageView
+                      android:id="@+id/ivLocation"
+                      android:layout_width="@dimen/_10sdp"
+                      android:layout_height="@dimen/_11sdp"
+                      android:src="@drawable/location2"
+                      app:tint="@color/white"
+                      android:layout_centerVertical="true"
+                      android:layout_marginLeft="@dimen/_4sdp"
+                      />
+
+                  <TextView
+                      android:id="@+id/tvLocation"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""
+                      android:layout_toRightOf="@id/ivLocation"
+                      android:background="@drawable/bg_location"
+                      android:textColor="@color/white"
+                      android:layout_marginLeft="@dimen/_3sdp"
+                      android:layout_marginRight="@dimen/_4sdp"
+                      android:layout_centerVertical="true"
+                      android:textSize="@dimen/_10sdp"
+                      android:maxLines="1"
+                      />
+
+
+              </RelativeLayout>
+
+          </RelativeLayout>
+
+
+          <pl.droidsonroids.gif.GifImageView
+              android:id="@+id/ivAnimSplash"
+              android:layout_width="wrap_content"
+              android:layout_height="@dimen/_32sdp"
+              android:scaleType="fitCenter"
+              android:layout_marginLeft="@dimen/_30sdp"
+              android:layout_centerVertical="true"
+              />
+
+
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/rl_main"
+          android:layout_below="@+id/rl_top"
+          android:layout_width="match_parent"
+          android:layout_marginLeft="@dimen/_12sdp"
+          android:layout_marginRight="@dimen/_8sdp"
+          android:layout_marginTop="@dimen/_10sdp"
+          android:layout_height="wrap_content">
+
+
+          <RelativeLayout
+              android:id="@+id/rlSearch"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:paddingVertical="@dimen/_2sdp"
+
+              >
+
+              <ImageView
+                  android:id="@+id/ivSearch"
+                  android:layout_width="@dimen/_12sdp"
+                  android:layout_height="@dimen/_12sdp"
+                  android:layout_marginStart="@dimen/_10sdp"
+                  android:layout_marginTop="@dimen/_5sdp"
+                  android:layout_marginEnd="@dimen/_5sdp"
+                  android:layout_marginBottom="@dimen/_5sdp"
+                  android:src="@drawable/search" />
+
+              <View
+                  android:layout_toRightOf="@+id/ivSearch"
+                  android:layout_centerVertical="true"
+                  android:layout_width="@dimen/_1sdp"
+                  android:layout_height="@dimen/_12sdp"
+                  android:layout_marginStart="@dimen/_2sdp"
+                  android:background="@color/material_blue_grey_300" />
+
+
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_toRightOf="@+id/ivSearch"
+                  android:layout_marginLeft="@dimen/_10sdp"
+                  android:layout_centerVertical="true"
+                  android:textSize="@dimen/_12sdp"
+                  android:hint="Search..."
+                  android:textColorHint="@color/white"
+
+                  />
+
+
+          </RelativeLayout>
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/tvBrowseByCat"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/rlSearch"
+              android:text="Browse By Category"
+              android:textSize="@dimen/_12sdp"
+              android:layout_marginTop="@dimen/_15sdp"
+              android:textStyle="bold"
+              android:visibility="gone"
+              />
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rvCategory"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_1sdp"
+              android:layout_below="@id/rlSearch"
+              android:orientation="horizontal"
+              />
+
+
+
+          <RelativeLayout
+              android:id="@+id/rlTrendingEvents"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/rvCategory"
+              android:layout_marginTop="@dimen/_20sdp"
+              android:visibility="invisible"
+              >
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/tvTrendingEvents"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Trending Events"
+                  android:textSize="@dimen/_12sdp"
+                  android:textStyle="bold"
+                  />
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_marginRight="@dimen/_10sdp"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  >
+
+
+                  <com.google.android.material.textview.MaterialTextView
+                      android:id="@+id/tvTrendingEventsViewAll"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="View All"
+                      android:textSize="@dimen/_10sdp"
+                      android:textStyle="bold"
+
+                      />
+
+                  <ImageView
+                      android:layout_width="@dimen/_6sdp"
+                      android:layout_height="@dimen/_6sdp"
+                      android:src="@drawable/ic_right_arrow"
+                      android:layout_marginLeft="@dimen/_4sdp"
+
+                      />
+
+              </LinearLayout>
+
+
+          </RelativeLayout>
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rvTrendingEvents"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_below="@+id/rlTrendingEvents"
+              android:orientation="horizontal"
+              />
+
+
+          <RelativeLayout
+              android:id="@+id/rlTrendingArtist"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/rvTrendingEvents"
+              android:layout_marginTop="@dimen/_20sdp"
+              android:visibility="invisible"
+              >
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/tvTrendingArist"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Trending Artist"
+                  android:textSize="@dimen/_12sdp"
+                  android:textStyle="bold"
+                  />
+
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_marginRight="@dimen/_10sdp"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  >
+
+
+                  <com.google.android.material.textview.MaterialTextView
+                      android:id="@+id/tvTrendingArtistViewAll"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="View All"
+                      android:textSize="@dimen/_10sdp"
+                      android:textStyle="bold"
+
+                      />
+
+                  <ImageView
+                      android:layout_width="@dimen/_6sdp"
+                      android:layout_height="@dimen/_6sdp"
+                      android:src="@drawable/ic_right_arrow"
+                      android:layout_marginLeft="@dimen/_4sdp"
+
+                      />
+
+              </LinearLayout>
+
+
+
+
+          </RelativeLayout>
+
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rvTrendingArtist"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_below="@+id/rlTrendingArtist"
+              android:orientation="horizontal"
+              />
+
+
+
+          <RelativeLayout
+              android:id="@+id/rlAll"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/rvTrendingArtist"
+              android:layout_marginTop="@dimen/_15sdp"
+              android:visibility="invisible"
+              >
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/tvAll"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="All"
+                  android:textSize="@dimen/_12sdp"
+                  android:textStyle="bold"
+                  />
+
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_marginRight="@dimen/_10sdp"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  >
+
+
+                  <com.google.android.material.textview.MaterialTextView
+                      android:id="@+id/tvAllViewAll"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="View All"
+                      android:textSize="@dimen/_10sdp"
+                      android:textStyle="bold"
+
+                      />
+
+                  <ImageView
+                      android:layout_width="@dimen/_6sdp"
+                      android:layout_height="@dimen/_6sdp"
+                      android:src="@drawable/ic_right_arrow"
+                      android:layout_marginLeft="@dimen/_4sdp"
+
+                      />
+
+              </LinearLayout>
+
+
+
+
+          </RelativeLayout>
+
+
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rvAllData"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_below="@+id/rlAll"
+              android:orientation="horizontal"
+              android:layout_marginBottom="@dimen/_70sdp"
+
+              />
+
+          <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/tvBrowseByCity"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/rvAllData"
+              android:text="Browse by City"
+              android:textSize="@dimen/_12sdp"
+              android:layout_marginTop="@dimen/_20sdp"
+              android:textStyle="bold"
+              android:visibility="gone"
+              />
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rvBrowseByCity"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_marginBottom="@dimen/_70sdp"
+              android:layout_below="@+id/tvBrowseByCity"
+              android:orientation="horizontal"
+              android:visibility="gone"
+              />
+          
+
+      </RelativeLayout>
+
+
+    </RelativeLayout>
+    </ScrollView>
+
+
+</FrameLayout>
+
+</layout>
