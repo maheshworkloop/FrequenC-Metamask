@@ -67,14 +67,9 @@
     <color name="material_blue_grey_500">#ff607d8b</color>
 
     <color name="light_blue">#CCD7FF</color>
-<!--    <color name="light_pink">#FFDDDD</color>-->
     <color name="dark_pink">#FFCBD1</color>
-
-
     <color name="status_active">#1DD75B</color>
     <color name="status_inactive">#DEE1E6</color>
-
-
 
     <color name="colorLabel">#000000</color>
     <color name="app_color_gradient">#D16954</color>

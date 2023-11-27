@@ -1,10 +1,12 @@
 package com.dev.frequenc
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,6 +47,18 @@ fun ConnectScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
+            Card() {
+
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+
+            DappButton(buttonText = stringResource(R.string.wallet), modifier = Modifier.alpha( if (connected) {1f} else {0f}), onClick =  {
+                navController.navigate(DappScreen.ACTIONS.name)
+            })
+
+            Spacer(modifier = Modifier.weight(1f))
             // Connect button
             if (connected) {
                 moveToActivity(DappScreen.ACTIONS.name)

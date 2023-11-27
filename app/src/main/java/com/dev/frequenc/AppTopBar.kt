@@ -14,10 +14,9 @@ fun AppTopBar(navController: NavController, name: DappScreen, moveToHome: ()-> U
         title = { Text("") },
         navigationIcon = {
             IconButton(onClick = {
-                if (name.equals(DappScreen.CONNECT)) {
+                if (name.name.equals(DappScreen.CONNECT.name) ) {
                 moveToHome()
             } else {
-                // Default back navigation
                 navController.popBackStack()
             }
 
