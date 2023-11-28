@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
+import com.dev.frequenc.ui_codes.connect.chat.AllChatUserFragment
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.screens.Dashboard.ConnectFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.CreateFragment
@@ -64,7 +65,7 @@ class MainActivity  : AppCompatActivity() {
 
         binding.drawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
 
-        val createFragment = CreateFragment()
+        val allChatUserFragment = AllChatUserFragment()
         val connectFragment = ConnectHomeFragment()
         val marketPlace = MarketPlaceFragment()
         val walletFragment = WalletFragment()
@@ -78,7 +79,7 @@ class MainActivity  : AppCompatActivity() {
             when (it.itemId) {
                 R.id.bottom_marketplace ->
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
-                R.id.bottom_create      -> setCurrentFragment(createFragment, "CreateFragment")
+                R.id.bottom_chat      -> setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
                 R.id.bottom_connect     ->
                     setCurrentFragment(connectFragment, "ConnectFragment")
                 R.id.bottom_wallet -> startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))

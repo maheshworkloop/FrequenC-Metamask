@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/cvProfile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/rewards_booking"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_margin="@dimen/_5sdp"
+                app:layout_constraintWidth_percent="0.1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/itemLays"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cvProfile">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/tvProfileName"
+                android:maxLength="20"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="@id/tvLastMsg"
+                android:fontFamily="@font/interregular"
+                android:maxLines="1"
+                android:text="@string/show_text"
+                android:textColor="#171A1F" />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tvProfileName"
+                android:id="@+id/tvLastMsg"
+                android:maxLength="50"
+                app:layout_constraintTop_toBottomOf="@id/tvProfileName"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toStartOf="@id/tvTime"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/interregular"
+                android:maxLines="1"
+                android:text="@string/show_text"
+                android:textColor="#323842" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/tvTime"
+                android:maxLength="10"
+                android:textSize="10sp"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/interregular"
+                android:maxLines="1"
+                android:text="@string/show_text"
+                android:textColor="#323842" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

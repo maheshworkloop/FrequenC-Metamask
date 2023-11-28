@@ -54,7 +54,7 @@ class ConnectionAdapter(val mList: List<ConnectionResponse>,val mListener : List
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+        return 9
     }
 
 
