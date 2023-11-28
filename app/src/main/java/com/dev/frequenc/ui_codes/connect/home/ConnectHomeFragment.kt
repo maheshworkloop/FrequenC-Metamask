@@ -1,12 +1,15 @@
 package com.dev.frequenc.ui_codes.connect.home
 
+import android.R.attr.bitmap
 import android.app.Dialog
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -19,9 +22,9 @@ import com.dev.frequenc.ui_codes.connect.events.EventsFragment
 import com.dev.frequenc.ui_codes.connect.yourvibes.ShareVibesAdapter
 import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibeFragment
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import pl.droidsonroids.gif.GifImageView
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +47,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     lateinit var viewPager : ViewPager
     lateinit var dialog : Dialog
     lateinit var dialog2 : Dialog
+    lateinit var dialogProfileMatch : Dialog
     lateinit var gifImageView : GifImageView
 
 
@@ -91,7 +95,10 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         gifImageView = root.findViewById<GifImageView>(R.id.ivAnimSplashConnct)
 
 
-        showPopUpConnectionRequest()
+//        showPopUpConnectionRequest()
+
+
+//        showPopUpCongratulation()
 
         Glide.with(this)
             .asGif()
@@ -185,6 +192,28 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
 //        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog2.show()
+    }
+
+    private fun showPopUpCongratulation()
+    {
+        dialogProfileMatch = Dialog(requireContext())
+        dialogProfileMatch.setContentView(R.layout.layout_dialog_profile_match)
+        dialogProfileMatch.window?.setBackgroundDrawableResource(R.color.transparent)
+//        dialog2.setCancelable(false)
+
+        val ivProfile1 = dialogProfileMatch.findViewById<ImageView>(R.id.ivProfile1)
+        val ivProfile2 = dialogProfileMatch.findViewById<ImageView>(R.id.ivProfile2)
+
+
+
+//        var btnViewProfile = dialog2.findViewById<TextView>(R.id.btnViewProfile)
+//
+//        btnViewProfile.setOnClickListener {
+//            dialog2.cancel()
+//        }
+
+//        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialogProfileMatch.show()
     }
 
     override fun onClickAtShareVibe(item: YourVibeResponse) {

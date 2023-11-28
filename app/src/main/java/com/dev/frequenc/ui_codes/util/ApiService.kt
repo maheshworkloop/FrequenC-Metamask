@@ -14,6 +14,7 @@ import com.dev.frequenc.ui_codes.data.BrowseByCatResponse
 import com.dev.frequenc.ui_codes.data.CityResponse
 import com.dev.frequenc.ui_codes.data.CountryResponse
 import com.dev.frequenc.ui_codes.data.EventResponse
+import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
@@ -23,6 +24,7 @@ import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.ui_codes.data.TrendingEventsTokenResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
 import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
+import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.WalletBalenceData
 import com.dev.frequenc.ui_codes.data.models.paymentInitiateReq
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
@@ -151,5 +153,10 @@ interface ApiService {
     fun metamaskBalence(@Path("eth_address") et_r: String): Call<WalletBalenceData>?
     @POST(KeysConstant.Initiate_payment)
     fun initiatePayment(@Header(Authorization) tokens : String,   @Body paymentInitiate : paymentInitiateReq): Call<InitiatePaymentResponse>?
+
+    @GET(KeysConstant.Vibe_Event)
+    fun vibeEvent(@Header(Authorization) tokens : String): Call<VibeEventResponse>
+    @GET(KeysConstant.GET_VIBE_CATEGORY)
+    fun getVibeCategory(): Call<GetVibeCategoryResponse>?
 
 }
