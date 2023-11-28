@@ -5,6 +5,15 @@
         android:layout_height="match_parent"
         tools:context=".ui_codes.connect.events.EventsFragment">
 
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:elevation="@dimen/_5sdp"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/grey"
+            android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvConnectEvents"
             android:layout_width="match_parent"
