@@ -217,11 +217,14 @@ class LoginActivity : AppCompatActivity(), DataChangeListener {
     }
 
     private fun replaceFragment(fragmentTag: String, fragment: Fragment) {
+
+        if (supportFragmentManager.findFragmentByTag(fragmentTag)?.isVisible == false) {
 //        if (supportFragmentManager.findFragmentByTag(fragmentTag)?.isVisible == false) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.containerLays, fragment, fragmentTag)
-            .commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerLays, fragment, fragmentTag)
+                .commit()
 //        }
+        }
     }
 //
 //

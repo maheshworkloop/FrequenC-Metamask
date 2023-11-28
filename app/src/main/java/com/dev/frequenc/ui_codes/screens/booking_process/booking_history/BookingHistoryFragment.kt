@@ -14,13 +14,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import com.dev.frequenc.MainActivity
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.FragmentBookingHistoryBinding
+import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.data.models.TicketDetailsModel
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletViewModel
 import com.dev.frequenc.ui_codes.screens.booking_process.tickets.ShowTicketFragment
+import com.dev.frequenc.ui_codes.screens.utils.ApiClient
+import com.dev.frequenc.ui_codes.screens.utils.KeysConstant
 import com.dev.frequenc.util.Constants
 import com.dev.frequenc.util.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +32,7 @@ import io.metamask.androidsdk.TAG
 
 @AndroidEntryPoint
 class BookingHistoryFragment : Fragment(), ItemClickListener {
-    private lateinit var currentActivity: Activity
+    private lateinit var currentActivity: MainActivity
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var bookinghistoryViewModel: BookingHistoryViewModel
     private lateinit var binding: FragmentBookingHistoryBinding
@@ -44,7 +46,8 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
         binding = FragmentBookingHistoryBinding.inflate(layoutInflater, container, false)
         bookinghistoryViewModel = ViewModelProvider(this)[BookingHistoryViewModel::class.java]
         try {
-            walletViewModel = ViewModelProvider(requireActivity())[WalletViewModel::class.java]
+            walletViewModel =
+                ViewModelProvider(activity as MainActivity)[WalletViewModel::class.java]
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -54,79 +57,106 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is Activity) {
-            currentActivity = context
+            currentActivity = context as MainActivity
         } else {
             try {
-                currentActivity = this.requireActivity()
+                currentActivity = this.requireActivity() as MainActivity
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            catch (e: Exception) { e.printStackTrace() }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferences =
-            requireActivity().getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)
+            currentActivity.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)
 
         binding.headerLays.btnBack.setOnClickListener {
             try {
-                activity?.let { requireActivity().supportFragmentManager.popBackStack() }
+                currentActivity.let { requireActivity().supportFragmentManager.popBackStack() }
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
         }
-
-        activity?.runOnUiThread {
-            try {
-                if (currentActivity is MainActivity) {
-                    walletViewModel.connectedVals.observe(viewLifecycleOwner) {
-                        if (!it) {
-//                    var fragment: Fragment? =
-//                        activity?.supportFragmentManager?.findFragmentByTag("WalletFragment")
-//                    var walletFragment: WalletFragment
-//                    if (fragment != null) {
-//                        walletFragment = fragment as WalletFragment
-//                    } else {
-//                        walletFragment = WalletFragment(walletViewModel)
+//
+//        currentActivity.runOnUiThread {
+//            try {
+//                if (currentActivity is MainActivity) {
+//                    walletViewModel.connectedVals.observe(viewLifecycleOwner) {
+//                        if (!it) {
+//                            var fragment: Fragment? =
+//                                currentActivity.supportFragmentManager?.findFragmentByTag("WalletFragment")
+//                            var walletFragment: WalletFragment
+//                            if (fragment != null) {
+//                                walletFragment = fragment as WalletFragment
+//                            } else {
+//                                walletFragment = WalletFragment()
+//                            }
+////                    currentActivity?.supportFragmentManager?.beginTransaction()
+////                        ?.replace(R.id.flFragment, walletFragment, "WalletFragment")
+////                        ?.commit()
+//                            try {
+//                                startActivity(
+//                                    Intent(
+//                                        activity,
+//                                        com.dev.frequenc.MainActivity::class.java
+//                                    )
+//                                )
+//                            } catch (ex: Exception) {
+//                                ex.printStackTrace()
+//                            }
+//                        } else {
+//                            walletViewModel.getBalence { result ->
+//                                if (result is RequestError) {
+//                                    if (result.code.equals(ErrorType.UNAUTHORISED_REQUEST.code)) {
+////                                        var fragment: Fragment? =
+////                                            currentActivity.supportFragmentManager?.findFragmentByTag("WalletFragment")
+////                                        var walletFragment: WalletFragment
+////                                        if (fragment != null) {
+////                                            walletFragment = fragment as WalletFragment
+////                                        } else {
+////                                            walletFragment = WalletFragment()
+////                                        }
+////                                        currentActivity?.supportFragmentManager?.beginTransaction()
+////                                            ?.replace(R.id.flFragment, walletFragment, "WalletFragment")
+////                                            ?.commit()
+//                                        try {
+//                                            startActivity(
+//                                                Intent(
+//                                                    activity,
+//                                                    com.dev.frequenc.MainActivity::class.java
+//                                                )
+//                                            )
+//                                        } catch (ex: Exception) {
+//                                            ex.printStackTrace()
+//
+//                                        }
+//                                    }
+//                                    Log.e(TAG, "Ethereum connection error: ${result.message}")
+//                                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT)
+//                                        .show()
+//
+//                                } else {
+//                                    walletViewModel.setConnectedVals(true)
+//                                    Log.d(TAG, "Ethereum connection result: $result")
+//                                    Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT)
+//                                        .show()
+//                                }
+//                            }
+//                        }
 //                    }
-//                    activity?.supportFragmentManager?.beginTransaction()
-//                        ?.replace(R.id.flFragment, walletFragment, "WalletFragment")
-//                        ?.commit()
-                            try {
-                                startActivity(Intent(activity, MainActivity::class.java))
-                            } catch (ex: Exception) {
-                                ex.printStackTrace()
-                            }
-                        }
-                        else {
-                            walletViewModel.getBalence {
-                                    result ->
-                                if (result is RequestError) {
-                                    if (result.code.equals(ErrorType.UNAUTHORISED_REQUEST.code)) {
-                                        walletViewModel.setConnectedVals(false)
-                                    }
-                                    Log.e(TAG, "Ethereum connection error: ${result.message}")
-                                    Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
-
-                                } else {
-                                    walletViewModel.setConnectedVals(true)
-                                    Log.d(TAG, "Ethereum connection result: $result")
-                                    Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show()
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (ex: Exception) {
-                Log.e(TAG, "connectedVals: ", ex)
-            }
-        }
+//                }
+//            } catch (ex: Exception) {
+//                Log.e(TAG, "connectedVals: ", ex)
+//            }
+//        }
 
         val bookingHistoryAdapter =
             BookingHistoryAdapter(ArrayList(), isUpcomingTabSelected = true, this)
         binding.rvBookingHistory.adapter = bookingHistoryAdapter
 
-        activity?.runOnUiThread {
+        currentActivity.runOnUiThread {
             bookinghistoryViewModel.isUpcomingTabSelected.observe(viewLifecycleOwner) {
                 try {
                     if (it) {
@@ -150,7 +180,7 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
             }
         }
 
-        activity?.runOnUiThread {
+        currentActivity.runOnUiThread {
             bookinghistoryViewModel.isApiCalled.observe(viewLifecycleOwner) {
                 if (!it) {
                     bookinghistoryViewModel.transactionListAp.value?.let { it1 ->
@@ -174,13 +204,26 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
                             e.printStackTrace()
                         }
                     }
+//                    bookinghistoryViewModel.setApiCall(false)
                     binding.progressBar.visibility = View.GONE
                 } else {
                     binding.progressBar.visibility = View.VISIBLE
+//                    bookinghistoryViewModel.setApiCall(true)
                 }
             }
         }
 
+
+        currentActivity.runOnUiThread {
+            bookinghistoryViewModel.walletBalanceDataLists.observe(viewLifecycleOwner) {
+                it?.let {
+                    if (it.data != null) {
+                        it.data.balance?.let { it2 -> binding.tvWallet.text = "$it2 ETH" }
+                        it.data.tokenBalance?.let { it2 -> binding.tvReward.text = "$it2 FRQ" }
+                    }
+                }
+            }
+        }
         binding.upcomingTab.setOnClickListener {
             if (bookinghistoryViewModel.isApiCalled.value == false) {
                 bookinghistoryViewModel.setUpcomingTabValue(true)
@@ -211,7 +254,6 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
         binding.upcomingTab.background = resources.getDrawable(R.drawable.transparent_bg)
     }
 
-
     override fun onResume() {
         super.onResume()
         binding.headerLays.tvHeader.text = "Booking History"
@@ -222,22 +264,40 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
             ).toString()
         )
 
-        activity?.runOnUiThread {
+        currentActivity.runOnUiThread {
             try {
-                if (currentActivity is MainActivity && walletViewModel.connectedVals.value == true) {
-                    walletViewModel.getBalence { result ->
-                        if (result is RequestError) {
-                            if (result.code.equals(ErrorType.UNAUTHORISED_REQUEST.code)) {
-                                walletViewModel.setConnectedVals(false)
-                            }
-                            Log.e(TAG, "Ethereum connection error: ${result.message}")
-                            Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+//                if (currentActivity is MainActivity && walletViewModel.connectedVals.value == true) {
+//                    walletViewModel.getBalence { result ->
+//                        if (result is RequestError) {
+//                            if (result.code.equals(ErrorType.UNAUTHORISED_REQUEST.code)) {
+//                                walletViewModel.setConnectedVals(false)
+//                            }
+//                            Log.e(TAG, "Ethereum connection error: ${result.message}")
+//                            Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
+//
+//                        } else {
+//                            walletViewModel.setConnectedVals(true)
+//                            Log.d(TAG, "Ethereum connection result: $result")
+//                            Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                }
 
-                        } else {
-                            walletViewModel.setConnectedVals(true)
-                            Log.d(TAG, "Ethereum connection result: $result")
-                            Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show()
-                        }
+                val metamaskAddress =
+                    sharedPreferences.getString(Constants.MetaMaskWalletAddress, null)
+                if (metamaskAddress != null) {
+                    bookinghistoryViewModel.getWalletBalence(metamaskAddress)
+                } else {
+                    try {
+                        startActivity(
+                            Intent(
+                                activity,
+                                com.dev.frequenc.MainActivity::class.java
+                            )
+                        )
+                    } catch (ex: Exception) {
+                        ex.printStackTrace()
+
                     }
                 }
             } catch (ex: Exception) {
@@ -249,7 +309,7 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
     }
 
     override fun onItemClicked(itemPositon: Int) {
-        activity?.runOnUiThread {
+        currentActivity.runOnUiThread {
             if (bookinghistoryViewModel.isUpcomingTabSelected.value == true) {
                 bookinghistoryViewModel.transactionListAp.value?.upcomingBooking?.get(itemPositon)
                     ?.let {

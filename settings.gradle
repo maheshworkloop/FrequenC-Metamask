@@ -15,5 +15,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "FrequenC"
+
 include ':app'
 include ':metamask-android-sdk'

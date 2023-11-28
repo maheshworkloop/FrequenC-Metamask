@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dev.frequenc.ui_codes.data.WalletBalenceData
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
@@ -15,9 +16,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class BookingHistoryViewModel : ViewModel() {
+    private val _walletBalence = MutableLiveData<WalletBalenceData>()
     private val _transactionListApi = MutableLiveData<TransactionListRes>()
     val transactionListAp: LiveData<TransactionListRes>
         get() = _transactionListApi
+
+    val walletBalanceDataLists : LiveData<WalletBalenceData>
+        get() = _walletBalence
 
     private val __isUpcomingTabSelected = MutableLiveData<Boolean>(false)
     val isUpcomingTabSelected: LiveData<Boolean>
@@ -28,12 +33,12 @@ class BookingHistoryViewModel : ViewModel() {
         get() = _isApiCalled
 
     fun setApiCall(isApiCalled: Boolean) {
-        _isApiCalled.value = isApiCalled
+        _isApiCalled.postValue(isApiCalled)
     }
 
     fun callTransactionslistApi(token: String) {
         viewModelScope.launch {
-        _isApiCalled.value = true
+        _isApiCalled.postValue( true)
         ApiClient.getInstance()!!.getTransactionlist(token)
             .enqueue(object : Callback<TransactionListRes> {
                 override fun onResponse(
@@ -44,21 +49,21 @@ class BookingHistoryViewModel : ViewModel() {
                             response.body().let {
                                 _transactionListApi.value = response.body()
                             }
-                            _isApiCalled.value = false
+                            _isApiCalled.postValue(false )
                         } else {
-                            Log.d(
+                                Log.d(
                                 Constants.Error,
                                 "onResponse: ${
                                     response.errorBody()!!.charStream().read().toString()
                                 }"
                             )
-                            _isApiCalled.value = false
+                            _isApiCalled.postValue(false)
                         }
                 }
 
                 override fun onFailure(call: Call<TransactionListRes>, t: Throwable) {
                     Log.e(Constants.Error, "onFailure: ", t)
-                    _isApiCalled.value = false
+                    _isApiCalled.postValue(false)
                 }
             })
         }
@@ -66,7 +71,34 @@ class BookingHistoryViewModel : ViewModel() {
 
 
     fun setUpcomingTabValue(toSelectUpcomingTabValue: Boolean) {
-        __isUpcomingTabSelected.value = toSelectUpcomingTabValue
+        __isUpcomingTabSelected.postValue(toSelectUpcomingTabValue)
+    }
+
+    fun getWalletBalence(metamaskAddress: String) {
+        _isApiCalled.postValue(true)
+        viewModelScope.launch {
+        ApiClient.getInstance()?.metamaskBalence(metamaskAddress)?.enqueue(object : Callback<WalletBalenceData>{
+            override fun onResponse(call: Call<WalletBalenceData>, response: Response<WalletBalenceData>) {
+                if (response.isSuccessful && response.body() != null ) {
+                        _walletBalence.value = response.body()
+                    _isApiCalled.postValue(false)
+                }
+                else {
+                    Log.d(
+                        Constants.Error,
+                        "onResponse: ${
+                            response.errorBody()!!.charStream().read().toString()
+                        }"
+                    )
+                    _isApiCalled.postValue(false)
+                }
+            }
+
+            override fun onFailure(call: Call<WalletBalenceData>, t: Throwable) {
+                Log.e(Constants.Error, "onFailure: ", t)
+                _isApiCalled.postValue(false)
+            }
+        }) }
     }
 
 }

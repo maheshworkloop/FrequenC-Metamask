@@ -16,11 +16,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
-import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
+import com.dev.frequenc.ui_codes.screens.Dashboard.ConnectFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.CreateFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.MarketPlaceFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.savedevent.SavedEventFragment
@@ -29,7 +31,12 @@ import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.booking_process.booking_history.BookingHistoryFragment
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
@@ -74,7 +81,8 @@ class MainActivity  : AppCompatActivity() {
                 R.id.bottom_create      -> setCurrentFragment(createFragment, "CreateFragment")
                 R.id.bottom_connect     ->
                     setCurrentFragment(connectFragment, "ConnectFragment")
-                R.id.bottom_wallet      -> setCurrentFragment(walletFragment, "WalletFragment")
+                R.id.bottom_wallet -> startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
+//                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
             }
 
             true
@@ -124,25 +132,17 @@ class MainActivity  : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
 
-                val count = supportFragmentManager.backStackEntryCount
+                val builder1 = AlertDialog.Builder(this@MainActivity)
+                    .setMessage("Do you want to exit ?")
+                    .setTitle("Alert !")
+                    .setPositiveButton("Yes") { dialog, id ->
+                        System.exit(0)
+                    }
+                    .setNegativeButton("No") { dialog, id ->
+                        dialog.cancel()
+                    }
 
-                if (count == 0) {
-                    val builder1 = AlertDialog.Builder(this@MainActivity)
-                        .setMessage("Do you want to exit ?")
-                        .setTitle("Alert !")
-                        .setPositiveButton("Yes") { dialog, id ->
-                            System.exit(0)
-                        }
-                        .setNegativeButton("No") { dialog, id ->
-                            dialog.cancel()
-                        }
-
-                    builder1.create().show()
-                    //additional code
-                } else {
-                    supportFragmentManager.popBackStack()
-                }
-
+                builder1.create().show()
             }
         })
 

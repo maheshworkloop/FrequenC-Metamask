@@ -20,6 +20,7 @@ fun DappButton(
     buttonHeight: Dp = 48.dp,
     buttonBackgroundColor: Color = Color(40, 124, 204),
     buttonTextColor: Color = Color.White,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Button(
@@ -27,7 +28,7 @@ fun DappButton(
         elevation = null, colors = ButtonDefaults.buttonColors(
             containerColor = buttonBackgroundColor,
             contentColor = buttonTextColor
-        ), modifier = Modifier
+        ), modifier = modifier
             .height(buttonHeight)
             .fillMaxWidth()
     ) {
