@@ -2,16 +2,22 @@ package com.dev.frequenc.ui_codes.connect.home
 
 import android.R.attr.bitmap
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +27,22 @@ import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.connect.events.EventsFragment
 import com.dev.frequenc.ui_codes.connect.yourvibes.ShareVibesAdapter
 import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibeFragment
+import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibesAdapter
+import com.dev.frequenc.ui_codes.data.AudienceDataResponse
+import com.dev.frequenc.ui_codes.data.CategoryDetail
+import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
+import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
+import com.dev.frequenc.ui_codes.screens.utils.ApiClient
+import com.dev.frequenc.util.Constants
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import pl.droidsonroids.gif.GifImageView
+import retrofit2.Call
+import retrofit2.Response
+import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,7 +68,12 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     lateinit var dialog2 : Dialog
     lateinit var dialogProfileMatch : Dialog
     lateinit var gifImageView : GifImageView
+    lateinit var progressDialog : ProgressBar
+    lateinit var authorization : String
 
+    lateinit var audience_id : String
+    private lateinit var sharedPreferences: SharedPreferences
+    var userRegistered : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,13 +90,16 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_connect_home, container, false)
 
+        progressDialog = root.findViewById(R.id.progress_bar)
+
         val ivConnectSplash = root.findViewById<GifImageView>(R.id.ivAnimSplashConnct)
 
         Glide.with(requireContext()).asGif().load(R.drawable.frequenc_loader).into(ivConnectSplash)
 
-
-
         val rl_splash = root.findViewById<RelativeLayout>(R.id.rl_splash)
+
+
+
 
         Handler().postDelayed({
             rl_splash.visibility =View.GONE
@@ -113,9 +140,30 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 //            override fun onTabUnselected(tab: TabLayout.Tab) {}
 //            override fun onTabReselected(tab: TabLayout.Tab) {}
 //        })
-        Handler().postDelayed({
-            showPopUp()
-        }, 10000)
+
+
+        sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+
+        userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
+
+
+        authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
+        audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
+
+        if(userRegistered && !authorization.isNullOrEmpty() &&authorization!="-1" && !audience_id.isNullOrEmpty() )
+        {
+
+            getProfileApi()
+        }
+        else
+        {
+
+
+//            Toast.makeText(requireContext(),"Not Logged in Failure", Toast.LENGTH_SHORT).show()
+            Log.e("Audience Id",audience_id)
+        }
+
+
 
 
         return root
@@ -147,7 +195,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
 
 
-    private fun showPopUp()
+    private fun showPopUp(mData : GetVibeCategoryResponse)
     {
         dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.layout_dialog_share_your_vibes)
@@ -168,7 +216,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
         rvShareVibe.apply {
             layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
-            adapter = ShareVibesAdapter(mlist,this@ConnectHomeFragment)
+            adapter = ShareVibesAdapter(mData,this@ConnectHomeFragment)
         }
 
 //        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
@@ -216,8 +264,136 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         dialogProfileMatch.show()
     }
 
-    override fun onClickAtShareVibe(item: YourVibeResponse) {
+    override fun onClickAtShareVibe(item: CategoryDetail) {
         dialog.cancel()
+        updateVibe(item._id)
     }
+
+
+    private fun getCategoryApi()
+    {
+        progressDialog.visibility =View.VISIBLE
+        ApiClient.getInstance()!!.getVibeCategory()!!.enqueue(object : retrofit2.Callback<GetVibeCategoryResponse>{
+            override fun onResponse(
+                call: Call<GetVibeCategoryResponse>,
+                response: Response<GetVibeCategoryResponse>
+            ) {
+
+                progressDialog.visibility = View.GONE
+
+                if(response.isSuccessful && response.body()!=null)
+                {
+
+
+                    Handler().postDelayed({
+                        showPopUp(response.body()!!)
+                    }, 2000)
+
+                }
+            }
+
+            override fun onFailure(call: Call<GetVibeCategoryResponse>, t: Throwable) {
+                progressDialog.visibility = View.GONE
+            }
+        })
+    }
+
+
+    private fun getProfileApi() {
+        progressDialog.visibility = View.VISIBLE
+        try {
+            ApiClient.getInstance()!!.getProfile(authorization, audience_id)
+                .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
+                    override fun onResponse(
+                        call: Call<AudienceDataResponse>,
+                        response: Response<AudienceDataResponse>
+                    ) {
+                        progressDialog.visibility = View.GONE
+                        if (response.isSuccessful && response.body() != null) {
+                            Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
+                            val res = response.body()
+
+                            var item: AudienceDataResponse = res!!
+
+                            val vibe_date = item.vibesDate.substringBefore("T")
+
+
+
+                            val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+                            val date = Calendar.getInstance().time
+                            val currentDate = sdf.format(Date())
+                            Log.e("date-today",currentDate)
+                            Log.e("date-vibe",vibe_date)
+
+                            if(!currentDate.equals(vibe_date))
+                            {
+                                getCategoryApi()
+
+                            }
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<AudienceDataResponse>, t: Throwable) {
+//                binding.progressDialog.visibility = View.GONE
+                        Log.d("Profile Api", "onFailure Retrofit: " + t.localizedMessage)
+
+
+                    }
+
+                })
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
+    private fun updateVibe(id : String)
+    {
+
+        progressDialog.visibility = View.VISIBLE
+
+        ApiClient.getInstance()!!.updateVibe(authorization,id)!!.enqueue(object : retrofit2.Callback<AudienceDataResponse>{
+            override fun onResponse(
+                call: Call<AudienceDataResponse>,
+                response: Response<AudienceDataResponse>
+            ) {
+                progressDialog.visibility = View.GONE
+
+                if(response.isSuccessful && response.body()!=null)
+                {
+                    var item: AudienceDataResponse = response.body()!!
+
+                    val vibe_date = item.vibesDate.substringBefore("T")
+
+
+
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+                    val date = Calendar.getInstance().time
+                    val currentDate = sdf.format(Date())
+                    Log.e("date-today",currentDate)
+                    Log.e("date-vibe",vibe_date)
+
+                    if(currentDate.equals(vibe_date))
+                    {
+//                        getCategoryApi()
+                      Toast.makeText(requireContext(),"Vibes Shared",Toast.LENGTH_SHORT).show()
+
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<AudienceDataResponse>, t: Throwable) {
+                progressDialog.visibility = View.GONE
+
+            }
+        })
+    }
+
+
 
 }

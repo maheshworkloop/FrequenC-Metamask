@@ -159,4 +159,7 @@ interface ApiService {
     @GET(KeysConstant.GET_VIBE_CATEGORY)
     fun getVibeCategory(): Call<GetVibeCategoryResponse>?
 
+    @PUT("audience/update-vibes/{id}")
+    fun updateVibe(@Header(Authorization) token: String,id : String ): Call<AudienceDataResponse>?
+
 }

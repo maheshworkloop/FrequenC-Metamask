@@ -24,5 +24,7 @@ val name: String,
 val postalCode: String,
 var profile_pic: String,
 val state: String,
-val id: String
+val id: String,
+val vibes :  String,
+val vibesDate : String
 ) : Serializable

@@ -5,14 +5,32 @@
         android:layout_height="match_parent"
         tools:context=".ui_codes.connect.yourvibes.YourVibeFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvYourVibe"
+
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
-            />
+            android:layout_height="match_parent">
+
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:elevation="@dimen/_5sdp"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/grey"
+                android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvYourVibe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_50sdp"
+                />
+
+    </RelativeLayout>
+
+
 
 </FrameLayout>
