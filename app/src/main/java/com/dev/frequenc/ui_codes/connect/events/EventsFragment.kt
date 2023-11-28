@@ -18,6 +18,7 @@ import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.Data
 import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
+import com.dev.frequenc.ui_codes.data.VibeResponse
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
@@ -80,7 +81,6 @@ class EventsFragment : Fragment(),VibesEventAdapter.ListAdapterListener {
         audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
 
 
-        getCategoryApi()
 
         if(userRegistered && !authorization.isNullOrEmpty() &&authorization!="-1" && !audience_id.isNullOrEmpty() )
         {
@@ -175,7 +175,7 @@ class EventsFragment : Fragment(),VibesEventAdapter.ListAdapterListener {
         })
     }
 
-    override fun onClickAtVibe(item: Data) {
+    override fun onClickAtVibe(item: VibeResponse) {
 
         val intent = Intent(requireContext(),EventDetailActivity::class.java)
         val bundle = Bundle()
@@ -188,21 +188,7 @@ class EventsFragment : Fragment(),VibesEventAdapter.ListAdapterListener {
     }
 
 
-    private fun getCategoryApi()
-    {
-        ApiClient.getInstance()!!.getVibeCategory()!!.enqueue(object : retrofit2.Callback<GetVibeCategoryResponse>{
-            override fun onResponse(
-                call: Call<GetVibeCategoryResponse>,
-                response: Response<GetVibeCategoryResponse>
-            ) {
 
-            }
-
-            override fun onFailure(call: Call<GetVibeCategoryResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-    }
 
 
 }

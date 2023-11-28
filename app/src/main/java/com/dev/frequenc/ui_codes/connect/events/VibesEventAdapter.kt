@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.Data
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
+import com.dev.frequenc.ui_codes.data.VibeResponse
 
 class VibesEventAdapter  (private val mData:VibeEventResponse, mListener : ListAdapterListener) : RecyclerView.Adapter<VibesEventAdapter.ViewHolder> (){
 
@@ -20,7 +21,7 @@ class VibesEventAdapter  (private val mData:VibeEventResponse, mListener : ListA
     val mList = mData.data
 
 
-    interface ListAdapterListener{ fun onClickAtVibe(item : Data) }
+    interface ListAdapterListener{ fun onClickAtVibe(item : VibeResponse) }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.connect.home.YourVibeResponse
+import com.dev.frequenc.ui_codes.data.CategoryDetail
+import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 
-class YourVibesAdapter (private val mList: List<YourVibeResponse>, mListener : ListAdapterListener) : RecyclerView.Adapter<YourVibesAdapter.ViewHolder> (){
+class YourVibesAdapter (private val mData: GetVibeCategoryResponse, mListener : ListAdapterListener) : RecyclerView.Adapter<YourVibesAdapter.ViewHolder> (){
 
     lateinit var mContext : Context
     var mListener = mListener
-
-    interface ListAdapterListener{ fun onClickAtVibe(item : YourVibeResponse) }
+    val mList = mData.data
+    interface ListAdapterListener{ fun onClickAtVibe(item : CategoryDetail) }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,13 +32,14 @@ class YourVibesAdapter (private val mList: List<YourVibeResponse>, mListener : L
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
         val item = mList!![position]
 
         Glide.with(mContext)
             .load(item!!.image)
             .into(holder.imageView )
 
-        holder.textView.setText(item.title)
+        holder.textView.setText(item.name)
 
         holder.clYourVibe.setOnClickListener { mListener.onClickAtVibe(item) }
             }

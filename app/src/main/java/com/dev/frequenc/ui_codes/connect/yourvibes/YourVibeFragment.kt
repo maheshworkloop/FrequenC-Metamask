@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -17,7 +18,12 @@ import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.VibesProfileList.VibesUserListFragment
 import com.dev.frequenc.ui_codes.connect.home.YourVibeResponse
+import com.dev.frequenc.ui_codes.data.CategoryDetail
+import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
+import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import pl.droidsonroids.gif.GifImageView
+import retrofit2.Call
+import retrofit2.Response
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +43,7 @@ class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener {
     lateinit var root : View
     lateinit var recyclerView: RecyclerView
     lateinit var mlist : List<YourVibeResponse>
+    lateinit var progressDialog : ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,22 +59,16 @@ class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_your_vibe, container, false)
 
+        progressDialog = root.findViewById(R.id.progress_bar)
 
         recyclerView = root.findViewById(R.id.rvYourVibe)
-        var item1 = YourVibeResponse(R.drawable.lookingforlove,"Looking For Love")
-        var item2 = YourVibeResponse(R.drawable.lookingforlove,"Free Tonight")
-        var item3 = YourVibeResponse(R.drawable.lookingforlove,"Let's be friend")
-         mlist = listOf(item1,item2,item3)
 
 
 
 
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false)
-            adapter = YourVibesAdapter(mlist,this@YourVibeFragment)
-        }
 
 
+        getCategoryApi()
 //        showPopUp()
 
         return root
@@ -96,16 +97,38 @@ class YourVibeFragment : Fragment(), YourVibesAdapter.ListAdapterListener {
 
 
 
-    override fun onClickAtVibe(item: YourVibeResponse) {
+    private fun getCategoryApi()
+    {
+        progressDialog.visibility =View.VISIBLE
+        ApiClient.getInstance()!!.getVibeCategory()!!.enqueue(object : retrofit2.Callback<GetVibeCategoryResponse>{
+            override fun onResponse(
+                call: Call<GetVibeCategoryResponse>,
+                response: Response<GetVibeCategoryResponse>
+            ) {
 
-      Toast.makeText(requireContext(),"Clicked",Toast.LENGTH_SHORT).show()
+                progressDialog.visibility = View.GONE
 
-       requireActivity().supportFragmentManager .beginTransaction().replace(R.id.flFragment,VibesUserListFragment()).
-       addToBackStack("YourVibeFragment")    .commit()
+                if(response.isSuccessful && response.body()!=null)
+                {
+                    recyclerView.apply {
+                        layoutManager = GridLayoutManager(requireContext(),2,GridLayoutManager.VERTICAL,false)
+                        adapter = YourVibesAdapter(response.body()!!,this@YourVibeFragment)
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<GetVibeCategoryResponse>, t: Throwable) {
+                progressDialog.visibility = View.GONE
+            }
+        })
     }
 
-
-
-
+    override fun onClickAtVibe(item: CategoryDetail)
+    {
+        Toast.makeText(requireContext(),"Clicked",Toast.LENGTH_SHORT).show()
+        requireActivity().supportFragmentManager .beginTransaction().replace(R.id.flFragment,VibesUserListFragment()).
+        addToBackStack("YourVibeFragment")    .commit()
+    }
 
 }

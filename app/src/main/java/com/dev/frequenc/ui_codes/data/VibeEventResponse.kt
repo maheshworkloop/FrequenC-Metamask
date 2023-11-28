@@ -1,7 +1,7 @@
 package com.dev.frequenc.ui_codes.data
 
 data class VibeEventResponse(
-    val `data`: List<Data>,
+    val `data`: List<VibeResponse>,
     val message: String,
     val status: Boolean
 )
@@ -48,7 +48,7 @@ class Venueid(
     val youtube_url: String
 )
 
-data class Data(
+data class VibeResponse(
     val __v: Int,
     val _id: String,
     val artist_id: List<String>,
