@@ -12,21 +12,39 @@
             android:layout_height="match_parent"
             tools:context=".ui_codes.connect.chat.AllChatUserFragment">
 
+
+        <include
+                layout="@layout/layout_search_header"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/rl_search_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/rl_search_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:id="@+id/suggestionLays"
+                android:visibility="gone"
+                />
+
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <include
-                    layout="@layout/layout_search_header"
-                    android:id="@+id/rl_search_top" />
+                android:layout_height="0dp"
+                android:id="@+id/bottomChatLay"
+                app:layout_constraintTop_toBottomOf="@id/rl_search_top"
+                app:layout_constraintBottom_toBottomOf="parent">
 
             <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:background="#DEE1E6"
                     android:id="@+id/divider1"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_below="@id/rl_search_top" />
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="@dimen/_10sdp" />
 
             <RelativeLayout
                     android:id="@+id/rlConnection"
@@ -43,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:text="Connection (10)"
                         android:background="@drawable/bg_location"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_14sdp"
                         android:maxLines="1"
                         android:textColor="#8023EB"
                         android:ellipsize="end"
@@ -56,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:text="Requests (10)"
                         android:background="@drawable/bg_location"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_14sdp"
                         android:maxLines="1"
                         android:ellipsize="end"
                         android:fontFamily="@font/epilogueregular"
@@ -112,8 +130,7 @@
                     android:text="Chats (10)"
                     android:background="@drawable/bg_location"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_16sdp"
-                    android:visibility="invisible"
+                    android:textSize="@dimen/_14sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/epilogueregular"
@@ -121,11 +138,11 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textStyle="bold" />
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="invisible"
                     android:id="@+id/requestLay"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_below="@id/divider3">
@@ -135,123 +152,120 @@
                         android:layout_height="match_parent"
                         android:id="@+id/pendingTab"
                         app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/myRequestsTab"
-                        >
-
-                <TextView
-                        android:id="@+id/headPending"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pending"
-                        android:background="@drawable/bg_location"
-                        android:textSize="@dimen/_16sdp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/selectedHeadPending"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:fontFamily="@font/epilogueregular"
-                        android:layout_marginBottom="@dimen/_8sdp"
-                        app:layout_constraintBottom_toTopOf="@id/selectedHeadPending"
-                        android:textStyle="bold" />
-
-                <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:id="@+id/notificationPendingBubble"
-                        app:layout_constraintTop_toTopOf="@id/headPending"
-                        app:cardBackgroundColor="#DE3B40"
-                        app:cardCornerRadius="@dimen/_12sdp"
-                        app:layout_constraintBottom_toBottomOf="@id/headPending"
-                        app:layout_constraintStart_toEndOf="@id/headPending"
-                        app:layout_constraintEnd_toEndOf="@id/selectedHeadPending"
-                        app:layout_constraintDimensionRatio="16:9">
+                        app:layout_constraintEnd_toStartOf="@id/myRequestsTab">
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/tvCountPending"
-                            android:textColor="@color/white"
-                            android:gravity="center"
-                            android:fontFamily="@font/interregular"
-                            android:textSize="12sp"
-                            android:text="12" />
-                </androidx.cardview.widget.CardView>
+                            android:id="@+id/headPending"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pending"
+                            android:background="@drawable/bg_location"
+                            android:textSize="@dimen/_14sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/selectedHeadPending"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:fontFamily="@font/epilogueregular"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            app:layout_constraintBottom_toTopOf="@id/selectedHeadPending"
+                            android:textStyle="bold" />
 
-                <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_2sdp"
-                        android:background="#8023EB"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:id="@+id/selectedHeadPending"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                    <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:id="@+id/notificationPendingBubble"
+                            app:layout_constraintTop_toTopOf="@id/headPending"
+                            app:cardBackgroundColor="#DE3B40"
+                            app:cardCornerRadius="@dimen/_12sdp"
+                            app:layout_constraintBottom_toBottomOf="@id/headPending"
+                            app:layout_constraintStart_toEndOf="@id/headPending"
+                            app:layout_constraintEnd_toEndOf="@id/selectedHeadPending"
+                            app:layout_constraintDimensionRatio="16:9">
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/tvCountPending"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:fontFamily="@font/interregular"
+                                android:textSize="12sp"
+                                android:text="12" />
+                    </androidx.cardview.widget.CardView>
+
+                    <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_2sdp"
+                            android:background="#8023EB"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:id="@+id/selectedHeadPending"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/myRequestsTab"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/pendingTab"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    >
-
-                <TextView
-                        android:id="@+id/headMyrequests"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Requests"
-                        android:background="@drawable/bg_location"
-                        android:textSize="@dimen/_16sdp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginBottom="@dimen/_8sdp"
-                        app:layout_constraintStart_toStartOf="@id/selectedHeadMyrequests"
-                        android:fontFamily="@font/epilogueregular"
-                        app:layout_constraintBottom_toTopOf="@id/selectedHeadMyrequests"
-                        android:textStyle="bold" />
-
-                <androidx.cardview.widget.CardView
+                <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:id="@+id/notificationMyrequestsBubble"
-                        app:layout_constraintTop_toTopOf="@id/headMyrequests"
-                        app:cardBackgroundColor="#DE3B40"
-                        app:cardCornerRadius="@dimen/_12sdp"
-                        app:layout_constraintBottom_toBottomOf="@id/headMyrequests"
-                        app:layout_constraintStart_toEndOf="@id/headMyrequests"
-                        app:layout_constraintEnd_toEndOf="@id/selectedHeadMyrequests"
-                        app:layout_constraintHeight_percent="0.7"
-                        app:layout_constraintDimensionRatio="16:9">
+                        android:layout_height="match_parent"
+                        android:id="@+id/myRequestsTab"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/pendingTab"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
 
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/tvCountMyrequests"
-                            android:textColor="@color/white"
-                            android:gravity="center"
-                            android:fontFamily="@font/interregular"
-                            android:textSize="12sp"
-                            android:text="12" />
-                </androidx.cardview.widget.CardView>
+                            android:id="@+id/headMyrequests"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="My Requests"
+                            android:background="@drawable/bg_location"
+                            android:textSize="@dimen/_14sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            app:layout_constraintStart_toStartOf="@id/selectedHeadMyrequests"
+                            android:fontFamily="@font/epilogueregular"
+                            app:layout_constraintBottom_toTopOf="@id/selectedHeadMyrequests"
+                            android:textStyle="bold" />
 
-                <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_2sdp"
-                        android:background="#8023EB"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:visibility="invisible"
-                        android:id="@+id/selectedHeadMyrequests"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:id="@+id/notificationMyrequestsBubble"
+                            app:layout_constraintTop_toTopOf="@id/headMyrequests"
+                            app:cardBackgroundColor="#DE3B40"
+                            app:cardCornerRadius="@dimen/_12sdp"
+                            app:layout_constraintBottom_toBottomOf="@id/headMyrequests"
+                            app:layout_constraintStart_toEndOf="@id/headMyrequests"
+                            app:layout_constraintEnd_toEndOf="@id/selectedHeadMyrequests"
+                            app:layout_constraintHeight_percent="0.7"
+                            app:layout_constraintDimensionRatio="16:9">
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/tvCountMyrequests"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:fontFamily="@font/interregular"
+                                android:textSize="12sp"
+                                android:text="12" />
+                    </androidx.cardview.widget.CardView>
+
+                    <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_2sdp"
+                            android:background="#8023EB"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:visibility="invisible"
+                            android:id="@+id/selectedHeadMyrequests"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -265,6 +279,15 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     tools:listitem="@layout/item_user_chat_requests"
                     android:layout_alignParentBottom="true" />
+
+
+            <include
+                    android:layout_below="@id/tvChatTag"
+                android:id="@+id/dataNotFoundLay"
+                layout="@layout/no_data_found"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
