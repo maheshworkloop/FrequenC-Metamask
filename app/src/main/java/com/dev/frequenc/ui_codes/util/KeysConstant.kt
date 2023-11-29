@@ -4,7 +4,7 @@ class KeysConstant {
 
     companion object
     {
-        const val BASE_URL = "http://192.168.252.40:3001/api/v1/"
+        const val BASE_URL = "http://192.168.1.8:3001/api/v1/"
 
         const val BROWSE_BY_CAT = "event/category/browse-by-category"
 
@@ -40,6 +40,8 @@ class KeysConstant {
         const val Vibe_Event = "connect/vibe-event"
 
         const val GET_VIBE_CATEGORY = "connect/vibe-categories"
+
+        const val MATCH_VIBE_USER_LIST = "connect/match-vibe/{category}"
 
         const val My_Request = "connect/myRequest"
         const val MyConnection = "connect/myConnection"

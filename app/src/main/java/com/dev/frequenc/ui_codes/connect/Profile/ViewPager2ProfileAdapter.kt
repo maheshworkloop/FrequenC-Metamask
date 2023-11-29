@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 
-class ViewPager2ProfileAdapter (val mcontext : Context, val mList : List<Int>)
+class ViewPager2ProfileAdapter (val mcontext : Context, val mList : List<String>)
     : RecyclerView.Adapter<ViewPager2ProfileAdapter.viewPager2ViewHolder>()
 {
 
@@ -35,10 +36,7 @@ class ViewPager2ProfileAdapter (val mcontext : Context, val mList : List<Int>)
 
         var item = mList[position]
 
-
-        holder.ivImage.setBackgroundResource(item)
-
-
+        Glide.with(mcontext).load(item).into(holder.ivImage)
 
     }
 

@@ -133,18 +133,65 @@ class MainActivity  : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
 
-                val builder1 = AlertDialog.Builder(this@MainActivity)
-                    .setMessage("Do you want to exit ?")
-                    .setTitle("Alert !")
-                    .setPositiveButton("Yes") { dialog, id ->
-                        System.exit(0)
-                    }
-                    .setNegativeButton("No") { dialog, id ->
-                        dialog.cancel()
-                    }
+                try {
+                    if (supportFragmentManager.fragments.size > 1 && (supportFragmentManager?.findFragmentByTag(
+                            "MarketPlaceFragment"
+                        )?.isVisible == false)
+                    ) {
 
-                builder1.create().show()
+                        val fragmentManager = supportFragmentManager
+                        val backStackCount = fragmentManager.backStackEntryCount
+                        for (i in 0 until backStackCount) {
+                            val backStackEntry: FragmentManager.BackStackEntry =
+                                fragmentManager.getBackStackEntryAt(i)
+                            if (!backStackEntry.getName().equals("MarketPlaceFragment")) {
+                                fragmentManager.popBackStackImmediate(
+                                    backStackEntry.getId(),
+                                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+                                )
+                            }
+                        }
+//                var fragmentToKeep =
+//                    this.supportFragmentManager.findFragmentByTag("MarketPlaceFragment")!! as MarketPlaceFragment
+//                val transaction: FragmentTransaction =
+//                    this.supportFragmentManager.beginTransaction()
+//
+//                if (fragmentToKeep != null) {
+//                    transaction.detach(fragmentToKeep)
+//                } else {
+//                    fragmentToKeep = MarketPlaceFragment()
+//                }
+//
+//                for (fragment in supportFragmentManager.fragments) {
+//                    if (fragment != null && fragment !== fragmentToKeep) {
+//                        transaction.remove(fragment)
+//                    }
+//                }
+//
+//                transaction.addToBackStack(null)
+//                transaction.commit()
+                    } else {
+                        val builder1 = AlertDialog.Builder(this@MainActivity)
+                            .setMessage("Do you want to exit ?")
+                            .setTitle("Alert !")
+                            .setPositiveButton("Yes") { dialog, id ->
+//                                super.onBackPressed()
+                                System.exit(0)
+                            }
+                            .setNegativeButton("No") { dialog, id ->
+                                dialog.cancel()
+                            }
+
+
+                        builder1.create().show()
+                    }
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                    supportFragmentManager.beginTransaction()
+                        .add(R.id.flFragment, MarketPlaceFragment(), "MarketPlaceFragment").commit()
+                }
             }
+
         })
 
 //        this.supportFragmentManager.addOnBackStackChangedListener {

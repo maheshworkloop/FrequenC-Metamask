@@ -15,6 +15,16 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
 
+       <ProgressBar
+               android:id="@+id/progressDialog"
+               android:layout_width="@dimen/_50sdp"
+               android:layout_height="@dimen/_50sdp"
+               android:visibility="gone"
+               android:indeterminate="true"
+               android:elevation="@dimen/_5sdp"
+               android:layout_centerInParent="true"
+               />
+
     <include layout="@layout/layout_header"
         android:id="@+id/rl_header"/>
 

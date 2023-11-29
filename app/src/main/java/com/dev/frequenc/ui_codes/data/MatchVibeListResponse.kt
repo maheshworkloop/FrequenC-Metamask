@@ -1,12 +1,12 @@
 package com.dev.frequenc.ui_codes.data
 
-data class Data(
-    val address: String,
-    val balance: String,
-    val tokenBalance: String
+data class MatchVibeListResponse(
+    val `data`: List<MatchVibeData>,
+    val message: String,
+    val status: Boolean
 )
 
-data class DataX(
+data class MatchVibeData(
     val __v: Int,
     val _id: String,
     val banner_image: String,
