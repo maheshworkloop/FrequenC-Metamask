@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
 
-class ConnectionAdapter(val mList: List<ConnectionResponse>,val mListener : ListAdapterListener) : RecyclerView.Adapter<ConnectionAdapter.ViewHolder> () {
+class ConnectionAdapter(var mList: List<ConnectionResponse>,val mListener : ListAdapterListener) : RecyclerView.Adapter<ConnectionAdapter.ViewHolder> () {
 
     lateinit var mContext : Context
     interface ListAdapterListener
@@ -33,30 +33,35 @@ class ConnectionAdapter(val mList: List<ConnectionResponse>,val mListener : List
 
     override fun onBindViewHolder(holder: ConnectionAdapter.ViewHolder, position: Int) {
 
-        val item = mList[position]
-
-        holder.ivImage.setBackgroundResource(item.image)
-
-        holder.clConnection.setOnClickListener {
-            mListener.onClickAtConnection(item)
-        }
-
-        if(item.status)
-        {
-            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_active)
-        }
-        else
-        {
-            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_inactive)
-
-        }
+//        val item = mList[position]
+//
+//        holder.ivImage.setBackgroundResource(item.image)
+//
+//        holder.clConnection.setOnClickListener {
+//            mListener.onClickAtConnection(item)
+//        }
+//
+//        if(item.status)
+//        {
+//            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_active)
+//        }
+//        else
+//        {
+//            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_inactive)
+//
+//        }
 
     }
 
     override fun getItemCount(): Int {
-        return mList.size
+//        return  mList.size
+        return 7
     }
 
+    fun update(itemLists : List<ConnectionResponse>) {
+        this.mList = itemLists
+        notifyDataSetChanged()
+    }
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

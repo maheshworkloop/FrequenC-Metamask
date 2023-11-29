@@ -28,6 +28,8 @@ import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.WalletBalenceData
 import com.dev.frequenc.ui_codes.data.models.paymentInitiateReq
+import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
+import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
@@ -165,5 +167,10 @@ interface ApiService {
 
     @GET(KeysConstant.MATCH_VIBE_USER_LIST)
     fun getMatchVibeList(@Header(Authorization) token: String,@Path("category")category : String): Call<MatchVibeListResponse>?
+    fun updateVibe(@Header(Authorization) token: String,id : String ): Call<AudienceDataResponse>?
+    @GET(KeysConstant.MyConnection)
+    fun connectionList(@Header(Authorization) token: String): Call<MyConnectionResponse>?
+    @GET(KeysConstant.My_Request)
+    fun myRequestApi(@Header(Authorization)token: String): Call<MyRequestsResponse>?
 
 }

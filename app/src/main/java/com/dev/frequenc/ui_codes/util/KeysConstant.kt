@@ -43,6 +43,8 @@ class KeysConstant {
 
         const val MATCH_VIBE_USER_LIST = "connect/match-vibe/{category}"
 
+        const val My_Request = "connect/myRequest"
+        const val MyConnection = "connect/myConnection"
     }
 
 
