@@ -20,7 +20,7 @@
                 android:indeterminateTint="@color/grey"
                 android:visibility="gone" />
         <include
-                layout="@layout/layout_search_header"
+                layout="@layout/layout_header"
                 android:id="@+id/rl_search_top" />
 
         <View
