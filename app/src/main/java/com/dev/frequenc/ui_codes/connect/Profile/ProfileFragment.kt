@@ -1,14 +1,27 @@
 package com.dev.frequenc.ui_codes.connect.Profile
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.dev.frequenc.R
+import com.dev.frequenc.ui_codes.data.AudienceDataResponse
+import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
+import com.dev.frequenc.ui_codes.screens.utils.ApiClient
+import com.dev.frequenc.util.Constants
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Response
+import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +40,12 @@ class ProfileFragment : Fragment() {
     lateinit var root : View
     lateinit var viewPagerProfileAdapter : ViewPager2
     lateinit var tabLayoutProfile : TabLayout
+    lateinit var audience_id : String
+    lateinit var progressDialog : ProgressBar
+
+    lateinit var authorization : String
+    private lateinit var sharedPreferences: SharedPreferences
+    var userRegistered : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +62,48 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_profile, container, false)
 
+        progressDialog = root.findViewById(R.id.progressDialog)
+
+        val bundle = this.arguments
+        if(bundle!=null)
+        {
+            audience_id = bundle.getString("audience_id")!!
+        }
+
         viewPagerProfileAdapter = root.findViewById(R.id.viewPagerProfile)
 
         tabLayoutProfile = root.findViewById(R.id.tabLayoutProfile)
 
-        setupTabs()
+
+
+        sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+        userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
+        authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
+        audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
+
+        if(userRegistered && !authorization.isNullOrEmpty() &&authorization!="-1" && !audience_id.isNullOrEmpty() )
+        {
+
+            Log.d("Audience Id",audience_id)
+            Log.d("Bearer",authorization)
+//            Toast.makeText(requireContext(),"Login Success", Toast.LENGTH_SHORT).show()
+//            loginBtn.visibility = View.INVISIBLE
+//            ivHamburger.visibility =View.VISIBLE
+//            ivNotification.visibility =View.VISIBLE
+            getProfileApi()
+//            getMatchUserList("Party")
+        }
+        else
+        {
+
+            Log.e("Audience Id",audience_id)
+//            loginBtn.visibility = View.VISIBLE
+//            ivHamburger.visibility =View.INVISIBLE
+//            ivNotification.visibility =View.INVISIBLE
+
+
+//            Log.e("Bearer",authorization)
+        }
 
         return root
     }
@@ -73,9 +129,8 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun setupTabs() {
+    private fun setupTabs(mlist : List<String>) {
 
-        val mlist = listOf<Int>(R.drawable.profile,R.drawable.profile_description,R.drawable.img_connect)
 
         val adapter = ViewPager2ProfileAdapter(requireContext(),mlist)
         viewPagerProfileAdapter.adapter = adapter
@@ -89,5 +144,46 @@ class ProfileFragment : Fragment() {
         }.attach()
 
     }
+
+    private fun getProfileApi() {
+      progressDialog.visibility = View.VISIBLE
+        try {
+            ApiClient.getInstance()!!.getProfile(authorization, audience_id)
+                .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
+                    override fun onResponse(
+                        call: Call<AudienceDataResponse>,
+                        response: Response<AudienceDataResponse>
+                    ) {
+                progressDialog.visibility = View.GONE
+                        if (response.isSuccessful && response.body() != null) {
+                            Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
+                            val res = response.body()
+
+                            var item: AudienceDataResponse = res!!
+                            Log.d("profile",item.name)
+
+                            val mlist = listOf<String>(item.banner_image)
+
+                            setupTabs(mlist)
+
+
+                            }
+
+                    }
+
+                    override fun onFailure(call: Call<AudienceDataResponse>, t: Throwable) {
+//                binding.progressDialog.visibility = View.GONE
+                        Log.d("Profile Api", "onFailure Retrofit: " + t.localizedMessage)
+
+
+                    }
+
+                })
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 
 }

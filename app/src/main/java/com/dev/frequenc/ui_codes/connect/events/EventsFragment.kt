@@ -47,11 +47,11 @@ class EventsFragment : Fragment(),VibesEventAdapter.ListAdapterListener {
     lateinit var audience_id : String
     private lateinit var sharedPreferences: SharedPreferences
     var userRegistered : Boolean = false
+    lateinit var progressDialog: ProgressBar
 
     lateinit var loginBtn : TextView
     lateinit var ivHamburger : ImageView
     lateinit var ivNotification: ImageView
-    lateinit var progressDialog: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,17 +70,12 @@ class EventsFragment : Fragment(),VibesEventAdapter.ListAdapterListener {
         root = inflater.inflate(R.layout.fragment_events, container, false)
 
         recyclerView = root.findViewById(R.id.rvConnectEvents)
+
         progressDialog = root.findViewById(R.id.progress_bar)
-
         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
-
         userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
-
-
         authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
         audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
-
-
 
         if(userRegistered && !authorization.isNullOrEmpty() &&authorization!="-1" && !audience_id.isNullOrEmpty() )
         {

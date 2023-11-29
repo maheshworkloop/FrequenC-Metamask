@@ -1,21 +1,26 @@
 package com.dev.frequenc.ui_codes.connect.VibesProfileList
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dev.frequenc.R
-import com.dev.frequenc.ui_codes.data.VibesProfileResponse
+import com.dev.frequenc.ui_codes.data.MatchVibeData
+import java.time.LocalDate
+import java.time.Period
 
-class VibesProfileListAdapter(val mList : List<VibesProfileResponse>,val mListener : ListAdapterListener ) : RecyclerView.Adapter<VibesProfileListAdapter.ViewHolder>(){
+class VibesProfileListAdapter(val mList : List<MatchVibeData>,val mListener : ListAdapterListener ) : RecyclerView.Adapter<VibesProfileListAdapter.ViewHolder>(){
 
     lateinit var mContext: Context
     interface ListAdapterListener{
-         fun onClickAtProfile(item : VibesProfileResponse)
+         fun onClickAtProfile(item : MatchVibeData)
     }
 
 
@@ -30,12 +35,23 @@ class VibesProfileListAdapter(val mList : List<VibesProfileResponse>,val mListen
         return mList.size
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item = mList[position]
         holder.tvName.text = item.name
-        holder.tvAge.text = item.age
+
+        val dateParts: List<String> = item.dob.split("-")
+        val day = dateParts[2]
+        val month = dateParts[1]
+        val year = dateParts[0]
+//        item.dob
+        holder.tvAge.text = "Age " + getAge(year.toInt(), month.toInt(),day.toInt()).toString()
+
         holder.clCard.setOnClickListener { mListener.onClickAtProfile(item) }
+
+        Glide.with(mContext).load(item.banner_image).into(holder.ivImage)
+
     }
 
 
@@ -46,6 +62,15 @@ class VibesProfileListAdapter(val mList : List<VibesProfileResponse>,val mListen
         val ivImage = itemView.findViewById<ImageView>(R.id.ivImage)
         val clCard = itemView.findViewById<ConstraintLayout>(R.id.clCard)
 
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
     }
 
 }

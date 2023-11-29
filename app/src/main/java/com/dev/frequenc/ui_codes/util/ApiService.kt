@@ -16,6 +16,7 @@ import com.dev.frequenc.ui_codes.data.CountryResponse
 import com.dev.frequenc.ui_codes.data.EventResponse
 import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
+import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistResponse
@@ -160,6 +161,9 @@ interface ApiService {
     fun getVibeCategory(): Call<GetVibeCategoryResponse>?
 
     @PUT("audience/update-vibes/{id}")
-    fun updateVibe(@Header(Authorization) token: String,id : String ): Call<AudienceDataResponse>?
+    fun updateVibe(@Header(Authorization) token: String,@Path("id")id : String, @Body vibes : String ): Call<AudienceDataResponse>?
+
+    @GET(KeysConstant.MATCH_VIBE_USER_LIST)
+    fun getMatchVibeList(@Header(Authorization) token: String,@Path("category")category : String): Call<MatchVibeListResponse>?
 
 }

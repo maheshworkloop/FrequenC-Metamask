@@ -164,8 +164,6 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         }
 
 
-
-
         return root
     }
 
@@ -266,7 +264,8 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
     override fun onClickAtShareVibe(item: CategoryDetail) {
         dialog.cancel()
-        updateVibe(item._id)
+        updateVibe(audience_id,item._id)
+
     }
 
 
@@ -300,7 +299,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
 
     private fun getProfileApi() {
-        progressDialog.visibility = View.VISIBLE
+//        progressDialog.visibility = View.VISIBLE
         try {
             ApiClient.getInstance()!!.getProfile(authorization, audience_id)
                 .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
@@ -308,7 +307,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
                         call: Call<AudienceDataResponse>,
                         response: Response<AudienceDataResponse>
                     ) {
-                        progressDialog.visibility = View.GONE
+//                        progressDialog.visibility = View.GONE
                         if (response.isSuccessful && response.body() != null) {
                             Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
                             val res = response.body()
@@ -326,7 +325,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
                             Log.e("date-today",currentDate)
                             Log.e("date-vibe",vibe_date)
 
-                            if(!currentDate.equals(vibe_date))
+                            if(currentDate.equals(vibe_date))
                             {
                                 getCategoryApi()
 
@@ -350,25 +349,30 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     }
 
 
-    private fun updateVibe(id : String)
+    private fun updateVibe(audience_id : String, id : String)
     {
 
-        progressDialog.visibility = View.VISIBLE
+        Log.d("date","calling update vibe api")
+        Log.d("id",id)
 
-        ApiClient.getInstance()!!.updateVibe(authorization,id)!!.enqueue(object : retrofit2.Callback<AudienceDataResponse>{
+//        progressDialog.visibility = View.VISIBLE
+
+        ApiClient.getInstance()!!.updateVibe(authorization,audience_id,id)!!.enqueue(object : retrofit2.Callback<AudienceDataResponse>{
             override fun onResponse(
                 call: Call<AudienceDataResponse>,
                 response: Response<AudienceDataResponse>
             ) {
-                progressDialog.visibility = View.GONE
+//                progressDialog.visibility = View.GONE
+                Log.d("sharevibe","inside api resposnse")
 
-                if(response.isSuccessful && response.body()!=null)
+                if(response.isSuccessful() && response.body()!=null)
                 {
+
+                    Log.d("sharevibe","resposnse success")
+
                     var item: AudienceDataResponse = response.body()!!
 
                     val vibe_date = item.vibesDate.substringBefore("T")
-
-
 
                     val sdf = SimpleDateFormat("yyyy-MM-dd")
 
@@ -377,18 +381,20 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
                     Log.e("date-today",currentDate)
                     Log.e("date-vibe",vibe_date)
 
-                    if(currentDate.equals(vibe_date))
+                    if(!currentDate.equals(vibe_date))
                     {
 //                        getCategoryApi()
                       Toast.makeText(requireContext(),"Vibes Shared",Toast.LENGTH_SHORT).show()
-
+                      Log.d("sharevibe","Vibes Updated")
                     }
 
                 }
             }
 
             override fun onFailure(call: Call<AudienceDataResponse>, t: Throwable) {
-                progressDialog.visibility = View.GONE
+//                progressDialog.visibility = View.GONE
+                Log.d("sharevibe","Vibes Failed")
+
 
             }
         })
