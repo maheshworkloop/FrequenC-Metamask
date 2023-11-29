@@ -43,6 +43,11 @@ class AllChatListViewModel : ViewModel() {
 //        }
 //        }
 
+    private val _countNumber = MutableLiveData<HashMap<String,Int>>(HashMap())
+
+    val CountNumber: LiveData<HashMap<String,Int>>
+        get() = _countNumber
+
     private val _isConnectionTabSelected = MutableLiveData<Boolean>(true)
 
     val isConnectionTabSelected: LiveData<Boolean>
@@ -91,6 +96,7 @@ class AllChatListViewModel : ViewModel() {
                             val adapterLists = ArrayList<ConnectionResponse>()
                             for (data: Data in response.body()?.data!!) {
 //                            adapterLists.add(ConnectionResponse(data.to_user_id,data.status))
+//                                _countNumber.postValue(CountNumber.value.put("C"))
                                 adapterLists.add(ConnectionResponse(0, true, ""))
                             }
                             _userLists.postValue(adapterLists)

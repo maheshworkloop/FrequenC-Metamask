@@ -146,7 +146,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getProfileApi() {
-      progressDialog.visibility = View.VISIBLE
+        progressDialog.visibility = View.VISIBLE
         try {
             ApiClient.getInstance()!!.getProfile(authorization, audience_id)
                 .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
@@ -154,7 +154,7 @@ class ProfileFragment : Fragment() {
                         call: Call<AudienceDataResponse>,
                         response: Response<AudienceDataResponse>
                     ) {
-                progressDialog.visibility = View.GONE
+                        progressDialog.visibility = View.GONE
                         if (response.isSuccessful && response.body() != null) {
                             Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
                             val res = response.body()
@@ -167,7 +167,7 @@ class ProfileFragment : Fragment() {
                             setupTabs(mlist)
 
 
-                            }
+                        }
 
                     }
 
