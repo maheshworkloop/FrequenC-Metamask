@@ -127,7 +127,7 @@ class ChatListAdapter(private val chatList: ArrayList<Any>,private var useType: 
     }
 
     override fun getItemCount(): Int {
-        return chatList.size
+            return chatList.size
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
+import com.dev.frequenc.util.ImageUtil
 
 class ConnectionAdapter(var mList: List<ConnectionResponse>,val mListener : ListAdapterListener) : RecyclerView.Adapter<ConnectionAdapter.ViewHolder> () {
 
@@ -35,7 +36,9 @@ class ConnectionAdapter(var mList: List<ConnectionResponse>,val mListener : List
 
         val item = mList[position]
 
-        holder.ivImage.setBackgroundResource(item.image)
+        if (!item.image.isNullOrEmpty()) {
+            ImageUtil.loadImage(holder.ivImage, item.image)
+        }
 
         holder.clConnection.setOnClickListener {
             mListener.onClickAtConnection(item)

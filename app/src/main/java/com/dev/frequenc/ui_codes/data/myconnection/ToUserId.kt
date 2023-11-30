@@ -3,7 +3,7 @@ package com.dev.frequenc.ui_codes.data.myconnection
 data class ToUserId(
     val __v: Int,
     val _id: String,
-    val audience_id: String,
+    val audience_id: AudienceId,
     val city: String,
     val country: String,
     val createdAt: String,
@@ -23,5 +23,5 @@ data class ToUserId(
     val updatedAt: String,
     val user_type: String,
     val venue_id: List<Any>,
-    val wallet: Int
+    val wallet: Any
 )

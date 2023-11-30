@@ -29,9 +29,15 @@ fun Setup(
                 onConnect = { dapp, onError ->
                     ethereumViewModel.connect(
                         dapp,
-                        onSuccess = { if (it!= null && it.toString().length>6 ) {sharedPreferencesEditor.putString(Constants.MetaMaskWalletAddress,it.toString()).apply()}
+                        onSuccess = {
+                            if (it != null && it.toString().length > 6) {
+                                sharedPreferencesEditor.putString(
+                                    Constants.MetaMaskWalletAddress,
+                                    it.toString()
+                                ).apply()
+                            }
                             screenViewModel.setScreen(ACTIONS)
-                                    },
+                        },
                         onError
                     )
                 },
@@ -86,7 +92,7 @@ fun Setup(
                 onSwitchChain = { screenViewModel.setScreen(SWITCH_CHAIN) }
             )
         }
-        composable(SIGN_MESSAGE.name                                                     ) {
+        composable(SIGN_MESSAGE.name) {
             SignMessageScreen(
                 navController,
                 ethereumState = ethereumState,
@@ -94,13 +100,16 @@ fun Setup(
                     ethereumViewModel.signMessage(message, address, onSuccess, onError)
                 })
         }
+
         composable(SEND_TRANSACTION.name) {
             SendTransactionScreen(
                 navController,
                 ethereumState = ethereumState,
                 sendTransaction = { amount, from, to, onSuccess, onError ->
                     ethereumViewModel.sendTransaction(amount, from, to, onSuccess, onError)
-                })
+                }
+//                transferring,
+                )
         }
         composable(SWITCH_CHAIN.name) {
             SwitchChainScreen(

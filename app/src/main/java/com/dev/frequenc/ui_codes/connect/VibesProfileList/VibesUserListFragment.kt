@@ -23,7 +23,6 @@ import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeData
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
-import com.dev.frequenc.ui_codes.data.VibesProfileResponse
 import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
@@ -231,8 +230,13 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
                                 val adapterLists = ArrayList<ConnectionResponse>()
                                 for (data: Data in response.body()?.data!!) {
-
-                                    adapterLists.add(ConnectionResponse(0, true, ""))
+                                    var images : String = ""
+                                    try {
+                                        images = data.to_user_id.audience_id.profile_pic
+                                    } catch (exs: Exception) {
+                                        exs.printStackTrace()
+                                    }
+                                    adapterLists.add(ConnectionResponse(images, true, ""))
 
                                 }
 

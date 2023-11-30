@@ -18,35 +18,34 @@ import retrofit2.Response
 
 class AllChatListViewModel : ViewModel() {
 
+    private val _myRequestCount = MutableLiveData<Int>(0)
+    val myRequestCount: LiveData<Int>
+        get () = _myRequestCount
+
+    private val _pendingRequestCount = MutableLiveData<Int>(0)
+    val pendingRequestCount: LiveData<Int>
+        get () = _pendingRequestCount
+
+    private val _chatCount = MutableLiveData<Int>(0)
+    val chatCount: LiveData<Int>
+        get () = _chatCount
+
+    private val _requestCount = MutableLiveData<Int>(0)
+    val requestCount: LiveData<Int>
+        get () = _requestCount
+
     private val _connectionList = MutableLiveData<List<ConnectionResponse>>(ArrayList(3))
     val connectionList: LiveData<List<ConnectionResponse>>
-        get() {
-            return if (_connectionList.value?.isNullOrEmpty() == false) {
-                setDataFound(true)
-                _connectionList
-            } else {
-                setDataFound(false)
-                MutableLiveData(emptyList())
-            }
-        }
+        get() = _connectionList
 
     private val _userLists = MutableLiveData<List<Any>>(ArrayList(3))
     val userListsData: LiveData<List<Any>>
         get()
-//        = _userLists
-        {
-        return if (_userLists.value?.isNullOrEmpty() == false) {
-            setDataFound(true)
-            _userLists
-        } else {
-            setDataFound(false)
-            MutableLiveData(emptyList())
-        }
-        }
+        = _userLists
 
-    private val _countNumber = MutableLiveData<HashMap<String,Int>>(HashMap())
+    private val _countNumber = MutableLiveData<HashMap<String, Int>>(HashMap())
 
-    val CountNumber: LiveData<HashMap<String,Int>>
+    val CountNumber: LiveData<HashMap<String, Int>>
         get() = _countNumber
 
     private val _isConnectionTabSelected = MutableLiveData<Boolean>(true)
@@ -98,20 +97,33 @@ class AllChatListViewModel : ViewModel() {
                             for (data: Data in response.body()?.data!!) {
 //                            adapterLists.add(ConnectionResponse(data.to_user_id,data.status))
 //                                _countNumber.postValue(CountNumber.value.put("C"))
-                                adapterLists.add(ConnectionResponse(0, true, ""))
+                                var images: String = ""
+                                try {
+                                    images = data.to_user_id.audience_id.profile_pic
+                                } catch (exs: Exception) {
+                                    exs.printStackTrace()
+                                }
+                                adapterLists.add(ConnectionResponse(images, true, ""))
                             }
-                            _connectionList.postValue(adapterLists)
+                            try {
+                                _connectionList.postValue(adapterLists)
+                                setDataFound(true)
+                            } catch (ex: Exception) {
+                                setDataFound(false)
+                                _connectionList.postValue(emptyList())
+                            }
                         } else {
                             _connectionList.postValue(emptyList())
+                            setDataFound(false)
                         }
                     } else {
-                        Log.d(Constants.Error, "onResponse: ${response.body()}")
+                        Log.d(Constants.Error, "onResponse:callConnectionApi() ${response.body()}")
                     }
                     __isApiCalled.postValue(false)
                 }
 
                 override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
-                    Log.e(Constants.Error, "onFailure: ", t)
+                    Log.e(Constants.Error, "onFailure:callConnectionApi() ", t)
                     __isApiCalled.postValue(false)
                 }
             })
@@ -126,20 +138,39 @@ class AllChatListViewModel : ViewModel() {
                         call: Call<MyRequestsResponse>,
                         response: Response<MyRequestsResponse>
                     ) {
-                        if (response.isSuccessful) {
+                        if (response.isSuccessful && response.body() != null && response.body()?.data.isNullOrEmpty() == false) {
                             if (response.body() != null) {
-                                _userLists.postValue(response.body()?.data)
+                                try {
+                                    _requestCount.postValue(response.body()?.count)
+                                    _myRequestCount.postValue(response.body()?.count)
+                                    _pendingRequestCount.postValue(response.body()?.count)
+                                    _chatCount.postValue(response.body()?.count)
+                                }
+                                catch (ex: Exception) {}
+                                try {
+                                    _userLists.postValue(response.body()?.data)
+                                    setDataFound(true)
+                                    _userLists
+                                } catch (ex: Exception) {
+                                    setDataFound(false)
+                                    MutableLiveData(emptyList())
+                                }
                             } else {
                                 _userLists.postValue(emptyList())
+                                setDataFound(false)
+                                MutableLiveData(emptyList())
                             }
                         } else {
-                            Log.d(Constants.Error, "onResponse: ${response.body()}")
+                            Log.d(
+                                Constants.Error,
+                                "onResponse: callMyRequestApi() ${response.body()}"
+                            )
                         }
                         __isApiCalled.postValue(false)
                     }
 
                     override fun onFailure(call: Call<MyRequestsResponse>, t: Throwable) {
-                        Log.e(Constants.Error, "onFailure: ", t)
+                        Log.e(Constants.Error, "onFailure: callMyRequestApi() ", t)
                         __isApiCalled.postValue(false)
                     }
                 })

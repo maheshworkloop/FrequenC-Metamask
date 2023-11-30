@@ -23,5 +23,5 @@ data class ToUserId(
     val updatedAt: String,
     val user_type: String,
     val venue_id: List<Any>,
-    val wallet: Int
+    val wallet: Any
 )

@@ -72,7 +72,9 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         activity?.runOnUiThread {
             allChatListViewModel.isConnectionTabSelected.observe(viewLifecycleOwner) {
-                showConnectionTab(it, chatListAdapter)
+                sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
+                    showConnectionTab(it, token)
+                }
             }
         }
 
@@ -81,17 +83,16 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                 sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
                     showPendingRequestsSubTab(
                         it,
-                        token,
-                        chatListAdapter
+                        token
                     )
                 }
             }
         }
         allChatListViewModel.isApiCalled.observe(viewLifecycleOwner) {
             if (it == true) {
-
+            binding.progressBar.visibility = View.VISIBLE
             } else {
-
+                binding.progressBar.visibility = View.GONE
             }
         }
 
@@ -103,32 +104,30 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                             it,
                             ItemUserListLay
                         )
+                        binding.tvChatTag.text = "Chats (${allChatListViewModel.chatCount.value})"
                     } else {
                         if (allChatListViewModel.isPendingSubTabSelected.value == true) {
-//                            chatListAdapter.refreshData(
-//                                it,
-//                                ItemUserChatPendingListLay
-//                            )
+                            chatListAdapter.refreshData(
+                                it,
+                                ItemUserChatPendingListLay
+                            )
                         } else {
                             chatListAdapter.refreshData(
                                 it,
                                 ItemUserChatRequestsLay
                             )
                         }
+                        binding.tvCountMyrequests.text = allChatListViewModel.myRequestCount.value.toString()
+                        binding.tvCountPending.text = allChatListViewModel.pendingRequestCount.value.toString()
                     }
                     try {
-                        binding.tvRequestsTag.text = "Requests (${it23.size})"
+                        binding.tvRequestsTag.text = "Requests (${allChatListViewModel.requestCount.value})"
                     } catch (ex: Exception) {
                         ex.printStackTrace()
                     }
                 }
             }
         }
-
-        sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
-            allChatListViewModel.callConnectionApi(token)
-        }
-
 
         activity?.runOnUiThread {
             allChatListViewModel.connectionList.observe(viewLifecycleOwner) {
@@ -148,18 +147,22 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                 connectionAdapter.update(it)
             }
         }
-//
-//        activity?.runOnUiThread {
-//            allChatListViewModel.isDataFound.observe(viewLifecycleOwner) {
-//                if (it) {
-//                    binding.dataNotFoundLay.noDataLay.visibility = View.GONE
-//                    binding.rvChatUser.visibility = View.VISIBLE
-//                } else {
-//                    binding.rvChatUser.visibility = View.INVISIBLE
-//                    binding.dataNotFoundLay.noDataLay.visibility = View.VISIBLE
-//                }
-//            }
-//        }
+
+        sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
+            allChatListViewModel.callConnectionApi(token)
+        }
+
+        activity?.runOnUiThread {
+            allChatListViewModel.isDataFound.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.dataNotFoundLay.noDataLay.visibility = View.GONE
+                    binding.rvChatUser.visibility = View.VISIBLE
+                } else {
+                    binding.rvChatUser.visibility = View.INVISIBLE
+                    binding.dataNotFoundLay.noDataLay.visibility = View.VISIBLE
+                }
+            }
+        }
 
         binding.tvRequestsTag.setOnClickListener {
             allChatListViewModel.setConnectionTab(false)
@@ -180,30 +183,18 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
     private fun showPendingRequestsSubTab(
         toShowPendingRequestTab: Boolean,
-        tokens: String,
-        chatListAdapter: ChatListAdapter
+        tokens: String
     ) {
+        if (allChatListViewModel.isApiCalled.value != true) {
         if (allChatListViewModel.isConnectionTabSelected.value == false) {
             if (toShowPendingRequestTab) {
-                allChatListViewModel.userListsData?.value?.let {
-                    chatListAdapter.refreshData(
-                        it,
-                        ItemUserChatPendingListLay
-                    )
-                }
-                allChatListViewModel.callPendingRequestApi(tokens)
+                allChatListViewModel.callMyRequestApi(tokens)
                 binding.headPending.setTextColor(Color.parseColor("#8023EB"))
                 binding.selectedHeadPending.visibility = View.VISIBLE
 
                 binding.headMyrequests.setTextColor(Color.parseColor("#171A1F"))
                 binding.selectedHeadMyrequests.visibility = View.INVISIBLE
             } else {
-//                allChatListViewModel.userListsData?.value?.let {
-//                    chatListAdapter.refreshData(
-//                        it,
-//                        ItemUserChatRequestsLay
-//                    )
-//                }
                 allChatListViewModel.callMyRequestApi(tokens)
                 binding.headMyrequests.setTextColor(Color.parseColor("#8023EB"))
                 binding.selectedHeadMyrequests.visibility = View.VISIBLE
@@ -213,16 +204,17 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                 binding.selectedHeadPending.visibility = View.INVISIBLE
             }
         }
+        }
     }
 
-    private fun showConnectionTab(toShowConnectionTab: Boolean, chatListAdapter: ChatListAdapter) {
+    private fun showConnectionTab(
+        toShowConnectionTab: Boolean,
+        token: String
+    ) {
+        if (allChatListViewModel.isApiCalled.value != true) {
         if (toShowConnectionTab) {
-//            allChatListViewModel.userListsData?.value?.let {
-//                chatListAdapter.refreshData(
-//                    it,
-//                    ItemUserListLay
-//                )
-//            }
+            allChatListViewModel.callConnectionApi(token)
+            allChatListViewModel.callMyRequestApi(token)
             binding.tvConnectionTag.setTextColor(Color.parseColor("#8023EB"))
             binding.tvChatTag.visibility = View.VISIBLE
 
@@ -235,6 +227,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
             binding.tvConnectionTag.setTextColor(Color.parseColor("#171A1F"))
             binding.tvChatTag.visibility = View.INVISIBLE
+        }
         }
     }
 
