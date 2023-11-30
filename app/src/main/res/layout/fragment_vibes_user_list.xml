@@ -93,6 +93,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
                     />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -103,7 +104,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     />
 
         </RelativeLayout>

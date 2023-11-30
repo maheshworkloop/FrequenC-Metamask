@@ -1,6 +1,8 @@
 package com.dev.frequenc.ui_codes.screens.ViewAllTrendingEvents
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +25,11 @@ import retrofit2.Response
 class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapter.ListAdapterListener {
 
     lateinit var binding : ActivityViewAllTrendingEventsBinding
+    lateinit var authorization : String
+    lateinit var audience_id : String
+    private lateinit var sharedPreferences: SharedPreferences
+    var userRegistered : Boolean = false
+    var isLogin = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,10 +42,32 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapter.ListAdapt
 
         binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
+        sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+        userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
+        authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
+        audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
+
+        if(userRegistered && !authorization.isNullOrEmpty() &&authorization!="-1" && !audience_id.isNullOrEmpty() )
+        {
+
+            Log.d("Audience Id",audience_id)
+            Log.d("Bearer",authorization)
+
+            isLogin =true
+
+        }
+        else
+        {
+            Log.e("Audience Id",audience_id)
+            isLogin = false
+        }
+
+
+
         binding.rvViewAll.apply {
             layoutManager = GridLayoutManager(this@ViewAllTrendingEvents,2,
                 GridLayoutManager.VERTICAL,false)
-            adapter = TrendingEventAdapter(mList,this@ViewAllTrendingEvents)
+            adapter = TrendingEventAdapter(mList,this@ViewAllTrendingEvents, isLogin)
         }
 
     }

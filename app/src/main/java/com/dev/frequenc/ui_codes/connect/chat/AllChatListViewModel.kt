@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
+import com.dev.frequenc.ui_codes.data.myconnection.ConnectionResponseData
 import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
@@ -95,7 +96,7 @@ class AllChatListViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         if (response.body() != null && response.body()?.data != null) {
                             val adapterLists = ArrayList<ConnectionResponse>()
-                            for (data: Data in response.body()?.data!!) {
+                            for (data: ConnectionResponseData in response.body()?.data!!) {
 //                            adapterLists.add(ConnectionResponse(data.to_user_id,data.status))
 //                                _countNumber.postValue(CountNumber.value.put("C"))
                                 adapterLists.add(ConnectionResponse(0, true, ""))

@@ -9,22 +9,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+    <RelativeLayout
         android:id="@+id/rlBookMark"
         android:layout_width="@dimen/_18sdp"
         android:layout_height="@dimen/_18sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:elevation="@dimen/_5sdp"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_alignParentRight="true"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_bookmark"
-            android:alpha="0.35"
+            android:alpha="0.7"
             />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -101,7 +107,7 @@
 
         <TextView
             android:id="@+id/tvTrendingEventType"
-            android:layout_width="@dimen/_35sdp"
+            android:layout_width="@dimen/_45sdp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:background="@drawable/bg_event_type"
@@ -109,8 +115,8 @@
             app:layout_constraintLeft_toRightOf="@id/tvTrendingEventTime"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingVertical="@dimen/_1sdp"
-            android:layout_marginLeft="@dimen/_2sdp"
+            android:paddingVertical="2dp"
+            android:layout_marginLeft="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_2sdp"
             android:paddingHorizontal="@dimen/_3sdp"
             android:text="concert"
@@ -126,5 +132,8 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>

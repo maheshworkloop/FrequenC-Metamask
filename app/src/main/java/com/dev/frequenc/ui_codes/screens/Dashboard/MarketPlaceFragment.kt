@@ -94,6 +94,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
     lateinit var rlTrendingArtist : RelativeLayout
     lateinit var rlAllData : RelativeLayout
 
+    var isLogin = false
 
 
 
@@ -228,6 +229,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
 
             trendingEventTokenApi()
             trendingArtistTokenApi()
+            isLogin = true
 
         }
         else
@@ -242,6 +244,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
 
             trendingArtistApi()
 
+            isLogin =false
 //            Log.e("Bearer",authorization)
         }
 
@@ -458,7 +461,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
 
                     rvTrendingEvents.apply {
                         layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
-                        adapter = TrendingEventAdapter(res,this@MarketPlaceFragment)
+                        adapter = TrendingEventAdapter(res,this@MarketPlaceFragment,isLogin)
                     }
 
 
@@ -516,7 +519,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
 
                     rvTrendingEvents.apply {
                         layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
-                        adapter = TrendingEventAdapter(res,this@MarketPlaceFragment)
+                        adapter = TrendingEventAdapter(res,this@MarketPlaceFragment,isLogin)
                     }
 
 

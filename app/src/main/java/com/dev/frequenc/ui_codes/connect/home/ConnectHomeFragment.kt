@@ -154,7 +154,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
         audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
 
-        if(userRegistered && !authorization.isNullOrEmpty() &&authorization!="-1" && !audience_id.isNullOrEmpty() )
+        if(userRegistered && !authorization.isNullOrEmpty() && authorization!="-1" && !audience_id.isNullOrEmpty() )
         {
 
             getProfileApi()
@@ -166,7 +166,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         {
 
 
-//            Toast.makeText(requireContext(),"Not Logged in Failure", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),"Not Logged in Failure", Toast.LENGTH_SHORT).show()
             Log.e("Audience Id",audience_id)
         }
 
@@ -206,7 +206,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         dialog.setContentView(R.layout.layout_dialog_share_your_vibes)
         dialog.window?.setBackgroundDrawableResource(R.color.transparent)
 
-        dialog.setCancelable(false)
+        dialog.setCancelable(true)
 
         var gifImage = dialog.findViewById<GifImageView>(R.id.ivAnimSplash)
 
@@ -328,7 +328,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
                             Log.e("date-today",currentDate)
                             Log.e("date-vibe",vibe_date)
 
-                            if(currentDate.equals(vibe_date))
+                            if(!currentDate.equals(vibe_date))
                             {
                                 getCategoryApi()
 

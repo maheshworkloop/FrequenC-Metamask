@@ -2,11 +2,13 @@ package com.dev.frequenc.ui_codes.connect.VibesProfileList
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +40,9 @@ class QuoteAdapter (val mData : QuoteResponse ) : RecyclerView.Adapter<QuoteAdap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mList[position]
         holder.tvQuote.text = item.name
+
+        Log.d("rv",item.name)
+
         }
 
 

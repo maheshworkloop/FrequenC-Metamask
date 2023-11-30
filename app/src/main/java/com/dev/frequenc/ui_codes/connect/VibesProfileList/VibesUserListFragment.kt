@@ -24,6 +24,7 @@ import com.dev.frequenc.ui_codes.data.MatchVibeData
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
 import com.dev.frequenc.ui_codes.data.VibesProfileResponse
+import com.dev.frequenc.ui_codes.data.myconnection.ConnectionResponseData
 import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
@@ -82,6 +83,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
         rvVibeUser = root.findViewById(R.id.rvVibeUser)
         rvConnection = root.findViewById(R.id.rvConnection)
+        rvQuote = root.findViewById(R.id.rvQuote)
 
         tvConnectionTag = root.findViewById<TextView>(R.id.tvConnectionTag)
 
@@ -127,11 +129,6 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
 //            Log.e("Bearer",authorization)
         }
-
-
-
-
-
 
 
         return root
@@ -198,13 +195,16 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                 }
 
                 override fun onFailure(call: Call<MatchVibeListResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(),t.localizedMessage,Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
 
     fun callConnectionApi(token: String) {
+
+        Log.d("flow","Connection Api Called")
+
         ApiClient.getInstance()?.connectionList(token)
             ?.enqueue(object : Callback<MyConnectionResponse> {
                 override fun onResponse(
@@ -213,6 +213,9 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null && response.body()?.data != null) {
+
+                            Log.d("flow","Connection Api Success")
+
 
                             val count = response.body()!!.count
 
@@ -230,7 +233,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                                 rvQuote.visibility = View.GONE
 
                                 val adapterLists = ArrayList<ConnectionResponse>()
-                                for (data: Data in response.body()?.data!!) {
+                                for (data: ConnectionResponseData in response.body()?.data!!) {
 
                                     adapterLists.add(ConnectionResponse(0, true, ""))
 
@@ -261,11 +264,14 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
                 override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
                     Log.e(Constants.Error, "onFailure: ", t)
+                    Log.d("flow","Connection Api Error")
+
                 }
             })
     }
 
     private fun getQuotes() {
+        Log.d("api","calling get quotes api")
         ApiClient.getInstance()!!.getQuoteApi()!!
             .enqueue(object : retrofit2.Callback<QuoteResponse> {
                 override fun onResponse(
@@ -274,6 +280,9 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                 ) {
                     if (response.isSuccessful) {
                         if (response.body() != null && response.body()!!.data != null) {
+
+                            Log.d("api","response success get quotes")
+
                             val mData = response.body()!!
 
                             rvQuote.apply {
@@ -290,7 +299,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                 }
 
                 override fun onFailure(call: Call<QuoteResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(),t.localizedMessage,Toast.LENGTH_SHORT).show()
                 }
             })
 
