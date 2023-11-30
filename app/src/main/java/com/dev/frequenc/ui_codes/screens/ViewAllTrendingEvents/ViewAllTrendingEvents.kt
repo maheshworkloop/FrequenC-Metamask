@@ -15,6 +15,7 @@ import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.databinding.ActivityViewAllTrendingEventsBinding
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingArtistAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
+import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapterold
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
@@ -22,7 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapter.ListAdapterListener {
+class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterold.ListAdapterListener {
 
     lateinit var binding : ActivityViewAllTrendingEventsBinding
     lateinit var authorization : String
@@ -67,7 +68,7 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapter.ListAdapt
         binding.rvViewAll.apply {
             layoutManager = GridLayoutManager(this@ViewAllTrendingEvents,2,
                 GridLayoutManager.VERTICAL,false)
-            adapter = TrendingEventAdapter(mList,this@ViewAllTrendingEvents, isLogin)
+            adapter = TrendingEventAdapterold(mList,this@ViewAllTrendingEvents, isLogin)
         }
 
     }

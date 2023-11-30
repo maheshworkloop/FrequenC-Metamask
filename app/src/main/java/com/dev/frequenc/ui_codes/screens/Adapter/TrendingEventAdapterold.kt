@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,9 +16,9 @@ import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.util.AppCommonMethods
 import com.dev.frequenc.util.Constants
 
-class TrendingEventAdapter(private val mList: List<TrendingEventsResponse>,
-                           mListener: ListAdapterListener,val isLogin : Boolean
-                ) : RecyclerView.Adapter<TrendingEventAdapter.ViewHolder> (){
+class TrendingEventAdapterold (private val mList: List<TrendingEventsResponse>,
+                               mListener: ListAdapterListener, val isLogin : Boolean
+) : RecyclerView.Adapter<TrendingEventAdapterold.ViewHolder> (){
 
     lateinit var mContext : Context
     private var mListener = mListener
@@ -34,7 +33,7 @@ class TrendingEventAdapter(private val mList: List<TrendingEventsResponse>,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_recyclerview_trending_events_new, parent, false)
+            .inflate(R.layout.layout_recyclerview_trending_events, parent, false)
 
         mContext = parent.context
 
@@ -58,7 +57,7 @@ class TrendingEventAdapter(private val mList: List<TrendingEventsResponse>,
 
         holder.tvEventDate.setText(
             AppCommonMethods.convertDateFormat2(
-            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'","dd MMM yyyy",item.eventStartDate))
+                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'","dd MMM yyyy",item.eventStartDate))
         holder.tvTrendingEventType.setText(item.category + " Events")
 
 //        if(!item.venueDetails.venue_locality.isNullOrEmpty())
@@ -66,7 +65,7 @@ class TrendingEventAdapter(private val mList: List<TrendingEventsResponse>,
 //        else if(!item.venueDetails.venue_name.isNullOrEmpty())
 //          holder.tvLocation.setText(item.venueDetails.venue_name)
 //        else if(!item.venueDetails.address.isNullOrEmpty())
-//            holder.tvLocation.setText(item.country)
+//        holder.tvLocation.setText(item.country)
 
         holder.cardView.setOnClickListener {  mListener.onClickAtCard(item) }
 
@@ -104,9 +103,9 @@ class TrendingEventAdapter(private val mList: List<TrendingEventsResponse>,
 
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
-         val imageView: ImageView = itemView.findViewById(R.id.ivTrendingEvent)
+        val imageView: ImageView = itemView.findViewById(R.id.ivTrendingEvent)
         val textView: TextView = itemView.findViewById(R.id.tvTrendingEventName)
-        val tvLocation: TextView = itemView.findViewById(R.id.tvLocation)
+//        val tvLocation: TextView = itemView.findViewById(R.id.tvLocation)
         val tvTrendingEventType: TextView = itemView.findViewById(R.id.tvTrendingEventType)
         val tvEventDate: TextView = itemView.findViewById(R.id.tvTrendingEventTime)
         val cardView : ConstraintLayout = itemView.findViewById(R.id.cvRv)

@@ -48,7 +48,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_140sdp"
+            android:layout_height="@dimen/_130sdp"
             android:background="@drawable/bg_main"
             />
 
@@ -57,7 +57,7 @@
           android:id="@+id/rl_top"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="@dimen/_20sdp"
+          android:layout_marginTop="@dimen/_10sdp"
           android:elevation="@dimen/_5sdp"
           >
 
@@ -95,7 +95,7 @@
               android:textColor="@color/black"
               android:layout_alignParentRight="true"
               android:layout_centerVertical="true"
-              android:layout_marginRight="@dimen/_20sdp"
+              android:layout_marginRight="@dimen/_12sdp"
               android:textSize="@dimen/_10sdp"
               />
 
@@ -154,7 +154,7 @@
               android:layout_width="wrap_content"
               android:layout_height="@dimen/_32sdp"
               android:scaleType="fitCenter"
-              android:layout_marginLeft="@dimen/_30sdp"
+              android:layout_marginLeft="@dimen/_12sdp"
               android:layout_centerVertical="true"
               />
 
@@ -166,8 +166,8 @@
           android:layout_below="@+id/rl_top"
           android:layout_width="match_parent"
           android:layout_marginLeft="@dimen/_12sdp"
-          android:layout_marginRight="@dimen/_8sdp"
-          android:layout_marginTop="@dimen/_10sdp"
+          android:layout_marginRight="@dimen/_12sdp"
+          android:layout_marginTop="@dimen/_5sdp"
           android:layout_height="wrap_content">
 
 
@@ -175,7 +175,7 @@
               android:id="@+id/rlSearch"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/_10sdp"
+              android:layout_marginTop="@dimen/_5sdp"
               android:paddingVertical="@dimen/_2sdp"
 
               >
@@ -230,7 +230,7 @@
               android:id="@+id/rvCategory"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/_1sdp"
+              android:layout_marginTop="@dimen/_10sdp"
               android:layout_below="@id/rlSearch"
               android:orientation="horizontal"
               />
@@ -253,6 +253,7 @@
                   android:text="Trending Events"
                   android:textSize="@dimen/_12sdp"
                   android:textStyle="bold"
+                  android:textAllCaps="true"
                   />
 
               <LinearLayout
@@ -260,7 +261,6 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:gravity="center"
-                  android:layout_marginRight="@dimen/_10sdp"
                   android:layout_alignParentRight="true"
                   android:layout_centerVertical="true"
                   >
@@ -270,9 +270,9 @@
                       android:id="@+id/tvTrendingEventsViewAll"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="View All"
+                      android:text="View all"
                       android:textSize="@dimen/_10sdp"
-                      android:textStyle="bold"
+                      android:textColor="@color/material_grey_700"
 
                       />
 
@@ -315,6 +315,7 @@
                   android:text="Trending Artist"
                   android:textSize="@dimen/_12sdp"
                   android:textStyle="bold"
+                  android:textAllCaps="true"
                   />
 
 
@@ -323,7 +324,6 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:gravity="center"
-                  android:layout_marginRight="@dimen/_10sdp"
                   android:layout_alignParentRight="true"
                   android:layout_centerVertical="true"
                   >
@@ -333,11 +333,11 @@
                       android:id="@+id/tvTrendingArtistViewAll"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="View All"
-                      android:textSize="@dimen/_10sdp"
-                      android:textStyle="bold"
+                      android:text="View all"
+                      android:textSize="@dimen/_9sdp"
+                      android:textColor="@color/material_grey_700"
 
-                      />
+                          />
 
                   <ImageView
                       android:layout_width="@dimen/_6sdp"
@@ -371,7 +371,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_below="@+id/rvTrendingArtist"
-              android:layout_marginTop="@dimen/_15sdp"
+              android:layout_marginTop="@dimen/_20sdp"
               android:visibility="invisible"
               >
 
@@ -382,6 +382,7 @@
                   android:text="All"
                   android:textSize="@dimen/_12sdp"
                   android:textStyle="bold"
+                  android:textAllCaps="true"
                   />
 
 
@@ -390,7 +391,6 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:gravity="center"
-                  android:layout_marginRight="@dimen/_10sdp"
                   android:layout_alignParentRight="true"
                   android:layout_centerVertical="true"
                   >
@@ -400,11 +400,11 @@
                       android:id="@+id/tvAllViewAll"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="View All"
+                      android:text="View all"
                       android:textSize="@dimen/_10sdp"
-                      android:textStyle="bold"
+                      android:textColor="@color/material_grey_700"
 
-                      />
+                          />
 
                   <ImageView
                       android:layout_width="@dimen/_6sdp"
