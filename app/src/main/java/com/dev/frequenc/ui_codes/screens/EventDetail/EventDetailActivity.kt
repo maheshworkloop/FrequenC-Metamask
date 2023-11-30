@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dev.frequenc.MainActivity
 import com.dev.frequenc.databinding.ActivityEventDetailBinding
+import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.screens.Adapter.ArtistAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.SliderAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TicketAdapter
