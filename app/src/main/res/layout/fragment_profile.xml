@@ -11,668 +11,668 @@
             android:layout_height="wrap_content">
 
 
-   <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-
-       <ProgressBar
-               android:id="@+id/progressDialog"
-               android:layout_width="@dimen/_50sdp"
-               android:layout_height="@dimen/_50sdp"
-               android:visibility="gone"
-               android:indeterminate="true"
-               android:elevation="@dimen/_5sdp"
-               android:layout_centerInParent="true"
-               />
-
-    <include layout="@layout/layout_header"
-        android:id="@+id/rl_header"/>
-
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rl_header"
-            android:layout_marginTop="@dimen/_10sdp"
-            >
-
-        <TextView
-                android:id="@+id/tvVibeTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Looking For Love !"
-                android:background="@drawable/bg_location"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textSize="@dimen/_14sdp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/epilogueregular"
-                android:layout_centerHorizontal="true"
-                />
-
-        <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayoutProfile"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_8sdp"
-                android:layout_below="@+id/tvVibeTag"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:tabMode="scrollable"
-                app:tabIndicatorColor="@color/font_color_purple"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                app:tabIndicatorFullWidth="true"
-                app:tabPaddingStart="@dimen/_2sdp"
-                app:tabPaddingEnd="@dimen/_2sdp"
-                app:tabBackground="@drawable/tab_color"
-                app:tabTextAppearance="@style/TabLayout">
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPagerProfile"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_320sdp"
-                android:layout_below="@id/tabLayoutProfile"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                />
-
-
         <RelativeLayout
-                android:id="@+id/rlLocAdd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_below="@id/viewPagerProfile"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/bg_rl_location_profile"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_4sdp"
-                >
+                android:layout_height="wrap_content">
 
-          <RelativeLayout
-                  android:id="@+id/rlLocation"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+            <ProgressBar
+                    android:id="@+id/progressDialog"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:visibility="gone"
+                    android:indeterminate="true"
+                    android:elevation="@dimen/_5sdp"
+                    android:layout_centerInParent="true"
+                    />
 
-              <ImageView
-                      android:id="@+id/ivLocation"
-                      android:layout_width="@dimen/_8sdp"
-                      android:layout_height="@dimen/_8sdp"
-                      android:src="@drawable/location"
-                      app:tint="@color/material_red_500"
-                      android:layout_marginLeft="@dimen/_10sdp"
-                      android:layout_centerVertical="true"
-                      />
+            <include layout="@layout/layout_header"
+                    android:id="@+id/rl_header"/>
 
 
-              <TextView
-                      android:id="@+id/tvLocation"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="2.0 km away"
-                      android:layout_marginLeft="@dimen/_8sdp"
-                      android:layout_toRightOf="@id/ivLocation"
-                      android:fontFamily="@font/epilogueregular"
-                      android:textSize="@dimen/_10sdp"
-                      android:layout_centerVertical="true"
-                      />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-                    android:id="@+id/rlAddress"
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlLocation"
-                    android:layout_marginTop="@dimen/_5sdp"
-                  >
+                    android:layout_below="@id/rl_header"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+
+                <TextView
+                        android:id="@+id/tvVibeTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Looking For Love !"
+                        android:background="@drawable/bg_location"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/epilogueregular"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayoutProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_8sdp"
+                        android:layout_below="@+id/tvVibeTag"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:tabMode="scrollable"
+                        app:tabIndicatorColor="@color/font_color_purple"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        app:tabIndicatorFullWidth="true"
+                        app:tabPaddingStart="@dimen/_2sdp"
+                        app:tabPaddingEnd="@dimen/_2sdp"
+                        app:tabBackground="@drawable/tab_color"
+                        app:tabTextAppearance="@style/TabLayout">
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPagerProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_320sdp"
+                        android:layout_below="@id/tabLayoutProfile"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        />
+
+
+                <RelativeLayout
+                        android:id="@+id/rlLocAdd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_below="@id/viewPagerProfile"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_rl_location_profile"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:paddingHorizontal="@dimen/_4sdp"
+                        >
+
+                    <RelativeLayout
+                            android:id="@+id/rlLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <ImageView
+                                android:id="@+id/ivLocation"
+                                android:layout_width="@dimen/_8sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:src="@drawable/location"
+                                app:tint="@color/material_red_500"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_centerVertical="true"
+                                />
+
+
+                        <TextView
+                                android:id="@+id/tvLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2.0 km away"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_toRightOf="@id/ivLocation"
+                                android:fontFamily="@font/epilogueregular"
+                                android:textSize="@dimen/_10sdp"
+                                android:layout_centerVertical="true"
+                                />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:id="@+id/rlAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rlLocation"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            >
+
+
+                        <TextView
+                                android:id="@+id/tvAddress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="LAS VEGAS, NV 89104"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:fontFamily="@font/epilogueregular"
+                                android:textSize="@dimen/_13sdp"
+                                android:layout_centerVertical="true"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                />
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+
+                <TextView
+                        android:id="@+id/tvAboutMeTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About Me"
+                        android:background="@drawable/bg_location"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/epilogueregular"
+                        android:layout_below="@id/rlLocAdd"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        />
+
+                <TextView
+                        android:id="@+id/tvAboutMe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_me"
+                        android:background="@drawable/bg_location"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/epilogueregular"
+                        android:layout_below="@id/tvAboutMeTag"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        />
+
+                <TextView
+                        android:id="@+id/tvMydetailsTag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Details"
+                        android:background="@drawable/bg_location"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/epilogueregular"
+                        android:layout_below="@id/tvAboutMe"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        />
+
+                <LinearLayout
+                        android:id="@+id/ll1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_below="@id/tvMydetailsTag"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+
+                        >
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:drawableStart="@drawable/baseline_wine_bar_24"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:drawableStart="@drawable/baseline_wine_bar_24"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:drawableStart="@drawable/baseline_wine_bar_24"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/ll2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_below="@id/ll1"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+
+                        >
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:drawableStart="@drawable/baseline_wine_bar_24"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:drawableStart="@drawable/baseline_wine_bar_24"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:drawableStart="@drawable/baseline_wine_bar_24"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+
+                </LinearLayout>
 
 
                 <TextView
-                        android:id="@+id/tvAddress"
+                        android:id="@+id/tvIEnjoy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="LAS VEGAS, NV 89104"
-                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:text="I Enjoy"
+                        android:background="@drawable/bg_location"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:fontFamily="@font/epilogueregular"
-                        android:textSize="@dimen/_13sdp"
-                        android:layout_centerVertical="true"
+                        android:layout_below="@id/ll2"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_30sdp"
                         />
+
+                <LinearLayout
+                        android:id="@+id/ll3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_below="@id/tvIEnjoy"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+
+                        >
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/ll4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_below="@id/ll3"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+
+                        >
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                        android:id="@+id/tvICommunicate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I Communicate"
+                        android:background="@drawable/bg_location"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/epilogueregular"
+                        android:layout_below="@id/ll4"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        />
+
+                <LinearLayout
+                        android:id="@+id/ll5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_below="@id/tvICommunicate"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+
+                        >
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/ll6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_below="@id/ll5"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+
+                        >
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+                    <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Non Smoker"
+                            android:background="@drawable/bg_tv_mydetail_blue"
+                            android:textSize="@dimen/_10sdp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/epilogueregular"
+                            android:textColor="@color/black"
+                            android:paddingVertical="@dimen/_4sdp"
+                            android:paddingHorizontal="@dimen/_4sdp"
+                            android:gravity="center"
+                            android:drawablePadding="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/_5sdp"
+
+                            />
+
+
+                </LinearLayout>
+
+
 
             </RelativeLayout>
 
-
-
         </RelativeLayout>
-
-        <TextView
-                android:id="@+id/tvAboutMeTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="About Me"
-                android:background="@drawable/bg_location"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_14sdp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/epilogueregular"
-                android:layout_below="@id/rlLocAdd"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_30sdp"
-                />
-
-        <TextView
-                android:id="@+id/tvAboutMe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_me"
-                android:background="@drawable/bg_location"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_12sdp"
-                android:fontFamily="@font/epilogueregular"
-                android:layout_below="@id/tvAboutMeTag"
-                android:layout_marginTop="@dimen/_20sdp"
-                />
-
-        <TextView
-                android:id="@+id/tvMydetailsTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Details"
-                android:background="@drawable/bg_location"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_14sdp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/epilogueregular"
-                android:layout_below="@id/tvAboutMe"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_30sdp"
-                />
-
-        <LinearLayout
-                android:id="@+id/ll1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/tvMydetailsTag"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-
-                >
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/ll2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/ll1"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-
-                >
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-
-        </LinearLayout>
-
-
-        <TextView
-                android:id="@+id/tvIEnjoy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="I Enjoy"
-                android:background="@drawable/bg_location"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_14sdp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/epilogueregular"
-                android:layout_below="@id/ll2"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_30sdp"
-                />
-
-        <LinearLayout
-                android:id="@+id/ll3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/tvIEnjoy"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-
-                >
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/ll4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/ll3"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-
-                >
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-
-        </LinearLayout>
-
-
-        <TextView
-                android:id="@+id/tvICommunicate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="I Communicate"
-                android:background="@drawable/bg_location"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_14sdp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:fontFamily="@font/epilogueregular"
-                android:layout_below="@id/ll4"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_30sdp"
-                />
-
-        <LinearLayout
-                android:id="@+id/ll5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/tvICommunicate"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-
-                >
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:id="@+id/ll6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/ll5"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
-
-                >
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
-                    />
-
-
-        </LinearLayout>
-
-
-
-    </RelativeLayout>
-
-   </RelativeLayout>
 
     </ScrollView>
 

@@ -129,6 +129,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         activity?.runOnUiThread {
             allChatListViewModel.connectionList.observe(viewLifecycleOwner) {
+                binding.tvConnectionTag.text
                 connectionAdapter.update(it)
             }
         }
