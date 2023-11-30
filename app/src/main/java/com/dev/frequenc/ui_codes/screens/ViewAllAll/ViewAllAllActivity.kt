@@ -21,6 +21,9 @@ class ViewAllAllActivity : AppCompatActivity(),AllDataAdapter.ListAdapterListene
 
         val list = intent.getSerializableExtra("list") as List<AllDataResponse>
 
+        binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+
+
         binding.rvViewAll.apply {
             layoutManager = GridLayoutManager(this@ViewAllAllActivity,2,
                 GridLayoutManager.VERTICAL,false )

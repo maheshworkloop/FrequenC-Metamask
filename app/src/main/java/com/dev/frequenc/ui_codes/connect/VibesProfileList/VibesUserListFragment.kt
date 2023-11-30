@@ -234,7 +234,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
                                 val adapterLists = ArrayList<ConnectionResponse>()
 
-                                for (data: Data in response.body()?.data!!) {
+                                for (data: ConnectionResponseData in response.body()?.data!!) {
                                     var images : String = ""
                                     try {
                                         images = data.to_user_id.audience_id.profile_pic

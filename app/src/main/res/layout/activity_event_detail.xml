@@ -101,14 +101,16 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEventName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Event Name"
         android:textSize="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/llBanner"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ivShare"
         android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:fontFamily="@font/robotocondensed_bold"
         android:textColor="@drawable/gradient_text_color"
         android:letterSpacing="0.1"
