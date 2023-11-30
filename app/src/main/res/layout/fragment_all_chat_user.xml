@@ -23,13 +23,12 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/rl_search_top"
-            app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_search_top"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"
                 android:id="@+id/suggestionLays"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -90,20 +89,6 @@
                     android:layout_below="@+id/rlConnection"
                     android:layout_marginTop="@dimen/_10sdp">
 
-                <TextView
-                        android:id="@+id/tvNoConnection"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The more you connect, the more you get the vibes..."
-                        android:background="@drawable/bg_textview_connection"
-                        android:textColor="@color/white"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/_14sdp"
-                        android:fontFamily="@font/epilogueregular"
-                        android:paddingVertical="@dimen/_8sdp"
-                        android:paddingHorizontal="@dimen/_10sdp"
-                        android:visibility="gone" />
-
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvConnection"
                         android:layout_width="match_parent"
@@ -114,6 +99,27 @@
                         android:layout_marginTop="@dimen/_10sdp" />
 
             </RelativeLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/connectionNotFoundLay"
+                    android:visibility="gone"
+                    android:layout_alignTop="@id/rlConnection"
+                    android:layout_height="@dimen/_50sdp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:minHeight="@dimen/_78sdp"
+                        android:src="@drawable/notfoundlay"
+                        app:layout_constraintHeight_percent="0.4"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                     android:layout_width="match_parent"
@@ -283,11 +289,11 @@
 
             <include
                     android:layout_below="@id/tvChatTag"
-                android:id="@+id/dataNotFoundLay"
-                layout="@layout/no_data_found"
+                    android:id="@+id/dataNotFoundLay"
+                    layout="@layout/no_data_found"
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

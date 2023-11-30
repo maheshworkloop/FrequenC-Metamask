@@ -32,16 +32,17 @@ class AllChatListViewModel : ViewModel() {
 
     private val _userLists = MutableLiveData<List<Any>>(ArrayList(3))
     val userListsData: LiveData<List<Any>>
-        get() = _userLists
-//        {
-//        return if (_userLists.value?.isNullOrEmpty() == false) {
-//            setDataFound(true)
-//            _userLists
-//        } else {
-//            setDataFound(false)
-//            MutableLiveData(emptyList())
-//        }
-//        }
+        get()
+//        = _userLists
+        {
+        return if (_userLists.value?.isNullOrEmpty() == false) {
+            setDataFound(true)
+            _userLists
+        } else {
+            setDataFound(false)
+            MutableLiveData(emptyList())
+        }
+        }
 
     private val _countNumber = MutableLiveData<HashMap<String,Int>>(HashMap())
 
@@ -53,7 +54,7 @@ class AllChatListViewModel : ViewModel() {
     val isConnectionTabSelected: LiveData<Boolean>
         get() = _isConnectionTabSelected
 
-    private val _isPendingSubTabSelected = MutableLiveData<Boolean>(true)
+    private val _isPendingSubTabSelected = MutableLiveData<Boolean>()
 
     val isPendingSubTabSelected: LiveData<Boolean>
         get() = _isPendingSubTabSelected
@@ -99,9 +100,9 @@ class AllChatListViewModel : ViewModel() {
 //                                _countNumber.postValue(CountNumber.value.put("C"))
                                 adapterLists.add(ConnectionResponse(0, true, ""))
                             }
-                            _userLists.postValue(adapterLists)
+                            _connectionList.postValue(adapterLists)
                         } else {
-                            _userLists.postValue(emptyList())
+                            _connectionList.postValue(emptyList())
                         }
                     } else {
                         Log.d(Constants.Error, "onResponse: ${response.body()}")
