@@ -15,5 +15,8 @@ class TrendingEventsResponse (
     val eventStartDate : String,
     val eventEndDate : String,
     val category : String,
-    val is_bookmark : Boolean
+    val is_bookmark : Boolean,
+    val venueDetails : VenueDetails
 ) : Serializable
+
+

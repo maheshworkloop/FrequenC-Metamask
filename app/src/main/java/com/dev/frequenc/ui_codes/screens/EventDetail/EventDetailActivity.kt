@@ -52,9 +52,9 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
         setContentView(binding.root)
 
         binding.ivBackBtn.setOnClickListener {
-//            onBackPressedDispatcher.onBackPressed()
-        startActivity(Intent(this, MainActivity::class.java))
-            finishAffinity()
+            onBackPressedDispatcher.onBackPressed()
+//        startActivity(Intent(this, MainActivity::class.java))
+//            finishAffinity()
         }
 
 
@@ -245,18 +245,18 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
                                 startActivity(Intent.createChooser(shareIntent, "Share..."))
                             }
 //
-//                            try {
-//                                val adapter = SliderAdapter(
-//                                    eventResponse.eventDetails.eventImage,
-//                                    this@EventDetailActivity
-//                                )
-//                                binding.sliderView.setSliderAdapter(adapter)
-//                                binding.sliderView.scrollTimeInSec = 3
-//                                binding.sliderView.isAutoCycle = true
-//                                binding.sliderView.startAutoCycle()
-//                            } catch (e: Exception) {
-//
-//                            }
+                            try {
+                                val adapter = SliderAdapter(
+                                    eventResponse.eventDetails.eventImage,
+                                    this@EventDetailActivity
+                                )
+                                binding.sliderView.setSliderAdapter(adapter)
+                                binding.sliderView.scrollTimeInSec = 3
+                                binding.sliderView.isAutoCycle = true
+                                binding.sliderView.startAutoCycle()
+                            } catch (e: Exception) {
+
+                            }
                             // Access other fields as required
                         }
                     } else {

@@ -72,27 +72,27 @@
             android:layout_marginBottom="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_12sdp">
 
-<!--            <com.smarteist.autoimageslider.SliderView-->
-<!--                android:id="@+id/sliderView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="220dp"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                app:sliderAnimationDuration="600"-->
-<!--                app:sliderAutoCycleDirection="right"-->
-<!--                app:sliderAutoCycleEnabled="true"-->
-<!--                app:sliderIndicatorAnimationDuration="600"-->
-<!--                app:sliderIndicatorEnabled="true"-->
-<!--                app:sliderIndicatorGravity="center_horizontal|bottom"-->
-<!--                app:sliderIndicatorMargin="15dp"-->
-<!--                app:sliderIndicatorOrientation="horizontal"-->
-<!--                app:sliderIndicatorPadding="3dp"-->
-<!--                app:sliderIndicatorRadius="2dp"-->
-<!--                app:sliderIndicatorRtlMode="off"-->
-<!--                app:sliderIndicatorSelectedColor="@color/colorPrimary"-->
-<!--                app:sliderIndicatorUnselectedColor="#FFF"-->
-<!--                app:sliderScrollTimeInSec="1"-->
-<!--                app:sliderStartAutoCycle="true"-->
-<!--                />-->
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/sliderView"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_centerInParent="true"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="right"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorRtlMode="off"
+                app:sliderIndicatorSelectedColor="@color/colorPrimary"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="1"
+                app:sliderStartAutoCycle="true"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -125,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/llBanner"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="@dimen/_12sdp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         />
 
     <ImageView
@@ -137,6 +137,7 @@
         app:layout_constraintTop_toBottomOf="@+id/llBanner"
         app:layout_constraintEnd_toStartOf="@id/ivCalendar"
         android:layout_marginRight="@dimen/_10sdp"
+        android:scaleType="fitXY"
         />
 
     <ImageView
