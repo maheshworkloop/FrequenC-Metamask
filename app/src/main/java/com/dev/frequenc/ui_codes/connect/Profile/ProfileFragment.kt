@@ -9,17 +9,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
+import com.dev.frequenc.ui_codes.data.CityResponse
+import com.dev.frequenc.ui_codes.data.ConnectionResponse
+import com.dev.frequenc.ui_codes.data.myconnection.Data
+import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 
@@ -47,6 +56,11 @@ class ProfileFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     var userRegistered : Boolean = false
 
+    lateinit var tvAboutMe : TextView
+    lateinit var tvAddress : TextView
+    var cityList = ArrayList<String>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -63,6 +77,9 @@ class ProfileFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_profile, container, false)
 
         progressDialog = root.findViewById(R.id.progressDialog)
+
+        tvAboutMe = root.findViewById(R.id.tvAboutMe)
+        tvAddress = root.findViewById(R.id.tvAddress)
 
         val bundle = this.arguments
         if(bundle!=null)
@@ -147,14 +164,14 @@ class ProfileFragment : Fragment() {
 
     private fun getProfileApi() {
       progressDialog.visibility = View.VISIBLE
-        try {
+      try {
             ApiClient.getInstance()!!.getProfile(authorization, audience_id)
                 .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
                     override fun onResponse(
                         call: Call<AudienceDataResponse>,
                         response: Response<AudienceDataResponse>
                     ) {
-                progressDialog.visibility = View.GONE
+                       progressDialog.visibility = View.GONE
                         if (response.isSuccessful && response.body() != null) {
                             Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
                             val res = response.body()
@@ -163,6 +180,12 @@ class ProfileFragment : Fragment() {
                             Log.d("profile",item.name)
 
                             val mlist = listOf<String>(item.banner_image)
+
+                            tvAboutMe.text = item.description
+
+                            tvAddress.text = item.city
+
+
 
                             setupTabs(mlist)
 
@@ -184,6 +207,10 @@ class ProfileFragment : Fragment() {
             e.printStackTrace()
         }
     }
+
+
+
+
 
 
 }
