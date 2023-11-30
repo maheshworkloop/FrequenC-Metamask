@@ -141,16 +141,20 @@ class MainActivity  : AppCompatActivity() {
 
                         val fragmentManager = supportFragmentManager
                         val backStackCount = fragmentManager.backStackEntryCount
-                        for (i in 0 until backStackCount) {
-                            val backStackEntry: FragmentManager.BackStackEntry =
-                                fragmentManager.getBackStackEntryAt(i)
-                            if (!backStackEntry.getName().equals("MarketPlaceFragment")) {
-                                fragmentManager.popBackStackImmediate(
-                                    backStackEntry.getId(),
-                                    FragmentManager.POP_BACK_STACK_INCLUSIVE
-                                )
-                            }
-                        }
+                        if (fragmentManager.backStackEntryCount > 0)
+                            fragmentManager.popBackStackImmediate()
+                        else
+                            onBackPressedDispatcher.onBackPressed()
+//                        for (i in 0 until backStackCount) {
+//                            val backStackEntry: FragmentManager.BackStackEntry =
+//                                fragmentManager.getBackStackEntryAt(backStackCount)
+//                            if (!backStackEntry.getName().equals("MarketPlaceFragment")) {
+//                                fragmentManager.popBackStackImmediate(
+//                                    backStackEntry.getId(),
+//                                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+//                                )
+//                            }
+//                        }
 //                var fragmentToKeep =
 //                    this.supportFragmentManager.findFragmentByTag("MarketPlaceFragment")!! as MarketPlaceFragment
 //                val transaction: FragmentTransaction =

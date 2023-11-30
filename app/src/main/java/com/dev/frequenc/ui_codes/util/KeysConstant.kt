@@ -4,7 +4,8 @@ class KeysConstant {
 
     companion object
     {
-        const val BASE_URL = "http://192.168.1.8:3001/api/v1/"
+//        const val BASE_URL = "http://192.168.1.8:3001/api/v1/"
+        const val BASE_URL = "http://ec2-43-204-108-136.ap-south-1.compute.amazonaws.com:3001/api/v1/"
 
         const val BROWSE_BY_CAT = "event/category/browse-by-category"
 
@@ -45,6 +46,8 @@ class KeysConstant {
 
         const val My_Request = "connect/myRequest"
         const val MyConnection = "connect/myConnection"
+
+        const val GET_QUOTE = "connect/quote"
     }
 
 

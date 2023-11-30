@@ -94,42 +94,57 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
             }
         }
-//
-//        activity?.runOnUiThread {
-//            allChatListViewModel.userListsData?.observe(viewLifecycleOwner) { it23 ->
-//                it23?.let {
-//                    if (allChatListViewModel.isConnectionTabSelected.value == true) {
-//                        chatListAdapter.refreshData(
-//                            it,
-//                            ItemUserListLay
-//                        )
-//                    } else {
-//                        if (allChatListViewModel.isPendingSubTabSelected.value == true) {
+
+        activity?.runOnUiThread {
+            allChatListViewModel.userListsData?.observe(viewLifecycleOwner) { it23 ->
+                it23?.let {
+                    if (allChatListViewModel.isConnectionTabSelected.value == true) {
+                        chatListAdapter.refreshData(
+                            it,
+                            ItemUserListLay
+                        )
+                    } else {
+                        if (allChatListViewModel.isPendingSubTabSelected.value == true) {
 //                            chatListAdapter.refreshData(
 //                                it,
 //                                ItemUserChatPendingListLay
 //                            )
-//                        } else {
-//                            chatListAdapter.refreshData(
-//                                it,
-//                                ItemUserChatRequestsLay
-//                            )
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-        activity?.runOnUiThread {
-            sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
-                allChatListViewModel.callConnectionApi(token)
+                        } else {
+                            chatListAdapter.refreshData(
+                                it,
+                                ItemUserChatRequestsLay
+                            )
+                        }
+                    }
+                    try {
+                        binding.tvRequestsTag.text = "Requests (${it23.size})"
+                    } catch (ex: Exception) {
+                        ex.printStackTrace()
+                    }
+                }
             }
+        }
+
+        sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
+            allChatListViewModel.callConnectionApi(token)
         }
 
 
         activity?.runOnUiThread {
             allChatListViewModel.connectionList.observe(viewLifecycleOwner) {
-                binding.tvConnectionTag.text
+                try {
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                if (it.isNullOrEmpty()) {
+                    binding.connectionNotFoundLay.visibility = View.VISIBLE
+                    binding.rvConnection.visibility = View.INVISIBLE
+                    binding.tvConnectionTag.text = "Connection"
+                } else {
+                    binding.rvConnection.visibility = View.VISIBLE
+                    binding.connectionNotFoundLay.visibility = View.GONE
+                    binding.tvConnectionTag.text = "Connection (${it.size})"
+                }
                 connectionAdapter.update(it)
             }
         }
@@ -176,20 +191,20 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                         ItemUserChatPendingListLay
                     )
                 }
-//                allChatListViewModel.callPendingRequestApi(tokens)
+                allChatListViewModel.callPendingRequestApi(tokens)
                 binding.headPending.setTextColor(Color.parseColor("#8023EB"))
                 binding.selectedHeadPending.visibility = View.VISIBLE
 
                 binding.headMyrequests.setTextColor(Color.parseColor("#171A1F"))
                 binding.selectedHeadMyrequests.visibility = View.INVISIBLE
             } else {
-                allChatListViewModel.userListsData?.value?.let {
-                    chatListAdapter.refreshData(
-                        it,
-                        ItemUserChatRequestsLay
-                    )
-                }
-//                allChatListViewModel.callMyRequestApi(tokens)
+//                allChatListViewModel.userListsData?.value?.let {
+//                    chatListAdapter.refreshData(
+//                        it,
+//                        ItemUserChatRequestsLay
+//                    )
+//                }
+                allChatListViewModel.callMyRequestApi(tokens)
                 binding.headMyrequests.setTextColor(Color.parseColor("#8023EB"))
                 binding.selectedHeadMyrequests.visibility = View.VISIBLE
 
@@ -202,25 +217,25 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
     private fun showConnectionTab(toShowConnectionTab: Boolean, chatListAdapter: ChatListAdapter) {
         if (toShowConnectionTab) {
-                allChatListViewModel.userListsData?.value?.let {
-                    chatListAdapter.refreshData(
-                        it,
-                        ItemUserListLay
-                    )
-                }
-                binding.tvConnectionTag.setTextColor(Color.parseColor("#8023EB"))
-                binding.tvChatTag.visibility = View.VISIBLE
+//            allChatListViewModel.userListsData?.value?.let {
+//                chatListAdapter.refreshData(
+//                    it,
+//                    ItemUserListLay
+//                )
+//            }
+            binding.tvConnectionTag.setTextColor(Color.parseColor("#8023EB"))
+            binding.tvChatTag.visibility = View.VISIBLE
 
-                binding.tvRequestsTag.setTextColor(Color.parseColor("#171A1F"))
-                binding.requestLay.visibility = View.INVISIBLE
-            } else {
-                allChatListViewModel.setPendingTab(true)
-                binding.tvRequestsTag.setTextColor(Color.parseColor("#8023EB"))
-                binding.requestLay.visibility = View.VISIBLE
+            binding.tvRequestsTag.setTextColor(Color.parseColor("#171A1F"))
+            binding.requestLay.visibility = View.INVISIBLE
+        } else {
+            allChatListViewModel.setPendingTab(true)
+            binding.tvRequestsTag.setTextColor(Color.parseColor("#8023EB"))
+            binding.requestLay.visibility = View.VISIBLE
 
-                binding.tvConnectionTag.setTextColor(Color.parseColor("#171A1F"))
-                binding.tvChatTag.visibility = View.INVISIBLE
-            }
+            binding.tvConnectionTag.setTextColor(Color.parseColor("#171A1F"))
+            binding.tvChatTag.visibility = View.INVISIBLE
+        }
     }
 
     override fun onClickAtConnection(item: ConnectionResponse) {

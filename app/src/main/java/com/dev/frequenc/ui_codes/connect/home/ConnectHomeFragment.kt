@@ -18,12 +18,14 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
+import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.events.EventsFragment
 import com.dev.frequenc.ui_codes.connect.yourvibes.ShareVibesAdapter
 import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibeFragment
@@ -74,6 +76,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     lateinit var audience_id : String
     private lateinit var sharedPreferences: SharedPreferences
     var userRegistered : Boolean = false
+    lateinit var ivHamburger : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,6 +110,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
         tabLayout = root.findViewById(R.id.tabLayout)
         viewPager = root.findViewById(R.id.viewPager)
+        ivHamburger = root.findViewById(R.id.ivHamburger)
 
         val adapter = VibesTabAdapter(childFragmentManager)
         adapter.addFragment(YourVibeFragment(),"Your Vibe")
@@ -154,6 +158,9 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         {
 
             getProfileApi()
+            ivHamburger.setOnClickListener {
+                (activity as MainActivity).binding.drawerLayout.openDrawer(GravityCompat.END)
+            }
         }
         else
         {
@@ -207,10 +214,6 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
         var rvShareVibe = dialog.findViewById<RecyclerView>(R.id.rvShareVibes)
 
-        var item1 = YourVibeResponse(R.drawable.lookingforlove,"Looking For Love")
-        var item2 = YourVibeResponse(R.drawable.lookingforlove,"Free Tonight")
-        var item3 = YourVibeResponse(R.drawable.lookingforlove,"Let's be friend")
-        val mlist = listOf(item1,item2,item3)
 
         rvShareVibe.apply {
             layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)

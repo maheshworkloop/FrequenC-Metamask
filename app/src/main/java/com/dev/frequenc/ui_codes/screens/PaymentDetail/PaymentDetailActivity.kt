@@ -64,6 +64,12 @@ class PaymentDetailActivity : AppCompatActivity() {
         binding.tvAmount.text = "FRQ ${count!!.toInt()* item.price}"
         binding.tvTotal.text = "FRQ ${count!!.toInt()* item.price}"
 
+
+        binding.btnConfirm.setOnClickListener {
+//            goToMetamask()
+        }
+
+
         getProfileApi()
 
     }

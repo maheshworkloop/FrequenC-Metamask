@@ -18,6 +18,7 @@ import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
+import com.dev.frequenc.ui_codes.data.QuoteResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistTokenResponse
@@ -172,5 +173,9 @@ interface ApiService {
     fun connectionList(@Header(Authorization) token: String): Call<MyConnectionResponse>?
     @GET(KeysConstant.My_Request)
     fun myRequestApi(@Header(Authorization)token: String): Call<MyRequestsResponse>?
+
+    @GET(KeysConstant.GET_QUOTE)
+    fun getQuoteApi(): Call<QuoteResponse>?
+
 
 }
