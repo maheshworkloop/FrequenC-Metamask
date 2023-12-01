@@ -34,30 +34,31 @@ class ConnectionAdapter(var mList: List<ConnectionResponse>,val mListener : List
 
     override fun onBindViewHolder(holder: ConnectionAdapter.ViewHolder, position: Int) {
 
-        val item = mList[position]
-
-        if (!item.image.isNullOrEmpty()) {
-            ImageUtil.loadImage(holder.ivImage, item.image)
-        }
-
-        holder.clConnection.setOnClickListener {
-            mListener.onClickAtConnection(item)
-        }
-
-        if(item.status)
-        {
-            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_active)
-        }
-        else
-        {
-            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_inactive)
-
-        }
+//        val item = mList[position]
+//
+//        if (!item.image.isNullOrEmpty()) {
+//            ImageUtil.loadImage(holder.ivImage, item.image)
+//        }
+//
+//        holder.clConnection.setOnClickListener {
+//            mListener.onClickAtConnection(item)
+//        }
+//
+//        if(item.status)
+//        {
+//            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_active)
+//        }
+//        else
+//        {
+//            holder.tvStatus.background = mContext.getDrawable(R.drawable.bg_tv_status_inactive)
+//
+//        }
 
     }
 
     override fun getItemCount(): Int {
-        return  mList.size
+//        return  mList.size
+        return 7
     }
 
     fun update(itemLists : List<ConnectionResponse>) {
@@ -71,6 +72,7 @@ class ConnectionAdapter(var mList: List<ConnectionResponse>,val mListener : List
         val ivImage = itemView.findViewById<ImageView>(R.id.ivImage)
         val tvStatus = itemView.findViewById<TextView>(R.id.tvStatus)
         val clConnection = itemView.findViewById<ConstraintLayout>(R.id.clConnection)
+        val tvName = itemView.findViewById<TextView>(R.id.tvName)
     }
 
 }

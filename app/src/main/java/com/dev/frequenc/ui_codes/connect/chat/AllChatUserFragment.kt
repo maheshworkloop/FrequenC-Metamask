@@ -135,15 +135,15 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
-                if (it.isNullOrEmpty()) {
-                    binding.connectionNotFoundLay.visibility = View.VISIBLE
-                    binding.rvConnection.visibility = View.INVISIBLE
-                    binding.tvConnectionTag.text = "Connection"
-                } else {
-                    binding.rvConnection.visibility = View.VISIBLE
-                    binding.connectionNotFoundLay.visibility = View.GONE
-                    binding.tvConnectionTag.text = "Connection (${it.size})"
-                }
+//                if (it.isNullOrEmpty()) {
+//                    binding.connectionNotFoundLay.visibility = View.VISIBLE
+//                    binding.rvConnection.visibility = View.INVISIBLE
+//                    binding.tvConnectionTag.text = "Connection"
+//                } else {
+//                    binding.rvConnection.visibility = View.VISIBLE
+//                    binding.connectionNotFoundLay.visibility = View.GONE
+//                    binding.tvConnectionTag.text = "Connection (${it.size})"
+//                }
                 connectionAdapter.update(it)
             }
         }
@@ -155,7 +155,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         activity?.runOnUiThread {
             allChatListViewModel.isDataFound.observe(viewLifecycleOwner) {
                 if (it) {
-                    binding.dataNotFoundLay.noDataLay.visibility = View.GONE
+                    binding.dataNotFoundLay.noDataLay.visibility = View.INVISIBLE
                     binding.rvChatUser.visibility = View.VISIBLE
                 } else {
                     binding.rvChatUser.visibility = View.INVISIBLE
