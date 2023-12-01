@@ -42,16 +42,15 @@
                     android:layout_height="@dimen/_1sdp"
                     android:background="#DEE1E6"
                     android:id="@+id/divider1"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/_10sdp" />
+                    android:layout_alignParentTop="true" />
 
             <RelativeLayout
                     android:id="@+id/rlConnection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/divider1"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
                     android:gravity="center_vertical">
 
                 <TextView
@@ -60,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:text="Connection (10)"
                         android:background="@drawable/bg_location"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:maxLines="1"
                         android:textColor="#8023EB"
                         android:ellipsize="end"
@@ -73,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:text="Requests (10)"
                         android:background="@drawable/bg_location"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:maxLines="1"
                         android:ellipsize="end"
                         android:fontFamily="@font/epilogueregular"
@@ -86,8 +85,8 @@
                     android:id="@+id/rlConnectionList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlConnection"
-                    android:layout_marginTop="@dimen/_10sdp">
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_below="@+id/rlConnection">
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvConnection"
@@ -95,8 +94,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp" />
+                        android:layout_marginStart="@dimen/_12sdp" />
 
             </RelativeLayout>
 
@@ -110,12 +108,11 @@
 
                 <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="match_parent"
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:minHeight="@dimen/_78sdp"
                         android:src="@drawable/notfoundlay"
-                        app:layout_constraintHeight_percent="0.4"
+                        app:layout_constraintHeight_percent="0.6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -129,29 +126,36 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_below="@id/rlConnectionList" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:id="@+id/chatPendingsLays"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_below="@id/divider3"
+                >
             <TextView
                     android:id="@+id/tvChatTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chats (10)"
                     android:background="@drawable/bg_location"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_14sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="@dimen/_12sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/epilogueregular"
-                    android:layout_below="@id/divider3"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="match_parent"
                     android:visibility="invisible"
                     android:id="@+id/requestLay"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:layout_below="@id/divider3">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
@@ -274,21 +278,20 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvChatUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_below="@id/tvChatTag"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_below="@id/chatPendingsLays"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
                     tools:listitem="@layout/item_user_chat_requests"
                     android:layout_alignParentBottom="true" />
 
 
             <include
-                    android:layout_below="@id/tvChatTag"
+                    android:layout_below="@id/chatPendingsLays"
                     android:id="@+id/dataNotFoundLay"
                     layout="@layout/no_data_found"
                     android:layout_alignParentBottom="true"

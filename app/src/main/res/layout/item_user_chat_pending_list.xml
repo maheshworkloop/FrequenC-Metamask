@@ -8,8 +8,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:padding="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
             android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -22,7 +23,7 @@
                 android:src="@drawable/rewards_booking"
                 app:layout_constraintDimensionRatio="1:1"
                 android:layout_margin="@dimen/_5sdp"
-                app:layout_constraintWidth_percent="0.1" />
+                app:layout_constraintWidth_percent="0.13" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
@@ -44,9 +45,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:textSize="14sp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/interregular"
+                    android:fontFamily="@font/intermedium"
                     android:maxLines="1"
-                    android:text="@string/show_text"
+                    android:text="Isabella Allen"
                     android:textColor="#171A1F" />
 
             <TextView
@@ -55,14 +56,13 @@
                     app:layout_constraintStart_toEndOf="@id/tvProfileName"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:id="@+id/tvTime"
-                    android:maxLength="10"
                     app:layout_constraintTop_toTopOf="@id/tvProfileName"
                     android:textSize="10sp"
                     android:ellipsize="end"
                     app:layout_constraintBottom_toBottomOf="@id/tvProfileName"
                     android:fontFamily="@font/interregular"
                     android:maxLines="1"
-                    android:text="@string/show_text"
+                    android:text="1 hours ago"
                     android:textColor="#323842" />
 
 
@@ -80,7 +80,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:fontFamily="@font/interregular"
                     android:maxLines="1"
-                    android:text="@string/show_text"
+                    android:text="Los Angeles, California(CA)....."
                     android:textColor="#323842" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
