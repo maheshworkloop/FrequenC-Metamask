@@ -35,7 +35,6 @@
             app:tabIndicatorColor="@color/material_red_500"
             style="@style/TabLayout"
             android:layout_below="@id/rl_top"
-            android:layout_marginTop="@dimen/_10sdp"
             />
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

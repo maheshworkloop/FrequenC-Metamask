@@ -10,9 +10,11 @@ import android.graphics.Matrix
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
@@ -200,29 +202,42 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
 
 
-    private fun showPopUp(mData : GetVibeCategoryResponse)
-    {
+    private fun showPopUp(mData: GetVibeCategoryResponse) {
         dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.layout_dialog_share_your_vibes)
-        dialog.window?.setBackgroundDrawableResource(R.color.transparent)
-
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setCancelable(true)
 
         var gifImage = dialog.findViewById<GifImageView>(R.id.ivAnimSplash)
-
         Glide.with(requireContext()).load(R.drawable.frequenc_loader).into(gifImage)
 
         var rvShareVibe = dialog.findViewById<RecyclerView>(R.id.rvShareVibes)
 
-
         rvShareVibe.apply {
-            layoutManager = GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
-            adapter = ShareVibesAdapter(mData,this@ConnectHomeFragment)
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            adapter = ShareVibesAdapter(mData, this@ConnectHomeFragment)
         }
+        val layoutParams: WindowManager.LayoutParams = dialog.window!!.attributes
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
 
-//        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+// Convert 30dp to pixels
+        val marginInPixels = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            30f,
+            resources.displayMetrics
+        ).toFloat()
+
+// Set margin
+        layoutParams.horizontalMargin = marginInPixels
+        layoutParams.verticalMargin = marginInPixels
+
+        // Apply the layout parameters to the window
+        dialog.window!!.attributes = layoutParams
+
         dialog.show()
     }
+
 
 
     private fun showPopUpConnectionRequest()
