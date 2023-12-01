@@ -12,7 +12,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintDimensionRatio="1:1"
-            android:layout_margin="@dimen/_1sdp"
+            android:layout_margin="@dimen/_2sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:cardCornerRadius="@dimen/_10sdp"
             >
@@ -25,7 +25,6 @@
                     android:id="@+id/ivImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:shapeAppearance="@style/RoundCorner3"
                     android:scaleType="fitXY"
                     android:src="@drawable/lookingforlove"
                     />
@@ -50,6 +49,7 @@
                     android:fontFamily="@font/epilogueregular"
                     android:textStyle="bold"
                     android:elevation="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:paddingHorizontal="@dimen/_4sdp"
                     android:paddingVertical="@dimen/_2sdp"
                     android:layout_alignParentBottom="true"
