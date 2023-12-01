@@ -4,6 +4,7 @@
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_16sdp"
         android:elevation="@dimen/_5sdp">
 
 
@@ -14,7 +15,6 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_hamburger"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/_20sdp"
 
             />
 
@@ -53,22 +53,21 @@
             android:layout_alignParentStart="true"
             app:cardCornerRadius="@dimen/_7sdp"
             android:layout_toStartOf="@id/ivNotification"
-            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_11sdp"
             app:cardBackgroundColor="#F3F4F6"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             >
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_4sdp"
             >
         <ImageView
                 android:id="@+id/ivSearch"
                 android:layout_width="@dimen/_10sdp"
                 android:layout_height="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:src="@drawable/search"
@@ -83,6 +82,7 @@
                 android:layout_toRightOf="@+id/ivSearch"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_5sdp"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/_13sdp"
                 android:maxLines="1"

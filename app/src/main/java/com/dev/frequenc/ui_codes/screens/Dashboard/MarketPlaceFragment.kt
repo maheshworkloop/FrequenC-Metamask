@@ -81,6 +81,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
     lateinit var tvViewAllTrendingEvents : TextView
     lateinit var tvViewAllTrendingArtist : TextView
     lateinit var tvViewAllAll : TextView
+    lateinit var rlLogin : RelativeLayout
 
     lateinit var rlLocation : RelativeLayout
 
@@ -157,7 +158,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         tvViewAllTrendingEvents = root.findViewById(R.id.tvTrendingEventsViewAll)
 
         tvViewAllAll = root.findViewById(R.id.tvAllViewAll)
-
+        rlLogin = root.findViewById(R.id.llLogin)
 
         rlSearch.setOnClickListener{
             val intent = Intent(requireContext(),SearchActivity::class.java)
@@ -224,6 +225,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
             Log.d("Bearer",authorization)
 //            Toast.makeText(requireContext(),"Login Success", Toast.LENGTH_SHORT).show()
             loginBtn.visibility = View.INVISIBLE
+            rlLogin.visibility = View.INVISIBLE
             ivHamburger.visibility =View.VISIBLE
             ivNotification.visibility =View.VISIBLE
 
@@ -231,12 +233,16 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
             trendingArtistTokenApi()
             isLogin = true
 
+            (activity as MainActivity).binding.bottomNavigationView.visibility = View.VISIBLE
+
+
         }
         else
         {
 //            Toast.makeText(requireContext(),"Not Logged in Failure", Toast.LENGTH_SHORT).show()
             Log.e("Audience Id",audience_id)
             loginBtn.visibility = View.VISIBLE
+            rlLogin.visibility = View.VISIBLE
             ivHamburger.visibility =View.INVISIBLE
             ivNotification.visibility =View.INVISIBLE
 
@@ -245,6 +251,9 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
             trendingArtistApi()
 
             isLogin =false
+
+            (activity as MainActivity).binding.bottomNavigationView.visibility = View.GONE
+
 //            Log.e("Bearer",authorization)
         }
 
