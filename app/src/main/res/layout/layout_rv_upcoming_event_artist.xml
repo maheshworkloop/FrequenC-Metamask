@@ -4,6 +4,7 @@
     android:layout_height="@dimen/_60sdp"
     android:layout_marginBottom="@dimen/_5sdp"
     android:id="@+id/cvUpcomingEvent"
+    android:background="@drawable/bg_upcoming_events_rv"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -19,31 +20,40 @@
         app:shapeAppearance="@style/RoundCorner"
         />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/ivEvent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+
+            >
+
+
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEventName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/ivEvent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="Artisan Food Festival"
-        android:textSize="@dimen/_16sdp"
-        android:fontFamily="@font/robotocondensed_bold"
+        android:textSize="@dimen/_14sdp"
+        style="@style/textViewRegularBold"
         android:textColor="@drawable/font_color"
-        android:letterSpacing="0.02"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_10sdp"
         android:maxLines="1"
         />
 
-
     <ImageView
         android:id="@+id/ivLocation"
-        android:layout_width="@dimen/_12sdp"
-        android:layout_height="@dimen/_12sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_11sdp"
         android:src="@drawable/location2"
-        app:tint="@color/black"
+        app:tint="@color/material_grey_800"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="@id/tvEventName"
         app:layout_constraintTop_toTopOf="@id/tvLocation"
@@ -58,18 +68,21 @@
         app:layout_constraintLeft_toRightOf="@id/ivLocation"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvEventName"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_1sdp"
         android:text="62, Bory , Dr Depew, New York"
-        android:textSize="@dimen/_12sdp"
-        android:fontFamily="@font/robotocondensed_regular"
-        android:textColor="@color/black"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/material_grey_600"
         android:layout_marginRight="@dimen/_10sdp"
         android:maxLines="1"
+        style="@style/textViewRegularBold"
+
         />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
