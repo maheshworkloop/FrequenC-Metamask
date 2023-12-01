@@ -6,7 +6,8 @@ class EventResponse (
     val eventDetails: EventDetails,
     val artist: List<Artist>,
     val eventTicket: List<EventTicket>,
-    val venueDetails: VenueDetails
+    val venueDetails: VenueDetails,
+    val startPrice : Double
 ) : Serializable
 
 

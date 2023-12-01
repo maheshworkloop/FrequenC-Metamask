@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".ui_codes.screens.EventDetail.EventDetailActivity">
+
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/cvBtn"
+            >
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -31,12 +40,12 @@
 
     <ImageView
         android:id="@+id/ivBackBtn"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="@id/tvEventDetail"
+        app:layout_constraintBottom_toBottomOf="@id/tvEventDetail"
         android:layout_marginLeft="@dimen/_15sdp"
         />
 
@@ -46,8 +55,8 @@
         android:layout_height="wrap_content"
         android:text="Event Detail"
         android:textSize="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/robotocondensed_bold"
+        android:layout_marginTop="@dimen/_8sdp"
+        style="@style/textViewRegularBold" 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -60,8 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvEventDetail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:orientation="vertical"
         >
 
@@ -70,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_12sdp">
+                >
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/sliderView"
@@ -99,21 +107,54 @@
 
     </LinearLayout>
 
-    <com.google.android.material.textview.MaterialTextView
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@+id/llBanner"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegularBold" 
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+        
+        
+        <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:elevation="@dimen/_5sdp"
+
+                />
+
+
+       <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvEventName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Event Name"
-        android:textSize="@dimen/_15sdp"
+        android:textSize="@dimen/_17sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/llBanner"
+        app:layout_constraintTop_toBottomOf="@+id/viewLine"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ivShare"
+        app:layout_constraintRight_toLeftOf="@id/ivCalendar"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        android:fontFamily="@font/robotocondensed_bold"
+        style="@style/textViewRegularBold" 
         android:textColor="@drawable/gradient_text_color"
-        android:letterSpacing="0.1"
         android:textStyle="bold"
         />
 
@@ -123,24 +164,15 @@
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_15sdp"
         android:src="@drawable/ic_calendar"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/llBanner"
+        app:layout_constraintTop_toTopOf="@+id/tvEventName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEventName"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="@dimen/_12sdp"
-        android:scaleType="fitXY"
-        />
-
-    <ImageView
-        android:id="@+id/ivShare"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        android:src="@drawable/ic_share"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/llBanner"
-        app:layout_constraintEnd_toStartOf="@id/ivCalendar"
         android:layout_marginRight="@dimen/_10sdp"
         android:scaleType="fitXY"
+        app:tint="@color/material_grey_800"
         />
+
+
 
     <ImageView
         android:id="@+id/ivLocation"
@@ -159,12 +191,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tvEventName"
         app:layout_constraintStart_toEndOf="@id/ivLocation"
         android:layout_marginLeft="@dimen/_5sdp"
-        android:fontFamily="@font/robotocondensed_regular"
-        android:textColor="@color/black"
+        style="@style/textViewRegular"
+         android:textColor="@color/black"
         android:layout_marginTop="@dimen/_10sdp"
         />
 
@@ -185,11 +217,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tvLocation"
         app:layout_constraintStart_toEndOf="@id/ivDate"
         android:layout_marginLeft="@dimen/_5sdp"
-        android:fontFamily="@font/robotocondensed_regular"
+        style="@style/textViewRegular"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/_5sdp"
         />
@@ -211,43 +243,114 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/tvDate"
         app:layout_constraintStart_toEndOf="@id/ivTime"
         android:layout_marginLeft="@dimen/_5sdp"
-        android:fontFamily="@font/robotocondensed_regular"
+        style="@style/textViewRegular"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/_5sdp"
         />
 
 
 
-    <TextView
-        android:id="@+id/btnBuy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Book Now"
-        android:background="@drawable/bg_book_now"
-        android:paddingHorizontal="@dimen/_16sdp"
-        android:paddingVertical="@dimen/_8sdp"
-        android:textColor="@color/white"
-        android:layout_marginRight="@dimen/_15sdp"
-        app:layout_constraintTop_toTopOf="@id/tvDate"
-        app:layout_constraintBottom_toBottomOf="@id/tvDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textStyle="bold"
-        />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clInvite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvTime"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/_20sdp"
+
+                >
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvInvite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Invite your friends"
+                    android:textSize="@dimen/_13sdp"
+                    style="@style/textViewRegularBold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/black"
+                    />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvInviteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="and enjoy your shared experience"
+                    android:textSize="@dimen/_9sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    style="@style/textViewRegular"
+                    app:layout_constraintTop_toBottomOf="@id/tvInvite"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:textColor="@color/material_grey_800"
+                    />
+
+            <RelativeLayout
+                    android:id="@+id/rlShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/bg_tv_time"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    >
+
+                <ImageView
+                        android:id="@+id/ivShare"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:src="@drawable/ic_share"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:scaleType="fitXY"
+                        app:tint="@color/material_red_500"
+                        />
+
+                <TextView
+                        android:id="@+id/btnShare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:paddingVertical="@dimen/_6sdp"
+                        android:textColor="@color/material_red_500"
+                        android:layout_toRightOf="@id/ivShare"
+                        style="@style/textViewRegularBold"
+                        app:layout_constraintRight_toRightOf="parent"
+
+
+                        />
+
+            </RelativeLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvAbout"
+        android:id="@+id/tvAboutEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About"
-        android:textSize="@dimen/_14sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/robotocondensed_bold"
-        app:layout_constraintTop_toBottomOf="@id/tvTime"
+        android:text="About the Event"
+        android:textSize="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        style="@style/textViewRegularBold" 
+        app:layout_constraintTop_toBottomOf="@id/clInvite"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="@dimen/_10sdp"
         android:textColor="@color/black"
@@ -259,14 +362,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="About"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:fontFamily="@font/robotocondensed_regular"
-        app:layout_constraintTop_toBottomOf="@id/tvAbout"
+        app:layout_constraintTop_toBottomOf="@id/tvAboutEvent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
+        style="@style/textViewRegular"
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -274,14 +377,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Read More"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_2sdp"
-        android:fontFamily="@font/robotocondensed_regular"
+        style="@style/textViewRegular"
         app:layout_constraintTop_toBottomOf="@id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="@dimen/_10sdp"
-        android:textColor="@color/black"
+        android:textColor="@color/material_red_500"
         android:visibility="gone"
+        android:background="@drawable/bg_tv_time"
+        android:paddingHorizontal="@dimen/_4sdp"
+        android:paddingVertical="@dimen/_2sdp"
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -289,23 +395,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Read Less"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_2sdp"
-        android:fontFamily="@font/robotocondensed_regular"
+        style="@style/textViewRegular"
         app:layout_constraintTop_toBottomOf="@id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="@dimen/_10sdp"
-        android:textColor="@color/black"
-        android:visibility="gone"
-        />
+            android:textColor="@color/material_red_500"
+            android:visibility="gone"
+            android:background="@drawable/bg_tv_time"
+            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            />
 
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTicketTypeTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ticket Type"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTicket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_25sdp"
-        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@id/tvTicketTypeTag"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -318,7 +441,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Artists"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
@@ -333,7 +456,7 @@
             android:id="@+id/rvArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/tvTrendingArtist"
             app:layout_constraintStart_toStartOf="parent"
@@ -348,7 +471,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Venue"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
@@ -363,7 +486,7 @@
             android:id="@+id/rvVenue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:orientation="horizontal"
             android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tvVenue"
@@ -375,13 +498,82 @@
             />
 
 
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </ScrollView>
+
+
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/cvBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardElevation="@dimen/_15sdp"
+            android:elevation="@dimen/_15sdp"
+            android:layout_alignParentBottom="true"
+            >
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                >
+
+
+            <ImageView
+                    android:id="@+id/ivwallet"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/wallet"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    >
+
+            </ImageView>
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvOnwards"
+                    android:layout_toRightOf="@id/ivwallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_toLeftOf="@+id/btnBuy"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    style="@style/textViewRegularBold"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    />
+
+            <TextView
+                    android:id="@+id/btnBuy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Now"
+                    android:background="@drawable/bg_book_now"
+                    android:paddingHorizontal="@dimen/_28sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 
 
-
-
-
-</ScrollView>
+</RelativeLayout>
