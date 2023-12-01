@@ -152,7 +152,7 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
 
                             Log.d("linecount2", "linecount ${binding.tvDescription.lineCount}")
 
-
+                            binding.tvOnwards.text = "FRQ " + eventResponse.startPrice.toInt().toString() + " Onwards"
 
                             binding.tvLocation.text = eventResponse.venueDetails.venue_locality
 
@@ -234,7 +234,7 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
                             }
 
 
-                            binding.ivShare.setOnClickListener {
+                            binding.rlShare.setOnClickListener {
                                 val shareIntent = Intent(Intent.ACTION_SEND)
                                 shareIntent.type = "text/plain"
                                 shareIntent.putExtra(

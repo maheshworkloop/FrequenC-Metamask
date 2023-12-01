@@ -63,7 +63,7 @@
                     android:layout_alignParentTop="true"
                     android:background="@drawable/bg_btn"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginHorizontal="@dimen/_6sdp"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
 
                     android:alpha="0.8">
 
