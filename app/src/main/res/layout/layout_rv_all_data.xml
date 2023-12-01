@@ -65,7 +65,7 @@
             android:layout_marginLeft="@dimen/_4sdp"
             android:textSize="@dimen/_12sdp"
             android:maxLines="1"
-            android:textStyle="bold"
+            style="@style/textViewRegularBold"
             android:textColor="@color/material_grey_700"
             />
 
@@ -98,6 +98,8 @@
             android:textSize="@dimen/_8sdp"
             android:textColor="@color/material_grey_700"
             android:layout_marginBottom="@dimen/_9sdp"
+            style="@style/textViewRegular"
+
             />
 
         <TextView
@@ -112,10 +114,11 @@
             android:paddingVertical="@dimen/_1sdp"
             android:paddingHorizontal="@dimen/_3sdp"
             android:text="concert"
-            android:fontFamily="@font/robotocondensed_regular"
             android:textColor="@color/white"
             android:maxLines="1"
             android:textSize="@dimen/_8sdp"
+            style="@style/textViewRegular"
+
             />
 
 

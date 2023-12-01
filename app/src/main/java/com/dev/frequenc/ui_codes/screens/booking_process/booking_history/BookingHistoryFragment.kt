@@ -12,22 +12,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.FragmentBookingHistoryBinding
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.data.models.TicketDetailsModel
-import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletViewModel
 import com.dev.frequenc.ui_codes.screens.booking_process.tickets.ShowTicketFragment
-import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.ui_codes.screens.utils.KeysConstant
 import com.dev.frequenc.util.Constants
 import com.dev.frequenc.util.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import io.metamask.androidsdk.ErrorType
-import io.metamask.androidsdk.RequestError
 import io.metamask.androidsdk.TAG
 
 @AndroidEntryPoint

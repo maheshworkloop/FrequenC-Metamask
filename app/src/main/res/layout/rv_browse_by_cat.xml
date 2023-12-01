@@ -40,7 +40,7 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sports"
+                    android:text=""
                     android:layout_centerHorizontal="true"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -51,6 +51,7 @@
                     android:textColor="@color/white"
                     android:elevation="@dimen/_5sdp"
                     android:alpha="1"
+                    style="@style/textViewRegular"
 
                     />
 
@@ -81,6 +82,7 @@
                         android:paddingVertical="3dp"
                         android:textColor="@color/white"
                         android:alpha="0.7"
+                        style="@style/textViewRegular"
                         />
 
             </LinearLayout>

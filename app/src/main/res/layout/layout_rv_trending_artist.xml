@@ -39,8 +39,8 @@
             android:text="Comedy Fiesta"
             android:layout_marginLeft="@dimen/_4sdp"
             android:textSize="@dimen/_12sdp"
-            android:textStyle="bold"
             android:textColor="@color/material_grey_700"
+            style="@style/textViewRegularBold"
             />
 
 
