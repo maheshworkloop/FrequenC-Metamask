@@ -282,24 +282,24 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
 //                        }
 //                    }
 //                }
-
-                val metamaskAddress =
-                    sharedPreferences.getString(Constants.MetaMaskWalletAddress, null)
-                if (metamaskAddress != null) {
-                    bookinghistoryViewModel.getWalletBalence(metamaskAddress)
-                } else {
-                    try {
-                        startActivity(
-                            Intent(
-                                activity,
-                                com.dev.frequenc.MainActivity::class.java
-                            )
-                        )
-                    } catch (ex: Exception) {
-                        ex.printStackTrace()
-
-                    }
-                }
+//
+//                val metamaskAddress =
+//                    sharedPreferences.getString(Constants.MetaMaskWalletAddress, null)
+//                if (metamaskAddress != null) {
+//                    bookinghistoryViewModel.getWalletBalence(metamaskAddress)
+//                } else {
+//                    try {
+//                        startActivity(
+//                            Intent(
+//                                activity,
+//                                com.dev.frequenc.MainActivity::class.java
+//                            )
+//                        )
+//                    } catch (ex: Exception) {
+//                        ex.printStackTrace()
+//
+//                    }
+//                }
             } catch (ex: Exception) {
                 Log.e(TAG, "WalletViewModel: ", ex)
                 walletViewModel.setConnectedVals(false)
