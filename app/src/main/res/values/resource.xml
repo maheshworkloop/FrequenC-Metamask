@@ -42,8 +42,19 @@
 
 
     <style name="TabLayout" parent="Widget.Material3.TabLayout">
-        <item name="android:layout_margin">0dp</item>
-        <item name="fontFamily">@font/epilogueregular</item>
+        <item name="android:layout_margin">@dimen/_10sdp</item>
+        <item name="fontFamily">@font/</item>
+        <item
+                name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
     </style>
 
+    <style
+            name="MyCustomTabTextAppearance"
+            parent="Widget.Material3.TabLayout">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textStyle">bold</item>
+
+
+
+    </style>
 </resources>
