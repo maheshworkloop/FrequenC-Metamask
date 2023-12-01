@@ -142,16 +142,16 @@
                     android:background="@drawable/bg_location"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:visibility="gone"
                     android:fontFamily="@font/epilogueregular"
                     android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="invisible"
                     android:id="@+id/requestLay"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -164,6 +164,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/myRequestsTab">
 
                     <TextView
@@ -172,14 +173,15 @@
                             android:layout_height="wrap_content"
                             android:text="Pending"
                             android:background="@drawable/bg_location"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:maxLines="1"
                             android:ellipsize="end"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="@id/selectedHeadPending"
-                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_50sdp"
                             android:fontFamily="@font/epilogueregular"
                             android:layout_marginBottom="@dimen/_8sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toTopOf="@id/selectedHeadPending"
                             android:textStyle="bold" />
 
@@ -191,8 +193,8 @@
                             app:cardBackgroundColor="#DE3B40"
                             app:cardCornerRadius="@dimen/_12sdp"
                             app:layout_constraintBottom_toBottomOf="@id/headPending"
+                            android:layout_marginStart="@dimen/_10sdp"
                             app:layout_constraintStart_toEndOf="@id/headPending"
-                            app:layout_constraintEnd_toEndOf="@id/selectedHeadPending"
                             app:layout_constraintDimensionRatio="16:9">
 
                         <TextView
@@ -232,13 +234,15 @@
                             android:layout_height="wrap_content"
                             android:text="My Requests"
                             android:background="@drawable/bg_location"
-                            android:textSize="@dimen/_14sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:maxLines="1"
                             android:ellipsize="end"
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginBottom="@dimen/_8sdp"
                             app:layout_constraintStart_toStartOf="@id/selectedHeadMyrequests"
+                            android:layout_marginEnd="@dimen/_50sdp"
                             android:fontFamily="@font/epilogueregular"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintBottom_toTopOf="@id/selectedHeadMyrequests"
                             android:textStyle="bold" />
 
@@ -248,11 +252,10 @@
                             android:id="@+id/notificationMyrequestsBubble"
                             app:layout_constraintTop_toTopOf="@id/headMyrequests"
                             app:cardBackgroundColor="#DE3B40"
+                            android:layout_marginStart="@dimen/_10sdp"
                             app:cardCornerRadius="@dimen/_12sdp"
                             app:layout_constraintBottom_toBottomOf="@id/headMyrequests"
                             app:layout_constraintStart_toEndOf="@id/headMyrequests"
-                            app:layout_constraintEnd_toEndOf="@id/selectedHeadMyrequests"
-                            app:layout_constraintHeight_percent="0.7"
                             app:layout_constraintDimensionRatio="16:9">
 
                         <TextView
