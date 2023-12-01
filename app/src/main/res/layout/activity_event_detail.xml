@@ -123,8 +123,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
-        
-        
+
         <View
                 android:id="@+id/viewLine"
                 android:layout_width="0dp"
