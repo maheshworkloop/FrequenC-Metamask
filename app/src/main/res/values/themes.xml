@@ -7,4 +7,12 @@
     <style name="MyTheme" parent="Theme.Material3.DayNight.NoActionBar" >
         <item name="android:statusBarColor">@color/purple_500</item>
     </style>
+    
+    <style name="textViewRegular">
+        <item name="fontFamily">@font/robotoregular</item>
+    </style>
+
+    <style name="textViewRegularBold">
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
 </resources>

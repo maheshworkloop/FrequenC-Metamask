@@ -102,7 +102,7 @@ class MainActivity  : AppCompatActivity() {
             Log.d("Audience Id", audience_id)
             Log.d("Bearer", authorization)
             Log.d("token", "onCreate: ${sharedPreferences.getString(Constants.Authorization, " ")}")
-            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
             binding.navbar.rlLogout.visibility = View.VISIBLE
             binding.navbar.viewLogout.visibility = View.VISIBLE
             binding.navbar.rlLogout.setOnClickListener {

@@ -63,7 +63,7 @@
             android:layout_marginBottom="@dimen/_8sdp"
             android:textSize="@dimen/_8sdp"
             android:textColor="@color/material_red_500"
-            android:textStyle="bold"
+            style="@style/textViewRegularBold"
             />
 
 

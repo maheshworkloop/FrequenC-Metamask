@@ -39,7 +39,7 @@ class TicketAdapter (private val mList: List<EventTicket>,
 
         holder.tvTicket.setText(item.ticket_type)
 
-        holder.tvSeat.setText("Total Seats ${item.no_of_tickets} / ${item.left_tickets} left")
+        holder.tvSeat.setText("${item.left_tickets} left / ${item.no_of_tickets} seats")
 
         holder.clTicket.setOnClickListener { mListener.onClickAtTicket(item,mList)
             val prev_pos = selectedTicketPos
