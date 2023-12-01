@@ -57,59 +57,96 @@
           android:id="@+id/rl_top"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="@dimen/_10sdp"
+          android:layout_marginTop="@dimen/_15sdp"
           android:elevation="@dimen/_5sdp"
           >
 
-          <ImageView
-              android:id="@+id/ivHamburger"
-              android:layout_width="@dimen/_20sdp"
-              android:layout_height="@dimen/_20sdp"
-              android:layout_alignParentRight="true"
-              android:src="@drawable/ic_hamburger"
-              android:layout_centerVertical="true"
-              app:tint="@color/white"
-              android:layout_marginRight="@dimen/_20sdp"
-
-              />
-
-          <ImageView
-              android:id="@+id/ivNotification"
-              android:layout_width="@dimen/_20sdp"
-              android:layout_height="@dimen/_20sdp"
-              android:layout_toStartOf="@id/ivHamburger"
-              android:src="@drawable/notification"
-              android:layout_centerVertical="true"
-              android:layout_marginEnd="@dimen/_20sdp"
-              app:tint="@color/white"
-
-              />
-          <TextView
-              android:id="@+id/btnLogin"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Login"
-              android:background="@drawable/bg_btn2"
-              android:paddingHorizontal="@dimen/_14sdp"
-              android:paddingVertical="@dimen/_4sdp"
-              android:textColor="@color/black"
-              android:layout_alignParentRight="true"
-              android:layout_centerVertical="true"
-              android:layout_marginRight="@dimen/_12sdp"
-              android:textSize="@dimen/_10sdp"
-              />
+          <RelativeLayout
+                   android:id="@+id/rl_icons"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  >
 
 
+              <ImageView
+                      android:id="@+id/ivHamburger"
+                      android:layout_width="@dimen/_20sdp"
+                      android:layout_height="@dimen/_20sdp"
+                      android:layout_alignParentRight="true"
+                      android:src="@drawable/ic_hamburger"
+                      android:layout_centerVertical="true"
+                      app:tint="@color/white"
+                      android:layout_marginRight="@dimen/_20sdp"
+
+                      />
+
+              <ImageView
+                      android:id="@+id/ivNotification"
+                      android:layout_width="@dimen/_20sdp"
+                      android:layout_height="@dimen/_20sdp"
+                      android:layout_toStartOf="@id/ivHamburger"
+                      android:src="@drawable/notification"
+                      android:layout_centerVertical="true"
+                      android:layout_marginEnd="@dimen/_10sdp"
+                      app:tint="@color/white"
+
+                      />
+
+              <TextView
+                      android:id="@+id/btnLogin"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Login"
+                      android:paddingHorizontal="@dimen/_12sdp"
+                      android:paddingVertical="@dimen/_3sdp"
+                      android:textColor="@color/white"
+                      android:textSize="@dimen/_10sdp"
+                      android:layout_alignParentRight="true"
+                      android:layout_centerVertical="true"
+                      android:layout_marginRight="@dimen/_12sdp"
+                      android:textStyle="bold"
+                      />
+
+              <RelativeLayout
+                      android:id="@+id/llLogin"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentRight="true"
+                      android:layout_centerVertical="true"
+                      android:layout_marginRight="@dimen/_12sdp"
+                      android:background="@drawable/bg_btn2"
+                      android:alpha="0.3"
+                      >
+
+
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Login"
+                          android:paddingHorizontal="@dimen/_12sdp"
+                          android:paddingVertical="@dimen/_3sdp"
+                          android:textColor="@color/white"
+                          android:textSize="@dimen/_10sdp"
+                          android:elevation="@dimen/_15sdp"
+                          android:visibility="invisible"
+                          />
+
+              </RelativeLayout>
+
+
+          </RelativeLayout>
 
 
           <RelativeLayout
               android:id="@+id/rlLocation"
               android:layout_width="@dimen/_120sdp"
               android:layout_height="wrap_content"
-              android:layout_toStartOf="@id/btnLogin"
-              android:layout_marginRight="@dimen/_15sdp"
               android:layout_centerVertical="true"
               android:visibility="invisible"
+              android:layout_centerHorizontal="true"
+
               >
               <RelativeLayout
                   android:layout_width="wrap_content"
@@ -120,8 +157,8 @@
 
                   <ImageView
                       android:id="@+id/ivLocation"
-                      android:layout_width="@dimen/_10sdp"
-                      android:layout_height="@dimen/_11sdp"
+                      android:layout_width="@dimen/_9sdp"
+                      android:layout_height="@dimen/_10sdp"
                       android:src="@drawable/location2"
                       app:tint="@color/white"
                       android:layout_centerVertical="true"
@@ -139,7 +176,7 @@
                       android:layout_marginLeft="@dimen/_3sdp"
                       android:layout_marginRight="@dimen/_4sdp"
                       android:layout_centerVertical="true"
-                      android:textSize="@dimen/_10sdp"
+                      android:textSize="@dimen/_9sdp"
                       android:maxLines="1"
                       />
 
@@ -271,7 +308,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="View all"
-                      android:textSize="@dimen/_10sdp"
+                      android:textSize="@dimen/_9sdp"
                       android:textColor="@color/material_grey_700"
 
                       />
@@ -401,7 +438,7 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="View all"
-                      android:textSize="@dimen/_10sdp"
+                      android:textSize="@dimen/_9sdp"
                       android:textColor="@color/material_grey_700"
 
                           />
@@ -430,7 +467,7 @@
               android:layout_marginTop="@dimen/_10sdp"
               android:layout_below="@+id/rlAll"
               android:orientation="horizontal"
-              android:layout_marginBottom="@dimen/_70sdp"
+              android:layout_marginBottom="@dimen/_20sdp"
 
               />
 
@@ -451,7 +488,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_10sdp"
-              android:layout_marginBottom="@dimen/_70sdp"
+              android:layout_marginBottom="@dimen/_20sdp"
               android:layout_below="@+id/tvBrowseByCity"
               android:orientation="horizontal"
               android:visibility="gone"
