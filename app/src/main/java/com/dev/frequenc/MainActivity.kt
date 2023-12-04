@@ -43,9 +43,10 @@ class MainActivity : ComponentActivity() {
                         color = MaterialTheme.colorScheme.background
                     ) {
                         val sharedPreferences:SharedPreferences = this.getSharedPreferences(Constants.SharedPreference , Context.MODE_PRIVATE)
-                        Setup(ethereumViewModel, screenViewModel, sharedPreferences) {
+                        Setup(ethereumViewModel, screenViewModel, sharedPreferences, intent?.getStringExtra("gotTo")) {
                             // Update the activity key when starting another activity
 //                            activityKey++
+
                             startActivity(Intent(this@MainActivity, MainActivity::class.java))
                         }
 //                    }
