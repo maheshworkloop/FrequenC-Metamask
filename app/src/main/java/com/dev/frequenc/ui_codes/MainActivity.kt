@@ -1,10 +1,13 @@
 package com.dev.frequenc.ui_codes
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.TextUtils
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +22,11 @@ import androidx.fragment.app.FragmentManager
 import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.dev.agorademo2.LogUtils
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
 import com.dev.frequenc.ui_codes.connect.chat.AllChatUserFragment
+import com.dev.frequenc.ui_codes.connect.chat.HomeActivity
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.screens.Dashboard.ConnectFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.CreateFragment
@@ -38,6 +43,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
+import io.agora.ConnectionListener
+import io.agora.Error
+import io.agora.chat.ChatClient
+import io.agora.chat.ChatOptions
+import io.agora.chat.uikit.EaseUIKit
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
@@ -212,8 +222,89 @@ class MainActivity  : AppCompatActivity() {
 //            }
 //        }
 
+
+
+        initView()
+        requestPermissions()
+        initSDK()
+        addConnectionListener()
+
+        getTokenFromAppServer(HomeActivity.NEW_LOGIN)
     }
 
+
+    private fun initView() {
+        binding.tvLog.setMovementMethod(ScrollingMovementMethod())
+    }
+
+    private fun requestPermissions() {
+        checkPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, 110)
+    }
+
+    //=================== init SDK start ========================
+    private fun initSDK() {
+        val options = ChatOptions()
+        // Set your appkey applied from Agora Console
+        val sdkAppkey = getString(R.string.app_key)
+        if (TextUtils.isEmpty(sdkAppkey)) {
+            Toast.makeText(
+                this@HomeActivity,
+                "You should set your AppKey first!",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        // Set your appkey to options
+        options.appKey = sdkAppkey
+        // Set whether confirmation of delivery is required by the recipient. Default: false
+        options.requireDeliveryAck = true
+        // Set not to log in automatically
+        options.autoLogin = false
+        // Use UI Samples to initialize Chat SDK
+        EaseUIKit.getInstance().init(this, options)
+        // Make Chat SDK debuggable
+        ChatClient.getInstance().setDebugMode(true)
+    }
+
+    //=================== init SDK end ========================
+    //================= SDK listener start ====================
+    private fun addConnectionListener() {
+        connectionListener = object : ConnectionListener {
+            override fun onConnected() {}
+            override fun onDisconnected(error: Int) {
+                if (error == Error.USER_REMOVED) {
+                    onUserException("account_removed")
+                } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
+                    onUserException("account_conflict")
+                } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
+                    onUserException("account_forbidden")
+                } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
+                    onUserException("account_kicked_by_change_password")
+                } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
+                    onUserException("account_kicked_by_other_device")
+                } else if (error == Error.USER_BIND_ANOTHER_DEVICE) {
+                    onUserException("user_bind_another_device")
+                } else if (error == Error.USER_DEVICE_CHANGED) {
+                    onUserException("user_device_changed")
+                } else if (error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
+                    onUserException("user_login_too_many_devices")
+                }
+            }
+
+            override fun onTokenExpired() {
+                //login again
+                signInWithToken(null)
+                LogUtils.showLog(binding.tvLog, "ConnectionListener onTokenExpired")
+            }
+
+            override fun onTokenWillExpire() {
+                getTokenFromAppServer(HomeActivity.RENEW_TOKEN)
+                LogUtils.showLog(binding.tvLog, "ConnectionListener onTokenWillExpire")
+            }
+        }
+        // Call removeConnectionListener(connectionListener) when the activity is destroyed
+        ChatClient.getInstance().addConnectionListener(connectionListener)
+    }
 
     private fun setCurrentFragment(fragment: Fragment, fragmetsTag: String) =
         supportFragmentManager.beginTransaction().apply {

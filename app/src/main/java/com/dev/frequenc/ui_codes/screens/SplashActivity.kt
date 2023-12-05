@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.MainActivity
+import com.dev.frequenc.ui_codes.connect.chat.HomeActivity
 import pl.droidsonroids.gif.GifImageView
 
 class SplashActivity : AppCompatActivity() {
@@ -41,11 +42,13 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler().postDelayed({
+//
+//            val intent = Intent(this, MainActivity::class.java)
+//
+//            startActivity(intent)
+//            finish()
 
-            val intent = Intent(this, MainActivity::class.java)
-
-            startActivity(intent)
-            finish()
+             this.startActivity(Intent( this, HomeActivity::class.java))
         }, 3000)
 
 

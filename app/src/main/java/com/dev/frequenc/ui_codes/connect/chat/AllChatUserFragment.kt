@@ -1,6 +1,7 @@
 package com.dev.frequenc.ui_codes.connect.chat
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -257,6 +258,13 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             "goChat" -> {
                 Toast.makeText(context, "Chat Screen is under construction. ", Toast.LENGTH_SHORT)
                     .show()
+                try {
+                    currentActivity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.flFragment, DemoChatFragment())
+                        ?.commit()
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
             }
 
             "goProfile" -> {
