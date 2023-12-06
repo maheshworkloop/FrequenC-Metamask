@@ -12,13 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
-                android:background="@drawable/bg_main"
-                />
 
-        <include layout="@layout/layout_header2"
+
+        <include layout="@layout/layout_header"
           android:id="@+id/rl_top"
             />
 
@@ -36,13 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorColor="@color/white"
+            app:tabSelectedTextColor="@color/material_red_500"
+            app:tabIndicatorColor="@color/material_red_500"
             style="@style/TabLayout"
-            app:tabTextColor="@color/material_grey_300"
+            app:tabTextColor="@color/material_grey_700"
             android:layout_below="@id/rl_top"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/transparent"
+            app:tabBackground="@drawable/tab_selector"
+
             />
 
 
@@ -60,7 +57,7 @@
            android:background="@color/white"
            android:elevation="@dimen/_5sdp"
            android:gravity="center"
-           android:visibility="visible"
+           android:visibility="gone"
            >
 
        <pl.droidsonroids.gif.GifImageView
