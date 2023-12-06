@@ -123,8 +123,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 />
-        
-        
+
         <View
                 android:id="@+id/viewLine"
                 android:layout_width="0dp"
@@ -304,6 +303,7 @@
                     android:background="@drawable/bg_tv_time"
                     android:paddingHorizontal="@dimen/_8sdp"
                     android:layout_marginRight="@dimen/_10sdp"
+                    android:gravity="center_vertical"
                     >
 
                 <ImageView
@@ -311,14 +311,15 @@
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="@dimen/_10sdp"
                         android:src="@drawable/ic_share"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         app:tint="@color/material_red_500"
+                        android:layout_centerVertical="true"
                         />
 
                 <TextView
                         android:id="@+id/btnShare"
+                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Share"
@@ -327,7 +328,7 @@
                         android:layout_toRightOf="@id/ivShare"
                         style="@style/textViewRegularBold"
                         app:layout_constraintRight_toRightOf="parent"
-
+                        android:layout_centerVertical="true"
 
                         />
 

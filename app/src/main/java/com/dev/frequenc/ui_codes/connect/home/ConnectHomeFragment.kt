@@ -67,6 +67,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
     lateinit var gifImageView : GifImageView
     lateinit var progressDialog : ProgressBar
     lateinit var authorization : String
+    lateinit var mContext: Context
 
     lateinit var audience_id : String
     private lateinit var sharedPreferences: SharedPreferences
@@ -81,6 +82,11 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,7 +98,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
         val ivConnectSplash = root.findViewById<GifImageView>(R.id.ivAnimSplashConnct)
 
-        Glide.with(requireContext()).asGif().load(R.drawable.frequenc_loader).into(ivConnectSplash)
+        Glide.with(mContext).asGif().load(R.drawable.frequenc_loader).into(ivConnectSplash)
 
         val rl_splash = root.findViewById<RelativeLayout>(R.id.rl_splash)
 
@@ -161,7 +167,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         {
 
 
-            Toast.makeText(requireContext(),"Not Logged in Failure", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext,"Not Logged in Failure", Toast.LENGTH_SHORT).show()
             Log.e("Audience Id",audience_id)
         }
 
@@ -235,7 +241,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
     private fun showPopUpConnectionRequest()
     {
-        dialog2 = Dialog(requireContext())
+        dialog2 = Dialog(mContext)
         dialog2.setContentView(R.layout.layout_dialog_new_connection_request)
         dialog2.window?.setBackgroundDrawableResource(R.color.transparent)
         dialog2.setCancelable(false)
@@ -253,7 +259,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
     private fun showPopUpCongratulation()
     {
-        dialogProfileMatch = Dialog(requireContext())
+        dialogProfileMatch = Dialog(mContext)
         dialogProfileMatch.setContentView(R.layout.layout_dialog_profile_match)
         dialogProfileMatch.window?.setBackgroundDrawableResource(R.color.transparent)
 //        dialog2.setCancelable(false)
@@ -395,7 +401,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
                     if(!currentDate.equals(vibe_date))
                     {
 //                        getCategoryApi()
-                      Toast.makeText(requireContext(),"Vibes Shared",Toast.LENGTH_SHORT).show()
+                      Toast.makeText(mContext,"Vibes Shared",Toast.LENGTH_SHORT).show()
                       Log.d("sharevibe","Vibes Updated")
                     }
 

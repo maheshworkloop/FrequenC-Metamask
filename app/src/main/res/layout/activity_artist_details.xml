@@ -31,12 +31,12 @@
 
     <ImageView
         android:id="@+id/ivBackBtn"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="@id/tvArtistDetail"
+        app:layout_constraintBottom_toBottomOf="@id/tvArtistDetail"
         android:layout_marginLeft="@dimen/_15sdp"
         />
 
@@ -46,8 +46,9 @@
         android:layout_height="wrap_content"
         android:text="Artist Detail"
         android:textSize="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/robotocondensed_bold"
+            android:layout_marginTop="@dimen/_8sdp"
+
+            android:fontFamily="@font/robotocondensed_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -64,13 +65,13 @@
             app:shapeAppearance="@style/RoundedBottom"
             app:layout_constraintTop_toBottomOf="@id/tvArtistDetail"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_icon_profile"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +79,8 @@
             app:layout_constraintBottom_toBottomOf="@id/ivBanner"
             app:layout_constraintTop_toBottomOf="@id/ivBanner"
             app:shapeAppearanceOverlay="@style/Circular"
-            app:strokeColor="#af50b3"
+            app:civ_border_width="@dimen/_2sdp"
+            app:civ_border_color="@color/silver"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -89,11 +91,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivProfile"
             android:text="Olivia"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/robotocondensed_bold"
+            android:textSize="@dimen/_19sdp"
+            style="@style/textViewRegularBold"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_5sdp"
             />
+
+
+
 
         <View
             android:id="@+id/view"
@@ -123,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:text="20K"
                 android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
+                style="@style/textViewRegularBold"
                 android:textColor="@color/black"
                 />
 
@@ -132,9 +137,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Followers"
-                android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
-                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                style="@style/textViewRegular"
+                android:textColor="@color/material_grey_800"
                 />
 
         </LinearLayout>
@@ -155,35 +160,121 @@
                 android:layout_height="wrap_content"
                 android:text="20"
                 android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
                 android:textColor="@color/black"
-                />
+                style="@style/textViewRegularBold"
+                    />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvFollowingCountTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Following"
-                android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/material_grey_800"
+                style="@style/textViewRegular"
+                    />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/llBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/llFollwers"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:weightSum="2"
+                >
+
+            <TextView
+                    android:id="@+id/btnFollow"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Follow"
+                    android:gravity="center"
+                    android:background="@drawable/bg_book_now"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    />
+
+            <TextView
+                    android:id="@+id/btnContactus"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Us"
+                    android:background="@drawable/bg_book_now"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    style="@style/textViewRegularBold"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    />
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/llSocial"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegularBold"
                 android:textColor="@color/black"
                 />
 
-        </LinearLayout>
+        <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:elevation="@dimen/_5sdp"
+
+                />
+
+
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             android:fontFamily="@font/robotocondensed_regular"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llFollwers"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/viewLine"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            style="@style/textViewRegular"
+
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -191,14 +282,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Follow Me On"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/robotocondensed_bold"
             android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@id/llBtn"
             android:layout_marginHorizontal="@dimen/_20sdp"
+            style="@style/textViewRegular"
+
             />
 
         <LinearLayout
@@ -251,13 +344,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_upcoming_events"
             android:layout_marginTop="@dimen/_15sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llSocial"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             >
 
@@ -267,18 +359,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Upcoming Events"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/robotocondensed_bold"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/black"
                 />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:elevation="@dimen/_5sdp"
+
+                    />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUpcomingEvents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
                 />
 
 
