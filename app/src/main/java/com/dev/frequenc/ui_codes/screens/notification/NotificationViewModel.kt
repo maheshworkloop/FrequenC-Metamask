@@ -1,15 +1,13 @@
 package com.dev.frequenc.ui_codes.screens.notification
 
 import android.util.Log
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev.frequenc.ui_codes.data.notification.Notification
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

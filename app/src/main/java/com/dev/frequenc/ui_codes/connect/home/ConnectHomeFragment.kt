@@ -1,12 +1,8 @@
 package com.dev.frequenc.ui_codes.connect.home
 
-import android.R.attr.bitmap
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -31,19 +27,16 @@ import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.events.EventsFragment
 import com.dev.frequenc.ui_codes.connect.yourvibes.ShareVibesAdapter
 import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibeFragment
-import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibesAdapter
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.data.CategoryDetail
 import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
-import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Response
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

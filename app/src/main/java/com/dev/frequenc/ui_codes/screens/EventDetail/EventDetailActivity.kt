@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.frequenc.databinding.ActivityEventDetailBinding
-import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.screens.Adapter.ArtistAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.SliderAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TicketAdapter
@@ -23,7 +22,7 @@ import com.dev.frequenc.ui_codes.data.VenueDetails
 import com.dev.frequenc.ui_codes.screens.SelectTicket.SelectTicketActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 //import com.smarteist.autoimageslider.SliderView
 import retrofit2.Call
 import java.io.Serializable

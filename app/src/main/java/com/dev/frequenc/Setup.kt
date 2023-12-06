@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dev.frequenc.DappScreen.*
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import io.metamask.androidsdk.*
 
 @Composable

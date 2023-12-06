@@ -13,7 +13,7 @@ import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.data.ArtistResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import retrofit2.Call
 import retrofit2.Response
 

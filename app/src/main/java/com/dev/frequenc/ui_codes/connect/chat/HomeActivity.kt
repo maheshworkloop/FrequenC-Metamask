@@ -56,7 +56,7 @@ class HomeActivity : AppCompatActivity() {
     private fun initSDK() {
         val options = ChatOptions()
         // Set your appkey applied from Agora Console
-        val sdkAppkey = getString(R.string.app_key)
+        val sdkAppkey = getString(R.string.app_key_chats)
         if (TextUtils.isEmpty(sdkAppkey)) {
             Toast.makeText(
                 this@HomeActivity,
