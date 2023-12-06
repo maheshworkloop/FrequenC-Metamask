@@ -1,13 +1,16 @@
 package com.dev.frequenc.ui_codes
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
@@ -17,35 +20,40 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.dev.agorademo2.LogUtils
+import com.dev.agorademo2.PermissionsManager
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
 import com.dev.frequenc.ui_codes.connect.chat.AllChatUserFragment
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
-import com.dev.frequenc.ui_codes.screens.Dashboard.ConnectFragment
-import com.dev.frequenc.ui_codes.screens.Dashboard.CreateFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.MarketPlaceFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.savedevent.SavedEventFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletFragment
 import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.booking_process.booking_history.BookingHistoryFragment
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
+import com.dev.frequenc.ui_codes.util.KeysConstant
+import com.dev.frequenc.ui_codes.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import io.agora.CallBack
+import io.agora.ConnectionListener
+import io.agora.Error
+import io.agora.chat.ChatClient
+import io.agora.chat.ChatOptions
+import io.agora.chat.uikit.EaseUIKit
+import io.agora.cloud.HttpClientManager
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
 
 
 @AndroidEntryPoint
-class MainActivity  : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
+    private val pwd: String? = "sdfdds"
+    private val username: String? = "sdfdds"
     val requestcode = 101
     var latitude = ""
     var longitude = ""
@@ -54,7 +62,15 @@ class MainActivity  : AppCompatActivity() {
     lateinit var authorization: String
     lateinit var audience_id: String
     lateinit var binding: ActivityMainBinding
+    private lateinit var connectionListener: ConnectionListener
 //    private lateinit var walletViewModel: WalletViewModel
+
+    companion object {
+        private const val NEW_LOGIN = "NEW_LOGIN"
+        private const val RENEW_TOKEN = "RENEW_TOKEN"
+        private const val LOGIN_URL = "https://a41.chat.agora.io/app/chat/user/login"
+        private const val REGISTER_URL = "https://a41.chat.agora.io/app/chat/user/register"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,10 +95,17 @@ class MainActivity  : AppCompatActivity() {
             when (it.itemId) {
                 R.id.bottom_marketplace ->
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
-                R.id.bottom_chat      -> setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
-                R.id.bottom_connect     ->
+
+                R.id.bottom_chat -> setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
+                R.id.bottom_connect ->
                     setCurrentFragment(connectFragment, "ConnectFragment")
-                R.id.bottom_wallet -> startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
+
+                R.id.bottom_wallet -> startActivity(
+                    Intent(
+                        this@MainActivity,
+                        com.dev.frequenc.MainActivity::class.java
+                    )
+                )
 //                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
             }
 
@@ -130,7 +153,7 @@ class MainActivity  : AppCompatActivity() {
         }
 
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+        onBackPressedDispatcher.addCallback( this@MainActivity, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
 
                 try {
@@ -212,8 +235,273 @@ class MainActivity  : AppCompatActivity() {
 //            }
 //        }
 
+        requestPermissions()
+        initSDK()
+        addConnectionListener()
+//        signUp()
+
+        getTokenFromAppServer(NEW_LOGIN)
     }
 
+
+    private fun requestPermissions() {
+        checkPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, 110)
+    }
+
+    private fun initSDK() {
+        val options = ChatOptions()
+        // Set your appkey applied from Agora Console
+        val sdkAppkey = getString(R.string.app_key_chats)
+        if (TextUtils.isEmpty(sdkAppkey)) {
+            Toast.makeText(
+                this@MainActivity,
+                "You should set your AppKey first!",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        // Set your appkey to options
+        options.appKey = sdkAppkey
+        // Set whether confirmation of delivery is required by the recipient. Default: false
+        options.requireDeliveryAck = true
+        // Set not to log in automatically
+        options.autoLogin = false
+        // Use UI Samples to initialize Chat SDK
+        EaseUIKit.getInstance().init(this, options)
+        // Make Chat SDK debuggable
+        ChatClient.getInstance().setDebugMode(true)
+    }
+
+    private fun addConnectionListener() {
+        connectionListener = object : ConnectionListener {
+            override fun onConnected() {}
+            override fun onDisconnected(error: Int) {
+                if (error == Error.USER_REMOVED) {
+                    onUserException("account_removed")
+                } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
+                    onUserException("account_conflict")
+                } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
+                    onUserException("account_forbidden")
+                } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
+                    onUserException("account_kicked_by_change_password")
+                } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
+                    onUserException("account_kicked_by_other_device")
+                } else if (error == Error.USER_BIND_ANOTHER_DEVICE) {
+                    onUserException("user_bind_another_device")
+                } else if (error == Error.USER_DEVICE_CHANGED) {
+                    onUserException("user_device_changed")
+                } else if (error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
+                    onUserException("user_login_too_many_devices")
+                }
+                else {
+                    onUserException(error.toString())
+                }
+            }
+
+            override fun onTokenExpired() {
+                //login again
+                getTokenFromAppServer(NEW_LOGIN)
+                Log.d(Constants.TAG_CHAT, "ConnectionListener onTokenExpired")
+//                LogUtils.showLog(binding.tvLog, "ConnectionListener onTokenExpired")
+            }
+
+            override fun onTokenWillExpire() {
+                getTokenFromAppServer(RENEW_TOKEN)
+                Log.d(Constants.TAG_CHAT, "ConnectionListener onTokenWillExpire")
+            }
+        }
+        // Call removeConnectionListener(connectionListener) when the activity is destroyed
+        ChatClient.getInstance().addConnectionListener(connectionListener)
+    }
+
+    fun signUp() {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
+//            LogUtils.showErrorToast(this, binding.tvLog, getString(R.string.username_or_pwd_miss))
+            return
+        }
+        execute {
+            try {
+                val headers: MutableMap<String, String> =
+                    HashMap()
+                headers["Content-Type"] = "application/json"
+                val request = JSONObject()
+                request.putOpt("userAccount", username)
+                request.putOpt("userPassword", pwd)
+                Log.d(Constants.TAG_CHAT, "begin to signUp...")
+//                LogUtils.showErrorLog(binding.tvLog, "begin to signUp...")
+                val response = HttpClientManager.httpExecute(
+                    REGISTER_URL,
+                    headers,
+                    request.toString(),
+                    HttpClientManager.Method_POST
+                )
+                val code = response.code
+                val responseInfo = response.content
+                if (code == 200) {
+                    if (responseInfo != null && responseInfo.length > 0) {
+                        val `object` = JSONObject(responseInfo)
+                        val resultCode = `object`.getString("code")
+                        if (resultCode == "RES_OK") {
+                            Log.d(Constants.TAG_CHAT, getString(R.string.sign_up_success))
+//                            LogUtils.showToast(
+//                                this@MainActivity,
+//                                binding.tvLog,
+//                                getString(R.string.sign_up_success)
+//                            )
+                        } else {
+                            val errorInfo = `object`.getString("errorInfo")
+                            Log.d(Constants.TAG_CHAT, errorInfo)
+//                            LogUtils.showErrorLog(binding.tvLog, errorInfo)
+                        }
+                    } else {
+                        Log.d(Constants.TAG_CHAT, responseInfo)
+//                        LogUtils.showErrorLog(binding.tvLog, responseInfo)
+                    }
+                } else {
+                    Log.d(Constants.TAG_CHAT, responseInfo)
+//                    LogUtils.showErrorLog(binding.tvLog, responseInfo)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.d(Constants.TAG_CHAT, e.message.toString())
+//                LogUtils.showErrorLog(binding.tvLog, e.message)
+            }
+        }
+    }
+    private fun getTokenFromAppServer(requestType: String) {
+        if (ChatClient.getInstance().options.autoLogin && ChatClient.getInstance().isLoggedInBefore) {
+//            LogUtils.showErrorLog(binding.tvLog, getString(R.string.has_login_before))
+            Log.d(Constants.TAG_CHAT, getString(R.string.has_login_before))
+            return
+        }
+//        val pwd = (findViewById<View>(R.id.et_pwd) as EditText).text.toString().trim { it <= ' ' }
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
+        Log.d(Constants.TAG_CHAT, getString(R.string.username_or_pwd_miss))
+//            LogUtils.showErrorToast(
+//                this@MainActivity,
+//                binding.tvLog,
+//                getString(R.string.username_or_pwd_miss)
+//            )
+        return
+    }
+        execute {
+            try {
+                val headers: MutableMap<String, String> =
+                    HashMap()
+                headers["Content-Type"] = "application/json"
+                val request = JSONObject()
+                request.putOpt("userAccount", username)
+                request.putOpt("userPassword", pwd)
+                Log.d(Constants.TAG_CHAT, "begin to getTokenFromAppServer ...")
+//                LogUtils.showErrorLog(binding.tvLog, "begin to getTokenFromAppServer ...")
+                val response = HttpClientManager.httpExecute(
+                    LOGIN_URL,
+                    headers,
+                    request.toString(),
+                    HttpClientManager.Method_POST
+                )
+                val code = response.code
+                val responseInfo = response.content
+                if (code == 200) {
+                    if (responseInfo != null && responseInfo.length > 0) {
+                        val `object` = JSONObject(responseInfo)
+                        val token = `object`.getString("accessToken")
+                        if (TextUtils.equals(
+                                requestType,
+                                NEW_LOGIN
+                            )
+                        ) {
+                            ChatClient.getInstance()
+                                .loginWithAgoraToken(username, token, object : CallBack {
+                                    override fun onSuccess() {
+
+                                        Log.d(Constants.TAG_CHAT, getString(R.string.sign_in_success))
+//                                        LogUtils.showToast(
+//                                            this@MainActivity,
+//                                            binding.tvLog,
+//                                            getString(R.string.sign_in_success)
+//                                        )
+                                    }
+
+                                    override fun onError(code: Int, error: String) {
+//                                        LogUtils.showErrorToast(
+//                                            this@MainActivity,
+//                                            binding.tvLog,
+//                                            "Login failed! code: $code error: $error"
+//                                        )
+
+                                        Log.d(Constants.TAG_CHAT, "Login failed! code: $code error: $error")
+                                    }
+
+                                    override fun onProgress(
+                                        progress: Int,
+                                        status: String
+                                    ) {
+                                    }
+                                })
+                        } else if (TextUtils.equals(
+                                requestType,
+                                RENEW_TOKEN
+                            )
+                        ) {
+                            ChatClient.getInstance().renewToken(token)
+                        }
+                    } else {
+                        Log.d(Constants.TAG_CHAT, "getTokenFromAppServer failed! code: $code error: $responseInfo")
+//                        LogUtils.showErrorToast(
+//                            this@MainActivity,
+//                            binding.tvLog,
+//                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
+//                        )
+                    }
+                } else {
+                    Log.d(Constants.TAG_CHAT, "getTokenFromAppServer failed! code: $code error: $responseInfo")
+//                    LogUtils.showErrorToast(
+//                        this@MainActivity,
+//                        binding.tvLog,
+//                        "getTokenFromAppServer failed! code: $code error: $responseInfo"
+//                    )
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.d(Constants.TAG_CHAT, "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message)
+//                LogUtils.showErrorToast(
+//                    this@MainActivity,
+//                    binding.tvLog,
+//                    "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message
+//                )
+            }
+        }
+}
+
+    fun onUserException(exception: String) {
+//        LogUtils.showLog(binding.tvLog, "onUserException: $exception")
+        Log.d(Constants.TAG_CHAT, "onUserException: $exception")
+        ChatClient.getInstance().logout(false, null)
+    }
+
+    fun execute(runnable: Runnable?) {
+        Thread(runnable).start()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (connectionListener != null) {
+            ChatClient.getInstance().removeConnectionListener(connectionListener)
+        }
+    }
+
+    private fun checkPermissions(permission: String, requestCode: Int): Boolean {
+        PermissionsManager.instance?.let {
+            if (!it.hasPermission(this, permission)) {
+                it.requestPermissions(this, arrayOf<String>(permission), requestCode)
+                return false
+            }
+            return true
+        }
+        return false
+    }
 
     private fun setCurrentFragment(fragment: Fragment, fragmetsTag: String) =
         supportFragmentManager.beginTransaction().apply {
@@ -273,45 +561,47 @@ class MainActivity  : AppCompatActivity() {
     private fun getProfileApi() {
 //        binding.progressDialog.visibility = View.VISIBLE
         try {
-        ApiClient.getInstance()!!.getProfile(authorization, audience_id)
-            .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
-                override fun onResponse(
-                    call: Call<AudienceDataResponse>,
-                    response: Response<AudienceDataResponse>
-                ) {
+            ApiClient.getInstance()!!.getProfile(authorization, audience_id)
+                .enqueue(object : retrofit2.Callback<AudienceDataResponse> {
+                    override fun onResponse(
+                        call: Call<AudienceDataResponse>,
+                        response: Response<AudienceDataResponse>
+                    ) {
 //                binding.progressDialog.visibility = View.GONE
-                    if (response.isSuccessful && response.body() != null) {
-                        Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
-                        val res = response.body()
+                        if (response.isSuccessful && response.body() != null) {
+                            Log.d(
+                                "Profile Api",
+                                "onResponse Retrofit Profile Data: " + response.body()
+                            )
+                            val res = response.body()
 
-                        var item: AudienceDataResponse = res!!
+                            var item: AudienceDataResponse = res!!
 
-                        binding.navbar.tvCustName.text = res!!.fullName
+                            binding.navbar.tvCustName.text = res!!.fullName
 
-                        binding.navbar.llNavDetails.setOnClickListener {
-                            closeDrawer()
-                            val intent =
-                                Intent(this@MainActivity, AudienceProfileActivity::class.java)
-                            intent.putExtra("item", item as Serializable)
-                            startActivity(intent)
+                            binding.navbar.llNavDetails.setOnClickListener {
+                                closeDrawer()
+                                val intent =
+                                    Intent(this@MainActivity, AudienceProfileActivity::class.java)
+                                intent.putExtra("item", item as Serializable)
+                                startActivity(intent)
+                            }
+
+                            if (!res.profile_pic.isNullOrEmpty())
+                                Glide.with(this@MainActivity).load(res.profile_pic)
+                                    .into(binding.navbar.ivProfileImage)
                         }
-
-                        if (!res.profile_pic.isNullOrEmpty())
-                            Glide.with(this@MainActivity).load(res.profile_pic)
-                                .into(binding.navbar.ivProfileImage)
                     }
-                }
 
-                override fun onFailure(call: Call<AudienceDataResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<AudienceDataResponse>, t: Throwable) {
 //                binding.progressDialog.visibility = View.GONE
-                    Log.d("Profile Api", "onFailure Retrofit: " + t.localizedMessage)
+                        Log.d("Profile Api", "onFailure Retrofit: " + t.localizedMessage)
 
 
-                }
+                    }
 
-            })
-        }
-        catch (e: Exception) {
+                })
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

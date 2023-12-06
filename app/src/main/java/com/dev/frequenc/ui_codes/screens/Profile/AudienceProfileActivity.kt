@@ -30,7 +30,7 @@ import com.dev.frequenc.ui_codes.data.StateResponse
 import com.dev.frequenc.databinding.ActivityAudienceProfileBinding
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.ImageUtil
 import retrofit2.Call
 import retrofit2.Callback

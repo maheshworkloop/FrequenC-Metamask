@@ -5,17 +5,15 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityNotificationBinding
-import com.dev.frequenc.util.Constants
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.Constants
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 
 class NotificationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNotificationBinding

@@ -1,19 +1,16 @@
 package com.dev.frequenc.ui_codes.screens.Dashboard.savedevent
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponseItem
 import com.dev.frequenc.databinding.ItemSavedEventsBinding
 import com.dev.frequenc.util.ImageUtil
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 
 class SavedEventAdapter(
     var savedEventList: List<SavedEventResponseItem>,

@@ -35,9 +35,7 @@ import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
-import com.dev.frequenc.ui_codes.screens.utils.KeysConstant
-import com.dev.frequenc.util.Constants
-import com.dev.frequenc.util.Constants.Companion.Authorization
+import com.dev.frequenc.ui_codes.util.Constants.Companion.Authorization
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
@@ -104,7 +102,7 @@ interface ApiService {
     fun bookmarkEvent(@Header(Constants.Authorization) tokens: String, @Body savedEventsReq: SavedEventsReq): Call<BookmarkEventResponse>
 
     @GET("audience/{id}")
-    fun getProfile(@Header(Constants.Authorization) tokens: String , @Path("id") id: String): Call<AudienceDataResponse>
+    fun getProfile(@Header(Constants.Authorization) tokens: String, @Path("id") id: String): Call<AudienceDataResponse>
 
     @GET(KeysConstant.TransactionList)
     fun getTransactionlist(@Header(Constants.Authorization) token: String): Call<TransactionListRes>
@@ -177,4 +175,6 @@ interface ApiService {
     fun getQuoteApi(): Call<QuoteResponse>?
 
 
+    @GET("/{org_name}/{app_name}/users/{owner_username}/contacts/users")
+    fun chatsList( @Header(Authorization) token: String ,@Path("org_name") org_name: String,@Path("app_name") app_name: String, @Path("owner_username") owner_username: String): Call<Any>?
 }

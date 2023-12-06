@@ -1,4 +1,4 @@
-package com.dev.frequenc.util
+package com.dev.frequenc.ui_codes.util
 
 import androidx.lifecycle.ViewModel
 

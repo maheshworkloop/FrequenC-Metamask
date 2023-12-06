@@ -10,12 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.databinding.FragmentVerifyOtpBinding
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.DataChangeListener
-import com.dev.frequenc.util.ImageUtil
 
 class VerifyOtpFragment : Fragment() {
     private lateinit var countDownTimer: CountDownTimer

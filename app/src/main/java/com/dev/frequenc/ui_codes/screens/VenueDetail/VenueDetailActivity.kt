@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.dev.frequenc.databinding.ActivityVenueDetailBinding
 import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
 import retrofit2.Call
 import retrofit2.Response
