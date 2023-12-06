@@ -12,8 +12,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:background="@drawable/bg_main"
+                />
 
-        <include layout="@layout/layout_header"
+        <include layout="@layout/layout_header2"
           android:id="@+id/rl_top"
             />
 
@@ -31,27 +36,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
-            app:tabSelectedTextColor="@color/material_red_500"
-            app:tabIndicatorColor="@color/material_red_500"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
             style="@style/TabLayout"
+            app:tabTextColor="@color/material_grey_300"
             android:layout_below="@id/rl_top"
             android:layout_marginTop="@dimen/_10sdp"
-            />
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout"
-
+            android:background="@color/transparent"
             />
 
-   <RelativeLayout
+
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tabLayout"
+                android:layout_marginTop="0dp" />
+
+        <RelativeLayout
            android:id="@+id/rl_splash"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:background="@color/white"
            android:elevation="@dimen/_5sdp"
            android:gravity="center"
+           android:visibility="visible"
            >
 
        <pl.droidsonroids.gif.GifImageView
@@ -59,10 +68,9 @@
                android:layout_width="@dimen/_90sdp"
                android:layout_height="@dimen/_50sdp"
                android:scaleType="fitCenter"
-               android:layout_centerInParent="true"
                android:elevation="@dimen/_10sdp"
                android:src="@drawable/frequenc_loader"
-               />
+               android:layout_centerInParent="true" />
 
        <TextView
                android:id="@+id/tvConnectSplash"

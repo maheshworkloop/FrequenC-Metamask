@@ -12,12 +12,13 @@ import com.dev.frequenc.ui_codes.screens.Adapter.UpcomingEventAdapter
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.data.ArtistResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
+import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
 import retrofit2.Call
 import retrofit2.Response
 
-class ArtistDetailsActivity : AppCompatActivity(), UpcomingEventAdapter.ListAdapterListener { //end of Activity
+class ArtistDetailsActivity : AppCompatActivity(), UpcomingEventNewAdapter.ListAdapterListener { //end of Activity
 
     lateinit var id : String
 
@@ -114,8 +115,8 @@ class ArtistDetailsActivity : AppCompatActivity(), UpcomingEventAdapter.ListAdap
                     }
 
                     binding.rvUpcomingEvents.apply {
-                        layoutManager = LinearLayoutManager(this@ArtistDetailsActivity, LinearLayoutManager.VERTICAL,false)
-                        adapter = UpcomingEventAdapter(res,this@ArtistDetailsActivity)
+                        layoutManager = LinearLayoutManager(this@ArtistDetailsActivity, LinearLayoutManager.HORIZONTAL,false)
+                        adapter = UpcomingEventNewAdapter(res,this@ArtistDetailsActivity,false)
                     }
 
 

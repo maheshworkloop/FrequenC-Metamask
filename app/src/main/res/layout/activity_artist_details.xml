@@ -97,9 +97,6 @@
             android:layout_marginTop="@dimen/_5sdp"
             />
 
-
-
-
         <View
             android:id="@+id/view"
             android:layout_width="@dimen/_1sdp"
@@ -226,7 +223,6 @@
                     />
         </LinearLayout>
 
-
         <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvAbout"
                 android:layout_width="0dp"
@@ -256,9 +252,6 @@
                 android:elevation="@dimen/_5sdp"
 
                 />
-
-
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDescription"

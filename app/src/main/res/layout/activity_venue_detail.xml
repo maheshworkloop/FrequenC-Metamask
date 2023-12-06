@@ -30,12 +30,12 @@
 
     <ImageView
         android:id="@+id/ivBackBtn"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="@id/tvVenuDetail"
+        app:layout_constraintBottom_toBottomOf="@id/tvVenuDetail"
         android:layout_marginLeft="@dimen/_15sdp"
         />
 
@@ -44,9 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Venue Detail"
-        android:textSize="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/robotocondensed_bold"
+        android:textSize="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        style="@style/textViewRegular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -65,186 +65,604 @@
             app:layout_constraintTop_toBottomOf="@id/tvVenuDetail"
             app:shapeAppearance="@style/RoundedBottom" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_icon_profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/ivBanner"
-            app:layout_constraintTop_toBottomOf="@id/ivBanner"
-            app:shapeAppearanceOverlay="@style/Circular"
-            app:strokeColor="#af50b3"
-            />
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_icon_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ivBanner"
+                app:layout_constraintTop_toBottomOf="@id/ivBanner"
+                app:shapeAppearanceOverlay="@style/Circular"
+                app:civ_border_width="@dimen/_2sdp"
+                app:civ_border_color="@color/silver"
+                />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvVenuName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivProfile"
-            android:text="Olivia"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_5sdp"
-            />
+                android:id="@+id/tvVenuName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivProfile"
+                android:text="Olivia"
+                android:textSize="@dimen/_19sdp"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
 
         <View
-            android:id="@+id/view"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:background="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvVenuName"
-            android:layout_marginTop="@dimen/_20sdp"
-            />
+                android:id="@+id/view"
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVenuName"
+                android:layout_marginTop="@dimen/_20sdp"
+                />
 
         <LinearLayout
-            android:id="@+id/llFollwers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/view"
-            app:layout_constraintTop_toTopOf="@id/view"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            android:gravity="center"
-            >
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvFollowersCount"
+                android:id="@+id/llFollwers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20K"
-                android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
-                android:textColor="@color/black"
-                />
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/view"
+                app:layout_constraintTop_toTopOf="@id/view"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                android:gravity="center"
+                >
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFollowersCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20K"
+                    android:textSize="@dimen/_18sdp"
+                    style="@style/textViewRegularBold"
+                    android:textColor="@color/black"
+                    />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvFollowersCountTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Followers"
-                android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
-                android:textColor="@color/black"
-                />
+                    android:id="@+id/tvFollowersCountTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Followers"
+                    android:textSize="@dimen/_12sdp"
+                    style="@style/textViewRegular"
+                    android:textColor="@color/material_grey_800"
+                    />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="@id/view"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/view"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            android:gravity="center"
-            >
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvFollowingCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
-                android:textColor="@color/black"
-                />
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@id/view"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/view"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                android:gravity="center"
+                >
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFollowingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"
+                    android:textSize="@dimen/_18sdp"
+                    android:textColor="@color/black"
+                    style="@style/textViewRegularBold"
+                    />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvFollowingCountTag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Following"
-                android:textSize="@dimen/_18sdp"
-                android:fontFamily="@font/robotocondensed_bold"
-                android:textColor="@color/black"
-                />
+                    android:id="@+id/tvFollowingCountTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Following"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/material_grey_800"
+                    style="@style/textViewRegular"
+                    />
 
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/llBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/llFollwers"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:weightSum="2"
+                >
+
+            <TextView
+                    android:id="@+id/btnFollow"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Follow"
+                    android:gravity="center"
+                    android:background="@drawable/bg_book_now"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    />
+
+            <TextView
+                    android:id="@+id/btnContactus"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Us"
+                    android:background="@drawable/bg_book_now"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    style="@style/textViewRegularBold"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginVertical="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    />
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="@dimen/_12sdp"
-            android:fontFamily="@font/robotocondensed_regular"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llFollwers"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            />
+                android:id="@+id/tvAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/llSocial"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/black"
+                />
+
+        <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:elevation="@dimen/_5sdp"
+
+                />
+
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvFollowMeOn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Follow Me On"
-            android:textSize="@dimen/_14sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            />
+                android:id="@+id/tvFollowMeOn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Me On"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/robotocondensed_bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llBtn"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                style="@style/textViewRegular"
+
+                />
 
         <LinearLayout
-            android:id="@+id/llSocial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFollowMeOn"
-            android:layout_marginTop="@dimen/_15sdp"
-            >
+                android:id="@+id/llSocial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFollowMeOn"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
 
             <ImageView
-                android:id="@+id/ivFb"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_fb"
-                />
+                    android:id="@+id/ivFb"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_fb"
+                    />
 
             <ImageView
-                android:id="@+id/ivInsta"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_insta"
-                android:layout_marginLeft="@dimen/_5sdp"
-                />
+                    android:id="@+id/ivInsta"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_insta"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
 
             <ImageView
-                android:id="@+id/ivLinkedIn"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_linkedin"
-                android:layout_marginLeft="@dimen/_5sdp"
-                />
+                    android:id="@+id/ivLinkedIn"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_linkedin"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
 
             <ImageView
-                android:id="@+id/ivX"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_x"
-                android:layout_marginLeft="@dimen/_5sdp"
-                />
+                    android:id="@+id/ivX"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/ic_x"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
 
 
         </LinearLayout>
 
 
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvVenueEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About the Venue"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/viewLine"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/robotocondensed_regular"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVenueEvent"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                style="@style/textViewRegular"
+                />
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPropertyLocationTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Property Location"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+        <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:apiKey="@string/google_maps_key"
+                app:layout_constraintTop_toBottomOf="@id/tvPropertyLocationTag"
+                android:clickable="true"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPropertyLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mapView"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                style="@style/textViewRegular"
+                />
+
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPlaceOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What this place offers"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPropertyLocation"
+                style="@style/textViewRegularBold"
+                />
+
+        <ImageView
+                android:id="@+id/ivDownIcon"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:src="@drawable/point_down"
+                app:layout_constraintTop_toTopOf="@+id/tvPlaceOffer"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPlaceOffer"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:layout_constraintLeft_toRightOf="@id/tvPlaceOffer"
+                />
+
+
+        <LinearLayout
+                android:id="@+id/llPlaceOffer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPlaceOffer"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+
+                >
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+
+                    >
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_4sdp"
+                        >
+                    <ImageView
+                            android:id="@+id/iv1"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/wifi"
+                            />
+
+                    <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Fast Wifi"
+                            android:textSize="@dimen/_11sdp"
+                            style="@style/textViewRegular"
+                            android:layout_toRightOf="@+id/iv1"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_4sdp"
+
+                        >
+                    <ImageView
+                            android:id="@+id/iv2"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/parking"
+                            />
+
+                    <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Free parking"
+                            android:textSize="@dimen/_11sdp"
+                            style="@style/textViewRegular"
+                            android:layout_toRightOf="@+id/iv2"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_4sdp"
+                        >
+                    <ImageView
+                            android:id="@+id/iv3"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/first_aid_box"
+                            />
+
+                    <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="First Aid Kit"
+                            android:textSize="@dimen/_11sdp"
+                            style="@style/textViewRegular"
+                            android:layout_toRightOf="@+id/iv3"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_4sdp"
+
+                        >
+                    <ImageView
+                            android:id="@+id/iv4"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/fire_extinguisher"
+                            />
+
+                    <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Fire Extinguisher"
+                            android:textSize="@dimen/_11sdp"
+                            style="@style/textViewRegular"
+                            android:layout_toRightOf="@+id/iv4"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvShowAllAmenity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show All Amenities"
+                android:textSize="@dimen/_9sdp"
+                app:layout_constraintTop_toBottomOf="@+id/llPlaceOffer"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/material_red_500"
+                style="@style/textViewRegularBold"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_tv_time"
+                android:layout_weight="2"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cvFaq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvShowAllAmenity"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFaq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FAQ"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            <ImageView
+                    android:id="@+id/tvFaqIcon"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:src="@drawable/plus"
+                    app:layout_constraintTop_toTopOf="@+id/tvFaq"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvFaq"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    app:tint="@color/material_red_500"
+                    />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cvTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvFaq"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                >
+
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTermsCondition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terms &amp; Conditions"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            <ImageView
+                    android:id="@+id/tvTermsConditionIcon"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:src="@drawable/plus"
+                    app:layout_constraintTop_toTopOf="@+id/tvTermsCondition"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTermsCondition"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    app:tint="@color/material_red_500"
+                    />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

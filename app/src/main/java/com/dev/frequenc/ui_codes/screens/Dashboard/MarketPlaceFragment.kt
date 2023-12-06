@@ -68,7 +68,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
     lateinit var rvTrendingEvents : RecyclerView
     lateinit var rvTrendingArtist : RecyclerView
     lateinit var rvAllData : RecyclerView
-    lateinit var progressDialog : ProgressBar
+    lateinit var progressDialog : ImageView
     lateinit var mContext: Context
     lateinit var tvLocation: TextView
     lateinit var rlSearch: RelativeLayout
@@ -124,6 +124,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         root = inflater.inflate(R.layout.fragment_market_place, container, false)
 
 
+
         gifImageView = root.findViewById<GifImageView>(R.id.ivAnimSplash)
 
         rvCategory = root.findViewById(R.id.rvCategory)
@@ -165,6 +166,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
             startActivity(intent)
         }
 
+        Glide.with(requireContext()).asGif() .load(R.drawable.frequenc_loader).
+             into(progressDialog)
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -208,8 +211,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         }
 
         ivNotification.setOnClickListener {
-            val intent = Intent(activity,  NotificationActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(activity,  NotificationActivity::class.java)
+//            startActivity(intent)
         }
         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
 

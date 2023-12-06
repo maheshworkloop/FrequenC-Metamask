@@ -21,27 +21,89 @@
 
     <ImageView
         android:id="@+id/ivBackBtn"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginLeft="@dimen/_15sdp"
-        />
+        app:tint="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tvTrendingEvent"
+        app:layout_constraintBottom_toBottomOf="@id/tvTrendingEvent"
+
+            />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvTrendingEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Trending Events"
-        android:textSize="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/robotocondensed_bold"
+        android:textSize="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        style="@style/textViewRegular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+
+    <ImageView
+            android:id="@+id/ivSearchAppBar"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:src="@drawable/search"
+            app:layout_constraintTop_toTopOf="@id/tvTrendingEvent"
+            app:layout_constraintBottom_toBottomOf="@id/tvTrendingEvent"
+            app:tint="@color/black"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="@dimen/_20sdp"
+            />
+
+    <RelativeLayout
+            android:id="@+id/rlSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_search_trending_event"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTrendingEvent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:visibility="gone"
+            >
+
+        <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:src="@drawable/search"
+                app:tint="@color/material_grey_600"
+                />
+
+
+        <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivSearch"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_10sdp"
+                android:hint="Search For Events..."
+                android:textColor="@color/black"
+                android:background="@drawable/et_search"
+                android:maxLines="1"
+                style="@style/textViewRegular"
+                />
+
+
+    </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvViewAll"
@@ -49,10 +111,11 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTrendingEvent"
+        app:layout_constraintTop_toBottomOf="@id/rlSearch"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginLeft="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
         />
 
 

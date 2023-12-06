@@ -15,6 +15,7 @@ import com.dev.frequenc.databinding.ActivityViewAllCategoryBinding
 import com.dev.frequenc.ui_codes.screens.ViewAllTrendingEvents.ViewAllTrendingEvents
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
+import com.dev.frequenc.ui_codes.screens.ViewAllTrendingEvents.TrendingEventAdapterViewAll
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
 import retrofit2.Call
@@ -22,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 
-class ViewAllCategoryActivity : AppCompatActivity(), TrendingEventAdapter.ListAdapterListener {
+class ViewAllCategoryActivity : AppCompatActivity(), TrendingEventAdapterViewAll.ListAdapterListener {
 
     lateinit var binding : ActivityViewAllCategoryBinding
     lateinit var authorization : String
@@ -103,7 +104,7 @@ class ViewAllCategoryActivity : AppCompatActivity(), TrendingEventAdapter.ListAd
                     binding.rvViewAll.apply {
                         layoutManager = GridLayoutManager(this@ViewAllCategoryActivity,2,
                             GridLayoutManager.VERTICAL,false)
-                        adapter = TrendingEventAdapter(res,this@ViewAllCategoryActivity,isLogin)
+                        adapter = TrendingEventAdapterViewAll(res,this@ViewAllCategoryActivity,isLogin)
                     }
 
 

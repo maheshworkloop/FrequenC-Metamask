@@ -21,14 +21,14 @@
 
         >
 
-        <ProgressBar
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/progress_bar"
-            android:layout_width="@dimen/_50sdp"
+            android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_50sdp"
-            android:elevation="@dimen/_5sdp"
+            android:elevation="@dimen/_15sdp"
             android:layout_centerInParent="true"
-            android:indeterminateTint="@color/grey"
-            android:visibility="gone" />
+            android:visibility="gone"
+                />
 
     </RelativeLayout>
 

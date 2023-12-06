@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,7 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterold.ListAdapterListener {
+class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterViewAll.ListAdapterListener {
 
     lateinit var binding : ActivityViewAllTrendingEventsBinding
     lateinit var authorization : String
@@ -31,6 +33,9 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterold.ListAd
     private lateinit var sharedPreferences: SharedPreferences
     var userRegistered : Boolean = false
     var isLogin = false
+    lateinit var search : String
+    lateinit var trendingEventAdapterViewAll : TrendingEventAdapterViewAll
+    lateinit var mList : List<TrendingEventsResponse>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +44,7 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterold.ListAd
 
         setContentView(binding.root)
 
-        val mList = intent.getSerializableExtra("list") as List<TrendingEventsResponse>
+        mList = intent.getSerializableExtra("list") as List<TrendingEventsResponse>
 
         binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
@@ -64,11 +69,47 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterold.ListAd
         }
 
 
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
 
+            override fun afterTextChanged(s: Editable) {
+
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                search = s.toString()
+                if(search!=null)
+                    if(mList!=null && trendingEventAdapterViewAll!=null)
+                    {
+                        filter(search)
+                    }
+//                       mlistener.searchDish(search)
+            }
+        })
+
+
+        trendingEventAdapterViewAll = TrendingEventAdapterViewAll(mList,this@ViewAllTrendingEvents, isLogin)
         binding.rvViewAll.apply {
             layoutManager = GridLayoutManager(this@ViewAllTrendingEvents,2,
                 GridLayoutManager.VERTICAL,false)
-            adapter = TrendingEventAdapterold(mList,this@ViewAllTrendingEvents, isLogin)
+            adapter = trendingEventAdapterViewAll
+        }
+
+        binding.ivSearchAppBar.setOnClickListener {
+
+            binding.rlSearch.visibility = View.VISIBLE
+            binding.ivSearchAppBar.visibility =View.GONE
+
+        }
+
+        binding.ivSearch.setOnClickListener {
+            binding.rlSearch.visibility = View.GONE
+            binding.ivSearchAppBar.visibility =View.VISIBLE
         }
 
     }
@@ -87,6 +128,25 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterold.ListAd
     override fun onClickAtBookmark(item: TrendingEventsResponse) {
 
     }
+
+    fun filter(text: String) {
+        val temp: ArrayList<TrendingEventsResponse> = java.util.ArrayList()
+        for (d in mList) {
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if (d.eventTitle!!.contains(text, ignoreCase = true)
+
+                ) {
+
+                temp.add(d)
+            }
+        }
+        //update recyclerview
+        if(trendingEventAdapterViewAll!=null) {
+            trendingEventAdapterViewAll!!.updateList(temp)
+        }
+    }
+
 
 
 }

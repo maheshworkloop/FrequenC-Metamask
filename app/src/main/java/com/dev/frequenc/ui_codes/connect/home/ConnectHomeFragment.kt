@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
@@ -119,7 +120,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         ivHamburger = root.findViewById(R.id.ivHamburger)
 
         val adapter = VibesTabAdapter(childFragmentManager)
-        adapter.addFragment(YourVibeFragment(),"Your Vibe")
+        adapter.addFragment(YourVibeFragment(),"Vibes")
         adapter.addFragment(EventsFragment(),"Events")
 
         viewPager.adapter = adapter
@@ -226,7 +227,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
             adapter = ShareVibesAdapter(mData,this@ConnectHomeFragment)
         }
 
-//        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.show()
     }
 

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.Profile.ProfileFragment
@@ -29,6 +30,7 @@ import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
+import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,6 +64,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
     lateinit var progressDialog: ProgressBar
 
     lateinit var ivHamburger : ImageView
+    lateinit var ivAnim : GifImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +88,8 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
         rvConnection = root.findViewById(R.id.rvConnection)
         rvQuote = root.findViewById(R.id.rvQuote)
 
+        ivAnim = root.findViewById(R.id.ivAnimSplashConnct)
+
         tvConnectionTag = root.findViewById<TextView>(R.id.tvConnectionTag)
 
         val bundle = this.arguments
@@ -102,6 +107,10 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
 
         callConnectionApi(authorization)
+
+
+        Glide.with(requireContext()).asGif().load(R.drawable.frequenc_loader).into(ivAnim)
+
 
         if (userRegistered && !authorization.isNullOrEmpty() && authorization != "-1" && !audience_id.isNullOrEmpty()) {
 
