@@ -12,6 +12,9 @@
     <string name="send">Send Transaction</string>
     <string name="switch_chain">Switch Chain</string>
     <string name="add_chain">Add Chain</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDsM6E-cbYvtlgdoKO_79zzlm9G2gErlNE</string>
+
     <string name="app_name">FrequenCNew</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

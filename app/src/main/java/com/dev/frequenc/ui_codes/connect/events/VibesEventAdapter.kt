@@ -27,7 +27,7 @@ class VibesEventAdapter  (private val mData:VibeEventResponse, mListener : ListA
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_yourvibe, parent, false)
+            .inflate(R.layout.layout_recycler_events, parent, false)
         mContext = parent.context
         return ViewHolder(view)
     }

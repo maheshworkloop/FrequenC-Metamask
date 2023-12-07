@@ -170,6 +170,7 @@ class LoginViewModel : ViewModel() {
                                             } else {
                                                 isUserTypeRegistered = false
                                                 moveToUserType()
+
                                             }
                                         } catch (e: Exception) {
                                             e.printStackTrace()

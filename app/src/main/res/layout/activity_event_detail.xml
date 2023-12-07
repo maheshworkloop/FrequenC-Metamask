@@ -40,8 +40,8 @@
 
     <ImageView
         android:id="@+id/ivBackBtn"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
         android:src="@drawable/icon_left_arrow"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvEventDetail"
@@ -54,9 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Event Detail"
-        android:textSize="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        style="@style/textViewRegularBold" 
+        android:textSize="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        style="@style/textViewRegular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -83,7 +83,7 @@
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/sliderView"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="240dp"
                 android:layout_centerInParent="true"
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="right"
@@ -153,7 +153,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         style="@style/textViewRegularBold" 
-        android:textColor="@drawable/gradient_text_color"
+        android:textColor="@color/font_color3"
         android:textStyle="bold"
         />
 
@@ -222,7 +222,7 @@
         android:layout_marginLeft="@dimen/_5sdp"
         style="@style/textViewRegular"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         />
 
     <ImageView
@@ -248,15 +248,10 @@
         android:layout_marginLeft="@dimen/_5sdp"
         style="@style/textViewRegular"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         />
 
-
-
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clInvite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -325,10 +320,10 @@
                         android:text="Share"
                         android:paddingVertical="@dimen/_6sdp"
                         android:textColor="@color/material_red_500"
-                        android:layout_toRightOf="@id/ivShare"
                         style="@style/textViewRegularBold"
                         app:layout_constraintRight_toRightOf="parent"
                         android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivShare"
 
                         />
 
@@ -338,9 +333,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -410,7 +402,7 @@
             />
 
 
-        <com.google.android.material.textview.MaterialTextView
+    <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTicketTypeTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -437,13 +429,13 @@
         />
 
 
-        <com.google.android.material.textview.MaterialTextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTrendingArtist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Artists"
             android:textSize="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:textStyle="bold"
@@ -473,14 +465,13 @@
             android:layout_height="wrap_content"
             android:text="Venue"
             android:textSize="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvArtist"
-
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -493,11 +484,164 @@
             app:layout_constraintTop_toBottomOf="@id/tvVenue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+               android:id="@+id/cvFaq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvVenue"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFaq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FAQ"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            <ImageView
+                    android:id="@+id/tvFaqIcon"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:src="@drawable/plus"
+                    app:layout_constraintTop_toTopOf="@+id/tvFaq"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvFaq"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    app:tint="@color/material_red_500"
+                    />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cvTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvFaq"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTermsCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms &amp; Conditions"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        <ImageView
+                android:id="@+id/tvTermsConditionIcon"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:src="@drawable/plus"
+                app:layout_constraintTop_toTopOf="@+id/tvTermsCondition"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTermsCondition"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="@dimen/_20sdp"
+                app:tint="@color/material_red_500"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+                android:id="@+id/viewLine2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvTerms"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:elevation="@dimen/_5sdp"
+
+                />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvYouMayLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You May Also Like"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewLine2"
+                    style="@style/textViewRegularBold"
+                    />
+
+            <ImageView
+                    android:id="@+id/ivDownIcon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/point_down"
+                    app:layout_constraintTop_toTopOf="@+id/tvYouMayLike"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvYouMayLike"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    app:layout_constraintLeft_toRightOf="@id/tvYouMayLike"
+                    />
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTrendingEventsViewAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View all"
+                android:textSize="@dimen/_9sdp"
+                app:layout_constraintTop_toTopOf="@+id/tvYouMayLike"
+                app:layout_constraintBottom_toBottomOf="@+id/tvYouMayLike"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_4sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:textColor="@color/material_red_500"
+                style="@style/textViewRegularBold"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_tv_time"
+                />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrendingEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@+id/tvYouMayLike"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvYouMayLike"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                />
 
 
 
@@ -543,13 +687,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_toLeftOf="@+id/btnBuy"
+                    android:textSize="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     style="@style/textViewRegularBold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/font_color3"
                     android:layout_centerVertical="true"
+                    />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvOnwardsTag"
+                    android:layout_toRightOf="@id/tvOnwards"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Onwards"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_toLeftOf="@+id/btnBuy"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    style="@style/textViewRegularBold"
+                    android:textColor="@color/material_grey_700"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible"
                     />
 
             <TextView
@@ -568,7 +727,9 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_15sdp" />
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp"
+                    />
 
         </RelativeLayout>
 

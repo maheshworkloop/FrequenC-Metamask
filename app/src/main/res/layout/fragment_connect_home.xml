@@ -13,6 +13,7 @@
             android:layout_height="match_parent"
             >
 
+
         <include layout="@layout/layout_header"
           android:id="@+id/rl_top"
             />
@@ -34,23 +35,28 @@
             app:tabSelectedTextColor="@color/material_red_500"
             app:tabIndicatorColor="@color/material_red_500"
             style="@style/TabLayout"
+            app:tabTextColor="@color/material_grey_700"
             android:layout_below="@id/rl_top"
-            />
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout"
+            android:layout_marginTop="@dimen/_10sdp"
 
             />
 
-   <RelativeLayout
+
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tabLayout"
+                android:layout_marginTop="0dp" />
+
+        <RelativeLayout
            android:id="@+id/rl_splash"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:background="@color/white"
            android:elevation="@dimen/_5sdp"
            android:gravity="center"
+           android:visibility="gone"
            >
 
        <pl.droidsonroids.gif.GifImageView
@@ -58,10 +64,9 @@
                android:layout_width="@dimen/_90sdp"
                android:layout_height="@dimen/_50sdp"
                android:scaleType="fitCenter"
-               android:layout_centerInParent="true"
                android:elevation="@dimen/_10sdp"
                android:src="@drawable/frequenc_loader"
-               />
+               android:layout_centerInParent="true" />
 
        <TextView
                android:id="@+id/tvConnectSplash"
