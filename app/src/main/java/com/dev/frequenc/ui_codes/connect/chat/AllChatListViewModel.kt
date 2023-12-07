@@ -5,35 +5,39 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dev.frequenc.ui_codes.data.ChatUserModel
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.data.myconnection.ConnectionResponseData
-import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.ContactListener
+import io.agora.chat.ChatClient
+import io.agora.chat.Conversation
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class AllChatListViewModel : ViewModel() {
 
     private val _myRequestCount = MutableLiveData<Int>(0)
     val myRequestCount: LiveData<Int>
-        get () = _myRequestCount
+        get() = _myRequestCount
 
     private val _pendingRequestCount = MutableLiveData<Int>(0)
     val pendingRequestCount: LiveData<Int>
-        get () = _pendingRequestCount
+        get() = _pendingRequestCount
 
     private val _chatCount = MutableLiveData<Int>(0)
     val chatCount: LiveData<Int>
-        get () = _chatCount
+        get() = _chatCount
 
     private val _requestCount = MutableLiveData<Int>(0)
     val requestCount: LiveData<Int>
-        get () = _requestCount
+        get() = _requestCount
 
     private val _connectionList = MutableLiveData<List<ConnectionResponse>>(ArrayList(3))
     val connectionList: LiveData<List<ConnectionResponse>>
@@ -146,8 +150,8 @@ class AllChatListViewModel : ViewModel() {
                                     _myRequestCount.postValue(response.body()?.count)
                                     _pendingRequestCount.postValue(response.body()?.count)
                                     _chatCount.postValue(response.body()?.count)
+                                } catch (ex: Exception) {
                                 }
-                                catch (ex: Exception) {}
                                 try {
                                     _userLists.postValue(response.body()?.data)
                                     setDataFound(true)
@@ -178,9 +182,85 @@ class AllChatListViewModel : ViewModel() {
         }
     }
 
-    fun callPendingRequestApi(tokens: String) {
+    fun getChatList() {
+
+        execute {
+            try {
+                Log.d(Constants.TAG_CHAT, "begin to getChatlists ...")
+
+//                Log.d("chats", "getContactList:  $usernames")
+                val contactLists: MutableMap<String, Conversation>? =
+                    ChatClient.getInstance().chatManager().allConversations
+
+                if (contactLists != null) {
+                    val chatListVals = ArrayList<ChatUserModel>()
+                    for (contact: Conversation in contactLists.values) {
+                        contact?.let {
+                            val lastMessage: String = it.lastMessage.body.toString()
+                            val userName: String = it.lastMessage.from
+                            val toUserName: String = it.lastMessage.to
+                            val unreadMessagesCount: String = it.unreadMsgCount.toString()
+                            val time = it.lastMessage.localTime() / 6000000
+                            val user_image = it.lastMessage.localTime().toInt().toString()
+                            chatListVals.add(
+                                ChatUserModel(
+                                    userName,
+                                    toUserName,
+                                    time.toInt().toString(),
+                                    user_image,
+                                    lastMessage
+                                )
+                            )
+                        }
+                    }
+
+                    _chatCount.postValue(chatListVals.size)
+
+                    _userLists.postValue(chatListVals)
+                } else {
+                    _userLists.postValue(ArrayList())
+                }
+
+            } catch (exs: Exception) {
+                exs.printStackTrace()
+            }
+
+        }
 
     }
 
+
+    fun execute(runnable: Runnable?) {
+        Thread(runnable).start()
+    }
+
+    fun callPendingRequestApi() {
+        execute {
+            val usernamesList = ChatClient.getInstance().contactManager().contactsFromLocal
+            Log.d(Constants.TAG_CHAT, "callPendingRequestApi:  " + usernamesList)
+        }
+
+    }
+
+    fun setContactChangeListener() {
+
+
+        ChatClient.getInstance().contactManager().setContactListener(object : ContactListener {
+            //The contact request is approved
+            override fun onFriendRequestAccepted(username: String) {}
+
+            //contact request is rejected
+            override fun onFriendRequestDeclined(username: String) {}
+
+            //Received contact invitation
+            override fun onContactInvited(username: String, reason: String) {}
+
+            //Call back this method when deleted
+            override fun onContactDeleted(username: String) {}
+
+            //Call back this method when a contact is added
+            override fun onContactAdded(username: String) {}
+        })
+    }
 
 }

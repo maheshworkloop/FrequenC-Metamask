@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.dev.frequenc.ui_codes.data.RegisterUserResponse
 import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmUserOtpResponse
 import com.dev.frequenc.ui_codes.data.confirmuserotp.UpdateUserTypeResponse
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import kotlinx.coroutines.launch
 import org.json.JSONObject

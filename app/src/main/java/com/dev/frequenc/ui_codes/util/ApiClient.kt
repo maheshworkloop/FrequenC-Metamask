@@ -1,6 +1,7 @@
 package com.dev.frequenc.ui_codes.screens.utils
 
 import com.dev.frequenc.ui_codes.util.ApiService
+import com.dev.frequenc.ui_codes.util.KeysConstant
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

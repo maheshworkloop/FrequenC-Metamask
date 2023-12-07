@@ -15,7 +15,7 @@ import com.dev.frequenc.ui_codes.data.transactionlist.PastBooking
 import com.dev.frequenc.ui_codes.data.transactionlist.UpcomingBooking
 import com.dev.frequenc.ui_codes.util.CommonUtils
 import com.dev.frequenc.util.ImageUtil
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 
 class BookingHistoryAdapter(
     var bhistoryList: List<Any>,

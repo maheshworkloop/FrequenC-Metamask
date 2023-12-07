@@ -24,9 +24,7 @@ import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeData
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
-import com.dev.frequenc.ui_codes.data.VibesProfileResponse
 import com.dev.frequenc.ui_codes.data.myconnection.ConnectionResponseData
-import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants

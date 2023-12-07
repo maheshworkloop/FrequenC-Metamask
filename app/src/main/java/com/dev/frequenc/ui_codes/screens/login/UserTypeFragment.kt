@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.databinding.FragmentUserTypeBinding
 import com.dev.frequenc.ui_codes.extensions.showAlertDialog
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.DataChangeListener
 
 

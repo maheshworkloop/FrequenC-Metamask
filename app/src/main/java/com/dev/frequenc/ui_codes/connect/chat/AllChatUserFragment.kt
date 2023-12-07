@@ -2,7 +2,9 @@ package com.dev.frequenc.ui_codes.connect.chat
 
 import android.content.Context
 import android.graphics.Color
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +16,11 @@ import com.dev.frequenc.R
 import com.dev.frequenc.databinding.FragmentAllChatUserBinding
 import com.dev.frequenc.ui_codes.connect.Profile.ProfileFragment
 import com.dev.frequenc.ui_codes.connect.VibesProfileList.ConnectionAdapter
+import com.dev.frequenc.ui_codes.data.ChatUserModel
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.chat.ChatClient
+import io.agora.chat.Conversation
 
 class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     ConnectionAdapter.ListAdapterListener {
@@ -90,7 +95,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         }
         allChatListViewModel.isApiCalled.observe(viewLifecycleOwner) {
             if (it == true) {
-            binding.progressBar.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             } else {
                 binding.progressBar.visibility = View.GONE
             }
@@ -117,11 +122,14 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                                 ItemUserChatRequestsLay
                             )
                         }
-                        binding.tvCountMyrequests.text = allChatListViewModel.myRequestCount.value.toString()
-                        binding.tvCountPending.text = allChatListViewModel.pendingRequestCount.value.toString()
+                        binding.tvCountMyrequests.text =
+                            allChatListViewModel.myRequestCount.value.toString()
+                        binding.tvCountPending.text =
+                            allChatListViewModel.pendingRequestCount.value.toString()
                     }
                     try {
-                        binding.tvRequestsTag.text = "Requests (${allChatListViewModel.requestCount.value})"
+                        binding.tvRequestsTag.text =
+                            "Requests (${allChatListViewModel.requestCount.value})"
                     } catch (ex: Exception) {
                         ex.printStackTrace()
                     }
@@ -179,6 +187,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         }
 
         allChatListViewModel.setConnectionTab(true)
+
     }
 
     private fun showPendingRequestsSubTab(
@@ -186,24 +195,24 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         tokens: String
     ) {
         if (allChatListViewModel.isApiCalled.value != true) {
-        if (allChatListViewModel.isConnectionTabSelected.value == false) {
-            if (toShowPendingRequestTab) {
-                allChatListViewModel.callMyRequestApi(tokens)
-                binding.headPending.setTextColor(Color.parseColor("#8023EB"))
-                binding.selectedHeadPending.visibility = View.VISIBLE
+            if (allChatListViewModel.isConnectionTabSelected.value == false) {
+                if (toShowPendingRequestTab) {
+                    allChatListViewModel.callMyRequestApi(tokens)
+                    binding.headPending.setTextColor(Color.parseColor("#8023EB"))
+                    binding.selectedHeadPending.visibility = View.VISIBLE
 
-                binding.headMyrequests.setTextColor(Color.parseColor("#171A1F"))
-                binding.selectedHeadMyrequests.visibility = View.INVISIBLE
-            } else {
-                allChatListViewModel.callMyRequestApi(tokens)
-                binding.headMyrequests.setTextColor(Color.parseColor("#8023EB"))
-                binding.selectedHeadMyrequests.visibility = View.VISIBLE
+                    binding.headMyrequests.setTextColor(Color.parseColor("#171A1F"))
+                    binding.selectedHeadMyrequests.visibility = View.INVISIBLE
+                } else {
+                    allChatListViewModel.callMyRequestApi(tokens)
+                    binding.headMyrequests.setTextColor(Color.parseColor("#8023EB"))
+                    binding.selectedHeadMyrequests.visibility = View.VISIBLE
 
 
-                binding.headPending.setTextColor(Color.parseColor("#171A1F"))
-                binding.selectedHeadPending.visibility = View.INVISIBLE
+                    binding.headPending.setTextColor(Color.parseColor("#171A1F"))
+                    binding.selectedHeadPending.visibility = View.INVISIBLE
+                }
             }
-        }
         }
     }
 
@@ -212,22 +221,22 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         token: String
     ) {
         if (allChatListViewModel.isApiCalled.value != true) {
-        if (toShowConnectionTab) {
-            allChatListViewModel.callConnectionApi(token)
-            allChatListViewModel.callMyRequestApi(token)
-            binding.tvConnectionTag.setTextColor(Color.parseColor("#8023EB"))
-            binding.tvChatTag.visibility = View.VISIBLE
+            if (toShowConnectionTab) {
+                allChatListViewModel.getChatList()
+                binding.tvConnectionTag.setTextColor(Color.parseColor("#8023EB"))
+                binding.tvChatTag.visibility = View.VISIBLE
 
-            binding.tvRequestsTag.setTextColor(Color.parseColor("#171A1F"))
-            binding.requestLay.visibility = View.INVISIBLE
-        } else {
-            allChatListViewModel.setPendingTab(true)
-            binding.tvRequestsTag.setTextColor(Color.parseColor("#8023EB"))
-            binding.requestLay.visibility = View.VISIBLE
+                binding.tvRequestsTag.setTextColor(Color.parseColor("#171A1F"))
+                binding.requestLay.visibility = View.INVISIBLE
+            } else {
+                allChatListViewModel.callPendingRequestApi()
+                allChatListViewModel.setPendingTab(true)
+                binding.tvRequestsTag.setTextColor(Color.parseColor("#8023EB"))
+                binding.requestLay.visibility = View.VISIBLE
 
-            binding.tvConnectionTag.setTextColor(Color.parseColor("#171A1F"))
-            binding.tvChatTag.visibility = View.INVISIBLE
-        }
+                binding.tvConnectionTag.setTextColor(Color.parseColor("#171A1F"))
+                binding.tvChatTag.visibility = View.INVISIBLE
+            }
         }
     }
 
@@ -236,27 +245,38 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     }
 
     override fun onItemClicked(itemPosition: Int, useType: Int, action: String) {
+        val bundle: Bundle = Bundle()
 
         when (useType) {
             ItemUserListLay -> {
-                performClickAction(action, 0)
+                val chatItem =
+                    allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
+                bundle.putString(Constants.Messaged_user, chatItem.toChatUser)
+                performClickAction(action, bundle)
             }
 
             ItemUserChatPendingListLay -> {
-                performClickAction(action, 0)
+                performClickAction(action, bundle)
             }
 
             ItemUserChatRequestsLay -> {
-                performClickAction(action, 0)
+                performClickAction(action, bundle)
             }
         }
     }
 
-    private fun performClickAction(action: String, item_id: Int) {
+    private fun performClickAction(action: String, bundle: Bundle?) {
         when (action) {
             "goChat" -> {
-                Toast.makeText(context, "Chat Screen is under construction. ", Toast.LENGTH_SHORT)
-                    .show()
+                try {
+                    val chatFragment = ChatFragment()
+                    chatFragment.arguments = bundle
+                    currentActivity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.flFragment, chatFragment)
+                        ?.commit()
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
             }
 
             "goProfile" -> {
@@ -283,4 +303,6 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         }
     }
+
+
 }

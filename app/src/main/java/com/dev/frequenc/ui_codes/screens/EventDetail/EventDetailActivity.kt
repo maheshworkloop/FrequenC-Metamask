@@ -28,7 +28,7 @@ import com.dev.frequenc.ui_codes.screens.SelectTicket.SelectTicketActivity
 import com.dev.frequenc.ui_codes.screens.ViewAllTrendingEvents.ViewAllTrendingEvents
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 //import com.smarteist.autoimageslider.SliderView
 import retrofit2.Call
 import retrofit2.Callback

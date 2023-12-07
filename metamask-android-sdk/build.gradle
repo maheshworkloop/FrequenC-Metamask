@@ -44,6 +44,7 @@ kotlin {
 }
 
 dependencies {
+
     implementation 'io.metamask.ecies:ecies:1.0.1'
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'androidx.security:security-crypto:1.1.0-alpha06'
