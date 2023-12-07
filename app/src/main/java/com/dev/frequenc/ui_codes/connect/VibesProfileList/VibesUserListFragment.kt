@@ -65,6 +65,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
     lateinit var ivHamburger : ImageView
     lateinit var ivAnim : GifImageView
+    lateinit var tvVibeTag : TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,11 +84,10 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
         root = inflater.inflate(R.layout.fragment_vibes_user_list, container, false)
 
         ivHamburger = root.findViewById(R.id.ivHamburger)
-
         rvVibeUser = root.findViewById(R.id.rvVibeUser)
         rvConnection = root.findViewById(R.id.rvConnection)
         rvQuote = root.findViewById(R.id.rvQuote)
-
+        tvVibeTag = root.findViewById(R.id.tvVibeTag)
         ivAnim = root.findViewById(R.id.ivAnimSplashConnct)
 
         tvConnectionTag = root.findViewById<TextView>(R.id.tvConnectionTag)
@@ -96,6 +96,8 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
         if (bundle != null) {
             category = bundle.getString("category").toString()
             Log.d("category", category)
+            tvVibeTag.text = category
+
         }
 
         progressDialog = root.findViewById(R.id.progress_bar)
@@ -233,7 +235,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                             if (count == 0) {
                                 rvConnection.visibility = View.GONE
                                 rvQuote.visibility = View.VISIBLE
-
+                                Toast.makeText(requireContext(),"No Connection",Toast.LENGTH_SHORT).show()
                                 getQuotes()
 
 
@@ -299,6 +301,12 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                             Log.d("api","response success get quotes")
 
                             val mData = response.body()!!
+
+//                            Log.d("api",mData.data.get(0).name)
+
+
+                            for(i in mData.data)
+                             Log.d("api",i.name.toString())
 
                             rvQuote.apply {
                                 adapter = QuoteAdapter(mData)

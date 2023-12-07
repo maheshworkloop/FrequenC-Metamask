@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:elevation="@dimen/_5sdp">
+        app:cardElevation="@dimen/_5sdp"
+    >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_15sdp"
+            >
 
 
         <ImageView
@@ -57,9 +64,10 @@
                 android:layout_centerVertical="true"
                 />
 
+        </RelativeLayout>
 
 
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>
 
 

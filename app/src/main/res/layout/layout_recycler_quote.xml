@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="@dimen/_10sdp"
+    android:elevation="@dimen/_5sdp"
+    >
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
     <TextView
             android:id="@+id/tvQuote"
@@ -12,10 +21,13 @@
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:textSize="@dimen/_14sdp"
-            android:fontFamily="@font/epilogueregular"
             android:paddingVertical="@dimen/_8sdp"
             android:paddingHorizontal="@dimen/_10sdp"
             android:visibility="visible"
+            style="@style/textViewRegularBold"
             />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

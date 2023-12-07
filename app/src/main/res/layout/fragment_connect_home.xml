@@ -38,7 +38,6 @@
             app:tabTextColor="@color/material_grey_700"
             android:layout_below="@id/rl_top"
             android:layout_marginTop="@dimen/_10sdp"
-            app:tabBackground="@drawable/tab_selector"
 
             />
 
