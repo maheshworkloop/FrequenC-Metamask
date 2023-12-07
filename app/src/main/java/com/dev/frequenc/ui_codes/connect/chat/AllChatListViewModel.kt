@@ -13,8 +13,10 @@ import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
 import io.agora.ContactListener
+import io.agora.ValueCallBack
 import io.agora.chat.ChatClient
 import io.agora.chat.Conversation
+import io.agora.chat.UserInfo
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -194,6 +196,8 @@ class AllChatListViewModel : ViewModel() {
 
                 if (contactLists != null) {
                     val chatListVals = ArrayList<ChatUserModel>()
+                    val userLists = ArrayList<String>()
+
                     for (contact: Conversation in contactLists.values) {
                         contact?.let {
                             val lastMessage: String = it.lastMessage.body.toString()
@@ -211,8 +215,22 @@ class AllChatListViewModel : ViewModel() {
                                     lastMessage
                                 )
                             )
+                            userLists.add(userName)
                         }
+
+                        ChatClient.getInstance().userInfoManager().fetchUserInfoByUserId(userLists.toArray() as Array<out String>?, object : ValueCallBack<Map<String, UserInfo>> {
+                            override fun onSuccess(value: Map<String, UserInfo>?) {
+                                value?.values?.forEachIndexed{ profileIndex, profileInfos ->
+                                    chatListVals[profileIndex].chatPersonImage = profileInfos.avatarUrl.toString()
+                                }
+                            }
+
+                            override fun onError(error: Int, errorMsg: String?) {
+                                Log.d("ds", "onError: ")
+                            }
+                        })
                     }
+
 
                     _chatCount.postValue(chatListVals.size)
 
@@ -237,14 +255,14 @@ class AllChatListViewModel : ViewModel() {
     fun callPendingRequestApi() {
         execute {
             val usernamesList = ChatClient.getInstance().contactManager().contactsFromLocal
+
+            _pendingRequestCount.postValue(usernamesList.size)
             Log.d(Constants.TAG_CHAT, "callPendingRequestApi:  " + usernamesList)
         }
 
     }
 
     fun setContactChangeListener() {
-
-
         ChatClient.getInstance().contactManager().setContactListener(object : ContactListener {
             //The contact request is approved
             override fun onFriendRequestAccepted(username: String) {}

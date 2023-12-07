@@ -1,6 +1,8 @@
 package com.dev.frequenc.ui_codes.screens.ArtistDetail
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,12 +10,14 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.dev.frequenc.databinding.ActivityArtistDetailsBinding
+import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.screens.Adapter.UpcomingEventAdapter
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.data.ArtistResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.chat.ChatClient
 import retrofit2.Call
 import retrofit2.Response
 
@@ -47,8 +51,11 @@ class ArtistDetailsActivity : AppCompatActivity(), UpcomingEventAdapter.ListAdap
 
         }
 
-    } //end of Create
+        binding.btnFollow.setOnClickListener {
 
+        }
+
+    } //end of Create
 
     private fun artistDetailApi(id : String)
     {

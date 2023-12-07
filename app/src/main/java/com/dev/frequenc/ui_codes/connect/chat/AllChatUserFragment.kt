@@ -249,8 +249,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         when (useType) {
             ItemUserListLay -> {
-                val chatItem =
-                    allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
+                val chatItem = allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
                 bundle.putString(Constants.Messaged_user, chatItem.toChatUser)
                 performClickAction(action, bundle)
             }

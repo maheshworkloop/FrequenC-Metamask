@@ -16,9 +16,10 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
+import kotlin.Exception
 
 class LoginViewModel : ViewModel() {
+    var userId: String = ""
     private val _startOtpTimer = MutableLiveData<Boolean>(false)
     val startOtpTimer : LiveData<Boolean>
         get() = _startOtpTimer
@@ -126,9 +127,14 @@ class LoginViewModel : ViewModel() {
                                 run {
                                     __isApiCalled.value = false
                                     if (response.isSuccessful) {
-                                        _receivedToken =
-                                            response.headers().get(Constants.Authorization)
-                                                .toString()
+                                        try {
+                                            _receivedToken =
+                                                response.headers().get(Constants.Authorization)
+                                                    .toString()
+                                            userId = response.body()!!.data.user.id
+                                        }
+                                        catch (ex: Exception ) { ex.printStackTrace()}
+
                                         try {
                                             if (response.body()!!.data.user.user_type.equals("audience")) {
                                                 isUserTypeRegistered = true

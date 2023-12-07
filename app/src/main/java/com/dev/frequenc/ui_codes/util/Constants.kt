@@ -4,6 +4,7 @@ class Constants {
 
     companion object
     {
+        val User_Id: String = "user_id"
         val Messaged_user: String = "receivedUsr"
         const val MetaMaskWalletAddress = "PublicAddress"
         const val AudienceId = "_id"
