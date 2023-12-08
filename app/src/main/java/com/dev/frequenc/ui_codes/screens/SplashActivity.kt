@@ -39,7 +39,6 @@ class SplashActivity : AppCompatActivity() {
         is_first_time = sharedPreferences.getBoolean(Constants.isFirst_Time_User, true)
 
 
-
         ApplylrtocAnimationInSplash()
         ApplylrtocAnimationInSplash2()
 
