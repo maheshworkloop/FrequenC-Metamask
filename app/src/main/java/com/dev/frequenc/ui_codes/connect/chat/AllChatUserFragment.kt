@@ -1,26 +1,28 @@
 package com.dev.frequenc.ui_codes.connect.chat
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.FragmentAllChatUserBinding
 import com.dev.frequenc.ui_codes.connect.Profile.ProfileFragment
 import com.dev.frequenc.ui_codes.connect.VibesProfileList.ConnectionAdapter
-import com.dev.frequenc.ui_codes.data.ChatUserModel
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.CallBack
+import io.agora.ContactListener
+import io.agora.PresenceListener
 import io.agora.chat.ChatClient
-import io.agora.chat.Conversation
+import io.agora.chat.Presence
 
 class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     ConnectionAdapter.ListAdapterListener {
@@ -28,6 +30,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     private var currentActivity: FragmentActivity? = null
     lateinit var binding: FragmentAllChatUserBinding
     lateinit var allChatListViewModel: AllChatListViewModel
+    private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
         private const val ItemUserListLay = 1
@@ -63,9 +66,8 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences =
-            activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)
-        val connectionAdapter = ConnectionAdapter(ArrayList(3), this@AllChatUserFragment)
+         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE) as SharedPreferences
+        val connectionAdapter = ConnectionAdapter(ArrayList(3),ArrayList(3), this@AllChatUserFragment)
         binding.rvConnection.apply {
             adapter = connectionAdapter
         }
@@ -140,6 +142,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         activity?.runOnUiThread {
             allChatListViewModel.connectionList.observe(viewLifecycleOwner) {
                 try {
+                    allChatListViewModel.getConnectionListWithPresence()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -154,6 +157,15 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 //                }
                 connectionAdapter.update(it)
             }
+        }
+
+        activity?.runOnUiThread {
+            try {
+                allChatListViewModel.isOnlineList.observe(viewLifecycleOwner) {
+                    connectionAdapter.updateOnlineStatus(it)
+                }
+            }
+            catch (ex: Exception) {ex.printStackTrace()}
         }
 
         sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
@@ -187,7 +199,46 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
         }
 
         allChatListViewModel.setConnectionTab(true)
+//
+//        allChatListViewModel.setOnPresenceChange()
 
+        allChatListViewModel.toastMessage.observe(viewLifecycleOwner) { observr ->
+            run {
+                if (!observr.isNullOrEmpty()) {
+                    Toast.makeText(context, observr, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        allChatListViewModel.setContactChangeListener(object : ContactListener {
+
+            override fun onFriendRequestAccepted(username: String) {
+                Log.d(Constants.TAG_CHAT, "onFriendRequestAccepted:username=> $username")
+            }
+
+            //contact request is rejected
+            override fun onFriendRequestDeclined(username: String) {
+                Log.d(Constants.TAG_CHAT, "onFriendRequestDeclined:username=> $username")
+            }
+
+            //Received contact invitation
+            override fun onContactInvited(username: String, reason: String) {
+                Log.d(
+                    Constants.TAG_CHAT,
+                    "onContactInvited:username=> $username  and reason =>> $reason"
+                )
+            }
+
+            //Call back this method when deleted
+            override fun onContactDeleted(username: String) {
+                Log.d(Constants.TAG_CHAT, "onContactDeleted:username=> $username")
+            }
+
+            //Call back this method when a contact is added
+            override fun onContactAdded(username: String) {
+                Log.d(Constants.TAG_CHAT, "onContactAdded:username=> $username")
+            }
+        })
     }
 
     private fun showPendingRequestsSubTab(
@@ -200,14 +251,12 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                     allChatListViewModel.callMyRequestApi(tokens)
                     binding.headPending.setTextColor(Color.parseColor("#8023EB"))
                     binding.selectedHeadPending.visibility = View.VISIBLE
-
                     binding.headMyrequests.setTextColor(Color.parseColor("#171A1F"))
                     binding.selectedHeadMyrequests.visibility = View.INVISIBLE
                 } else {
                     allChatListViewModel.callMyRequestApi(tokens)
                     binding.headMyrequests.setTextColor(Color.parseColor("#8023EB"))
                     binding.selectedHeadMyrequests.visibility = View.VISIBLE
-
 
                     binding.headPending.setTextColor(Color.parseColor("#171A1F"))
                     binding.selectedHeadPending.visibility = View.INVISIBLE
@@ -229,7 +278,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                 binding.tvRequestsTag.setTextColor(Color.parseColor("#171A1F"))
                 binding.requestLay.visibility = View.INVISIBLE
             } else {
-                allChatListViewModel.callPendingRequestApi()
+                allChatListViewModel.callPendingRequestApi(token)
                 allChatListViewModel.setPendingTab(true)
                 binding.tvRequestsTag.setTextColor(Color.parseColor("#8023EB"))
                 binding.requestLay.visibility = View.VISIBLE
@@ -249,12 +298,18 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         when (useType) {
             ItemUserListLay -> {
-                val chatItem = allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
-                bundle.putString(Constants.Messaged_user, chatItem.toChatUser)
+//                val chatItem = allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
                 performClickAction(action, bundle)
             }
 
             ItemUserChatPendingListLay -> {
+                try {
+                    val dataItem =
+                        (allChatListViewModel.userListsData.value?.get(itemPosition) as com.dev.frequenc.ui_codes.data.pending_request.Data)
+                    bundle.putString("Connection_id", dataItem.from_user_id._id)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
                 performClickAction(action, bundle)
             }
 
@@ -271,7 +326,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                     val chatFragment = ChatFragment()
                     chatFragment.arguments = bundle
                     currentActivity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.flFragment, chatFragment)
+                        ?.replace(R.id.flFragment, chatFragment, "ChatFragment")
                         ?.commit()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
@@ -280,8 +335,10 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
             "goProfile" -> {
                 try {
+                    val profileFragment = ProfileFragment()
+                    profileFragment.arguments = bundle
                     currentActivity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.flFragment, ProfileFragment())
+                        ?.replace(R.id.flFragment, profileFragment, "ProfileFragment")
                         ?.commit()
                 } catch (ex: Exception) {
                     ex.printStackTrace()
@@ -293,15 +350,37 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             }
 
             "accept" -> {
-                Toast.makeText(context, "Accepted", Toast.LENGTH_SHORT).show()
+                sharedPreferences.getString(Constants.Authorization, null)
+                    ?.let {
+                        allChatListViewModel.callAcceptApi(
+                            token = it,
+                            bundle?.getString("Connection_id", null).toString()
+                        )
+                    }
             }
 
             "decline" -> {
-                Toast.makeText(context, "Rejected. ", Toast.LENGTH_SHORT).show()
+                sharedPreferences.getString(Constants.Authorization, null)
+                    ?.let {
+                        allChatListViewModel.callRejectApi(
+                            token = it,
+                            bundle?.getString("Connection_id", null).toString()
+                        )
+                    }
             }
 
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+//        allChatListViewModel.removePresenceListener( object : CallBack {
+//            override fun onSuccess() {
+//
+//            }
+//            override fun onError(errorCode: Int, errorMsg: String) {
+//
+//            }}
+//        )
+    }
 }

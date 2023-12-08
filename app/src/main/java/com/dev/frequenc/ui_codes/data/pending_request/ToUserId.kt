@@ -1,9 +1,9 @@
-package com.dev.frequenc.ui_codes.data.myconnection
+package com.dev.frequenc.ui_codes.data.pending_request
 
 data class ToUserId(
     val __v: Int,
     val _id: String,
-    val audience_id: AudienceId,
+    val audience_id: String,
     val city: String,
     val country: String,
     val createdAt: String,

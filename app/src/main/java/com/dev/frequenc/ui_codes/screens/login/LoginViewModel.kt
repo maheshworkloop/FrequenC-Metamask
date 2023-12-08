@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.dev.frequenc.ui_codes.data.RegisterUserResponse
-import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmUserOtpResponse
-import com.dev.frequenc.ui_codes.data.confirmuserotp.UpdateUserTypeResponse
+import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmOtpResponse
 import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import kotlinx.coroutines.launch
@@ -25,6 +24,7 @@ class LoginViewModel : ViewModel() {
         get() = _startOtpTimer
     var _mob_no = MutableLiveData<String>(null)
     var _receivedToken = "--1"
+    var isAgoraRegistered = false
     var isUserTypeRegistered = false
 //    private val mobile_no: LiveData<String> get() =  _mob_no
 //    private val otp : MutableLiveData<String> get() = _otp
@@ -119,14 +119,20 @@ class LoginViewModel : ViewModel() {
                 phone_no?.let { it1 ->
                     ApiClient.getInstance()!!
                         .confirmUserOtp(VerifyOtpReq(phone_no = it1, otp = it.toInt()))!!
-                        .enqueue(object : Callback<ConfirmUserOtpResponse> {
+                        .enqueue(object : Callback<ConfirmOtpResponse> {
                             override fun onResponse(
-                                call: Call<ConfirmUserOtpResponse>,
-                                response: Response<ConfirmUserOtpResponse>
+                                call: Call<ConfirmOtpResponse>,
+                                response: Response<ConfirmOtpResponse>
                             ) =
                                 run {
                                     __isApiCalled.value = false
                                     if (response.isSuccessful) {
+                                        try {
+                                            isAgoraRegistered = response.body()!!.data.isAgoraId
+                                        }
+                                        catch (ex: Exception ) {
+                                            ex.printStackTrace()
+                                        }
                                         try {
                                             _receivedToken =
                                                 response.headers().get(Constants.Authorization)
@@ -158,19 +164,17 @@ class LoginViewModel : ViewModel() {
                                                 )
                                             ) {
                                                 isUserTypeRegistered = true
-                                                if (!response.body()!!.data.user.artist_id.isNullOrEmpty()) {
+                                                if (!response.body()!!.data.user.audience_id.isNullOrEmpty()) {
                                                     audienceId =
-                                                        response.body()!!.data.user.artist_id
+                                                        response.body()!!.data.user.audience_id
                                                 }
                                                 moveToHome()
-                                            } else if (response.body()!!.data.user.user_type.equals(
-                                                    "vendor"
-                                                )
+                                            } else if (response.body()!!.data.user.user_type.equals("vendor")
                                             ) {
                                                 isUserTypeRegistered = true
-                                                if (!response.body()!!.data.user.vendor_id.isNullOrEmpty()) {
+                                                if (!response.body()!!.data.user.audience_id.isNullOrEmpty()) {
                                                     audienceId =
-                                                        response.body()!!.data.user.artist_id
+                                                        response.body()!!.data.user.audience_id
                                                 }
                                                 moveToHome()
                                             } else {
@@ -198,7 +202,7 @@ class LoginViewModel : ViewModel() {
                                 }
 
                             override fun onFailure(
-                                call: Call<ConfirmUserOtpResponse>,
+                                call: Call<ConfirmOtpResponse>,
                                 t: Throwable
                             ) {
                                 _toastMessage.value = t.localizedMessage
@@ -213,89 +217,89 @@ class LoginViewModel : ViewModel() {
 
     data class VerifyOtpReq(val phone_no: String, val otp: Int)
 
-    fun callUpdateUserTypeApi(tokens: String, phone_no: String, userTypeKey: String) {
-        viewModelScope.launch {
-        __isApiCalled.value = true
-        tokens.let {
-            phone_no.let {
-                userTypeKey.let {
-                    ApiClient.getInstance()!!
-                        .updateUserType(
-                            tokens,
-                            UpdateUserReq(phone_no = phone_no, user_type = userTypeKey)
-                        )!!
-                        .enqueue(object : Callback<UpdateUserTypeResponse> {
-                            override fun onResponse(
-                                call: Call<UpdateUserTypeResponse>,
-                                response: Response<UpdateUserTypeResponse>
-                            ): Unit = run {
-                                    __isApiCalled.value = false
-                                    if (response.isSuccessful) {
-                                        try {
-                                            if (response.body()!!.data.user.user_type.equals("audience")) {
-                                                isUserTypeRegistered = true
-                                                if (!response.body()!!.data.user.audience_id.isNullOrEmpty()) {
-                                                    audienceId =
-                                                        response.body()!!.data.user.audience_id
-                                                }
-                                            } else if (response.body()!!.data.user.user_type.equals(
-                                                    "venue"
-                                                )
-                                            ) {
-                                                isUserTypeRegistered = true
-                                                if (!response.body()!!.data.user.venue_id.isNullOrEmpty()) {
-                                                    audienceId =
-                                                        response.body()!!.data.user.venue_id[0].toString()
-                                                }
-                                            } else if (response.body()!!.data.user.user_type.equals(
-                                                    "artist"
-                                                )
-                                            ) {
-                                                isUserTypeRegistered = true
-                                                if (!response.body()!!.data.user.artist_id.isNullOrEmpty()) {
-                                                    audienceId =
-                                                        response.body()!!.data.user.artist_id
-                                                }
-                                            } else if (response.body()!!.data.user.user_type.equals(
-                                                    "vendor"
-                                                )
-                                            ) {
-                                                isUserTypeRegistered = true
-                                                if (!response.body()!!.data.user.vendor_id.isNullOrEmpty()) {
-                                                    audienceId =
-                                                        response.body()!!.data.user.artist_id
-                                                }
-                                            }
-                                        } catch (e: Exception) {
-                                            e.printStackTrace()
-                                        }
-                                        //                    if (!response.body()!!.data.isUserType.toString().isNullOrEmpty()) {
-                                        //                    }
-                                        moveToHome()
-                                    } else {
-                                        Log.d(
-                                            Constants.Error,
-                                            "onResponse:callUpdateUserTypeApi() " + response.body()
-                                        )
-                                        _toastMessage.value =
-                                            response?.errorBody()?.string().toString()
-                                    }
-                                }
-
-                            override fun onFailure(
-                                call: Call<UpdateUserTypeResponse>,
-                                t: Throwable
-                            ) {
-                                __isApiCalled.value = false
-                                _toastMessage.value = t.localizedMessage
-                                Log.e(Constants.Error, "onFailure:callUpdateUserTypeApi ", t)
-                            }
-                        })
-                }
-                }
-            }
-        }
-    }
+//    fun callUpdateUserTypeApi(tokens: String, phone_no: String, userTypeKey: String) {
+//        viewModelScope.launch {
+//        __isApiCalled.value = true
+//        tokens.let {
+//            phone_no.let {
+//                userTypeKey.let {
+//                    ApiClient.getInstance()!!
+//                        .updateUserType(
+//                            tokens,
+//                            UpdateUserReq(phone_no = phone_no, user_type = userTypeKey)
+//                        )!!
+//                        .enqueue(object : Callback<UpdateUserTypeResponse> {
+//                            override fun onResponse(
+//                                call: Call<UpdateUserTypeResponse>,
+//                                response: Response<UpdateUserTypeResponse>
+//                            ): Unit = run {
+//                                    __isApiCalled.value = false
+//                                    if (response.isSuccessful) {
+//                                        try {
+//                                            if (response.body()!!.data.user.user_type.equals("audience")) {
+//                                                isUserTypeRegistered = true
+//                                                if (!response.body()!!.data.user.audience_id.isNullOrEmpty()) {
+//                                                    audienceId =
+//                                                        response.body()!!.data.user.audience_id
+//                                                }
+//                                            } else if (response.body()!!.data.user.user_type.equals(
+//                                                    "venue"
+//                                                )
+//                                            ) {
+//                                                isUserTypeRegistered = true
+//                                                if (!response.body()!!.data.user.venue_id.isNullOrEmpty()) {
+//                                                    audienceId =
+//                                                        response.body()!!.data.user.venue_id[0].toString()
+//                                                }
+//                                            } else if (response.body()!!.data.user.user_type.equals(
+//                                                    "artist"
+//                                                )
+//                                            ) {
+//                                                isUserTypeRegistered = true
+//                                                if (!response.body()!!.data.user.artist_id.isNullOrEmpty()) {
+//                                                    audienceId =
+//                                                        response.body()!!.data.user.artist_id
+//                                                }
+//                                            } else if (response.body()!!.data.user.user_type.equals(
+//                                                    "vendor"
+//                                                )
+//                                            ) {
+//                                                isUserTypeRegistered = true
+//                                                if (!response.body()!!.data.user.vendor_id.isNullOrEmpty()) {
+//                                                    audienceId =
+//                                                        response.body()!!.data.user.artist_id
+//                                                }
+//                                            }
+//                                        } catch (e: Exception) {
+//                                            e.printStackTrace()
+//                                        }
+//                                        //                    if (!response.body()!!.data.isUserType.toString().isNullOrEmpty()) {
+//                                        //                    }
+//                                        moveToHome()
+//                                    } else {
+//                                        Log.d(
+//                                            Constants.Error,
+//                                            "onResponse:callUpdateUserTypeApi() " + response.body()
+//                                        )
+//                                        _toastMessage.value =
+//                                            response?.errorBody()?.string().toString()
+//                                    }
+//                                }
+//
+//                            override fun onFailure(
+//                                call: Call<UpdateUserTypeResponse>,
+//                                t: Throwable
+//                            ) {
+//                                __isApiCalled.value = false
+//                                _toastMessage.value = t.localizedMessage
+//                                Log.e(Constants.Error, "onFailure:callUpdateUserTypeApi ", t)
+//                            }
+//                        })
+//                }
+//                }
+//            }
+//        }
+//    }
 
     fun callResendOtpApi(phone_no: String) {
         __isApiCalled.value = true

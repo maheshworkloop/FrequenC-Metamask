@@ -41,6 +41,7 @@ class VerifyOtpFragment : Fragment() {
                             Constants.isUserTypeRegistered,
                             loginViewModel.isUserTypeRegistered
                         )
+                            .putBoolean(Constants.Is_AgoraRegistered, loginViewModel.isAgoraRegistered)
                             .putString(Constants.User_Id, loginViewModel.userId)
                             .putString(Constants.Authorization, loginViewModel._receivedToken)
                             .putString(Constants.AudienceId, loginViewModel.audienceId)

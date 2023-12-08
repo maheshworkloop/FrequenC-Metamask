@@ -10,15 +10,14 @@ import com.dev.frequenc.databinding.ItemUserChatPendingListBinding
 import com.dev.frequenc.databinding.ItemUserChatRequestsBinding
 import com.dev.frequenc.databinding.ItemUserListBinding
 import com.dev.frequenc.ui_codes.data.ChatUserModel
-import io.agora.chat.Conversation
+import com.dev.frequenc.ui_codes.data.pending_request.Data
 
 
 class ChatListAdapter(
     private val chatList: ArrayList<Any>,
     private var useType: Int,
     private val itemListListener: ItemListListener
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val ItemUserListLay = 1
         private const val ItemUserChatPendingListLay = 2
@@ -41,14 +40,14 @@ class ChatListAdapter(
             itemListListener: ItemListListener
         ) {
             (chatItem as ChatUserModel)?.let {
-                val time = it.chatTime.toInt()/60000
+                val time = it.chatTime.toInt() / 60000
                 val user_image = it.chatPersonImage.toInt().toString()
 
                 binding.tvLastMsg.text = "You: ${it.lastMessage}"
                 binding.tvTime.text = "$time min ago"
                 binding.tvProfileName.text = it.profileName
 
-//            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
+////            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
                 binding.cvProfile.setOnClickListener {
                     itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
                 }
@@ -66,19 +65,23 @@ class ChatListAdapter(
     class MyPendingRequestViewHolder(val binding: ItemUserChatPendingListBinding) :
         ViewHolder(binding.root) {
         fun bindPendingRequestViews(
-            position: Int,
+            pendingItem: Any,
             itemListListener: ItemListListener,
-            any: Any
+            position: Int
         ) {
+            (pendingItem as Data)?.let {
+                val item_image = pendingItem.status
 
-            binding.cvProfile.setOnClickListener {
-                itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
-            }
-            binding.btnAccept.setOnClickListener {
-                itemListListener.onItemClicked(position, ItemUserListLay, "accept")
-            }
-            binding.btnDecline.setOnClickListener {
-                itemListListener.onItemClicked(position, ItemUserListLay, "decline")
+
+                binding.cvProfile.setOnClickListener {
+                    itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
+                }
+                binding.btnAccept.setOnClickListener {
+                    itemListListener.onItemClicked(position, ItemUserListLay, "accept")
+                }
+                binding.btnDecline.setOnClickListener {
+                    itemListListener.onItemClicked(position, ItemUserListLay, "decline")
+                }
             }
 
 //            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
@@ -89,18 +92,21 @@ class ChatListAdapter(
     class MyChatRequestsViewHolder(val binding: ItemUserChatRequestsBinding) :
         ViewHolder(binding.root) {
         fun bindChatRequestsViews(
-            position: Int,
+            MyRequestDataItem: Any,
             itemListListener: ItemListListener,
-            any: Any
+            position: Int
         ) {
+            (MyRequestDataItem as com.dev.frequenc.ui_codes.data.myrequests.Data)?.let {
+                binding.tvProfileName.text = it.from_user_id.fullName.toString()
 
 //            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
-            binding.cvProfile.setOnClickListener {
-                itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
-            }
+                binding.cvProfile.setOnClickListener {
+                    itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
+                }
 
-            binding.itemLays.setOnClickListener {
-                itemListListener.onItemClicked(position, ItemUserListLay, "goChat")
+//                binding.itemLays.setOnClickListener {
+//                    itemListListener.onItemClicked(position, ItemUserListLay, "goChat")
+//                }
             }
         }
     }
@@ -154,17 +160,17 @@ class ChatListAdapter(
 
                 is MyPendingRequestViewHolder -> {
                     holder.bindPendingRequestViews(
-                        item_position,
+                        chatList[item_position],
                         itemListListener,
-                        chatList[item_position]
+                        item_position
                     )
                 }
 
                 is MyChatRequestsViewHolder -> {
                     holder.bindChatRequestsViews(
-                        item_position,
+                        chatList[item_position],
                         itemListListener,
-                        chatList[item_position]
+                        item_position
                     )
                 }
 
@@ -175,8 +181,8 @@ class ChatListAdapter(
     }
 
     override fun getItemCount(): Int {
-//        return 7
-            return chatList.size
+        return 7
+//            return chatList.size
     }
 
     override fun getItemViewType(position: Int): Int {

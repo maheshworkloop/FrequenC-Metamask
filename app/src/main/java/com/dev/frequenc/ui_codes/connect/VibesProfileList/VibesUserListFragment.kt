@@ -23,10 +23,11 @@ import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeData
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
-import com.dev.frequenc.ui_codes.data.myconnection.ConnectionResponseData
+import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.chat.ChatClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,7 +60,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
     var userRegistered: Boolean = false
     lateinit var progressDialog: ProgressBar
 
-    lateinit var ivHamburger : ImageView
+    lateinit var ivHamburger: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,6 +155,13 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
     override fun onClickAtProfile(item: MatchVibeData) {
 
+
+        try {
+            ChatClient.getInstance().contactManager().addContact(item.id, "connect")
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
         val profile = ProfileFragment()
 
         Toast.makeText(requireContext(), "Profile Clicked", Toast.LENGTH_SHORT).show()
@@ -193,7 +201,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                 }
 
                 override fun onFailure(call: Call<MatchVibeListResponse>, t: Throwable) {
-                    Toast.makeText(requireContext(),t.localizedMessage,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), t.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -201,10 +209,9 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
     fun callConnectionApi(token: String) {
 
-        Log.d("flow","Connection Api Called")
+        Log.d("flow", "Connection Api Called")
 
-        ApiClient.getInstance()?.connectionList(token)
-            ?.enqueue(object : Callback<MyConnectionResponse> {
+        ApiClient.getInstance()?.connectionList(token)?.enqueue(object : Callback<MyConnectionResponse> {
                 override fun onResponse(
                     call: Call<MyConnectionResponse>,
                     response: Response<MyConnectionResponse>
@@ -212,7 +219,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                     if (response.isSuccessful) {
                         if (response.body() != null && response.body()?.data != null) {
 
-                            Log.d("flow","Connection Api Success")
+                            Log.d("flow", "Connection Api Success")
 
 
                             val count = response.body()!!.count
@@ -232,21 +239,21 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
                                 val adapterLists = ArrayList<ConnectionResponse>()
 
-                                for (data: ConnectionResponseData in response.body()?.data!!) {
-                                    var images : String = ""
+                                for (data: Data in response.body()?.data!!) {
+                                    var images: String = ""
                                     try {
-                                        images = data.to_user_id.audience_id.profile_pic
+                                        images = data.from_user_id.audience_id.profile_pic
                                     } catch (exs: Exception) {
                                         exs.printStackTrace()
                                     }
-                                    adapterLists.add(ConnectionResponse(images, true, ""))
+                                    adapterLists.add(ConnectionResponse(images, data.to_user_id.fullName.toString(), data.id))
 
                                 }
 
 
                                 rvConnection.apply {
                                     adapter =
-                                        ConnectionAdapter(adapterLists, this@VibesUserListFragment)
+                                        ConnectionAdapter(adapterLists, ArrayList<Boolean>(adapterLists.size),this@VibesUserListFragment)
                                     layoutManager = LinearLayoutManager(
                                         requireContext(),
                                         LinearLayoutManager.HORIZONTAL,
@@ -268,14 +275,14 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
                 override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
                     Log.e(Constants.Error, "onFailure: ", t)
-                    Log.d("flow","Connection Api Error")
+                    Log.d("flow", "Connection Api Error")
 
                 }
             })
     }
 
     private fun getQuotes() {
-        Log.d("api","calling get quotes api")
+        Log.d("api", "calling get quotes api")
         ApiClient.getInstance()!!.getQuoteApi()!!
             .enqueue(object : retrofit2.Callback<QuoteResponse> {
                 override fun onResponse(
@@ -285,7 +292,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                     if (response.isSuccessful) {
                         if (response.body() != null && response.body()!!.data != null) {
 
-                            Log.d("api","response success get quotes")
+                            Log.d("api", "response success get quotes")
 
                             val mData = response.body()!!
 
@@ -303,7 +310,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                 }
 
                 override fun onFailure(call: Call<QuoteResponse>, t: Throwable) {
-                    Toast.makeText(requireContext(),t.localizedMessage,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), t.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
             })
 

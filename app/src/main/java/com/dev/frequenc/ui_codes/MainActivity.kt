@@ -52,8 +52,8 @@ import java.io.Serializable
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val pwd: String? = "sdfdds"
-    private val username: String? = "sdfdds"
+    private var pwd: String? = "dssadasd"
+    private var username: String? = "sdfds"
     val requestcode = 101
     var latitude = ""
     var longitude = ""
@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
 
         binding.drawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
 
@@ -113,12 +114,24 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+        try {
+//            sharedPreferences.edit().putString(Constants.User_Id, username)
+//                .apply()
+            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null).toString()
+            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
+            pwd= username!!.substring(generatedUsername!!.lastIndex-5, generatedUsername!!.lastIndex) + "@" + mob_no!!.substring(mob_no.lastIndex-5, mob_no.lastIndex)
+            username = generatedUsername
+        }
+        catch (e: Exception) { e.printStackTrace()}
 
         val userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
 
         authorization = sharedPreferences.getString(Constants.Authorization, "-1").toString()
         audience_id = sharedPreferences.getString(Constants.AudienceId, "-1").toString()
+
+        requestPermissions()
+        initSDK()
+        addConnectionListener()
 
         if (userRegistered && !(authorization == "-1") && !(audience_id == "-1")) {
 
@@ -143,6 +156,12 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered,false)) {
+                signUp()
+            }
+            else {
+                getTokenFromAppServer(NEW_LOGIN)
+            }
         } else {
             Toast.makeText(this, "User Not Logged in", Toast.LENGTH_SHORT).show()
             Log.e("Audience Id", audience_id)
@@ -235,12 +254,7 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-        requestPermissions()
-        initSDK()
-        addConnectionListener()
-//        signUp()
 
-        getTokenFromAppServer(NEW_LOGIN)
     }
 
 
@@ -317,6 +331,7 @@ class MainActivity : AppCompatActivity() {
     fun signUp() {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
 //            LogUtils.showErrorToast(this, binding.tvLog, getString(R.string.username_or_pwd_miss))
+            Log.d(Constants.TAG_CHAT, "signUp: getString(R.string.username_or_pwd_miss)")
             return
         }
         execute {
@@ -338,6 +353,7 @@ class MainActivity : AppCompatActivity() {
                 val code = response.code
                 val responseInfo = response.content
                 if (code == 200) {
+                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered,true).apply()
                     if (responseInfo != null && responseInfo.length > 0) {
                         val `object` = JSONObject(responseInfo)
                         val resultCode = `object`.getString("code")
@@ -357,9 +373,16 @@ class MainActivity : AppCompatActivity() {
                         Log.d(Constants.TAG_CHAT, responseInfo)
 //                        LogUtils.showErrorLog(binding.tvLog, responseInfo)
                     }
+                    getTokenFromAppServer(NEW_LOGIN)
                 } else {
+                    if (code >= 400 && code < 500) {
+                        sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, true)
+                            .apply()
+                        getTokenFromAppServer(NEW_LOGIN)
+                    }
                     Log.d(Constants.TAG_CHAT, responseInfo)
 //                    LogUtils.showErrorLog(binding.tvLog, responseInfo)
+                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered,false).apply()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -384,7 +407,7 @@ class MainActivity : AppCompatActivity() {
 //            )
         return
     }
-        execute {
+        this.runOnUiThread {
             try {
                 val headers: MutableMap<String, String> =
                     HashMap()
@@ -414,13 +437,9 @@ class MainActivity : AppCompatActivity() {
                             ChatClient.getInstance()
                                 .loginWithAgoraToken(username, token, object : CallBack {
                                     override fun onSuccess() {
-
                                         Log.d(Constants.TAG_CHAT, getString(R.string.sign_in_success))
-//                                        LogUtils.showToast(
-//                                            this@MainActivity,
-//                                            binding.tvLog,
-//                                            getString(R.string.sign_in_success)
-//                                        )
+                                        Toast.makeText(this@MainActivity, getString(R.string.sign_in_success), Toast.LENGTH_SHORT).show()
+
                                     }
 
                                     override fun onError(code: Int, error: String) {
@@ -430,6 +449,7 @@ class MainActivity : AppCompatActivity() {
 //                                            "Login failed! code: $code error: $error"
 //                                        )
 
+                                        Toast.makeText(this@MainActivity, "Login failed! code: $code error: $error", Toast.LENGTH_SHORT).show()
                                         Log.d(Constants.TAG_CHAT, "Login failed! code: $code error: $error")
                                     }
 

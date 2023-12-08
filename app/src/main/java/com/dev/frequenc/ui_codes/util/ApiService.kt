@@ -2,8 +2,6 @@ package com.dev.frequenc.ui_codes.util
 
 import com.dev.frequenc.ui_codes.data.SearchResponse
 import com.dev.frequenc.ui_codes.data.RegisterUserResponse
-import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmUserOtpResponse
-import com.dev.frequenc.ui_codes.data.confirmuserotp.UpdateUserTypeResponse
 import com.dev.frequenc.ui_codes.screens.login.LoginViewModel
 import com.dev.frequenc.ui_codes.screens.login.UpdateUserReq
 import com.dev.frequenc.ui_codes.data.AllDataResponse
@@ -28,10 +26,13 @@ import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
 import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.WalletBalenceData
+import com.dev.frequenc.ui_codes.data.accept_invitation.RequestAcceptResponse
+import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmOtpResponse
 import com.dev.frequenc.ui_codes.data.models.paymentInitiateReq
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
+import com.dev.frequenc.ui_codes.data.pending_request.PendingRequestResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
@@ -55,11 +56,11 @@ interface ApiService {
     fun register(@Body phone_no: LoginViewModel.registerUserReq ): Call<RegisterUserResponse>?
 
     @POST(KeysConstant.ConfirmUserOtp)
-    fun confirmUserOtp(@Body verifyOtpReq: LoginViewModel.VerifyOtpReq) : Call<ConfirmUserOtpResponse>?
+    fun confirmUserOtp(@Body verifyOtpReq: LoginViewModel.VerifyOtpReq) : Call<ConfirmOtpResponse>?
 
-    @POST(KeysConstant.UpdateUserType)
-
-    fun updateUserType(@Header("Authorization") tokenMsg: String, @Body updateUserReq : UpdateUserReq): Call<UpdateUserTypeResponse>?
+//    @POST(KeysConstant.UpdateUserType)
+//
+//    fun updateUserType(@Header("Authorization") tokenMsg: String, @Body updateUserReq : UpdateUserReq): Call<UpdateUserTypeResponse>?
 
     @GET(KeysConstant.BROWSE_BY_CAT)
     fun browseByCat(): Call<List<BrowseByCatResponse?>>?
@@ -177,4 +178,11 @@ interface ApiService {
 
     @GET("/{org_name}/{app_name}/users/{owner_username}/contacts/users")
     fun chatsList( @Header(Authorization) token: String ,@Path("org_name") org_name: String,@Path("app_name") app_name: String, @Path("owner_username") owner_username: String): Call<Any>?
+
+    @GET(KeysConstant.MYPENDING_REQUEST)
+    fun pendingRequests(@Header(Authorization) tokens: String): Call<PendingRequestResponse>?
+    @GET("connect/acceptRequest/{connect_d}")
+    fun acceptInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
+    @GET("connect/rejectRequest/{connect_d}")
+    fun rejectInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
 }
