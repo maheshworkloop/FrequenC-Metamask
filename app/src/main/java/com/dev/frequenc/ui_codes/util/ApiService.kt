@@ -17,6 +17,7 @@ import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
+import com.dev.frequenc.ui_codes.data.SendInvitationResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistTokenResponse
@@ -36,6 +37,7 @@ import com.dev.frequenc.ui_codes.data.pending_request.PendingRequestResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
+import com.dev.frequenc.ui_codes.data.update_user_type.UpdateUserTypeResponse
 import com.dev.frequenc.ui_codes.util.Constants.Companion.Authorization
 import org.json.JSONObject
 import retrofit2.Call
@@ -58,9 +60,9 @@ interface ApiService {
     @POST(KeysConstant.ConfirmUserOtp)
     fun confirmUserOtp(@Body verifyOtpReq: LoginViewModel.VerifyOtpReq) : Call<ConfirmOtpResponse>?
 
-//    @POST(KeysConstant.UpdateUserType)
-//
-//    fun updateUserType(@Header("Authorization") tokenMsg: String, @Body updateUserReq : UpdateUserReq): Call<UpdateUserTypeResponse>?
+    @POST(KeysConstant.UpdateUserType)
+
+    fun updateUserType(@Header("Authorization") tokenMsg: String, @Body updateUserReq : UpdateUserReq): Call<UpdateUserTypeResponse>?
 
     @GET(KeysConstant.BROWSE_BY_CAT)
     fun browseByCat(): Call<List<BrowseByCatResponse?>>?
@@ -185,4 +187,7 @@ interface ApiService {
     fun acceptInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
     @GET("connect/rejectRequest/{connect_d}")
     fun rejectInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
+    @GET("connect/sentRequest/{audienceId}")
+    fun callInvitationApi(@Header(Authorization) token: String, @Path("audienceId") audienceId:  String) : Call<SendInvitationResponse>
+
 }

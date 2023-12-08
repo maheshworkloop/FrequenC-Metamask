@@ -19,6 +19,7 @@ class Constants {
         val PhoneNo: String = "phone"
         val Error: String = "apierror"
         val Email: String = "email"
+        val TAG_CHAT: String = "Chats"
         val SharedPreference: String = "mySharePreference"
 
     }

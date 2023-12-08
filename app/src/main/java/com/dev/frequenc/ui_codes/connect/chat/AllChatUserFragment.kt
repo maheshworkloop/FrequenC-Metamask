@@ -18,11 +18,7 @@ import com.dev.frequenc.ui_codes.connect.Profile.ProfileFragment
 import com.dev.frequenc.ui_codes.connect.VibesProfileList.ConnectionAdapter
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.util.Constants
-import io.agora.CallBack
 import io.agora.ContactListener
-import io.agora.PresenceListener
-import io.agora.chat.ChatClient
-import io.agora.chat.Presence
 
 class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     ConnectionAdapter.ListAdapterListener {
@@ -66,13 +62,17 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE) as SharedPreferences
-        val connectionAdapter = ConnectionAdapter(ArrayList(3),ArrayList(3), this@AllChatUserFragment)
+        sharedPreferences = activity?.getSharedPreferences(
+            Constants.SharedPreference,
+            Context.MODE_PRIVATE
+        ) as SharedPreferences
+        val connectionAdapter =
+            ConnectionAdapter(ArrayList(3), ArrayList(3), this@AllChatUserFragment)
         binding.rvConnection.apply {
             adapter = connectionAdapter
         }
         val chatListAdapter =
-            ChatListAdapter(ArrayList(3), ItemUserListLay, this@AllChatUserFragment)
+            ChatListAdapter(ArrayList(3),ArrayList(3), ItemUserListLay, this@AllChatUserFragment)
         binding.rvChatUser.apply {
             adapter = chatListAdapter
         }
@@ -105,67 +105,75 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         activity?.runOnUiThread {
             allChatListViewModel.userListsData?.observe(viewLifecycleOwner) { it23 ->
-                it23?.let {
+                it23?.let { it ->
                     if (allChatListViewModel.isConnectionTabSelected.value == true) {
                         chatListAdapter.refreshData(
                             it,
+                            allChatListViewModel.connectionList.value,
                             ItemUserListLay
                         )
                         binding.tvChatTag.text = "Chats (${allChatListViewModel.chatCount.value})"
+
                     } else {
                         if (allChatListViewModel.isPendingSubTabSelected.value == true) {
                             chatListAdapter.refreshData(
                                 it,
+                                allChatListViewModel.connectionList.value,
                                 ItemUserChatPendingListLay
                             )
                         } else {
                             chatListAdapter.refreshData(
                                 it,
+                                allChatListViewModel.connectionList.value,
                                 ItemUserChatRequestsLay
                             )
                         }
-                        binding.tvCountMyrequests.text =
-                            allChatListViewModel.myRequestCount.value.toString()
-                        binding.tvCountPending.text =
-                            allChatListViewModel.pendingRequestCount.value.toString()
-                    }
-                    try {
-                        binding.tvRequestsTag.text =
-                            "Requests (${allChatListViewModel.requestCount.value})"
-                    } catch (ex: Exception) {
-                        ex.printStackTrace()
                     }
                 }
             }
         }
 
         activity?.runOnUiThread {
-            allChatListViewModel.connectionList.observe(viewLifecycleOwner) {
-                try {
-                    allChatListViewModel.getConnectionListWithPresence()
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                }
-//                if (it.isNullOrEmpty()) {
-//                    binding.connectionNotFoundLay.visibility = View.VISIBLE
-//                    binding.rvConnection.visibility = View.INVISIBLE
-//                    binding.tvConnectionTag.text = "Connection"
-//                } else {
-//                    binding.rvConnection.visibility = View.VISIBLE
-//                    binding.connectionNotFoundLay.visibility = View.GONE
-//                    binding.tvConnectionTag.text = "Connection (${it.size})"
-//                }
-                connectionAdapter.update(it)
+            allChatListViewModel.myRequestCount.observe(viewLifecycleOwner) {
+                binding.tvCountMyrequests.text =
+                    allChatListViewModel.myRequestCount.value.toString()
             }
-        }
 
-        activity?.runOnUiThread {
+            allChatListViewModel.pendingRequestCount.observe(viewLifecycleOwner) {
+                binding.tvCountPending.text =
+                    allChatListViewModel.pendingRequestCount.value.toString()
+            }
+
             try {
                 allChatListViewModel.isOnlineList.observe(viewLifecycleOwner) {
                     connectionAdapter.updateOnlineStatus(it)
                 }
+            } catch (ex: Exception) {
+                ex.printStackTrace()
             }
-            catch (ex: Exception) {ex.printStackTrace()}
+        }
+
+
+        activity?.runOnUiThread {
+            allChatListViewModel.connectionList.observe(viewLifecycleOwner) {
+                try {
+//                    allChatListViewModel.getConnectionListWithPresence()
+                    binding.tvConnectionTag.text = "Connection (${allChatListViewModel.connectionList.value?.size})"
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+                if (it.isNullOrEmpty()) {
+                    binding.connectionNotFoundLay.visibility = View.VISIBLE
+                    binding.rvConnection.visibility = View.INVISIBLE
+                    binding.tvConnectionTag.text = "Connection"
+                } else {
+                    binding.rvConnection.visibility = View.VISIBLE
+                    binding.connectionNotFoundLay.visibility = View.GONE
+                    binding.tvConnectionTag.text = "Connection (${it.size})"
+                }
+                connectionAdapter.update(it)
+
+            }
         }
 
         sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
@@ -290,7 +298,17 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     }
 
     override fun onClickAtConnection(item: ConnectionResponse) {
-        Toast.makeText(context, "Chat Screen is under construction. ", Toast.LENGTH_SHORT).show()
+        try {
+            val bundle = Bundle()
+            bundle.putString("Connection_id", item.id)
+            val chatFragment = ChatFragment()
+            chatFragment.arguments = bundle
+            currentActivity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.flFragment, chatFragment, "ChatFragment")
+                ?.commit()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 
     override fun onItemClicked(itemPosition: Int, useType: Int, action: String) {

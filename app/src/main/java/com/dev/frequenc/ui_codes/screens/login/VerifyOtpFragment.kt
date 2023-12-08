@@ -223,7 +223,7 @@ class VerifyOtpFragment : Fragment() {
 //            afterTextChanged = {})
 
         verifyOtpBinding.btnSubmit.setOnClickListener {
-            val otps = verifyOtpBinding.otpLays.text.toString()
+                val otps = verifyOtpBinding.otpLays.text.toString()
             if (otps?.isEmpty() == true || otps?.length != 6) {
                 verifyOtpBinding.otpLays.requestFocus()
             } else {

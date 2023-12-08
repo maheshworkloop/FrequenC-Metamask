@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.Profile.ProfileFragment
@@ -23,6 +24,7 @@ import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeData
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
+import com.dev.frequenc.ui_codes.data.SendInvitationResponse
 import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
@@ -61,8 +63,12 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
     var userRegistered: Boolean = false
     lateinit var progressDialog: ProgressBar
 
-    lateinit var ivHamburger : ImageView
-    lateinit var ivAnim : GifImageView
+    private lateinit var _ivAnim: GifImageView
+    var ivAnim : GifImageView
+        get() = _ivAnim
+        set(value) {
+            _ivAnim = value
+        }
     lateinit var tvVibeTag : TextView
     lateinit var ivHamburger: ImageView
 
@@ -165,23 +171,42 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
     }
 
     override fun onClickAtProfile(item: MatchVibeData) {
-
-
         try {
-            ChatClient.getInstance().contactManager().addContact(item.id, "connect")
+            ChatClient.getInstance().contactManager().addContact(item._id, "connect")
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
 
-        val profile = ProfileFragment()
+        ApiClient.getInstance()?.callInvitationApi(sharedPreferences.getString(Constants.Authorization,null).toString(), item._id)?.enqueue(object :
+            Callback<SendInvitationResponse> {
+            override fun onResponse(
+                call: Call<SendInvitationResponse>,
+                response: Response<SendInvitationResponse>
+            ) {
+                try {
+                    Toast.makeText(context, response.body()!!.message, Toast.LENGTH_SHORT).show()
 
-        Toast.makeText(requireContext(), "Profile Clicked", Toast.LENGTH_SHORT).show()
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.flFragment, profile).addToBackStack("ProfileFragment").commit()
+                    val profile = ProfileFragment()
 
-        val bundle = Bundle()
-        bundle.putString("audience_id", item._id)
-        profile.arguments = bundle
+                    Toast.makeText(requireContext(), "Profile Clicked", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.flFragment, profile).addToBackStack("ProfileFragment").commit()
+
+                    val bundle = Bundle()
+                    bundle.putString("audience_id", item._id)
+                    profile.arguments = bundle
+                 }
+                catch (ex: Exception)
+                {
+                    ex.printStackTrace()
+                }
+            }
+
+            override fun onFailure(call: Call<SendInvitationResponse>, t: Throwable) {
+                Log.e(Constants.ApiError, "onFailure: ", t)
+            }
+        })
+
     }
 
     override fun onClickAtConnection(item: ConnectionResponse) {

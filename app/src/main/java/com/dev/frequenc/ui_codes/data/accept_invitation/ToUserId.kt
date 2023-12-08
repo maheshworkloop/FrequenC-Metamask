@@ -11,7 +11,7 @@ data class ToUserId(
     val dob: String,
     val ekyc: Boolean,
     val email: String,
-    val fullName: Any,
+    val fullName: String,
     val gender: String,
     val id: String,
     val isOtpVerified: Boolean,

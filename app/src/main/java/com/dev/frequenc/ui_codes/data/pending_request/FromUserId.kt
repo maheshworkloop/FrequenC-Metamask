@@ -3,7 +3,7 @@ package com.dev.frequenc.ui_codes.data.pending_request
 data class FromUserId(
     val __v: Int,
     val _id: String,
-    val audience_id: String,
+    val audience_id: AudienceId,
     val city: String,
     val country: String,
     val createdAt: String,
@@ -11,7 +11,7 @@ data class FromUserId(
     val dob: String,
     val ekyc: Boolean,
     val email: String,
-    val fullName: Any,
+    val fullName: String,
     val gender: String,
     val id: String,
     val isOtpVerified: Boolean,

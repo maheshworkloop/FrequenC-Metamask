@@ -27,7 +27,7 @@ import retrofit2.Response
 
 class AllChatListViewModel : ViewModel() {
 
-    private val userLists = ArrayList<String>()
+    private var userLists = ArrayList<String>()
     private val _myRequestCount = MutableLiveData<Int>(0)
     val myRequestCount: LiveData<Int>
         get() = _myRequestCount
@@ -40,7 +40,7 @@ class AllChatListViewModel : ViewModel() {
     val toastMessage: LiveData<String>
         get() = _toastMessage
 
-    private val _isOnlineList = MutableLiveData<List<Boolean>>(emptyList())
+    private val _isOnlineList = MutableLiveData<List<Boolean>>(ArrayList())
     val isOnlineList: LiveData<List<Boolean>>
         get() = _isOnlineList
 
@@ -126,24 +126,22 @@ class AllChatListViewModel : ViewModel() {
                                     adapterLists.add(
                                         ConnectionResponse(
                                             images,
-                                            data.from_user_id.fullName.toString(),
-                                            data.from_user_id.id
+                                            data.from_user_id.fullName,
+                                            data.from_user_id._id
                                         )
                                     )
                                     userIdsLst.add(data.id)
                                 }
+                                userLists = userIdsLst
                                 try {
                                     _connectionList.postValue(adapterLists)
-                                    _userListsData.postValue(userIdsLst)
                                     setDataFound(true)
+                                    _requestCount.postValue(response.body()!!.requestCount)
                                 } catch (ex: Exception) {
-                                    setDataFound(false)
-                                    _connectionList.postValue(emptyList())
-                                    _userListsData.postValue(emptyList())
                                 }
+
                             } else {
-                                _connectionList.postValue(emptyList())
-                                _userListsData.postValue(emptyList())
+                                _connectionList.postValue(ArrayList())
                                 setDataFound(false)
                             }
                         } else {
@@ -175,10 +173,8 @@ class AllChatListViewModel : ViewModel() {
                         if (response.isSuccessful && response.body() != null && response.body()?.data.isNullOrEmpty() == false) {
                             if (response.body() != null) {
                                 try {
-                                    _requestCount.postValue(response.body()?.count)
-                                    _myRequestCount.postValue(response.body()?.count)
-                                    _pendingRequestCount.postValue(response.body()?.count)
-                                    _chatCount.postValue(response.body()?.count)
+                                    _pendingRequestCount.postValue(response.body()!!.pendingCount)
+                                    _myRequestCount.postValue(response.body()!!.count)
                                 } catch (ex: Exception) {
                                 }
                                 try {
@@ -186,11 +182,13 @@ class AllChatListViewModel : ViewModel() {
                                     setDataFound(true)
                                 } catch (ex: Exception) {
                                     setDataFound(false)
-                                    _userListsData.postValue(emptyList())
+                                    _userListsData.postValue(ArrayList())
                                 }
                             } else {
-                                _userListsData.postValue(emptyList())
+                                _userListsData.postValue(ArrayList())
                                 setDataFound(false)
+                                _pendingRequestCount.postValue(0)
+                                _myRequestCount.postValue(0)
                             }
                         } else {
                             Log.d(
@@ -284,30 +282,38 @@ class AllChatListViewModel : ViewModel() {
                     response: Response<PendingRequestResponse>
                 ) {
                     if (response.body() != null && response.body()?.data.isNullOrEmpty() == false) {
-                        _userListsData.postValue(response.body()?.data)
                         try {
+                            _requestCount.postValue(response.body()?.count)
+                            _pendingRequestCount.postValue(response.body()?.requestCount)
                             _userListsData.postValue(response.body()?.data)
                             setDataFound(true)
                         } catch (ex: Exception) {
                             setDataFound(false)
-                            _userListsData.postValue(emptyList())
+                            _userListsData.postValue(ArrayList())
+                            _pendingRequestCount.postValue(0)
                         }
                     } else {
-                        _userListsData.postValue(emptyList())
+                        _userListsData.postValue(ArrayList())
+                        _pendingRequestCount.postValue(0)
                         setDataFound(false)
                     }
                 }
 
                 override fun onFailure(call: Call<PendingRequestResponse>, t: Throwable) {
-                    _userListsData.postValue(emptyList())
+                    _userListsData.postValue(ArrayList())
+                    _pendingRequestCount.postValue(0)
                     setDataFound(false)
                     Log.e(Constants.ApiError, "onFailure:callPendingRequestApi ", t)
                 }
             })
-            val usernamesList = ChatClient.getInstance().contactManager().contactsFromLocal
 
-            _pendingRequestCount.postValue(usernamesList.size)
-            Log.d(Constants.TAG_CHAT, "callPendingRequestApi:  " + usernamesList)
+            try {
+                var usernamesList = ChatClient.getInstance().contactManager().allContactsFromServer
+                Log.d(Constants.TAG_CHAT, "callPendingRequestApi:  " + usernamesList)
+            }
+            catch (ex: Exception) {
+                ex.printStackTrace()
+            }
         }
 
     }
@@ -467,9 +473,10 @@ class AllChatListViewModel : ViewModel() {
                                 }
                                 oldConnectionLists.add(isOnline)
                             }
-                            }
-                            _isOnlineList.postValue(oldConnectionLists)
+                        }
+                        _isOnlineList.postValue(oldConnectionLists)
                     }
+
                     override fun onError(errorCode: Int, errorMsg: String) {}
                 })
         }

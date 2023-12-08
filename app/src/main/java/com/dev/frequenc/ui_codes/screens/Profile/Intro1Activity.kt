@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityIntro1Binding
 import com.dev.frequenc.ui_codes.MainActivity
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 
 class Intro1Activity : AppCompatActivity() {
 

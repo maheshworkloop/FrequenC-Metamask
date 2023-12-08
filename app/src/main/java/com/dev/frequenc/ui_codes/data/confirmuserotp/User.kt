@@ -11,7 +11,7 @@ data class User(
     val dob: String,
     val ekyc: Boolean,
     val email: String,
-    val fullName: Any,
+    val fullName: String,
     val gender: String,
     val id: String,
     val isOtpVerified: Boolean,
@@ -23,5 +23,5 @@ data class User(
     val updatedAt: String,
     val user_type: String,
     val venue_id: List<Any>,
-    val wallet: Int
+    val wallet: Any
 )

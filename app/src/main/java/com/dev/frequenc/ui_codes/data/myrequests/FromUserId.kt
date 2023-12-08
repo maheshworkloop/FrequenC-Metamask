@@ -3,7 +3,7 @@ package com.dev.frequenc.ui_codes.data.myrequests
 data class FromUserId(
     val __v: Int,
     val _id: String,
-    val audience_id: String,
+    val audience_id: AudienceId,
     val city: String,
     val country: String,
     val createdAt: String,
@@ -16,6 +16,8 @@ data class FromUserId(
     val id: String,
     val isOtpVerified: Boolean,
     val kyb_email_verified: Boolean,
+    val lastName: String,
+    val marital_status: String,
     val phone_no: String,
     val postalCode: String,
     val state: String,
@@ -23,5 +25,5 @@ data class FromUserId(
     val updatedAt: String,
     val user_type: String,
     val venue_id: List<Any>,
-    val wallet: Any
+    val wallet: Double
 )

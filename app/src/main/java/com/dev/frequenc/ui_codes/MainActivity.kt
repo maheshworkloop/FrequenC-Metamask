@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.os.AsyncTask.execute
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -20,13 +21,15 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
 import com.bumptech.glide.Glide
-import com.dev.agorademo2.LogUtils
+import com.dev.agorademo2.LogUtils.showErrorLog
+import com.dev.agorademo2.LogUtils.showErrorToast
+import com.dev.agorademo2.LogUtils.showToast
 import com.dev.agorademo2.PermissionsManager
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
 import com.dev.frequenc.ui_codes.connect.chat.AllChatUserFragment
+import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.screens.Dashboard.MarketPlaceFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.savedevent.SavedEventFragment
@@ -34,7 +37,6 @@ import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletFragment
 import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.booking_process.booking_history.BookingHistoryFragment
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.ui_codes.util.KeysConstant
 import com.dev.frequenc.ui_codes.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import io.agora.CallBack
@@ -44,6 +46,7 @@ import io.agora.chat.ChatClient
 import io.agora.chat.ChatOptions
 import io.agora.chat.uikit.EaseUIKit
 import io.agora.cloud.HttpClientManager
+import io.agora.cloud.HttpClientManager.Method_POST
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
@@ -53,8 +56,9 @@ import java.io.Serializable
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private var pwd: String? = "dssadasd"
-    private var username: String? = "sdfds"
+    private var pwd: String? = "skkfjdsd"
+//    private var username: String? = "skkfjdsd"
+    private var username: String? = "7777444422"
     val requestcode = 101
     var latitude = ""
     var longitude = ""
@@ -100,15 +104,18 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.bottom_marketplace ->
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
-                R.id.bottom_chat      ->
+
+                R.id.bottom_chat ->
 //                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
                     setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
-                R.id.bottom_connect     ->
+
+                R.id.bottom_connect ->
 //                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
 
                     setCurrentFragment(connectFragment, "ConnectFragment")
+
                 R.id.bottom_wallet ->
-                    Toast.makeText(this,"Under Construction",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show()
 
 //                    startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
 //                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
@@ -119,14 +126,15 @@ class MainActivity : AppCompatActivity() {
 
 
         try {
-//            sharedPreferences.edit().putString(Constants.User_Id, username)
-//                .apply()
-            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null).toString()
-            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
-            pwd= username!!.substring(generatedUsername!!.lastIndex-5, generatedUsername!!.lastIndex) + "@" + mob_no!!.substring(mob_no.lastIndex-5, mob_no.lastIndex)
-            username = generatedUsername
+            sharedPreferences.edit().putString(Constants.User_Id, username)
+                .apply()
+//            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null).toString()
+//            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
+//            pwd= username!!.substring(generatedUsername!!.lastIndex-5, generatedUsername!!.lastIndex) + "@" + mob_no!!.substring(mob_no.lastIndex-5, mob_no.lastIndex)
+//            username = generatedUsername
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        catch (e: Exception) { e.printStackTrace()}
 
         val userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
 
@@ -149,7 +157,7 @@ class MainActivity : AppCompatActivity() {
                 closeDrawer()
                 showLogout()
 //           binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
-           binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
 
@@ -164,12 +172,12 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered,false)) {
-                signUp()
-            }
-            else {
-                getTokenFromAppServer(NEW_LOGIN)
-            }
+//            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered,false)) {
+//                signUp()
+//            }
+//            else {
+            getTokenFromAppServer(NEW_LOGIN)
+//            }
         } else {
             Toast.makeText(this, "User Not Logged in", Toast.LENGTH_SHORT).show()
             Log.e("Audience Id", audience_id)
@@ -181,21 +189,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        onBackPressedDispatcher.addCallback( this@MainActivity, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
+        onBackPressedDispatcher.addCallback(
+            this@MainActivity,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
 
-                try {
-                    if (supportFragmentManager.fragments.size > 1 && (supportFragmentManager?.findFragmentByTag(
-                            "MarketPlaceFragment"
-                        )?.isVisible == false)
-                    ) {
+                    try {
+                        if (supportFragmentManager.fragments.size > 1 && (supportFragmentManager?.findFragmentByTag(
+                                "MarketPlaceFragment"
+                            )?.isVisible == false)
+                        ) {
 
-                        val fragmentManager = supportFragmentManager
-                        val backStackCount = fragmentManager.backStackEntryCount
-                        if (fragmentManager.backStackEntryCount > 0)
-                            fragmentManager.popBackStackImmediate()
-                        else
-                            onBackPressedDispatcher.onBackPressed()
+                            val fragmentManager = supportFragmentManager
+                            val backStackCount = fragmentManager.backStackEntryCount
+                            if (fragmentManager.backStackEntryCount > 0)
+                                fragmentManager.popBackStackImmediate()
+                            else
+                                onBackPressedDispatcher.onBackPressed()
 //                        for (i in 0 until backStackCount) {
 //                            val backStackEntry: FragmentManager.BackStackEntry =
 //                                fragmentManager.getBackStackEntryAt(backStackCount)
@@ -225,29 +235,30 @@ class MainActivity : AppCompatActivity() {
 //
 //                transaction.addToBackStack(null)
 //                transaction.commit()
-                    } else {
-                        val builder1 = AlertDialog.Builder(this@MainActivity)
-                            .setMessage("Do you want to exit ?")
-                            .setTitle("Alert !")
-                            .setPositiveButton("Yes") { dialog, id ->
+                        } else {
+                            val builder1 = AlertDialog.Builder(this@MainActivity)
+                                .setMessage("Do you want to exit ?")
+                                .setTitle("Alert !")
+                                .setPositiveButton("Yes") { dialog, id ->
 //                                super.onBackPressed()
-                                System.exit(0)
-                            }
-                            .setNegativeButton("No") { dialog, id ->
-                                dialog.cancel()
-                            }
+                                    System.exit(0)
+                                }
+                                .setNegativeButton("No") { dialog, id ->
+                                    dialog.cancel()
+                                }
 
 
-                        builder1.create().show()
+                            builder1.create().show()
+                        }
+                    } catch (ex: Exception) {
+                        ex.printStackTrace()
+                        supportFragmentManager.beginTransaction()
+                            .add(R.id.flFragment, MarketPlaceFragment(), "MarketPlaceFragment")
+                            .commit()
                     }
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                    supportFragmentManager.beginTransaction()
-                        .add(R.id.flFragment, MarketPlaceFragment(), "MarketPlaceFragment").commit()
                 }
-            }
 
-        })
+            })
 
 //        this.supportFragmentManager.addOnBackStackChangedListener {
 //            if (supportFragmentManager.findFragmentByTag("MarketPlaceFragment")?.isVisible == true) {
@@ -315,8 +326,7 @@ class MainActivity : AppCompatActivity() {
                     onUserException("user_device_changed")
                 } else if (error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
                     onUserException("user_login_too_many_devices")
-                }
-                else {
+                } else {
                     onUserException(error.toString())
                 }
             }
@@ -362,7 +372,7 @@ class MainActivity : AppCompatActivity() {
                 val code = response.code
                 val responseInfo = response.content
                 if (code == 200) {
-                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered,true).apply()
+                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, true).apply()
                     if (responseInfo != null && responseInfo.length > 0) {
                         val `object` = JSONObject(responseInfo)
                         val resultCode = `object`.getString("code")
@@ -391,7 +401,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     Log.d(Constants.TAG_CHAT, responseInfo)
 //                    LogUtils.showErrorLog(binding.tvLog, responseInfo)
-                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered,false).apply()
+                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, false).apply()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -400,23 +410,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun getTokenFromAppServer(requestType: String) {
         if (ChatClient.getInstance().options.autoLogin && ChatClient.getInstance().isLoggedInBefore) {
-//            LogUtils.showErrorLog(binding.tvLog, getString(R.string.has_login_before))
             Log.d(Constants.TAG_CHAT, getString(R.string.has_login_before))
             return
         }
-//        val pwd = (findViewById<View>(R.id.et_pwd) as EditText).text.toString().trim { it <= ' ' }
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
-        Log.d(Constants.TAG_CHAT, getString(R.string.username_or_pwd_miss))
-//            LogUtils.showErrorToast(
-//                this@MainActivity,
-//                binding.tvLog,
-//                getString(R.string.username_or_pwd_miss)
-//            )
-        return
-    }
-        this.runOnUiThread {
+//            showErrorToast(this@MainActivity, tv_log, getString(R.string.username_or_pwd_miss))
+            Log.d(Constants.TAG_CHAT, getString(R.string.username_or_pwd_miss))
+            return
+        }
+        this.execute {
             try {
                 val headers: MutableMap<String, String> =
                     HashMap()
@@ -424,13 +429,13 @@ class MainActivity : AppCompatActivity() {
                 val request = JSONObject()
                 request.putOpt("userAccount", username)
                 request.putOpt("userPassword", pwd)
+//                showErrorLog(tv_log, "begin to getTokenFromAppServer ...")
                 Log.d(Constants.TAG_CHAT, "begin to getTokenFromAppServer ...")
-//                LogUtils.showErrorLog(binding.tvLog, "begin to getTokenFromAppServer ...")
                 val response = HttpClientManager.httpExecute(
                     LOGIN_URL,
                     headers,
                     request.toString(),
-                    HttpClientManager.Method_POST
+                    Method_POST
                 )
                 val code = response.code
                 val responseInfo = response.content
@@ -438,28 +443,31 @@ class MainActivity : AppCompatActivity() {
                     if (responseInfo != null && responseInfo.length > 0) {
                         val `object` = JSONObject(responseInfo)
                         val token = `object`.getString("accessToken")
-                        if (TextUtils.equals(
-                                requestType,
-                                NEW_LOGIN
-                            )
-                        ) {
+                        if (TextUtils.equals(requestType, NEW_LOGIN)) {
                             ChatClient.getInstance()
                                 .loginWithAgoraToken(username, token, object : CallBack {
                                     override fun onSuccess() {
-                                        Log.d(Constants.TAG_CHAT, getString(R.string.sign_in_success))
-                                        Toast.makeText(this@MainActivity, getString(R.string.sign_in_success), Toast.LENGTH_SHORT).show()
-
+//                                        showToast(
+//                                            this@MainActivity,
+//                                            tv_log,
+//                                            getString(R.string.sign_in_success)
+//                                        )
+                                        Log.d(
+                                            Constants.TAG_CHAT,
+                                            getString(R.string.sign_in_success)
+                                        )
                                     }
 
                                     override fun onError(code: Int, error: String) {
-//                                        LogUtils.showErrorToast(
+//                                        showErrorToast(
 //                                            this@MainActivity,
-//                                            binding.tvLog,
+//                                            tv_log,
 //                                            "Login failed! code: $code error: $error"
 //                                        )
-
-                                        Toast.makeText(this@MainActivity, "Login failed! code: $code error: $error", Toast.LENGTH_SHORT).show()
-                                        Log.d(Constants.TAG_CHAT, "Login failed! code: $code error: $error")
+                                        Log.d(
+                                            Constants.TAG_CHAT,
+                                            "Login failed! code: $code error: $error"
+                                        )
                                     }
 
                                     override fun onProgress(
@@ -468,40 +476,45 @@ class MainActivity : AppCompatActivity() {
                                     ) {
                                     }
                                 })
-                        } else if (TextUtils.equals(
-                                requestType,
-                                RENEW_TOKEN
-                            )
-                        ) {
+                        } else if (TextUtils.equals(requestType, RENEW_TOKEN)) {
                             ChatClient.getInstance().renewToken(token)
                         }
                     } else {
-                        Log.d(Constants.TAG_CHAT, "getTokenFromAppServer failed! code: $code error: $responseInfo")
-//                        LogUtils.showErrorToast(
+//                        showErrorToast(
 //                            this@MainActivity,
-//                            binding.tvLog,
+//                            tv_log,
 //                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
 //                        )
+                        Log.d(
+                            Constants.TAG_CHAT,
+                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
+                        )
                     }
                 } else {
-                    Log.d(Constants.TAG_CHAT, "getTokenFromAppServer failed! code: $code error: $responseInfo")
-//                    LogUtils.showErrorToast(
+//                    showErrorToast(
 //                        this@MainActivity,
-//                        binding.tvLog,
+//                        tv_log,
 //                        "getTokenFromAppServer failed! code: $code error: $responseInfo"
 //                    )
+                    Log.d(
+                        Constants.TAG_CHAT,
+                        "getTokenFromAppServer failed! code: $code error: $responseInfo"
+                    )
                 }
-            } catch (e: Exception) {
+            } catch (e: java.lang.Exception) {
                 e.printStackTrace()
-                Log.d(Constants.TAG_CHAT, "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message)
-//                LogUtils.showErrorToast(
+//                showErrorToast(
 //                    this@MainActivity,
-//                    binding.tvLog,
+//                    tv_log,
 //                    "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message
 //                )
+                Log.d(
+                    Constants.TAG_CHAT,
+                    "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message
+                )
             }
         }
-}
+    }
 
     fun onUserException(exception: String) {
 //        LogUtils.showLog(binding.tvLog, "onUserException: $exception")

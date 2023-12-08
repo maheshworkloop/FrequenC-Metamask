@@ -10,20 +10,25 @@ import com.dev.frequenc.databinding.ItemUserChatPendingListBinding
 import com.dev.frequenc.databinding.ItemUserChatRequestsBinding
 import com.dev.frequenc.databinding.ItemUserListBinding
 import com.dev.frequenc.ui_codes.data.ChatUserModel
+import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.data.pending_request.Data
+import com.dev.frequenc.util.ImageUtil
 
 
 class ChatListAdapter(
     private val chatList: ArrayList<Any>,
+    private val connectionList: ArrayList<ConnectionResponse>,
     private var useType: Int,
     private val itemListListener: ItemListListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
-        private const val ItemUserListLay = 1
-        private const val ItemUserChatPendingListLay = 2
+        private const val ItemUserListLay: Int = 1
+        private const val ItemUserChatPendingListLay: Int = 2
         private const val ItemUserChatRequestsLay: Int = 3
 
     }
+
+    var conectLst = connectionList
 
     private var mContext: Context? = null
 
@@ -41,13 +46,17 @@ class ChatListAdapter(
         ) {
             (chatItem as ChatUserModel)?.let {
                 val time = it.chatTime.toInt() / 60000
-                val user_image = it.chatPersonImage.toInt().toString()
+                val user_image = it.chatPersonImage
 
-                binding.tvLastMsg.text = "You: ${it.lastMessage}"
+                try {
+                    binding.tvLastMsg.text = "You: ${it.lastMessage.substring(4)}"
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
                 binding.tvTime.text = "$time min ago"
                 binding.tvProfileName.text = it.profileName
 
-////            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
+                ImageUtil.loadImage(binding.cvProfile, user_image)
                 binding.cvProfile.setOnClickListener {
                     itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
                 }
@@ -70,21 +79,37 @@ class ChatListAdapter(
             position: Int
         ) {
             (pendingItem as Data)?.let {
-                val item_image = pendingItem.status
+                var item_image: String = ""
+                try {
+                    item_image = pendingItem.from_user_id.audience_id.profile_pic.toString()
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
 
+                ImageUtil.loadImage(binding.cvProfile, item_image)
 
+                try {
+                    binding.tvProfileName.text =
+                        pendingItem.from_user_id.audience_id.fullName.toString()
+//                    binding.tvTime.text = pendingItem.from_user_id.
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
                 binding.cvProfile.setOnClickListener {
-                    itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
+                    itemListListener.onItemClicked(
+                        position,
+                        ItemUserChatPendingListLay,
+                        "goProfile"
+                    )
                 }
                 binding.btnAccept.setOnClickListener {
-                    itemListListener.onItemClicked(position, ItemUserListLay, "accept")
+                    itemListListener.onItemClicked(position, ItemUserChatPendingListLay, "accept")
                 }
                 binding.btnDecline.setOnClickListener {
-                    itemListListener.onItemClicked(position, ItemUserListLay, "decline")
+                    itemListListener.onItemClicked(position, ItemUserChatPendingListLay, "decline")
                 }
             }
 
-//            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
 
         }
     }
@@ -97,16 +122,24 @@ class ChatListAdapter(
             position: Int
         ) {
             (MyRequestDataItem as com.dev.frequenc.ui_codes.data.myrequests.Data)?.let {
-                binding.tvProfileName.text = it.from_user_id.fullName.toString()
-
-//            ImageUtil.loadImage(itemUserListBinding.cvProfile, )
-                binding.cvProfile.setOnClickListener {
-                    itemListListener.onItemClicked(position, ItemUserListLay, "goProfile")
+                try {
+                    binding.tvProfileName.text = it.to_user_id.audience_id.fullName.toString()
+                    var item_img = it.to_user_id.audience_id.profile_images[0].toString()
+//                    if (item_img.isNullOrEmpty() || item_img.isNullOrBlank()) {
+//                        for (connectonItm: ConnectionResponse in )
+//                    }
+                    ImageUtil.loadImage( binding.cvProfile, item_img)
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
                 }
 
-//                binding.itemLays.setOnClickListener {
-//                    itemListListener.onItemClicked(position, ItemUserListLay, "goChat")
-//                }
+                binding.cvProfile.setOnClickListener {
+                    itemListListener.onItemClicked(position, ItemUserChatRequestsLay, "goProfile")
+                }
+
+                binding.itemLays.setOnClickListener {
+                    itemListListener.onItemClicked(position, ItemUserChatRequestsLay, "goChat")
+                }
             }
         }
     }
@@ -181,8 +214,8 @@ class ChatListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 7
-//            return chatList.size
+//        return 7
+        return chatList.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -195,9 +228,15 @@ class ChatListAdapter(
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun refreshData(newData: List<Any>, newUseType: Int) {
+    fun refreshData(
+        newData: List<Any>,
+        connectionLists: List<ConnectionResponse>,
+        newUseType: Int
+    ) {
         chatList.clear()
         chatList.addAll(newData)
+        this.connectionList.clear()
+        this.connectionList.addAll(connectionLists)
         this.useType = newUseType
         notifyDataSetChanged()
     }
