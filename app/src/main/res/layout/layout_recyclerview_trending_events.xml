@@ -62,8 +62,6 @@
             />
 
 
-
-
         <RelativeLayout
                 android:id="@+id/rl_bookmark"
                 android:layout_width="@dimen/_18sdp"
@@ -88,7 +86,6 @@
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_bookmark" />
         </RelativeLayout>
-
 
         <TextView
                 android:id="@+id/tvTrendingEventName"

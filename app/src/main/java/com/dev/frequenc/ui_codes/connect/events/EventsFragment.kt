@@ -15,13 +15,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.frequenc.R
-import com.dev.frequenc.ui_codes.data.Data
-import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.VibeResponse
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import retrofit2.Call
 import retrofit2.Response
 
