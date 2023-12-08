@@ -36,8 +36,15 @@
         tools:remove="android:appComponentFactory"
         tools:targetApi="31">
         <activity
-            android:name=".ui_codes.screens.intro.IntroduceYourselfActivity"
+            android:name=".ui_codes.screens.Profile.Intro1Activity"
             android:exported="false" />
+        <activity
+            android:name=".ui_codes.screens.intro.PresentationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui_codes.screens.intro.IntroduceYourselfActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui_codes.connect.Profile.EditProfileActivity"
             android:exported="false" />

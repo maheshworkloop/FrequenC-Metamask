@@ -168,7 +168,7 @@
                      android:layout_height="@dimen/_80sdp"
                      android:layout_weight="1.7"
                      android:scaleType="fitXY"
-                     android:src="@drawable/img_connect"
+                     android:src="@drawable/add"
                      android:background="@drawable/bg_img_profile"
                      android:padding="@dimen/_2sdp"
                      />
