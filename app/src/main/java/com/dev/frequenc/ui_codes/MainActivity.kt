@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
@@ -82,6 +83,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.drawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
 
+//        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+
         val allChatUserFragment = AllChatUserFragment()
         val connectFragment = ConnectHomeFragment()
         val marketPlace = MarketPlaceFragment()
@@ -96,17 +100,17 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.bottom_marketplace ->
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
+                R.id.bottom_chat      ->
+//                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
+                    setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
+                R.id.bottom_connect     ->
+//                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
 
-                R.id.bottom_chat -> setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
-                R.id.bottom_connect ->
                     setCurrentFragment(connectFragment, "ConnectFragment")
+                R.id.bottom_wallet ->
+                    Toast.makeText(this,"Under Construction",Toast.LENGTH_SHORT).show()
 
-                R.id.bottom_wallet -> startActivity(
-                    Intent(
-                        this@MainActivity,
-                        com.dev.frequenc.MainActivity::class.java
-                    )
-                )
+//                    startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
 //                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
             }
 
@@ -144,8 +148,12 @@ class MainActivity : AppCompatActivity() {
             binding.navbar.rlLogout.setOnClickListener {
                 closeDrawer()
                 showLogout()
+//           binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
+           binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
+
+
             binding.navbar.rlSavedEvents.setOnClickListener {
                 setCurrentFragment(savedEventFragment, "SavedEventFragment")
                 closeDrawer()
@@ -168,6 +176,7 @@ class MainActivity : AppCompatActivity() {
             Log.e("Bearer", authorization)
             binding.navbar.rlLogout.visibility = View.INVISIBLE
             binding.navbar.viewLogout.visibility = View.INVISIBLE
+            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         }
 

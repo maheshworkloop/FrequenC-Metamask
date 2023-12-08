@@ -50,6 +50,15 @@
                         android:layout_centerHorizontal="true"
                         />
 
+                <ImageView
+                        android:id="@+id/ivEdit"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_toRightOf="@id/tvVibeTag"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:src="@drawable/img_edit"
+                        />
+
                 <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabLayoutProfile"
                         android:layout_width="match_parent"

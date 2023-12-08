@@ -13,14 +13,13 @@ class Constants {
         const val ApiError = "ApiError"
         const val IS_LOGIN = "IS_LOGIN"
         const val ApiResponse = "ApiResponse"
-        const val _currentFragmentTag: String = "0"
-        const val isUserTypeRegistered: String = "user_type_registered"
-        const val PhoneNo: String = "phone"
-        const val Error: String = "apierror"
-        const val Email: String = "email"
-        const val SharedPreference: String = "mySharePreference"
-        const val TAG_CHAT: String  = "ChatErrors"
-
+        val _currentFragmentTag: String = "0"
+        val isUserTypeRegistered: String = "user_type_registered"
+        val isFirst_Time_User: String = "isFirst_Time_User"
+        val PhoneNo: String = "phone"
+        val Error: String = "apierror"
+        val Email: String = "email"
+        val SharedPreference: String = "mySharePreference"
 
     }
 

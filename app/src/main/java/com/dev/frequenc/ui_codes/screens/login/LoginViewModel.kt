@@ -1,5 +1,6 @@
 package com.dev.frequenc.ui_codes.screens.login
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -112,6 +113,10 @@ class LoginViewModel : ViewModel() {
         _currentFragmentTag.value = "-1"
     }
 
+    fun moveToIntro() {
+        _currentFragmentTag.value = "3"
+    }
+
     fun callVerifyOtpApi(phone_no: String?, otp: String) {
         viewModelScope.launch {
             __isApiCalled.value = true
@@ -179,12 +184,21 @@ class LoginViewModel : ViewModel() {
                                                 moveToHome()
                                             } else {
                                                 isUserTypeRegistered = false
-                                                moveToUserType()
+//                                                callUpdateUserTypeApi(
+//                                                    _receivedToken,
+//                                                    phone_no,
+//                                                    "audience"
+//                                                )
                                             }
                                         } catch (e: Exception) {
                                             e.printStackTrace()
                                             isUserTypeRegistered = false
-                                            moveToUserType()
+//                                            moveToUserType()
+//                                            callUpdateUserTypeApi(
+//                                                _receivedToken,
+//                                                phone_no,
+//                                                "audience"
+//                                            )
                                         }
                                     } else {
                                         Log.d(

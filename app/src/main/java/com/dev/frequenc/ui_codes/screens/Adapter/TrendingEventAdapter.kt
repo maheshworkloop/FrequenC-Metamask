@@ -16,7 +16,7 @@ import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.util.AppCommonMethods
 import com.dev.frequenc.ui_codes.util.Constants
 
-class TrendingEventAdapter(private val mList: List<TrendingEventsResponse>,
+class TrendingEventAdapter (private val mList: List<TrendingEventsResponse>,
                            mListener: ListAdapterListener,val isLogin : Boolean
                 ) : RecyclerView.Adapter<TrendingEventAdapter.ViewHolder> (){
 

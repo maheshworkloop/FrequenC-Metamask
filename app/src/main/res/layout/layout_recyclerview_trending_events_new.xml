@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_180sdp"
+    android:layout_width="@dimen/_200sdp"
     android:layout_height="wrap_content"
     android:layout_marginRight="@dimen/_10sdp"
     android:layout_marginTop="@dimen/_2sdp"
@@ -143,7 +143,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:background="@drawable/bg_event_type_new"
-            app:layout_constraintTop_toBottomOf="@id/tvTrendingEventName"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingVertical="@dimen/_4sdp"
@@ -153,10 +152,68 @@
             android:textColor="@color/white"
             android:maxLines="1"
             android:textSize="@dimen/_9sdp"
-            android:layout_marginTop="@dimen/_15sdp"
             />
 
 
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvTrendingEventType"
+                app:layout_constraintTop_toBottomOf="@id/tvLocation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/img_pf"
+                    app:civ_border_width="@dimen/_1sdp"
+                    app:civ_border_color="@color/material_grey_500"
+
+                    />
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/img_pf2"
+
+                    android:layout_marginLeft="-6dp"
+                    android:layout_toRightOf="@+id/iv1"
+                    app:civ_border_width="@dimen/_1sdp"
+                    app:civ_border_color="@color/material_grey_500"
+                    />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv3"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/img_pf3"
+
+                    android:layout_marginLeft="-6dp"
+                    android:layout_toRightOf="@id/iv2"
+                    app:civ_border_width="@dimen/_1sdp"
+                    app:civ_border_color="@color/material_grey_500"
+                    />
+            <TextView
+                    android:id="@+id/tvGoing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_pf"
+                    android:layout_toRightOf="@id/iv3"
+                    android:text="+39 Going"
+                    android:textSize="@dimen/_8sdp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/material_red_500"
+                    style="@style/textViewRegularBold"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    />
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

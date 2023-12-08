@@ -31,7 +31,8 @@ class UpcomingEventResponse(
     val created_at: String,
     val updated_at: String,
     val __v: Int,
-    val venueid: Venue
+    val venueid: Venue,
+    val is_bookmark : Boolean
 )
 
 data class Venue(

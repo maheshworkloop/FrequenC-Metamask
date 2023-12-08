@@ -47,6 +47,7 @@ import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
 import com.dev.frequenc.ui_codes.screens.ArtistDetail.ArtistDetailsActivity
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.MainActivity
+import com.dev.frequenc.ui_codes.screens.intro.IntroduceYourselfActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -68,7 +69,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
     lateinit var rvTrendingEvents : RecyclerView
     lateinit var rvTrendingArtist : RecyclerView
     lateinit var rvAllData : RecyclerView
-    lateinit var progressDialog : ProgressBar
+    lateinit var progressDialog : ImageView
     lateinit var mContext: Context
     lateinit var tvLocation: TextView
     lateinit var rlSearch: RelativeLayout
@@ -124,6 +125,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         root = inflater.inflate(R.layout.fragment_market_place, container, false)
 
 
+
         gifImageView = root.findViewById<GifImageView>(R.id.ivAnimSplash)
 
         rvCategory = root.findViewById(R.id.rvCategory)
@@ -165,6 +167,13 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
             startActivity(intent)
         }
 
+        rlLocation.setOnClickListener {
+            val intent = Intent(requireContext(),IntroduceYourselfActivity::class.java)
+            startActivity(intent)
+        }
+
+        Glide.with(requireContext()).asGif() .load(R.drawable.frequenc_loader).
+             into(progressDialog)
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -208,8 +217,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         }
 
         ivNotification.setOnClickListener {
-            val intent = Intent(activity,  NotificationActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(activity,  NotificationActivity::class.java)
+//            startActivity(intent)
         }
         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
 

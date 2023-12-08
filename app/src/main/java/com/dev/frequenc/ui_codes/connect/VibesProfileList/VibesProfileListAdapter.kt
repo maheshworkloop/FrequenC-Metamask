@@ -39,18 +39,24 @@ class VibesProfileListAdapter(val mList : List<MatchVibeData>,val mListener : Li
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item = mList[position]
-        holder.tvName.text = item.name
 
         val dateParts: List<String> = item.dob.split("-")
         val day = dateParts[2]
         val month = dateParts[1]
         val year = dateParts[0]
 //        item.dob
-        holder.tvAge.text = "Age " + getAge(year.toInt(), month.toInt(),day.toInt()).toString()
+        holder.tvAge.text = getAge(year.toInt(), month.toInt(),day.toInt()).toString()
 
         holder.clCard.setOnClickListener { mListener.onClickAtProfile(item) }
 
-        Glide.with(mContext).load(item.banner_image).into(holder.ivImage)
+        Glide.with(mContext).load(item.profile_pic).into(holder.ivImage)
+
+        if(!item.profile_pic.isNullOrEmpty())
+            Glide.with(mContext).load(item.profile_pic).into(holder.ivImage)
+        else
+            Glide.with(mContext).load(R.drawable.baseline_person_2_24).into(holder.ivImage)
+
+        holder.tvName.text = item.name + " , " + holder.tvAge.text
 
     }
 

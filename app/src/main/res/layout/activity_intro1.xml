@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui_codes.screens.Profile.Intro1Activity">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/ivAnimSplash"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:scaleType="fitCenter"
+        android:layout_centerVertical="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginLeft="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        app:layout_constraintTop_toBottomOf="@+id/ivAnimSplash"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:src="@drawable/dance_event"
+        android:layout_marginTop="@dimen/_20sdp"
+        style="@style/RoundCorner"
+        />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/iv1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Welcome to our FrequenC event marketplace! Buy tickets, connect with fellow attendees, and create lasting memories"
+        android:textSize="@dimen/_12sdp"
+        style="@style/textViewRegular"
+        android:layout_marginHorizontal="@dimen/_30sdp"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/llTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_30sdp"
+        app:layout_constraintTop_toBottomOf="@+id/tv1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Let the excitement begin"
+            android:textSize="@dimen/_12sdp"
+            style="@style/textViewRegular"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/event"
+            android:layout_marginLeft="@dimen/_5sdp"
+            />
+        <ImageView
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/event"
+            android:layout_marginLeft="@dimen/_5sdp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:background="@drawable/bg_book_now"
+        android:paddingHorizontal="@dimen/_28sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        android:textColor="@color/white"
+        style="@style/textViewRegularBold"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTv"
+        android:layout_marginTop="@dimen/_10sdp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

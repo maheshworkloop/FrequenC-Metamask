@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui_codes.screens.intro.PresentationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/material_grey_800"
+            android:layout_weight="1"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/material_grey_800"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llPresentation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:src="@drawable/baseline_crop_original_24"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="It's all about\nPresentation"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_28sdp"
+            style="@style/textViewRegularBold"
+            android:textColor="@color/font_color3"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:weightSum="2"
+            >
+
+            <ImageView
+                android:id="@+id/ivProfile1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_weight="1"
+                android:src="@drawable/add"
+                android:background="@drawable/bg_img_profile"
+                android:padding="@dimen/_2sdp"
+                android:scaleType="center"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:id="@+id/ivProfile2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_weight="1"
+                android:src="@drawable/add"
+                android:scaleType="center"
+                android:background="@drawable/bg_img_profile"
+                android:padding="@dimen/_2sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+
+                />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
+
+
+            <ImageView
+                android:id="@+id/ivBullet1"
+                android:layout_width="@dimen/_4sdp"
+                android:layout_height="@dimen/_4sdp"
+                android:src="@drawable/dot"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_10sdp"
+                style="@style/textViewRegular"
+                android:textColor="@color/black"
+                android:text="Two photos are mandatory"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ivBullet1"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_3sdp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
+
+
+            <ImageView
+                android:id="@+id/ivBullet2"
+                android:layout_width="@dimen/_4sdp"
+                android:layout_height="@dimen/_4sdp"
+                android:src="@drawable/dot"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show us that smile please"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_10sdp"
+                style="@style/textViewRegular"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ivBullet2"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_3sdp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
+
+
+            <ImageView
+                android:id="@+id/ivBullet3"
+                android:layout_width="@dimen/_4sdp"
+                android:layout_height="@dimen/_4sdp"
+                android:src="@drawable/dot"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avoid Blurry Pictures"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_10sdp"
+                style="@style/textViewRegular"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ivBullet3"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_3sdp"
+                />
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/_20sdp"
+        >
+        <ImageView
+            android:id="@+id/ivNext"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:src="@drawable/arrow_right"
+            android:padding = "@dimen/_8sdp"
+            android:background="@drawable/bg_img_intro"
+            android:layout_alignParentRight="true"
+            />
+
+
+        <ImageView
+            android:id="@+id/ivVisible"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/baseline_visibility_24"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_20sdp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This will be shown on your profile"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_10sdp"
+            style="@style/textViewRegular"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/ivVisible"
+            android:layout_marginLeft="@dimen/_3sdp"
+            android:layout_toLeftOf="@+id/ivNext"
+            android:layout_marginRight="@dimen/_3sdp"
+            />
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

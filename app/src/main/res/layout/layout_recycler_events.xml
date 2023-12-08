@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/clYourVibe"
+        android:layout_width="@dimen/_145sdp"
+        android:layout_height="@dimen/_176sdp"
+        android:layout_marginRight="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="@dimen/_10sdp"
+            >
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_textview_connect"
+                >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:shapeAppearance="@style/RoundCorner3"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/lookingforlove"
+                    android:alpha="1.0"
+                    />
+
+            <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FrequenC"
+                    android:textColor="@color/offwhite"
+                    android:textSize="@dimen/_16sdp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:elevation="@dimen/_10sdp"
+                    android:gravity="bottom"
+                    android:paddingHorizontal="@dimen/_6sdp"
+                    android:paddingVertical="@dimen/_3sdp"
+                    android:layout_centerInParent="true"
+
+                    />
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_textview_connect"
+                    />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
