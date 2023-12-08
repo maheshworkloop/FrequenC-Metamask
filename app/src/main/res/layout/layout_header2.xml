@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:elevation="@dimen/_5sdp">
+
+
+    <ImageView
+            android:id="@+id/ivHamburger"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/hamburger"
+            android:layout_centerVertical="true"
+            app:tint="@color/white"
+            android:layout_marginRight="@dimen/_12sdp"
+
+            />
+
+    <ImageView
+            android:id="@+id/ivNotification"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_toStartOf="@id/ivHamburger"
+            android:src="@drawable/notification"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:tint="@color/white"
+
+            />
+    <TextView
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:background="@drawable/bg_btn2"
+            android:paddingHorizontal="@dimen/_14sdp"
+            android:paddingVertical="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="invisible"
+            />
+
+
+    <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/ivAnimSplashConnct"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_centerVertical="true"
+            />
+
+
+
+
+</RelativeLayout>
+
+

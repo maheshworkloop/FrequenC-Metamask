@@ -54,15 +54,17 @@
                         android:textColor="@color/offwhite"
                         android:layout_marginLeft="@dimen/_3sdp"
                         android:layout_marginRight="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_8sdp"
                         android:textSize="@dimen/_12sdp"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        android:fontFamily="@font/epilogueregular"
                         android:textStyle="bold"
                         android:elevation="@dimen/_10sdp"
                         android:paddingHorizontal="@dimen/_4sdp"
                         android:paddingVertical="@dimen/_2sdp"
                         android:layout_above="@+id/tvAge"
+                       android:layout_alignParentBottom="true"
+                        style="@style/textViewRegular"
                         />
 
                 <TextView
@@ -82,6 +84,7 @@
                         android:paddingHorizontal="@dimen/_4sdp"
                         android:paddingVertical="@dimen/_2sdp"
                         android:layout_alignParentBottom="true"
+                        android:visibility="gone"
                         />
             </RelativeLayout>
 

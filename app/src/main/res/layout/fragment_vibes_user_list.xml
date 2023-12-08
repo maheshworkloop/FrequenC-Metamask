@@ -23,21 +23,14 @@
                 layout="@layout/layout_header"
                 android:id="@+id/rl_search_top" />
 
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-            android:background="#DEE1E6"
-                android:id="@+id/divider1"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_below="@id/rl_search_top"
-            />
+
 
         <RelativeLayout
                 android:id="@+id/rlConnection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/divider1"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_below="@id/rl_search_top"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:gravity="center_vertical"
@@ -49,8 +42,7 @@
                     android:layout_height="wrap_content"
                     android:text="Connection"
                     android:background="@drawable/bg_location"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_16sdp"
+                    android:textSize="@dimen/_13sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/epilogueregular"
@@ -67,23 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlConnection"
-                android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
                 >
 
-            <TextView
-                    android:id="@+id/tvNoConnection"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="The more you connect, the more you get the vibes..."
-                    android:background="@drawable/bg_textview_connection"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
-                    android:textSize="@dimen/_14sdp"
-                    android:fontFamily="@font/epilogueregular"
-                    android:paddingVertical="@dimen/_8sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:visibility="gone"
-                    />
+
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvConnection"
@@ -92,7 +71,6 @@
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:visibility="gone"
                     />
 
@@ -102,8 +80,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:visibility="visible"
                     />
 
@@ -114,7 +90,7 @@
                 android:layout_height="@dimen/_1sdp"
                 android:background="#DEE1E6"
                 android:id="@+id/divider3"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_below="@id/rlConnectionList"
                 />
 
@@ -125,14 +101,26 @@
                 android:text="Chats"
                 android:background="@drawable/bg_location"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_13sdp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:fontFamily="@font/epilogueregular"
                 android:layout_below="@id/divider3"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textStyle="bold"
+            style="@style/textViewRegularBold"
                 />
+
+        <ImageView
+            android:id="@+id/ivFilter"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:textSize="@dimen/_13sdp"
+            android:src="@drawable/baseline_filter_list_24"
+            android:layout_below="@id/divider3"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_alignParentRight="true"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVibeUser"

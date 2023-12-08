@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui_codes.connect.Profile.EditProfileActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:elevation="@dimen/_5sdp"
+            android:indeterminateTint="@color/grey"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:src="@drawable/icon_left_arrow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvEditProfile"
+            app:layout_constraintBottom_toBottomOf="@id/tvEditProfile"
+            android:layout_marginLeft="@dimen/_15sdp"
+            />
+
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            style="@style/textViewRegular"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <View
+                android:id="@+id/viewLine"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvEditProfile"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:elevation="@dimen/_5sdp"
+                />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPhotosTag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Photos"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/viewLine"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPhotosDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The main photo is how you appear to others on the swipe view"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/tvPhotosTag"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegular"
+                />
+
+        <LinearLayout
+                android:id="@+id/llProfilePicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPhotosDesc"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                >
+
+         <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1.3"
+                 android:orientation="vertical"
+                 android:layout_marginRight="@dimen/_5sdp"
+                 >
+             <ImageView
+                     android:id="@+id/ivProfile1"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/_250sdp"
+                     android:layout_weight="1.3"
+                     android:src="@drawable/img_event"
+                     android:scaleType="fitXY"
+                     android:background="@drawable/bg_img_profile"
+                     android:padding="@dimen/_2sdp"
+                     />
+         </LinearLayout>
+
+
+         <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1.7"
+                 android:orientation="vertical"
+                 android:layout_marginLeft="@dimen/_5sdp"
+                 >
+
+             <ImageView
+                     android:id="@+id/ivProfile2"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/_80sdp"
+                     android:layout_weight="1.7"
+                     android:scaleType="fitXY"
+                     android:src="@drawable/img_connect"
+                     android:layout_marginBottom="@dimen/_5sdp"
+                     android:background="@drawable/bg_img_profile"
+                     android:padding="@dimen/_2sdp"
+                     />
+
+             <ImageView
+                     android:id="@+id/ivProfile3"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/_80sdp"
+                     android:layout_weight="1.7"
+                     android:scaleType="fitXY"
+                     android:src="@drawable/img_connect"
+                     android:layout_marginBottom="@dimen/_5sdp"
+                     android:background="@drawable/bg_img_profile"
+                     android:padding="@dimen/_2sdp"
+                     />
+
+             <ImageView
+                     android:id="@+id/ivProfile4"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/_80sdp"
+                     android:layout_weight="1.7"
+                     android:scaleType="fitXY"
+                     android:src="@drawable/add"
+                     android:background="@drawable/bg_img_profile"
+                     android:padding="@dimen/_2sdp"
+                     />
+
+         </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/llProfilePicture"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+        <View
+                android:id="@+id/viewLine1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:elevation="@dimen/_5sdp"
+                />
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAboutMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About Me"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/viewLine1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAboutMeDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Make it easy for others to get a sense of who you are"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/tvAboutMe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegular"
+                />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etEditDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Share few words about yourself, your interests, and what you are looking in a connection"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@id/tvAboutMeDescription"
+
+                android:background="@drawable/bg_edittext"
+                app:boxBackgroundMode="none"
+                android:layout_marginTop="@dimen/_20sdp"
+                >
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="6"
+                android:minLines="3"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvMydetailsTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Details"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/etEditDescription"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+
+        <LinearLayout
+                android:id="@+id/llMyDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMydetailsTag"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                >
+
+          <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:paddingVertical="@dimen/_5sdp"
+                  android:paddingHorizontal="@dimen/_10sdp"
+                  >
+
+              <ImageView
+                      android:id="@+id/ivMydetailsIcon1"
+                      android:layout_width="@dimen/_22sdp"
+                      android:layout_height="@dimen/_22sdp"
+                      android:src="@drawable/ic_occupation_svg"
+                      android:layout_gravity="center_vertical"
+                      android:scaleType="fitXY"
+                      />
+
+              <com.google.android.material.textview.MaterialTextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="Occupation"
+                      android:textSize="@dimen/_15sdp"
+                       android:layout_toLeftOf="@id/tvDesc1"
+                      android:layout_toRightOf="@+id/ivMydetailsIcon1"
+                      android:layout_marginLeft="@dimen/_20sdp"
+                      android:layout_marginRight="@dimen/_5sdp"
+                      style="@style/textViewRegular"
+                      android:layout_gravity="center_vertical"
+                      />
+
+              <com.google.android.material.textview.MaterialTextView
+                      android:id="@+id/tvDesc1"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Add"
+                      android:textSize="@dimen/_15sdp"
+                      android:layout_marginLeft="@dimen/_20sdp"
+                      android:layout_marginRight="@dimen/_10sdp"
+                      style="@style/textViewRegular"
+                      android:layout_gravity="center_vertical"
+                      android:layout_toLeftOf="@id/ivMydetailsArrow1"
+                      />
+
+              <ImageView
+                      android:id="@+id/ivMydetailsArrow1"
+                      android:layout_width="@dimen/_22sdp"
+                      android:layout_height="@dimen/_22sdp"
+                      android:src="@drawable/ic_right_arrow"
+                      android:layout_gravity="center_vertical"
+                      android:padding="@dimen/_5sdp"
+                      app:tint="@color/material_grey_800"
+                      android:layout_alignParentRight="true"
+                      android:layout_marginRight="@dimen/_20sdp"
+                      />
+
+          </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon2"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc2"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon2"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow2"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow2"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                >
+
+            <ImageView
+                    android:id="@+id/ivMydetailsIcon3"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_occupation_svg"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Education"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_toLeftOf="@id/tvDesc3"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon3"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDesc3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow3"
+                    />
+
+            <ImageView
+                    android:id="@+id/ivMydetailsArrow3"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    />
+
+        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+
+                >
+
+            <ImageView
+                    android:id="@+id/ivMydetailsIcon4"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_occupation_svg"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_toLeftOf="@id/tvDesc4"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon4"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    />
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDesc4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delhi"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow4"
+                    />
+
+            <ImageView
+                    android:id="@+id/ivMydetailsArrow4"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    />
+
+        </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvMostPeople"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Most People also want to know"
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tvAboutMe"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    style="@style/textViewRegular"
+                    />
+
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon6"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Height"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc6"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon6"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow6"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow6"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon7"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Smoking"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc7"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon7"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow7"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow7"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon8"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Drinking"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc8"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon8"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow8"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow8"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon9"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pets"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc9"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon9"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow9"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow9"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon10"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Children"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc10"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon10"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow10"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow10"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon11"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Zodiac Sign"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc11"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon11"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow11"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow11"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+
+                    >
+
+                <ImageView
+                        android:id="@+id/ivMydetailsIcon12"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Religion"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvDesc12"
+                        android:layout_toRightOf="@+id/ivMydetailsIcon12"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvDesc12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivMydetailsArrow12"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivMydetailsArrow12"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvIEnjoy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I Enjoy"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/llMyDetail"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvIEnjoyDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adding your interest is a great way to find like-minded connections"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/tvIEnjoy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                style="@style/textViewRegular"
+                />
+
+        <LinearLayout
+                android:id="@+id/llEnjoy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_below="@id/tvMydetailsTag"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvIEnjoyDescription"
+
+                >
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Smoker"
+                    android:background="@drawable/bg_tv_mydetail_blue"
+                    android:textSize="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textColor="@color/black"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    />
+
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Smoker"
+                    android:background="@drawable/bg_tv_mydetail_blue"
+                    android:textSize="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textColor="@color/black"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+
+                    />
+
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Smoker"
+                    android:background="@drawable/bg_tv_mydetail_blue"
+                    android:textSize="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textColor="@color/black"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+
+                    />
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvICommunicate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I Communicate in"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/llEnjoy"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+        <LinearLayout
+                android:id="@+id/llICommunicate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvICommunicate"
+
+                >
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Smoker"
+                    android:background="@drawable/bg_tv_mydetail_blue"
+                    android:textSize="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textColor="@color/black"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    />
+
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Smoker"
+                    android:background="@drawable/bg_tv_mydetail_blue"
+                    android:textSize="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textColor="@color/black"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+
+                    />
+
+            <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Smoker"
+                    android:background="@drawable/bg_tv_mydetail_blue"
+                    android:textSize="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/epilogueregular"
+                    android:textColor="@color/black"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+
+                    />
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvLinkedAccounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Linked Accounts"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/llICommunicate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+
+        <LinearLayout
+                android:id="@+id/llLinkedAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLinkedAccounts"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    >
+
+                <ImageView
+                        android:id="@+id/ivSocialIcon1"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Instagram"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvSocialDesc1"
+                        android:layout_toRightOf="@+id/ivSocialIcon1"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvSocialDesc1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivSocialArrow1"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivSocialArrow1"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    >
+
+                <ImageView
+                        android:id="@+id/ivSocialIcon2"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Facebook"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvSocialDesc2"
+                        android:layout_toRightOf="@+id/ivSocialIcon2"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvSocialDesc2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivSocialArrow2"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivSocialArrow2"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    >
+
+                <ImageView
+                        android:id="@+id/ivSocialIcon3"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_occupation_svg"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Twitter"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_toLeftOf="@id/tvSocialDesc3"
+                        android:layout_toRightOf="@+id/ivSocialIcon3"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvSocialDesc3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        style="@style/textViewRegular"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@id/ivSocialArrow3"
+                        />
+
+                <ImageView
+                        android:id="@+id/ivSocialArrow3"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+                        app:tint="@color/material_grey_800"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

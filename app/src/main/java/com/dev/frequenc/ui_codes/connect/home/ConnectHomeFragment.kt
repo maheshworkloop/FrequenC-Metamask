@@ -114,7 +114,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         ivHamburger = root.findViewById(R.id.ivHamburger)
 
         val adapter = VibesTabAdapter(childFragmentManager)
-        adapter.addFragment(YourVibeFragment(),"Your Vibe")
+        adapter.addFragment(YourVibeFragment(),"Vibes")
         adapter.addFragment(EventsFragment(),"Events")
 
         viewPager.adapter = adapter
@@ -234,6 +234,7 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
         // Apply the layout parameters to the window
         dialog.window!!.attributes = layoutParams
 
+        dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.show()
     }
 

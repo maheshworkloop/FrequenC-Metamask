@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.MainActivity
-import com.dev.frequenc.ui_codes.util.Constants
+import com.dev.frequenc.ui_codes.screens.intro.IntroduceYourselfActivity
+import com.dev.frequenc.util.Constants
 import com.dev.frequenc.util.DataChangeListener
 
 class LoginActivity : AppCompatActivity(), DataChangeListener {
@@ -168,7 +169,12 @@ class LoginActivity : AppCompatActivity(), DataChangeListener {
                     addORReplaceFragment("VerifyOtpFragment", verifyOtpFragment)
                 } else if (data.equals("2") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
                     addFragment("UserTypeFragment", UserTypeFragment())
-                } else {
+                }
+                else if (data.equals("3") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
+                    val intent = Intent(this,IntroduceYourselfActivity::class.java)
+                    startActivity(intent)
+                }
+                else {
                     if (!data.toString().isNullOrEmpty() && data.equals("-1")) {
                         backToHome()
                     }

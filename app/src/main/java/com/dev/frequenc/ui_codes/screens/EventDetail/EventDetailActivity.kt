@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityEventDetailBinding
+import com.dev.frequenc.ui_codes.MainActivity
+import com.dev.frequenc.ui_codes.data.AllDataResponse
 import com.dev.frequenc.ui_codes.screens.Adapter.ArtistAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.SliderAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TicketAdapter
@@ -18,13 +21,18 @@ import com.dev.frequenc.ui_codes.screens.VenueDetail.VenueDetailActivity
 import com.dev.frequenc.ui_codes.data.Artist
 import com.dev.frequenc.ui_codes.data.EventResponse
 import com.dev.frequenc.ui_codes.data.EventTicket
+import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.ui_codes.data.VenueDetails
+import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
 import com.dev.frequenc.ui_codes.screens.SelectTicket.SelectTicketActivity
+import com.dev.frequenc.ui_codes.screens.ViewAllTrendingEvents.ViewAllTrendingEvents
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
 import com.dev.frequenc.ui_codes.util.Constants
 //import com.smarteist.autoimageslider.SliderView
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -32,7 +40,7 @@ import java.util.Locale
 
 
 class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListener,
-    ArtistAdapter.ListAdapterListener, VenueAdapter.ListAdapterListener { // End of Program
+    ArtistAdapter.ListAdapterListener, VenueAdapter.ListAdapterListener,TrendingEventAdapter.ListAdapterListener { // End of Program
 
     private var selectedDate: String? = null
     private var selectedItem: EventTicket? = null
@@ -43,6 +51,10 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
     var str = ""
     private lateinit var binding: ActivityEventDetailBinding
     lateinit var eventResponse: EventResponse
+
+    var flagFaq : Boolean = false
+    var flagTerms : Boolean = false
+    lateinit var trendingEventList : List<TrendingEventsResponse>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +67,8 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
 //        startActivity(Intent(this, MainActivity::class.java))
 //            finishAffinity()
         }
+
+        trendingEventApi()
 
 
 //        progressDialog = findViewById(R.id.progress_bar2)
@@ -87,6 +101,27 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
 
         }
 
+        binding.cvFaq.setOnClickListener {
+
+            flagFaq = !flagFaq
+
+            if(flagFaq)
+                binding.tvFaqIcon.setImageDrawable(getDrawable(R.drawable.minus))
+            else
+                binding.tvFaqIcon.setImageDrawable(getDrawable(R.drawable.plus))
+
+        }
+
+        binding.cvTerms.setOnClickListener {
+
+            flagTerms = !flagTerms
+
+            if(flagTerms)
+                binding.tvTermsConditionIcon.setImageDrawable(getDrawable(R.drawable.minus))
+            else
+                binding.tvTermsConditionIcon.setImageDrawable(getDrawable(R.drawable.plus))
+
+        }
 
         binding.btnBuy.setOnClickListener {
             if (selectedItem == null || selectedList.isNullOrEmpty()) {
@@ -151,7 +186,9 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
 
                             Log.d("linecount2", "linecount ${binding.tvDescription.lineCount}")
 
-                            binding.tvOnwards.text = "FRQ " + eventResponse.startPrice.toInt().toString() + " Onwards"
+                            binding.tvOnwards.text = "FRQ " + eventResponse.startPrice.toInt().toString()
+
+                            binding.tvOnwardsTag.visibility = View.VISIBLE
 
                             binding.tvLocation.text = eventResponse.venueDetails.venue_locality
 
@@ -318,6 +355,63 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
 
     }     // End of Event Detail Api
 
+    private fun trendingEventApi() {
+//        binding.progressBar2.visibility = View.VISIBLE
+
+        ApiClient.getInstance()!!.trendingEvents()!!.enqueue(object :
+            Callback<List<TrendingEventsResponse>> {
+            override fun onResponse(
+                call: Call<List<TrendingEventsResponse>>,
+                response: Response<List<TrendingEventsResponse>>
+            ) {
+
+
+//                binding.progressBar2.visibility = View.GONE
+
+                if (response.isSuccessful() && response.body() != null
+                ) {
+
+//                    rlTrendingEvent.visibility = View.VISIBLE
+
+                    Log.d(Constants.ApiResponse, "onResponse Retrofit: " + response.body())
+
+                    val res = response.body()
+
+                    trendingEventList = res!!
+
+                    binding.tvTrendingEventsViewAll.setOnClickListener {
+                        val intent = Intent(this@EventDetailActivity, ViewAllTrendingEvents::class.java)
+                        intent.putExtra("list",trendingEventList as Serializable)
+                        startActivity(intent)
+                    }
+
+                    for(i in res!!.indices)
+                    {
+                        Log.d(Constants.ApiResponse, " Body : ${res[i]!!.eventTitle}")
+
+                    }
+
+                    binding.rvTrendingEvents.apply {
+                        layoutManager = LinearLayoutManager(this@EventDetailActivity,LinearLayoutManager.HORIZONTAL,false)
+                        adapter = TrendingEventAdapter(res,this@EventDetailActivity,false)
+                    }
+
+
+                } else {
+//                    genericTypeResponse.postValue(null)
+                    //                        if (response.code() )\
+                }
+            }
+
+            override fun onFailure(call: Call<List<TrendingEventsResponse>>, t: Throwable) {
+//                setIsLoading(false)
+                Log.e(Constants.ApiError, "onFailure Retrofit: ", t)
+//                progressDialog.visibility = View.GONE
+
+            }
+        })
+
+    }
 
     private fun dateTimePickerDialog() {
         val calendar = Calendar.getInstance()
@@ -373,6 +467,21 @@ class EventDetailActivity : AppCompatActivity(), TicketAdapter.ListAdapterListen
         intent.putExtras(bundle)
         startActivity(intent)
 
+    }
+
+
+
+    override fun onClickAtCard(item: TrendingEventsResponse) {
+        val intent = Intent(this,EventDetailActivity::class.java)
+        val bundle = Bundle()
+        bundle.putString("eventid",item._id)
+        Log.d("eventid",item._id)
+
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
+
+    override fun onClickAtBookmark(item: TrendingEventsResponse) {
     }
 
 
