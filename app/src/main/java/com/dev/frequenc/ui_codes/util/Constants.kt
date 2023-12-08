@@ -12,6 +12,7 @@ class Constants {
         const val ApiResponse = "ApiResponse"
         val _currentFragmentTag: String = "0"
         val isUserTypeRegistered: String = "user_type_registered"
+        val isFirst_Time_User: String = "isFirst_Time_User"
         val PhoneNo: String = "phone"
         val Error: String = "apierror"
         val Email: String = "email"

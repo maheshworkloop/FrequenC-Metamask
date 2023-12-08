@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui_codes.screens.intro.IntroduceYourselfActivity">
 
+
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:weightSum="2"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         android:layout_marginTop="@dimen/_20sdp"
+         android:layout_marginHorizontal="@dimen/_10sdp"
+         >
+
+         <View
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/_3sdp"
+             android:background="@color/material_grey_800"
+             android:layout_weight="1"
+             />
+
+         <View
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/_3sdp"
+             android:background="@color/material_grey_400"
+             android:layout_weight="1"
+             />
+     </LinearLayout>
+
+
     <LinearLayout
+        android:id="@+id/llIntroduce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         >
 
         <ImageView
@@ -29,10 +63,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Introduce\nYourself"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_28sdp"
             style="@style/textViewRegularBold"
-            android:textColor="@color/appColor"
+            android:textColor="@color/font_color3"
             />
 
 
@@ -41,7 +75,7 @@
             android:layout_height="wrap_content"
             android:text="You won't be able to change this later"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_11sdp"
             style="@style/textViewRegular"
             android:textColor="@color/black"
             />
@@ -57,6 +91,7 @@
             android:paddingBottom="@dimen/_10sdp"
             android:textColorHint="@color/material_grey_700"
             style="@style/textViewRegularBold"
+            android:textSize="@dimen/_14sdp"
             />
 
 
@@ -71,6 +106,8 @@
             android:textColorHint="@color/material_grey_700"
             style="@style/textViewRegularBold"
             android:inputType="textEmailAddress"
+            android:textSize="@dimen/_14sdp"
+
             />
 
         <EditText
@@ -83,6 +120,8 @@
             android:hint="Location"
             android:textColorHint="@color/material_grey_700"
             style="@style/textViewRegularBold"
+            android:textSize="@dimen/_14sdp"
+
             />
 
         <TextView
@@ -102,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             >
 
           <LinearLayout
@@ -114,18 +153,17 @@
                   android:id="@+id/btnMale"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text=" Male "
+                  android:text=" Male  "
                   android:background="@drawable/bg_btn_gender"
-                  android:paddingHorizontal="@dimen/_28sdp"
-                  android:paddingVertical="@dimen/_8sdp"
+                  android:paddingHorizontal="@dimen/_32sdp"
+                  android:paddingVertical="@dimen/_11sdp"
                   android:textColor="@color/material_grey_800"
-                  android:layout_marginRight="@dimen/_15sdp"
                   style="@style/textViewRegularBold"
                   android:layout_alignParentRight="true"
                   android:layout_marginVertical="@dimen/_2sdp"
-                  android:layout_marginStart="@dimen/_15sdp"
-                  android:layout_marginEnd="@dimen/_15sdp"
-                  android:textSize="@dimen/_12sdp"
+                  android:layout_marginStart="@dimen/_8sdp"
+                  android:layout_marginEnd="@dimen/_8sdp"
+                  android:textSize="@dimen/_14sdp"
                   />
           </LinearLayout>
 
@@ -140,16 +178,15 @@
                     android:layout_height="wrap_content"
                     android:text="Female"
                     android:background="@drawable/bg_btn_gender"
-                    android:paddingHorizontal="@dimen/_28sdp"
-                    android:paddingVertical="@dimen/_8sdp"
+                    android:paddingHorizontal="@dimen/_32sdp"
+                    android:paddingVertical="@dimen/_11sdp"
                     android:textColor="@color/material_grey_800"
-                    android:layout_marginRight="@dimen/_15sdp"
                     style="@style/textViewRegularBold"
                     android:layout_alignParentRight="true"
                     android:layout_marginVertical="@dimen/_2sdp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:textSize="@dimen/_14sdp"
                     />
             </LinearLayout>
 
@@ -157,8 +194,60 @@
         </LinearLayout>
 
 
+
+
+
     </LinearLayout>
 
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/_20sdp"
+         android:layout_marginRight="@dimen/_30sdp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+         android:layout_marginBottom="@dimen/_20sdp"
+         >
+         <ImageView
+             android:id="@+id/ivNext"
+             android:layout_width="@dimen/_32sdp"
+             android:layout_height="@dimen/_32sdp"
+             android:src="@drawable/arrow_right"
+             android:padding = "@dimen/_8sdp"
+             android:background="@drawable/bg_img_intro"
+             android:layout_alignParentRight="true"
+             />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+         <ImageView
+             android:id="@+id/ivVisible"
+             android:layout_width="@dimen/_12sdp"
+             android:layout_height="@dimen/_12sdp"
+             android:src="@drawable/baseline_visibility_24"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="@dimen/_20sdp"
+             />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="This will be shown on your profile"
+             android:layout_marginTop="@dimen/_10sdp"
+             android:textSize="@dimen/_10sdp"
+             style="@style/textViewRegular"
+             android:textColor="@color/black"
+             android:layout_centerVertical="true"
+             android:layout_toRightOf="@+id/ivVisible"
+             android:layout_marginLeft="@dimen/_3sdp"
+             android:layout_toLeftOf="@+id/ivNext"
+             android:layout_marginRight="@dimen/_3sdp"
+             />
+
+     </RelativeLayout>
+
+
+
+ </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
