@@ -1,6 +1,7 @@
 package com.dev.frequenc.ui_codes.screens.Stripe
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.dev.frequenc.MainActivity
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.data.EventResponse
@@ -21,6 +23,7 @@ import com.dev.frequenc.ui_codes.data.req.UpdatePaymentRequest
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
 import com.stripe.android.PaymentConfiguration
+import com.stripe.android.core.utils.ContextUtils.packageInfo
 import com.stripe.android.model.ConfirmPaymentIntentParams
 import com.stripe.android.payments.paymentlauncher.PaymentLauncher
 import com.stripe.android.payments.paymentlauncher.PaymentResult
@@ -35,7 +38,9 @@ class StripePaymentActivity : AppCompatActivity() {
     val STRIPE_PUBLISHABLE_KEY="pk_test_51Msg80SDrSIXwtthzwmV8YXpzPbxhk0M1atGmMxtyf0ZlmpA6cWKdRiIZijNimCwD9vLiC21yFkYhhLbvDKG86y800dgr69PR1"
     val STRIPE_SECRET_KEY="sk_test_51Msg80SDrSIXwtthWlqKansXTFnhImdlF6IHkSSJEpzNRdhfRcRB3yW8kDHE8lxGepKYodzrQrrxwKR1JaSTJCJt00r8N3nAaT"
     val STRIPE_ACCOUNT_ID = "acct_1Msg80SDrSIXwtth"
-    
+
+    var client_scret = ""
+
     // we need paymentIntentClientSecret to start transaction
     private var paymentIntentClientSecret: String? = null
     private lateinit var paymentLauncher: PaymentLauncher
@@ -149,6 +154,8 @@ class StripePaymentActivity : AppCompatActivity() {
                     Toast.makeText(this@StripePaymentActivity,res!!.stripePayment.clientSecret,
                         Toast.LENGTH_SHORT).show()
                     Log.d("client secret",res!!.stripePayment.clientSecret)
+
+                    client_scret = res!!.stripePayment.clientSecret
 
                     paymentIntentClientSecret = res!!.stripePayment.clientSecret
 
@@ -281,15 +288,18 @@ class StripePaymentActivity : AppCompatActivity() {
         if(message.equals("Completed!"))
         {
 
-            updatePaymenentApi()
+            updatePaymentStatusApi()
         }
 
 
     }
 
-    private fun updatePaymenentApi()
+    private fun updatePaymentStatusApi()
     {
-        ApiClient.getInstance()!!.updatePayment(authorization, UpdatePaymentRequest("Success","123456"))!!.
+
+       var stripe_id = client_scret.substringBefore("_secret")
+
+        ApiClient.getInstance()!!.updatePaymentStatus(authorization, UpdatePaymentRequest("Success",stripe_id))!!.
         enqueue(object : retrofit2.Callback<InitiatePaymentResponse>{
 
 
@@ -302,10 +312,13 @@ class StripePaymentActivity : AppCompatActivity() {
                 if(response.isSuccessful && response.body()!=null)
                 {
 
-//                    val res = response.body()
-
                     Log.d("payment","Payment Status Updated")
 
+                    Toast.makeText(this@StripePaymentActivity,"Payment Completed Stripe Gateway",Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@StripePaymentActivity,MainActivity::class.java)
+                    startActivity(intent)
+                    finishAffinity()
 
 
                 }

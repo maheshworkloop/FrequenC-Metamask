@@ -160,7 +160,7 @@ interface ApiService {
     fun initiatePayment(@Header(Authorization) tokens : String,   @Body paymentInitiate : paymentInitiateReq): Call<InitiatePaymentResponse>?
 
     @POST(KeysConstant.Update_Payment)
-    fun updatePayment(@Header(Authorization) tokens : String , @Body updatePaymentRequest : UpdatePaymentRequest): Call<InitiatePaymentResponse>?
+    fun updatePaymentStatus(@Header(Authorization) tokens : String , @Body updatePaymentRequest : UpdatePaymentRequest): Call<InitiatePaymentResponse>?
 
 
     @GET(KeysConstant.Vibe_Event)

@@ -72,7 +72,8 @@ data class EventTicket(
     val created_at: String,
     val updated_at: String,
     val __v: Int,
-    val id: String
+    val id: String,
+    var selected : Boolean = false
 ) : Serializable
 
 data class VenueDetails(
