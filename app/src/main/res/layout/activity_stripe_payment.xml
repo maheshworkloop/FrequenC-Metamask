@@ -19,19 +19,28 @@
                 android:visibility="gone"
                 android:layout_centerInParent="true"
                 />
-    </RelativeLayout>
 
-    <com.stripe.android.view.CardInputWidget
+        <com.stripe.android.view.CardInputWidget
             android:id="@+id/cardInputWidget"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            />
 
-    <Button
+        <Button
             android:text="Pay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/payButton"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@android:color/holo_green_light"/>
+            android:backgroundTint="@android:color/holo_green_light"
+            android:layout_below="@id/cardInputWidget"
+            />
+
+    </RelativeLayout>
+
+
+
+
 
 </LinearLayout>

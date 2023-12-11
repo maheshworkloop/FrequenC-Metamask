@@ -11,6 +11,9 @@ import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.data.EventResponse
 import com.dev.frequenc.ui_codes.data.EventTicket
 import com.dev.frequenc.databinding.ActivityPaymentDetailBinding
+import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
+import com.dev.frequenc.ui_codes.screens.Stripe.StripePaymentActivity
+
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
 import com.dev.frequenc.ui_codes.util.Constants
@@ -24,6 +27,15 @@ class PaymentDetailActivity : AppCompatActivity() {
     lateinit var authorization : String
     lateinit var audience_id : String
     private lateinit var sharedPreferences: SharedPreferences
+
+    lateinit var  eventDetails : EventResponse
+
+    lateinit var  item : EventTicket
+
+    lateinit var count : String
+
+    lateinit var audience : AudienceDataResponse
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPaymentDetailBinding.inflate(layoutInflater)
@@ -36,11 +48,11 @@ class PaymentDetailActivity : AppCompatActivity() {
         audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
 
 
-        val eventDetails = intent.getSerializableExtra("eventDetail") as EventResponse
+        eventDetails = intent.getSerializableExtra("eventDetail") as EventResponse
 
-        val item = intent.getSerializableExtra("item") as EventTicket
+        item = intent.getSerializableExtra("item") as EventTicket
 
-        val count = intent.getStringExtra("count")
+        count = intent.getStringExtra("count").toString()
 
         binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
@@ -61,8 +73,20 @@ class PaymentDetailActivity : AppCompatActivity() {
         binding.tvTotal.text = "FRQ ${count!!.toInt()* item.price}"
 
 
+        Log.d("eventid",eventDetails.eventDetails._id)
+
+
         binding.btnConfirm.setOnClickListener {
 //            goToMetamask()
+
+            val intent = Intent(this,StripePaymentActivity::class.java)
+            intent.putExtra("item",item as Serializable)
+            intent.putExtra("count",count)
+            intent.putExtra("audience",audience as Serializable)
+            intent.putExtra("eventDetail", eventDetails as Serializable)
+
+            Log.d("eventid",eventDetails.eventDetails._id)
+            startActivity(intent)
         }
 
 
@@ -87,9 +111,9 @@ class PaymentDetailActivity : AppCompatActivity() {
                     Log.d("Profile Api", "onResponse Retrofit Profile Data: " + response.body())
                     val res = response.body()
 
-                    var item : AudienceDataResponse = res!!
+                    audience  = res!!
 
-                    binding.etName.editText!!.setText(res!!.fullName)
+                    binding.etName.editText!!.setText(res!!.name)
                     binding.etEmail.editText!!.setText(res!!.email)
                     binding.etMobile.editText!!.setText(res!!.mobile_no)
 
