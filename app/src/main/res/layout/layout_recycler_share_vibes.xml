@@ -42,7 +42,6 @@
                     android:textColor="@color/offwhite"
                     android:layout_marginLeft="@dimen/_6sdp"
                     android:layout_marginRight="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp"
                     android:maxLines="2"
                     android:ellipsize="end"

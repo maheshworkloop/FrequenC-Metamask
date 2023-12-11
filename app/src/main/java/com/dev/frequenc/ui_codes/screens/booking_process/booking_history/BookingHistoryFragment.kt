@@ -17,8 +17,8 @@ import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.data.models.TicketDetailsModel
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletViewModel
 import com.dev.frequenc.ui_codes.screens.booking_process.tickets.ShowTicketFragment
-import com.dev.frequenc.util.Constants
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.Constants
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.metamask.androidsdk.TAG
 

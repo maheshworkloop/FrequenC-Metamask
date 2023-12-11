@@ -3,6 +3,7 @@ package com.dev.frequenc.ui_codes.data.myconnection
 data class AudienceId(
     val __v: Int,
     val _id: String,
+    val address: String,
     val banner_image: String,
     val city: String,
     val country: String,
@@ -12,8 +13,9 @@ data class AudienceId(
     val email: String,
     val fullName: String,
     val gender: String,
-    val genreType: List<Any>,
+    val genreType: List<String>,
     val id: String,
+    val marital_status: String,
     val mobile_no: String,
     val name: String,
     val postalCode: String,
@@ -21,7 +23,7 @@ data class AudienceId(
     val profile_pic: String,
     val state: String,
     val status: String,
-    val tickets: List<Any>,
+    val tickets: List<Ticket>,
     val updated_at: String,
     val vibes: String,
     val vibesDate: String

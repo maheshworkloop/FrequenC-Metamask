@@ -31,7 +31,8 @@ import retrofit2.Call
 class ChatFragment : Fragment() {
 
     private lateinit var shearedPreference: SharedPreferences
-    private var toChatUsername: String = "mwr"
+    private var toChatUsername: String = "skkfjdsd"
+//    private var toChatUsername: String? = "7777444422"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,12 +41,13 @@ class ChatFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_chat, container, false)
         try {
-            toChatUsername = activity?.intent?.getStringExtra(Constants.Messaged_user).toString()
+            shearedPreference = this.activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE) as SharedPreferences
+//            toChatUsername = shearedPreference.getString(Constants.User_Id, null).toString()
+//            toChatUsername = activity?.intent?.getStringExtra(Constants.Messaged_user).toString()
         }
         catch (ex: Exception) {
 
         }
-        shearedPreference = this.activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE) as SharedPreferences
 
         startChat(view)
         return view

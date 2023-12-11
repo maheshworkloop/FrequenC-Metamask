@@ -4,6 +4,8 @@ class Constants {
 
     companion object
     {
+        val Is_AgoraRegistered: String = "is_agoras"
+        val User_Id: String = "user_id"
         val Messaged_user: String = "receivedUsr"
         const val MetaMaskWalletAddress = "PublicAddress"
         const val AudienceId = "_id"
@@ -17,6 +19,7 @@ class Constants {
         val PhoneNo: String = "phone"
         val Error: String = "apierror"
         val Email: String = "email"
+        val TAG_CHAT: String = "Chats"
         val SharedPreference: String = "mySharePreference"
 
     }

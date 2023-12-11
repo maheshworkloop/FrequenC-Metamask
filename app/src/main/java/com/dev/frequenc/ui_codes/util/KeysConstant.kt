@@ -26,6 +26,7 @@ class KeysConstant {
         const val TRENDING_ARTIST_TOKEN = "event/home/trendingartist"
 
         const val ALL_DATA = "event/all-data/all"
+        const val MYPENDING_REQUEST = "connect/myPendingRequest"
 
         const val ALL_DATA_TOKEN = "event/all-data/all"
 

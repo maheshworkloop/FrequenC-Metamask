@@ -40,12 +40,12 @@ class VerifyOtpFragment : Fragment() {
                         sharedPreferences.edit().putBoolean(
                             Constants.isUserTypeRegistered,
                             loginViewModel.isUserTypeRegistered
-                        ).apply()
-                        sharedPreferences.edit()
+                        )
+                            .putBoolean(Constants.Is_AgoraRegistered, loginViewModel.isAgoraRegistered)
+                            .putString(Constants.User_Id, loginViewModel.userId)
                             .putString(Constants.Authorization, loginViewModel._receivedToken)
+                            .putString(Constants.AudienceId, loginViewModel.audienceId)
                             .apply()
-                        sharedPreferences.edit()
-                            .putString(Constants.AudienceId, loginViewModel.audienceId).apply()
 
 //                    Toast.makeText(requireContext(),loginViewModel.audienceId, Toast.LENGTH_SHORT).show()
 
@@ -223,7 +223,7 @@ class VerifyOtpFragment : Fragment() {
 //            afterTextChanged = {})
 
         verifyOtpBinding.btnSubmit.setOnClickListener {
-            val otps = verifyOtpBinding.otpLays.text.toString()
+                val otps = verifyOtpBinding.otpLays.text.toString()
             if (otps?.isEmpty() == true || otps?.length != 6) {
                 verifyOtpBinding.otpLays.requestFocus()
             } else {

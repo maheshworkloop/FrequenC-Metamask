@@ -70,7 +70,7 @@
                         android:id="@+id/tvRequestsTag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Requests (10) "
+                        android:text="Requests"
                         android:background="@drawable/bg_location"
                         android:textSize="@dimen/_13sdp"
                         android:maxLines="1"
@@ -104,7 +104,7 @@
                     android:id="@+id/connectionNotFoundLay"
                     android:visibility="gone"
                     android:layout_alignTop="@id/rlConnection"
-                    android:layout_height="@dimen/_50sdp">
+                    android:layout_height="@dimen/_25sdp">
 
                 <ImageView
                         android:layout_width="0dp"

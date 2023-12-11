@@ -1,8 +1,0 @@
-package com.dev.frequenc.ui_codes.data.confirmuserotp
-
-data class DataX(
-    val isProfile: Boolean,
-    val isUserType: Boolean,
-    val message: String,
-    val user: UserX
-)

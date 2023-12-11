@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.databinding.ActivityViewAllTrendingEventsBinding
@@ -35,7 +36,6 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterViewAll.Li
         setContentView(binding.root)
 
         mList = intent.getSerializableExtra("list") as List<TrendingEventsResponse>
-
         binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!

@@ -66,7 +66,8 @@ class UserTypeFragment : Fragment() {
                         sharedPreferences!!.edit().putBoolean(
                             Constants.isUserTypeRegistered,
                             loginViewModel.isUserTypeRegistered
-                        ).apply()
+                        )
+                            .putBoolean(Constants.Is_AgoraRegistered, loginViewModel.isAgoraRegistered).apply()
                         dataChangeListener.onDataChange(it, "move")
                     }
                 }
@@ -90,11 +91,11 @@ class UserTypeFragment : Fragment() {
                     "Yes",
                     "Edit",
                     positiveButtonClick = {
-                        loginViewModel.callUpdateUserTypeApi(
-                            tokenMsg,
-                            phoneNo,
-                            "audience"
-                        )
+//                        loginViewModel.callUpdateUserTypeApi(
+//                            tokenMsg,
+//                            phoneNo,
+//                            "audience"
+//                        )
                     },
                     negativeButtonClick = {}
                 )
@@ -106,11 +107,11 @@ class UserTypeFragment : Fragment() {
                     "Yes",
                     "Edit",
                     positiveButtonClick = {
-                        loginViewModel.callUpdateUserTypeApi(
-                            tokenMsg,
-                            phoneNo,
-                            "artist"
-                        )
+//                        loginViewModel.callUpdateUserTypeApi(
+//                            tokenMsg,
+//                            phoneNo,
+//                            "artist"
+//                        )
                     },
                     negativeButtonClick = {}
                 )
@@ -122,11 +123,11 @@ class UserTypeFragment : Fragment() {
                     "Yes",
                     "Edit",
                     positiveButtonClick = {
-                        loginViewModel.callUpdateUserTypeApi(
-                            tokenMsg,
-                            phoneNo,
-                            "venue"
-                        )
+//                        loginViewModel.callUpdateUserTypeApi(
+//                            tokenMsg,
+//                            phoneNo,
+//                            "venue"
+//                        )
                     },
                     negativeButtonClick = {}
                 )
@@ -138,11 +139,11 @@ class UserTypeFragment : Fragment() {
                     "Yes",
                     "Edit",
                     positiveButtonClick = {
-                        loginViewModel.callUpdateUserTypeApi(
-                            tokenMsg,
-                            phoneNo,
-                            "vendor"
-                        )
+//                        loginViewModel.callUpdateUserTypeApi(
+//                            tokenMsg,
+//                            phoneNo,
+//                            "vendor"
+//                        )
                     },
                     negativeButtonClick = {}
                 )

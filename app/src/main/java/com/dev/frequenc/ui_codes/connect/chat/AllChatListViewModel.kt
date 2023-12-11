@@ -4,17 +4,25 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.dev.frequenc.ui_codes.data.ChatUserModel
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
-import com.dev.frequenc.ui_codes.data.myconnection.ConnectionResponseData
+import com.dev.frequenc.ui_codes.data.accept_invitation.RequestAcceptResponse
+import com.dev.frequenc.ui_codes.data.myconnection.Data
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
+import com.dev.frequenc.ui_codes.data.pending_request.PendingRequestResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.CallBack
 import io.agora.ContactListener
+import io.agora.PresenceListener
+import io.agora.ValueCallBack
 import io.agora.chat.ChatClient
 import io.agora.chat.Conversation
+import io.agora.chat.Presence
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +31,7 @@ import retrofit2.Response
 
 class AllChatListViewModel : ViewModel() {
 
+    private var userLists = ArrayList<String>()
     private val _myRequestCount = MutableLiveData<Int>(0)
     val myRequestCount: LiveData<Int>
         get() = _myRequestCount
@@ -30,6 +39,14 @@ class AllChatListViewModel : ViewModel() {
     private val _pendingRequestCount = MutableLiveData<Int>(0)
     val pendingRequestCount: LiveData<Int>
         get() = _pendingRequestCount
+
+    private val _toastMessage = MutableLiveData<String>(null)
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
+    private val _isOnlineList = MutableLiveData<List<Boolean>>(ArrayList())
+    val isOnlineList: LiveData<List<Boolean>>
+        get() = _isOnlineList
 
     private val _chatCount = MutableLiveData<Int>(0)
     val chatCount: LiveData<Int>
@@ -43,10 +60,10 @@ class AllChatListViewModel : ViewModel() {
     val connectionList: LiveData<List<ConnectionResponse>>
         get() = _connectionList
 
-    private val _userLists = MutableLiveData<List<Any>>(ArrayList(3))
+    private val _userListsData = MutableLiveData<List<Any>>(ArrayList(3))
     val userListsData: LiveData<List<Any>>
         get()
-        = _userLists
+        = _userListsData
 
     private val _countNumber = MutableLiveData<HashMap<String, Int>>(HashMap())
 
@@ -88,54 +105,69 @@ class AllChatListViewModel : ViewModel() {
         }
     }
 
-    fun callConnectionApi(token: String) {
-        __isApiCalled.postValue(true)
-        ApiClient.getInstance()?.connectionList(token)
-            ?.enqueue(object : Callback<MyConnectionResponse> {
-                override fun onResponse(
-                    call: Call<MyConnectionResponse>,
-                    response: Response<MyConnectionResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        if (response.body() != null && response.body()?.data != null) {
-                            val adapterLists = ArrayList<ConnectionResponse>()
-                            for (data: ConnectionResponseData in response.body()?.data!!) {
+    suspend fun callConnectionApi(token: String) {
+        coroutineScope {
+            __isApiCalled.postValue(true)
+            ApiClient.getInstance()?.connectionList(token)
+                ?.enqueue(object : Callback<MyConnectionResponse> {
+                    override fun onResponse(
+                        call: Call<MyConnectionResponse>,
+                        response: Response<MyConnectionResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            if (response.body() != null && response.body()?.data != null && response.body()?.data?.size!! > 0) {
+                                val adapterLists = ArrayList<ConnectionResponse>()
+                                val userIdsLst = ArrayList<String>()
+                                for (data: Data in response.body()?.data!!) {
 //                            adapterLists.add(ConnectionResponse(data.to_user_id,data.status))
 //                                _countNumber.postValue(CountNumber.value.put("C"))
-                                var images: String = ""
-                                try {
-                                    images = data.to_user_id.audience_id.profile_pic
-                                } catch (exs: Exception) {
-                                    exs.printStackTrace()
+                                    var images: String = ""
+                                    try {
+                                        images = data.from_user_id.audience_id.profile_pic
+                                    } catch (exs: Exception) {
+                                        exs.printStackTrace()
+                                    }
+                                    adapterLists.add(
+                                        ConnectionResponse(
+                                            images,
+                                            data.from_user_id.fullName,
+                                            data.from_user_id._id
+                                        )
+                                    )
+                                    userIdsLst.add(data.id)
                                 }
-                                adapterLists.add(ConnectionResponse(images, true, ""))
-                            }
-                            try {
-                                _connectionList.postValue(adapterLists)
-                                setDataFound(true)
-                            } catch (ex: Exception) {
+                                userLists = userIdsLst
+                                try {
+                                    _connectionList.postValue(adapterLists)
+                                    setDataFound(true)
+                                    _requestCount.postValue(response.body()!!.requestCount)
+                                } catch (ex: Exception) {
+                                }
+
+                            } else {
+                                _connectionList.postValue(ArrayList())
                                 setDataFound(false)
-                                _connectionList.postValue(emptyList())
                             }
                         } else {
-                            _connectionList.postValue(emptyList())
-                            setDataFound(false)
+                            Log.d(
+                                Constants.Error,
+                                "onResponse:callConnectionApi() ${response.body()}"
+                            )
                         }
-                    } else {
-                        Log.d(Constants.Error, "onResponse:callConnectionApi() ${response.body()}")
+                        __isApiCalled.postValue(false)
                     }
-                    __isApiCalled.postValue(false)
-                }
 
-                override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
-                    Log.e(Constants.Error, "onFailure:callConnectionApi() ", t)
-                    __isApiCalled.postValue(false)
-                }
-            })
+                    override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
+                        Log.e(Constants.Error, "onFailure:callConnectionApi() ", t)
+                        __isApiCalled.postValue(false)
+                    }
+                })
+        }
     }
 
-    fun callMyRequestApi(token: String) {
-        viewModelScope.launch {
+
+    suspend fun callMyRequestApi(token: String) {
+        coroutineScope {
             __isApiCalled.postValue(true)
             ApiClient.getInstance()?.myRequestApi(token)
                 ?.enqueue(object : Callback<MyRequestsResponse> {
@@ -143,27 +175,25 @@ class AllChatListViewModel : ViewModel() {
                         call: Call<MyRequestsResponse>,
                         response: Response<MyRequestsResponse>
                     ) {
-                        if (response.isSuccessful && response.body() != null && response.body()?.data.isNullOrEmpty() == false) {
+                        if (response.isSuccessful && response.body() != null && response.body()?.data.isNullOrEmpty() == false && response.body()?.data!!.size > 0) {
                             if (response.body() != null) {
                                 try {
-                                    _requestCount.postValue(response.body()?.count)
-                                    _myRequestCount.postValue(response.body()?.count)
-                                    _pendingRequestCount.postValue(response.body()?.count)
-                                    _chatCount.postValue(response.body()?.count)
+                                    _pendingRequestCount.postValue(response.body()!!.pendingCount)
+                                    _myRequestCount.postValue(response.body()!!.count)
                                 } catch (ex: Exception) {
                                 }
                                 try {
-                                    _userLists.postValue(response.body()?.data)
+                                    _userListsData.postValue(response.body()?.data)
                                     setDataFound(true)
-                                    _userLists
                                 } catch (ex: Exception) {
                                     setDataFound(false)
-                                    MutableLiveData(emptyList())
+                                    _userListsData.postValue(ArrayList())
                                 }
                             } else {
-                                _userLists.postValue(emptyList())
+                                _userListsData.postValue(ArrayList())
                                 setDataFound(false)
-                                MutableLiveData(emptyList())
+                                _pendingRequestCount.postValue(0)
+                                _myRequestCount.postValue(0)
                             }
                         } else {
                             Log.d(
@@ -182,20 +212,21 @@ class AllChatListViewModel : ViewModel() {
         }
     }
 
-    fun getChatList() {
-
-        execute {
+    suspend fun getChatList() {
+        coroutineScope {
+            __isApiCalled.postValue(true)
             try {
                 Log.d(Constants.TAG_CHAT, "begin to getChatlists ...")
-
 //                Log.d("chats", "getContactList:  $usernames")
                 val contactLists: MutableMap<String, Conversation>? =
                     ChatClient.getInstance().chatManager().allConversations
 
                 if (contactLists != null) {
                     val chatListVals = ArrayList<ChatUserModel>()
+                    userLists.clear()
+
                     for (contact: Conversation in contactLists.values) {
-                        contact?.let {
+                        contact.let {
                             val lastMessage: String = it.lastMessage.body.toString()
                             val userName: String = it.lastMessage.from
                             val toUserName: String = it.lastMessage.to
@@ -211,56 +242,249 @@ class AllChatListViewModel : ViewModel() {
                                     lastMessage
                                 )
                             )
+                            userLists.add(userName)
                         }
+//
+//                        ChatClient.getInstance().userInfoManager().fetchUserInfoByUserId(userLists.toArray() as Array<out String>?, object : ValueCallBack<Map<String, UserInfo>> {
+//                            override fun onSuccess(value: Map<String, UserInfo>?) {
+//                                value?.values?.forEachIndexed{ profileIndex, profileInfos ->
+//                                    chatListVals[profileIndex].chatPersonImage = profileInfos.avatarUrl.toString()
+//                                }
+//                            }
+//
+//                            override fun onError(error: Int, errorMsg: String?) {
+//                                Log.d("ds", "onError: ")
+//                            }
+//                        })
                     }
-
                     _chatCount.postValue(chatListVals.size)
 
-                    _userLists.postValue(chatListVals)
+                    _userListsData.postValue(chatListVals)
+                    __isApiCalled.postValue(false)
                 } else {
-                    _userLists.postValue(ArrayList())
+                    _userListsData.postValue(ArrayList())
+                    _chatCount.postValue(0)
+                    __isApiCalled.postValue(false)
                 }
 
             } catch (exs: Exception) {
                 exs.printStackTrace()
             }
+        }
+    }
 
+
+    suspend fun callPendingRequestApi(tokens: String) {
+        coroutineScope {
+            ApiClient.getInstance()?.pendingRequests(tokens)?.enqueue(object :
+                Callback<PendingRequestResponse> {
+                override fun onResponse(
+                    call: Call<PendingRequestResponse>,
+                    response: Response<PendingRequestResponse>
+                ) {
+                    if (response.body() != null && response.body()?.data.isNullOrEmpty() == false && response.body()?.data!!.size > 0) {
+                        try {
+                            _requestCount.postValue(response.body()?.count)
+                            _pendingRequestCount.postValue(response.body()?.requestCount)
+                            _userListsData.postValue(response.body()?.data)
+                            setDataFound(true)
+                        } catch (ex: Exception) {
+                            setDataFound(false)
+                            _userListsData.postValue(ArrayList())
+                            _pendingRequestCount.postValue(0)
+                        }
+                    } else {
+                        _userListsData.postValue(ArrayList())
+                        _pendingRequestCount.postValue(0)
+                        setDataFound(false)
+                    }
+                }
+
+                override fun onFailure(call: Call<PendingRequestResponse>, t: Throwable) {
+                    _userListsData.postValue(ArrayList())
+                    _pendingRequestCount.postValue(0)
+                    setDataFound(false)
+                    Log.e(Constants.ApiError, "onFailure:callPendingRequestApi ", t)
+                }
+            })
+
+            try {
+                var usernamesList = ChatClient.getInstance().contactManager().allContactsFromServer
+                Log.d(Constants.TAG_CHAT, "callPendingRequestApi:  " + usernamesList)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
         }
 
     }
 
+    suspend fun getConnectionListWithPresence() {
+        coroutineScope {
+            ChatClient.getInstance().presenceManager().subscribePresences(
+                userLists,
+                (1 * 24 * 3600).toLong(),
+                object : ValueCallBack<List<Presence?>?> {
+                    override fun onSuccess(presences: List<Presence?>?) {
+                        val oldConnectionLists = ArrayList<Boolean>()
+                        presences?.forEachIndexed { index, presenceItem ->
+                            _connectionList.value?.get(index)?.let {
+                                var isOnline = false
+                                presenceItem?.statusList?.let { its ->
+                                    for (presenceItm in its) {
+                                        if (presenceItm.value.equals("1")) {
+                                            isOnline = true
+                                            return
+                                        }
+                                    }
+                                }
+                                oldConnectionLists.add(isOnline)
+                            }
+                            _isOnlineList.postValue(oldConnectionLists)
+                        }
+                    }
 
-    fun execute(runnable: Runnable?) {
-        Thread(runnable).start()
-    }
-
-    fun callPendingRequestApi() {
-        execute {
-            val usernamesList = ChatClient.getInstance().contactManager().contactsFromLocal
-            Log.d(Constants.TAG_CHAT, "callPendingRequestApi:  " + usernamesList)
+                    override fun onError(errorCode: Int, errorMsg: String) {
+                        Log.e(
+                            Constants.ApiError,
+                            "onFailure:getConnectionListWithPresence ",
+                            Throwable(errorMsg)
+                        )
+                    }
+                })
         }
 
     }
 
-    fun setContactChangeListener() {
-
-
-        ChatClient.getInstance().contactManager().setContactListener(object : ContactListener {
-            //The contact request is approved
-            override fun onFriendRequestAccepted(username: String) {}
-
-            //contact request is rejected
-            override fun onFriendRequestDeclined(username: String) {}
-
-            //Received contact invitation
-            override fun onContactInvited(username: String, reason: String) {}
-
-            //Call back this method when deleted
-            override fun onContactDeleted(username: String) {}
-
-            //Call back this method when a contact is added
-            override fun onContactAdded(username: String) {}
-        })
+    fun setContactChangeListener(contactListener: ContactListener) {
+        ChatClient.getInstance().contactManager().setContactListener(contactListener)
     }
+
+    suspend fun callAcceptApi(token: String, connect_id: String) {
+        coroutineScope {
+            __isApiCalled.postValue(true)
+            ApiClient.getInstance()?.acceptInvitation(token = token, connect_id)
+                ?.enqueue(object : Callback<RequestAcceptResponse> {
+                    override fun onResponse(
+                        call: Call<RequestAcceptResponse>,
+                        response: Response<RequestAcceptResponse>
+                    ) {
+                        if (response.body() != null && response.body()?.data != null && response.body()?.data?.request_status?.equals(
+                                "approved"
+                            ) == true
+                        ) {
+                            GlobalScope.launch {
+                            try {
+                                _toastMessage.postValue("Accepted")
+                                    callPendingRequestApi(token)
+                            } catch (ex: Exception) {
+                            }
+                        }
+                        }
+                        __isApiCalled.postValue(false)
+                    }
+
+                    override fun onFailure(call: Call<RequestAcceptResponse>, t: Throwable) {
+                        Log.e(Constants.ApiError, "onFailure:callAcceptApi ", t)
+                        __isApiCalled.postValue(false)
+                    }
+                })
+            ChatClient.getInstance().contactManager().acceptInvitation(connect_id)
+        }
+    }
+
+    suspend fun callRejectApi(token: String, connect_id: String) {
+        coroutineScope {
+            __isApiCalled.postValue(true)
+            ApiClient.getInstance()?.rejectInvitation(token = token, connect_id)
+                ?.enqueue(object : Callback<RequestAcceptResponse> {
+                    override fun onResponse(
+                        call: Call<RequestAcceptResponse>,
+                        response: Response<RequestAcceptResponse>
+                    ) {
+                        if (response.body() != null && response.body()?.data != null && response.body()?.data?.request_status?.equals(
+                                "approved"
+                            ) == false
+                        ) {
+                            GlobalScope.launch {
+                                try {
+                                    _toastMessage.postValue("Rejected.")
+                                    callPendingRequestApi(token)
+                                } catch (ex: Exception) {
+                                    Log.d(
+                                        Constants.ApiError,
+                                        "onResponse:callAcceptApi $response.body()"
+                                    )
+                                }
+                            }
+                        }
+                        __isApiCalled.postValue(false)
+                    }
+
+                    override fun onFailure(call: Call<RequestAcceptResponse>, t: Throwable) {
+                        Log.e(Constants.ApiError, "onFailure:callAcceptApi ", t)
+                        __isApiCalled.postValue(false)
+                    }
+                })
+            ChatClient.getInstance().contactManager().declineInvitation(connect_id)
+        }
+    }
+
+    fun removePresenceListener(callbacks: CallBack) {
+        ChatClient.getInstance().presenceManager().unsubscribePresences(userLists, callbacks)
+    }
+
+    suspend fun setOnPresenceChange() {
+        coroutineScope {
+            ChatClient.getInstance().presenceManager().addListener(object : PresenceListener {
+                override fun onPresenceUpdated(presences: MutableList<Presence>?) {
+                    val oldConnectionLists = ArrayList<Boolean>()
+                    presences?.forEachIndexed { index, presenceItem ->
+                        _connectionList.value?.get(index)?.let {
+                            var isOnline = false
+                            presenceItem?.statusList?.let { its ->
+                                for (presenceItm in its) {
+                                    if (presenceItm.value.equals("1")) {
+                                        isOnline = true
+                                        return
+                                    }
+                                }
+                            }
+                            oldConnectionLists.add(isOnline)
+                        }
+                        _isOnlineList.postValue(oldConnectionLists)
+                    }
+                }
+            })
+        }
+    }
+
+    suspend fun fetchPresenceStateLists() {
+        coroutineScope {
+            ChatClient.getInstance().presenceManager()
+                .fetchPresenceStatus(userLists, object : ValueCallBack<List<Presence?>?> {
+                    override fun onSuccess(presences: List<Presence?>?) {
+                        val oldConnectionLists = ArrayList<Boolean>()
+                        presences?.forEachIndexed { index, presenceItem ->
+                            _connectionList.value?.get(index)?.let {
+                                var isOnline = false
+                                presenceItem?.statusList?.let { its ->
+                                    for (presenceItm in its) {
+                                        if (presenceItm.value.equals("1")) {
+                                            isOnline = true
+                                            return
+                                        }
+                                    }
+                                }
+                                oldConnectionLists.add(isOnline)
+                            }
+                        }
+                        _isOnlineList.postValue(oldConnectionLists)
+                    }
+
+                    override fun onError(errorCode: Int, errorMsg: String) {}
+                })
+        }
+    }
+
 
 }
