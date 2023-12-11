@@ -33,7 +33,7 @@ class StripePaymentActivity : AppCompatActivity() {
 
     val STRIPE_PUBLISHABLE_KEY="pk_test_51Msg80SDrSIXwtthzwmV8YXpzPbxhk0M1atGmMxtyf0ZlmpA6cWKdRiIZijNimCwD9vLiC21yFkYhhLbvDKG86y800dgr69PR1"
     val STRIPE_SECRET_KEY="sk_test_51Msg80SDrSIXwtthWlqKansXTFnhImdlF6IHkSSJEpzNRdhfRcRB3yW8kDHE8lxGepKYodzrQrrxwKR1JaSTJCJt00r8N3nAaT"
-    val STRIPE_ACCOUNT_ID = ""
+    val STRIPE_ACCOUNT_ID = "acct_1Msg80SDrSIXwtth"
     
     // we need paymentIntentClientSecret to start transaction
     private var paymentIntentClientSecret: String? = null
@@ -61,24 +61,36 @@ class StripePaymentActivity : AppCompatActivity() {
 
         eventDetails = intent.getSerializableExtra("eventDetail") as EventResponse
 
+
+
         item = intent.getSerializableExtra("item") as EventTicket
 
         audiencce = intent.getSerializableExtra("audience") as AudienceDataResponse
         count = intent.getStringExtra("count").toString()
 
 
-        val paymentConfiguration = PaymentConfiguration.getInstance(applicationContext)
-        paymentLauncher = PaymentLauncher.Companion.create(
-            this,
-            STRIPE_PUBLISHABLE_KEY,
-            STRIPE_ACCOUNT_ID,
-            this::onPaymentResult
-        )
+
 
         PaymentConfiguration.init(
             applicationContext,
-            STRIPE_PUBLISHABLE_KEY    )
+            STRIPE_PUBLISHABLE_KEY  )
 
+//        val paymentConfiguration = PaymentConfiguration.getInstance(applicationContext)
+//        paymentLauncher = PaymentLauncher.Companion.create(
+//            this,
+//            STRIPE_PUBLISHABLE_KEY,
+//            STRIPE_ACCOUNT_ID,
+//            this::onPaymentResult
+//        )
+
+
+        val paymentConfiguration = PaymentConfiguration.getInstance(applicationContext)
+        paymentLauncher = PaymentLauncher.Companion.create(
+            this,
+            paymentConfiguration.publishableKey,
+            paymentConfiguration.stripeAccountId,
+            ::onPaymentResult
+        )
         startCheckout()
 
     }
@@ -91,11 +103,14 @@ class StripePaymentActivity : AppCompatActivity() {
         authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
 
 
-        var billingInformation : BillingInformation = BillingInformation(
-            audiencce.fullName,
+        var billingInformation  = BillingInformation(
+//            audiencce.fullName,
+            "sumit",
             "Singh",
-            audiencce.email,
-            audiencce.mobile_no,
+//            audiencce.email,
+            "sumit@gmail.com",
+//            audiencce.mobile_no,
+             "8765454545",
             "my address",
             "Delhi",
             "Noida",
@@ -105,7 +120,7 @@ class StripePaymentActivity : AppCompatActivity() {
 
         val billingInformationList = listOf(billingInformation)
 
-        var initiateReq : paymentInitiateReq = paymentInitiateReq(
+        var initiateReq = paymentInitiateReq(
             item.price * count.toDouble(),
             eventDetails.eventDetails._id,
             count.toInt(),

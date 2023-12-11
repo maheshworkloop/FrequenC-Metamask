@@ -48,6 +48,7 @@ import com.dev.frequenc.ui_codes.screens.ArtistDetail.ArtistDetailsActivity
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.screens.intro.IntroduceYourselfActivity
+import com.dev.frequenc.ui_codes.screens.intro.PresentationActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -168,7 +169,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         }
 
         rlLocation.setOnClickListener {
-            val intent = Intent(requireContext(),IntroduceYourselfActivity::class.java)
+            val intent = Intent(requireContext(),PresentationActivity::class.java)
+//            val intent = Intent(requireContext(),IntroduceYourselfActivity::class.java)
             startActivity(intent)
         }
 

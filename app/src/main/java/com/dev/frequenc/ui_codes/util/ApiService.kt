@@ -17,6 +17,7 @@ import com.dev.frequenc.ui_codes.data.EventResponse
 import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
 import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
 import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
+import com.dev.frequenc.ui_codes.data.ProfileRes
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
@@ -175,6 +176,23 @@ interface ApiService {
 
     @GET(KeysConstant.GET_QUOTE)
     fun getQuoteApi(): Call<QuoteResponse>?
+
+    @FormUrlEncoded
+    @PUT(KeysConstant.UPDATE_CONNECT_PROFILE)
+    fun updateConnectProfile(@Header(Authorization) token: String,@Path("audience_id")id : String,
+                             @Field("fullName") fullName : String,
+                             @Field("email") email : String,
+                             @Field("location") location : String,
+                             @Field("dob") dob : String,
+                             @Field("gender") gender : String,
+
+                             ) : Call<ProfileRes>?
+
+    @FormUrlEncoded
+    @PUT(KeysConstant.UPDATE_CONNECT_PROFILE)
+    fun updateConnectProfilePhoto(@Header(Authorization) token: String,@Path("audience_id")id : String,
+                             @Field("profile_images") profile_images : List<String>
+                             ) : Call<ProfileRes>?
 
 
 }

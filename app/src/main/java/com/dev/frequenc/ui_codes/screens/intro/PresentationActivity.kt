@@ -1,14 +1,18 @@
 package com.dev.frequenc.ui_codes.screens.intro
 
 import android.Manifest
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -17,8 +21,14 @@ import androidx.core.content.ContextCompat
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityPresentationBinding
 import com.dev.frequenc.ui_codes.MainActivity
+import com.dev.frequenc.ui_codes.data.ProfileRes
 import com.dev.frequenc.ui_codes.screens.Profile.Intro1Activity
+import com.dev.frequenc.ui_codes.screens.utils.ApiClient
+import com.dev.frequenc.util.Constants
 import com.dev.frequenc.util.ImageUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 import java.nio.ByteBuffer
 
@@ -35,6 +45,12 @@ class PresentationActivity : AppCompatActivity() {
 
     var flagProfile1 = false
     var flagProfile2 = false
+
+    lateinit var authorization : String
+    lateinit var audience_id : String
+    private lateinit var sharedPreferences: SharedPreferences
+
+    lateinit var profile_images : List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,8 +94,9 @@ class PresentationActivity : AppCompatActivity() {
             {
                 Toast.makeText(this,"All done",Toast.LENGTH_SHORT).show()
 
-                val intent = Intent (this,MainActivity::class.java)
-                startActivity(intent)
+                profile_images = listOf( encoded_img_1,encoded_img_2)
+
+               callProfileUpdateApi()
 
             }
             else
@@ -89,7 +106,59 @@ class PresentationActivity : AppCompatActivity() {
                 Toast.makeText(this,"Both images mandatory",Toast.LENGTH_SHORT).show()
             }
         }
+
+        sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+
+        authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
+        audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
+
     }
+
+
+
+    private fun callProfileUpdateApi()
+    {
+//        Log.d("img",profile_images[0])
+//        Log.d("img",profile_images[1])
+
+        binding.progressBar.visibility = View.VISIBLE
+
+
+        ApiClient.getInstance()!!.updateConnectProfilePhoto(authorization,audience_id,
+            profile_images
+        )!!.enqueue(object : Callback<ProfileRes> {
+            override fun onResponse(
+                call: Call<ProfileRes>,
+                response: Response<ProfileRes>
+            ) {
+
+                binding.progressBar.visibility = View.GONE
+
+                Log.d("api","connect profile photo update response")
+
+                if(response.isSuccessful)
+                    if(response.body()!=null)
+                    {
+                        Toast.makeText(this@PresentationActivity,"Profile photo Data Updated",Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@PresentationActivity,MainActivity::class.java)
+                        startActivity(intent)
+
+                        Log.d("api","connect profile photo update success")
+
+                    }
+            }
+
+            override fun onFailure(call: Call<ProfileRes>, t: Throwable) {
+                Toast.makeText(this@PresentationActivity,"Some error occurred",Toast.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.GONE
+
+                Log.d("api","connect profile update failure")
+
+            }
+        }  )
+    }
+
+
 
 
     //********************CAMERA METHODS*************************//

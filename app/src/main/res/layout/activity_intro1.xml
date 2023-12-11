@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui_codes.screens.Profile.Intro1Activity">
 
     <pl.droidsonroids.gif.GifImageView
@@ -42,6 +43,7 @@
         android:text="@string/intro_msg"
         android:textSize="@dimen/_12sdp"
         style="@style/textViewRegular"
+        android:textColor="@color/material_grey_800"
         android:layout_marginHorizontal="@dimen/_30sdp"
         />
 
@@ -65,18 +67,21 @@
             android:text="Let the excitement begin"
             android:textSize="@dimen/_12sdp"
             style="@style/textViewRegular"
+            android:textColor="@color/material_grey_800"
+
             />
 
         <ImageView
             android:layout_width="@dimen/_12sdp"
             android:layout_height="@dimen/_12sdp"
-            android:src="@drawable/event"
+            android:src="@drawable/party2"
             android:layout_marginLeft="@dimen/_5sdp"
+
             />
         <ImageView
             android:layout_width="@dimen/_12sdp"
             android:layout_height="@dimen/_12sdp"
-            android:src="@drawable/event"
+            android:src="@drawable/party"
             android:layout_marginLeft="@dimen/_5sdp"
             />
 
@@ -94,7 +99,7 @@
         android:textColor="@color/white"
         style="@style/textViewRegularBold"
         android:textSize="@dimen/_12sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
