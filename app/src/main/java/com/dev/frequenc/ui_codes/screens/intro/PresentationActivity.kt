@@ -8,7 +8,6 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,15 +15,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityPresentationBinding
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.data.ProfileRes
-import com.dev.frequenc.ui_codes.screens.Profile.Intro1Activity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.ImageUtil
 import retrofit2.Call
 import retrofit2.Callback
