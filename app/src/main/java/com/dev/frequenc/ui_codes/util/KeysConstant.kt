@@ -4,11 +4,13 @@ class KeysConstant {
 
     companion object
     {
+//        const val BASE_URL = "http://192.168.1.6:3001/api/v1/"
 
         val CHAT_User_Name: String = "Chat_User_Names"
         val CHAT_TOKEN: String = "Chat_Tokn"
 
-//                const val BASE_URL = "http://192.168.1.6:3001/api/v1/"
+        //        const val BASE_URL = "http://192.168.1.8:3001/api/v1/"
+
         const val BASE_URL = "http://ec2-43-204-108-136.ap-south-1.compute.amazonaws.com:3001/api/v1/"
 
         const val CHAT_BASE_URL = "a71.chat.agora.io"
@@ -55,6 +57,8 @@ class KeysConstant {
         const val MyConnection = "connect/myConnection"
 
         const val GET_QUOTE = "connect/quote"
+
+        const val UPDATE_CONNECT_PROFILE = "audience/update-mobile-profile/{audience_id}"
     }
 
 

@@ -32,6 +32,7 @@ class Intro1Activity : AppCompatActivity() {
         binding.btnContinue.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
             sharedPreferences.edit().putBoolean(
                 Constants.isFirst_Time_User,
                 false
