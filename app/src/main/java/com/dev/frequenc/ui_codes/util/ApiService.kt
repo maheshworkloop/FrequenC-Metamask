@@ -24,6 +24,8 @@ import com.dev.frequenc.ui_codes.data.TrendingArtistTokenResponse
 import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.ui_codes.data.TrendingEventsTokenResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
+import com.dev.frequenc.ui_codes.data.UpdateAgoraDetailResponse
+import com.dev.frequenc.ui_codes.data.UpdateAgoraModel
 import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.WalletBalenceData
@@ -189,5 +191,8 @@ interface ApiService {
     fun rejectInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
     @GET("connect/sentRequest/{audienceId}")
     fun callInvitationApi(@Header(Authorization) token: String, @Path("audienceId") audienceId:  String) : Call<SendInvitationResponse>
+    @POST("auth/updateAgora")
+    fun getUpdateAgora(@Header(Authorization) token: String?,@Body updateAgoraBdy: UpdateAgoraModel ):Call<UpdateAgoraDetailResponse>?
+
 
 }

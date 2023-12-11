@@ -217,8 +217,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         }
 
         ivNotification.setOnClickListener {
-//            val intent = Intent(activity,  NotificationActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(activity,  NotificationActivity::class.java)
+            startActivity(intent)
         }
         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
 

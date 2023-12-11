@@ -5,13 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.os.AsyncTask.execute
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
@@ -21,16 +19,17 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.dev.agorademo2.LogUtils.showErrorLog
-import com.dev.agorademo2.LogUtils.showErrorToast
-import com.dev.agorademo2.LogUtils.showToast
 import com.dev.agorademo2.PermissionsManager
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
+import com.dev.frequenc.ui_codes.connect.chat.AllChatListViewModel
 import com.dev.frequenc.ui_codes.connect.chat.AllChatUserFragment
 import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
+import com.dev.frequenc.ui_codes.data.UpdateAgoraDetailResponse
+import com.dev.frequenc.ui_codes.data.UpdateAgoraModel
 import com.dev.frequenc.ui_codes.screens.Dashboard.MarketPlaceFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.savedevent.SavedEventFragment
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletFragment
@@ -47,8 +46,13 @@ import io.agora.chat.ChatOptions
 import io.agora.chat.uikit.EaseUIKit
 import io.agora.cloud.HttpClientManager
 import io.agora.cloud.HttpClientManager.Method_POST
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 
@@ -56,8 +60,10 @@ import java.io.Serializable
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var allChatListViewModel: AllChatListViewModel
     private var pwd: String? = "skkfjdsd"
-//    private var username: String? = "skkfjdsd"
+
+    //            private var username: String? = "skkfjdsd"
     private var username: String? = "7777444422"
     val requestcode = 101
     var latitude = ""
@@ -87,6 +93,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.drawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
 
+        allChatListViewModel = ViewModelProvider(this).get(AllChatListViewModel::class.java)
 //        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
 
@@ -126,12 +133,12 @@ class MainActivity : AppCompatActivity() {
 
 
         try {
-            sharedPreferences.edit().putString(Constants.User_Id, username)
-                .apply()
-//            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null).toString()
+//            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null)+"6"
 //            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
 //            pwd= username!!.substring(generatedUsername!!.lastIndex-5, generatedUsername!!.lastIndex) + "@" + mob_no!!.substring(mob_no.lastIndex-5, mob_no.lastIndex)
 //            username = generatedUsername
+            sharedPreferences.edit().putString(Constants.User_Id, username)
+                .apply()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -172,20 +179,21 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-//            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered,false)) {
-//                signUp()
-//            }
-//            else {
-            getTokenFromAppServer(NEW_LOGIN)
+//            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered, false)) {
+            signUp()
+//            } else {
+//            getTokenFromAppServer(NEW_LOGIN)
 //            }
         } else {
-            Toast.makeText(this, "User Not Logged in", Toast.LENGTH_SHORT).show()
-            Log.e("Audience Id", audience_id)
-            Log.e("Bearer", authorization)
-            binding.navbar.rlLogout.visibility = View.INVISIBLE
-            binding.navbar.viewLogout.visibility = View.INVISIBLE
-            binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            runOnUiThread {
+                Toast.makeText(this, "User Not Logged in", Toast.LENGTH_SHORT).show()
+                Log.e("Audience Id", audience_id)
+                Log.e("Bearer", authorization)
+                binding.navbar.rlLogout.visibility = View.INVISIBLE
+                binding.navbar.viewLogout.visibility = View.INVISIBLE
+                binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
+            }
         }
 
 
@@ -347,13 +355,13 @@ class MainActivity : AppCompatActivity() {
         ChatClient.getInstance().addConnectionListener(connectionListener)
     }
 
-    fun signUp() {
+    private fun signUp() {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
 //            LogUtils.showErrorToast(this, binding.tvLog, getString(R.string.username_or_pwd_miss))
             Log.d(Constants.TAG_CHAT, "signUp: getString(R.string.username_or_pwd_miss)")
             return
         }
-        execute {
+        this.execute {
             try {
                 val headers: MutableMap<String, String> =
                     HashMap()
@@ -383,13 +391,33 @@ class MainActivity : AppCompatActivity() {
 //                                binding.tvLog,
 //                                getString(R.string.sign_up_success)
 //                            )
+                            try {
+                                runOnUiThread {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        getString(R.string.sign_up_success),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } catch (ex: Exception) {
+                                ex.printStackTrace()
+                            }
+                            callUpdateAgoraApi(username, pwd)
                         } else {
                             val errorInfo = `object`.getString("errorInfo")
                             Log.d(Constants.TAG_CHAT, errorInfo)
+                            runOnUiThread {
+                                Toast.makeText(applicationContext, errorInfo, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
 //                            LogUtils.showErrorLog(binding.tvLog, errorInfo)
                         }
                     } else {
                         Log.d(Constants.TAG_CHAT, responseInfo)
+                        runOnUiThread {
+                            Toast.makeText(applicationContext, responseInfo, Toast.LENGTH_SHORT)
+                                .show()
+                        }
 //                        LogUtils.showErrorLog(binding.tvLog, responseInfo)
                     }
                     getTokenFromAppServer(NEW_LOGIN)
@@ -414,14 +442,28 @@ class MainActivity : AppCompatActivity() {
     private fun getTokenFromAppServer(requestType: String) {
         if (ChatClient.getInstance().options.autoLogin && ChatClient.getInstance().isLoggedInBefore) {
             Log.d(Constants.TAG_CHAT, getString(R.string.has_login_before))
+            runOnUiThread {
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.has_login_before),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             return
         }
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
 //            showErrorToast(this@MainActivity, tv_log, getString(R.string.username_or_pwd_miss))
             Log.d(Constants.TAG_CHAT, getString(R.string.username_or_pwd_miss))
+            runOnUiThread {
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.username_or_pwd_miss),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             return
         }
-        this.execute {
+        execute {
             try {
                 val headers: MutableMap<String, String> =
                     HashMap()
@@ -456,6 +498,14 @@ class MainActivity : AppCompatActivity() {
                                             Constants.TAG_CHAT,
                                             getString(R.string.sign_in_success)
                                         )
+                                        callUpdateAgoraApi(username, pwd)
+                                        runOnUiThread {
+                                            Toast.makeText(
+                                                applicationContext,
+                                                getString(R.string.sign_in_success),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
 
                                     override fun onError(code: Int, error: String) {
@@ -468,6 +518,13 @@ class MainActivity : AppCompatActivity() {
                                             Constants.TAG_CHAT,
                                             "Login failed! code: $code error: $error"
                                         )
+                                        runOnUiThread {
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "Login failed! code: $code error: $error",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
 
                                     override fun onProgress(
@@ -485,10 +542,19 @@ class MainActivity : AppCompatActivity() {
 //                            tv_log,
 //                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
 //                        )
-                        Log.d(
-                            Constants.TAG_CHAT,
-                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
-                        )
+                        runOnUiThread {
+                            Log.d(
+                                Constants.TAG_CHAT,
+                                "getTokenFromAppServer failed! code: $code error: $responseInfo"
+                            )
+
+
+                            Toast.makeText(
+                                applicationContext,
+                                "getTokenFromAppServer failed! code: $code error: $responseInfo",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 } else {
 //                    showErrorToast(
@@ -496,10 +562,17 @@ class MainActivity : AppCompatActivity() {
 //                        tv_log,
 //                        "getTokenFromAppServer failed! code: $code error: $responseInfo"
 //                    )
-                    Log.d(
-                        Constants.TAG_CHAT,
-                        "getTokenFromAppServer failed! code: $code error: $responseInfo"
-                    )
+                    runOnUiThread {
+                        Log.d(
+                            Constants.TAG_CHAT,
+                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
+                        )
+                        Toast.makeText(
+                            applicationContext,
+                            "getTokenFromAppServer failed! code: $code error: $responseInfo",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
@@ -512,6 +585,49 @@ class MainActivity : AppCompatActivity() {
                     Constants.TAG_CHAT,
                     "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message
                 )
+                runOnUiThread {
+                    Toast.makeText(
+                        applicationContext,
+                        "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun callUpdateAgoraApi(username: String?, pwd: String?) {
+        GlobalScope.launch {
+            username?.let { it ->
+                pwd?.let { pwd ->
+                    ApiClient.getInstance()?.getUpdateAgora(
+                        sharedPreferences.getString(Constants.Authorization, null),
+                        UpdateAgoraModel(it, pwd)
+                    )?.enqueue(object : Callback<UpdateAgoraDetailResponse> {
+                        override fun onResponse(
+                            call: Call<UpdateAgoraDetailResponse>,
+                            response: Response<UpdateAgoraDetailResponse>
+                        ) {
+                            try {
+                                Toast.makeText(
+                                    applicationContext,
+                                    response.body()?.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } catch (e: Exception) {
+                                Log.e(Constants.ApiError, "onResponse:callUpdateAgoraApi ", e)
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<UpdateAgoraDetailResponse>,
+                            t: Throwable
+                        ) {
+                            Log.e(Constants.ApiError, "onFailure:callUpdateAgoraApi ", t)
+                        }
+                    })
+                }
             }
         }
     }
@@ -769,6 +885,8 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.flFragment, MarketPlaceFragment(), "MarketPlaceFragment").commit()
         }
     }
+
+
 }
 
 

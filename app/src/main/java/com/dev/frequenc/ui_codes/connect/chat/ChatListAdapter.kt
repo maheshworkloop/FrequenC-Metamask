@@ -28,7 +28,6 @@ class ChatListAdapter(
 
     }
 
-    var conectLst = connectionList
 
     private var mContext: Context? = null
 
@@ -75,6 +74,7 @@ class ChatListAdapter(
         ViewHolder(binding.root) {
         fun bindPendingRequestViews(
             pendingItem: Any,
+            connectionItms: List<ConnectionResponse>,
             itemListListener: ItemListListener,
             position: Int
         ) {
@@ -82,10 +82,19 @@ class ChatListAdapter(
                 var item_image: String = ""
                 try {
                     item_image = pendingItem.from_user_id.audience_id.profile_pic.toString()
+
+                    if (item_image == null && connectionItms != null) {
+                        for (itms: ConnectionResponse in connectionItms) {
+                            if (pendingItem.from_user_id._id == itms.id) {
+                                item_image = itms.image.toString()
+                                break
+                            }
+                        }
+                    }
+
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
-
                 ImageUtil.loadImage(binding.cvProfile, item_image)
 
                 try {
@@ -128,7 +137,7 @@ class ChatListAdapter(
 //                    if (item_img.isNullOrEmpty() || item_img.isNullOrBlank()) {
 //                        for (connectonItm: ConnectionResponse in )
 //                    }
-                    ImageUtil.loadImage( binding.cvProfile, item_img)
+                    ImageUtil.loadImage(binding.cvProfile, item_img)
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
@@ -194,6 +203,7 @@ class ChatListAdapter(
                 is MyPendingRequestViewHolder -> {
                     holder.bindPendingRequestViews(
                         chatList[item_position],
+                        connectionList,
                         itemListListener,
                         item_position
                     )
@@ -230,13 +240,17 @@ class ChatListAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun refreshData(
         newData: List<Any>,
-        connectionLists: List<ConnectionResponse>,
+        connectionLists: List<ConnectionResponse>?,
         newUseType: Int
     ) {
         chatList.clear()
-        chatList.addAll(newData)
+        if (newData != null) {
+            chatList.addAll(newData)
+        }
         this.connectionList.clear()
-        this.connectionList.addAll(connectionLists)
+        if (connectionLists != null) {
+            this.connectionList.addAll(connectionLists)
+        }
         this.useType = newUseType
         notifyDataSetChanged()
     }
