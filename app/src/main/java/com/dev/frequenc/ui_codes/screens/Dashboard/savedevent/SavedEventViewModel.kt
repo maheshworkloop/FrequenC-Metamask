@@ -10,9 +10,7 @@ import com.dev.frequenc.ui_codes.data.BookmarkEventResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
+import com.dev.frequenc.ui_codes.util.Constants
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

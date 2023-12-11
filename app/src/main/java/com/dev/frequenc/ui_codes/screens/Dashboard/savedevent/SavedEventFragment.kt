@@ -13,12 +13,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
-import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponseItem
 import com.dev.frequenc.databinding.FragmentSavedEventBinding
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
-import com.dev.frequenc.util.Constants
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.Constants
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SavedEventFragment : Fragment(), ItemClickListener {

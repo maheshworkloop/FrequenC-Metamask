@@ -1,26 +1,24 @@
 package com.dev.frequenc.ui_codes.screens.PaymentDetail
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
-import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.data.EventResponse
 import com.dev.frequenc.ui_codes.data.EventTicket
 import com.dev.frequenc.databinding.ActivityPaymentDetailBinding
 import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.Stripe.StripePaymentActivity
+
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import retrofit2.Call
 import retrofit2.Response
-import java.io.Serializable
 
 class PaymentDetailActivity : AppCompatActivity() {
 

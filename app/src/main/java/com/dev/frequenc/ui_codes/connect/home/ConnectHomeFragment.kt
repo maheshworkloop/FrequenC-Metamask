@@ -1,15 +1,12 @@
 package com.dev.frequenc.ui_codes.connect.home
 
-import android.R.attr.bitmap
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,19 +27,16 @@ import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.events.EventsFragment
 import com.dev.frequenc.ui_codes.connect.yourvibes.ShareVibesAdapter
 import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibeFragment
-import com.dev.frequenc.ui_codes.connect.yourvibes.YourVibesAdapter
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.data.CategoryDetail
 import com.dev.frequenc.ui_codes.data.GetVibeCategoryResponse
-import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener
 import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Response
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -207,29 +201,43 @@ class ConnectHomeFragment : Fragment(),ShareVibesAdapter.ListAdapterListener {
 
 
 
-    private fun showPopUp(mData : GetVibeCategoryResponse)
-    {
-        dialog = Dialog(mContext)
+    private fun showPopUp(mData: GetVibeCategoryResponse) {
+        dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.layout_dialog_share_your_vibes)
-        dialog.window?.setBackgroundDrawableResource(R.color.transparent)
-
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setCancelable(true)
 
         var gifImage = dialog.findViewById<GifImageView>(R.id.ivAnimSplash)
-
-        Glide.with(mContext).load(R.drawable.frequenc_loader).into(gifImage)
+        Glide.with(requireContext()).load(R.drawable.frequenc_loader).into(gifImage)
 
         var rvShareVibe = dialog.findViewById<RecyclerView>(R.id.rvShareVibes)
 
-
         rvShareVibe.apply {
-            layoutManager = GridLayoutManager(mContext,2, GridLayoutManager.VERTICAL,false)
-            adapter = ShareVibesAdapter(mData,this@ConnectHomeFragment)
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            adapter = ShareVibesAdapter(mData, this@ConnectHomeFragment)
         }
+        val layoutParams: WindowManager.LayoutParams = dialog.window!!.attributes
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+
+// Convert 30dp to pixels
+        val marginInPixels = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            30f,
+            resources.displayMetrics
+        ).toFloat()
+
+// Set margin
+        layoutParams.horizontalMargin = marginInPixels
+        layoutParams.verticalMargin = marginInPixels
+
+        // Apply the layout parameters to the window
+        dialog.window!!.attributes = layoutParams
 
         dialog.getWindow()!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.show()
     }
+
 
 
     private fun showPopUpConnectionRequest()

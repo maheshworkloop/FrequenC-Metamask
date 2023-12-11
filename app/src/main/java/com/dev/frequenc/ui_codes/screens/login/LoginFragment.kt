@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.FragmentLoginBinding
 import com.dev.frequenc.ui_codes.extensions.textChanged
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.DataChangeListener
 
 

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,8 +14,7 @@ import com.dev.frequenc.ui_codes.data.EventTicket
 import com.dev.frequenc.databinding.ActivitySelectTicketBinding
 import com.dev.frequenc.ui_codes.screens.PaymentDetail.PaymentDetailActivity
 import com.dev.frequenc.ui_codes.screens.login.LoginActivity
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import java.io.Serializable
 
 class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapterListener {

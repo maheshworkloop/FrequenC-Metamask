@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.util.AppCommonMethods
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 
 class TrendingEventAdapterold (private val mList: List<TrendingEventsResponse>,
                                mListener: ListAdapterListener, val isLogin : Boolean

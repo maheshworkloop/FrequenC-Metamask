@@ -18,12 +18,11 @@ import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
 import com.dev.frequenc.ui_codes.data.models.BillingInformation
 import com.dev.frequenc.ui_codes.data.models.paymentInitiateReq
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.model.ConfirmPaymentIntentParams
 import com.stripe.android.payments.paymentlauncher.PaymentLauncher
 import com.stripe.android.payments.paymentlauncher.PaymentResult
-import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.view.CardInputWidget
 import kotlinx.coroutines.launch
 import retrofit2.Call

@@ -1,10 +1,11 @@
-package com.dev.frequenc.util
+package com.dev.frequenc.ui_codes.util
 
 class Constants {
 
     companion object
     {
-        val MetaMaskWalletAddress = "PublicAddress"
+        val Messaged_user: String = "receivedUsr"
+        const val MetaMaskWalletAddress = "PublicAddress"
         const val AudienceId = "_id"
         const val Authorization = "Authorization"
         const val ApiError = "ApiError"
