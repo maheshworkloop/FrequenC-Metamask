@@ -33,6 +33,7 @@ class ChatFragment : Fragment() {
     private lateinit var shearedPreference: SharedPreferences
     private var toChatUsername: String = "skkfjdsd"
 //    private var toChatUsername: String? = "7777444422"
+//    private var toChatUsername: String? = "52452423324234"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +43,7 @@ class ChatFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_chat, container, false)
         try {
             shearedPreference = this.activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE) as SharedPreferences
-//            toChatUsername = shearedPreference.getString(Constants.User_Id, null).toString()
+//            toChatUsername = shearedPreference.getString(Constants.User_Id, null)
 //            toChatUsername = activity?.intent?.getStringExtra(Constants.Messaged_user).toString()
         }
         catch (ex: Exception) {

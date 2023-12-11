@@ -283,7 +283,7 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                                     } catch (exs: Exception) {
                                         exs.printStackTrace()
                                     }
-                                    adapterLists.add(ConnectionResponse(images, data.to_user_id.fullName.toString(), data.id))
+                                    adapterLists.add(ConnectionResponse(images, data.to_user_id.fullName, data.id))
 
                                 }
 

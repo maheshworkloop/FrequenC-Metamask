@@ -139,14 +139,12 @@ class AllChatListViewModel : ViewModel() {
                                 userLists = userIdsLst
                                 try {
                                     _connectionList.postValue(adapterLists)
-                                    setDataFound(true)
                                     _requestCount.postValue(response.body()!!.requestCount)
                                 } catch (ex: Exception) {
                                 }
 
                             } else {
                                 _connectionList.postValue(ArrayList())
-                                setDataFound(false)
                             }
                         } else {
                             Log.d(
@@ -261,10 +259,12 @@ class AllChatListViewModel : ViewModel() {
 
                     _userListsData.postValue(chatListVals)
                     __isApiCalled.postValue(false)
+                    setDataFound(true)
                 } else {
                     _userListsData.postValue(ArrayList())
                     _chatCount.postValue(0)
                     __isApiCalled.postValue(false)
+                    setDataFound(false)
                 }
 
             } catch (exs: Exception) {

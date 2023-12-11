@@ -19,6 +19,7 @@ import com.dev.frequenc.databinding.FragmentAllChatUserBinding
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.Profile.ProfileFragment
 import com.dev.frequenc.ui_codes.connect.VibesProfileList.ConnectionAdapter
+import com.dev.frequenc.ui_codes.data.ChatUserModel
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.screens.notification.NotificationActivity
 import com.dev.frequenc.ui_codes.util.Constants
@@ -60,7 +61,8 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             ex.printStackTrace()
         }
 
-        allChatListViewModel = ViewModelProvider(requireActivity())[AllChatListViewModel::class.java]
+        allChatListViewModel =
+            ViewModelProvider(requireActivity())[AllChatListViewModel::class.java]
         return binding.root
 
     }
@@ -93,20 +95,17 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             }
         }
 
-        val authorization = sharedPreferences.getString(Constants.Authorization,null)
-        if(!authorization.isNullOrEmpty() && authorization!="-1" )
-        {
+        val authorization = sharedPreferences.getString(Constants.Authorization, null)
+        if (!authorization.isNullOrEmpty() && authorization != "-1") {
             binding.rlSearchTop.ivHamburger.setOnClickListener {
                 (activity as MainActivity).binding.drawerLayout.openDrawer(GravityCompat.END)
             }
-        }
-        else
-        {
-            Toast.makeText(context,"Not Logged in Failure", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Not Logged in Failure", Toast.LENGTH_SHORT).show()
         }
 
         binding.rlSearchTop.ivNotification.setOnClickListener {
-            val intent = Intent(activity,  NotificationActivity::class.java)
+            val intent = Intent(activity, NotificationActivity::class.java)
             startActivity(intent)
         }
 
@@ -361,14 +360,17 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         when (useType) {
             ItemUserListLay -> {
+                bundle.putString(
+                    "audience_id",
+                    (allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel).toChatUser
+                )
 //                val chatItem = allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
                 performClickAction(action, bundle)
             }
 
             ItemUserChatPendingListLay -> {
                 try {
-                    val dataItem =
-                        (allChatListViewModel.userListsData.value?.get(itemPosition) as com.dev.frequenc.ui_codes.data.pending_request.Data)
+                    val dataItem = (allChatListViewModel.userListsData.value?.get(itemPosition) as com.dev.frequenc.ui_codes.data.pending_request.Data)
                     bundle.putString("Connection_id", dataItem.from_user_id._id)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -377,6 +379,10 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             }
 
             ItemUserChatRequestsLay -> {
+                bundle.putString(
+                    "audience_id",
+                    (allChatListViewModel.userListsData.value?.get(itemPosition) as com.dev.frequenc.ui_codes.data.myrequests.Data).from_user_id._id
+                )
                 performClickAction(action, bundle)
             }
         }

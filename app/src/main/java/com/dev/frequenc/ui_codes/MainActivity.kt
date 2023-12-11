@@ -63,8 +63,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var allChatListViewModel: AllChatListViewModel
     private var pwd: String? = "skkfjdsd"
 
-    //            private var username: String? = "skkfjdsd"
-    private var username: String? = "7777444422"
+//                private var username: String? = "skkfjdsd"
+//    private var username: String? = "7777444422"
+    private var username: String? = "52452423324234"
     val requestcode = 101
     var latitude = ""
     var longitude = ""
@@ -133,12 +134,10 @@ class MainActivity : AppCompatActivity() {
 
 
         try {
-//            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null)+"6"
+//            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null)
 //            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
 //            pwd= username!!.substring(generatedUsername!!.lastIndex-5, generatedUsername!!.lastIndex) + "@" + mob_no!!.substring(mob_no.lastIndex-5, mob_no.lastIndex)
 //            username = generatedUsername
-            sharedPreferences.edit().putString(Constants.User_Id, username)
-                .apply()
         } catch (e: Exception) {
             e.printStackTrace()
         }

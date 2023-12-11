@@ -15,8 +15,8 @@ import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityIntroduceYourselfBinding
 import com.dev.frequenc.ui_codes.data.ProfileRes
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
+import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.AppCommonMethods
-import com.dev.frequenc.util.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
