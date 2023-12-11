@@ -50,7 +50,7 @@ import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.screens.intro.IntroduceYourselfActivity
 import com.dev.frequenc.ui_codes.screens.intro.PresentationActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import pl.droidsonroids.gif.GifImageView
@@ -219,8 +219,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         }
 
         ivNotification.setOnClickListener {
-//            val intent = Intent(activity,  NotificationActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(activity,  NotificationActivity::class.java)
+            startActivity(intent)
         }
         sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
 

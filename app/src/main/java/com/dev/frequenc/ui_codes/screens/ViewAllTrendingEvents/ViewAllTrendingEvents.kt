@@ -10,20 +10,11 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dev.frequenc.MainActivity
-import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.databinding.ActivityViewAllTrendingEventsBinding
-import com.dev.frequenc.ui_codes.screens.Adapter.TrendingArtistAdapter
-import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapterold
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
-import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.dev.frequenc.ui_codes.util.Constants
 
 class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterViewAll.ListAdapterListener {
 
@@ -45,7 +36,6 @@ class ViewAllTrendingEvents : AppCompatActivity(),TrendingEventAdapterViewAll.Li
         setContentView(binding.root)
 
         mList = intent.getSerializableExtra("list") as List<TrendingEventsResponse>
-
         binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!

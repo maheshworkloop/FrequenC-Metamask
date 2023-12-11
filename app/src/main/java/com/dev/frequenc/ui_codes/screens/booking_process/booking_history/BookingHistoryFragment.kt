@@ -2,7 +2,6 @@ package com.dev.frequenc.ui_codes.screens.booking_process.booking_history
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
@@ -19,8 +17,8 @@ import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.data.models.TicketDetailsModel
 import com.dev.frequenc.ui_codes.screens.Dashboard.wallet.WalletViewModel
 import com.dev.frequenc.ui_codes.screens.booking_process.tickets.ShowTicketFragment
-import com.dev.frequenc.util.Constants
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.Constants
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.metamask.androidsdk.TAG
 
@@ -276,24 +274,7 @@ class BookingHistoryFragment : Fragment(), ItemClickListener {
 //                        }
 //                    }
 //                }
-//
-//                val metamaskAddress =
-//                    sharedPreferences.getString(Constants.MetaMaskWalletAddress, null)
-//                if (metamaskAddress != null) {
-//                    bookinghistoryViewModel.getWalletBalence(metamaskAddress)
-//                } else {
-//                    try {
-//                        startActivity(
-//                            Intent(
-//                                activity,
-//                                com.dev.frequenc.MainActivity::class.java
-//                            )
-//                        )
-//                    } catch (ex: Exception) {
-//                        ex.printStackTrace()
-//
-//                    }
-//                }
+//booking
             } catch (ex: Exception) {
                 Log.e(TAG, "WalletViewModel: ", ex)
                 walletViewModel.setConnectedVals(false)

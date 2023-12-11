@@ -4,18 +4,24 @@ data class User(
     val __v: Int,
     val _id: String,
     val audience_id: String,
+    val city: String,
+    val country: String,
     val createdAt: String,
     val device_type: String,
-    val fullName: Any,
+    val dob: String,
+    val ekyc: Boolean,
+    val email: String,
+    val fullName: String,
+    val gender: String,
     val id: String,
     val isOtpVerified: Boolean,
+    val kyb_email_verified: Boolean,
     val phone_no: String,
+    val postalCode: String,
+    val state: String,
     val status: String,
     val updatedAt: String,
     val user_type: String,
     val venue_id: List<Any>,
-    val wallet: Any,
-    val artist_id: String,
-    val vendor_id: String
-) {
-}
+    val wallet: Any
+)

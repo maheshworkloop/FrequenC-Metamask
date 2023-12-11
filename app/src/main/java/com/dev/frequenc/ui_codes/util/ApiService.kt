@@ -2,8 +2,6 @@ package com.dev.frequenc.ui_codes.util
 
 import com.dev.frequenc.ui_codes.data.SearchResponse
 import com.dev.frequenc.ui_codes.data.RegisterUserResponse
-import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmUserOtpResponse
-import com.dev.frequenc.ui_codes.data.confirmuserotp.UpdateUserTypeResponse
 import com.dev.frequenc.ui_codes.screens.login.LoginViewModel
 import com.dev.frequenc.ui_codes.screens.login.UpdateUserReq
 import com.dev.frequenc.ui_codes.data.AllDataResponse
@@ -20,26 +18,31 @@ import com.dev.frequenc.ui_codes.data.MatchVibeListResponse
 import com.dev.frequenc.ui_codes.data.ProfileRes
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
 import com.dev.frequenc.ui_codes.data.QuoteResponse
+import com.dev.frequenc.ui_codes.data.SendInvitationResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistResponse
 import com.dev.frequenc.ui_codes.data.TrendingArtistTokenResponse
 import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.ui_codes.data.TrendingEventsTokenResponse
 import com.dev.frequenc.ui_codes.data.UpcomingEventResponse
+import com.dev.frequenc.ui_codes.data.UpdateAgoraDetailResponse
+import com.dev.frequenc.ui_codes.data.UpdateAgoraModel
 import com.dev.frequenc.ui_codes.data.VenueDetailsResponse
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.WalletBalenceData
+import com.dev.frequenc.ui_codes.data.accept_invitation.RequestAcceptResponse
+import com.dev.frequenc.ui_codes.data.confirmuserotp.ConfirmOtpResponse
 import com.dev.frequenc.ui_codes.data.models.paymentInitiateReq
 import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
+import com.dev.frequenc.ui_codes.data.pending_request.PendingRequestResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
 import com.dev.frequenc.ui_codes.data.req.UpdatePaymentRequest
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
-import com.dev.frequenc.ui_codes.screens.utils.KeysConstant
-import com.dev.frequenc.util.Constants
-import com.dev.frequenc.util.Constants.Companion.Authorization
+import com.dev.frequenc.ui_codes.data.update_user_type.UpdateUserTypeResponse
+import com.dev.frequenc.ui_codes.util.Constants.Companion.Authorization
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
@@ -59,7 +62,7 @@ interface ApiService {
     fun register(@Body phone_no: LoginViewModel.registerUserReq ): Call<RegisterUserResponse>?
 
     @POST(KeysConstant.ConfirmUserOtp)
-    fun confirmUserOtp(@Body verifyOtpReq: LoginViewModel.VerifyOtpReq) : Call<ConfirmUserOtpResponse>?
+    fun confirmUserOtp(@Body verifyOtpReq: LoginViewModel.VerifyOtpReq) : Call<ConfirmOtpResponse>?
 
     @POST(KeysConstant.UpdateUserType)
 
@@ -106,7 +109,7 @@ interface ApiService {
     fun bookmarkEvent(@Header(Constants.Authorization) tokens: String, @Body savedEventsReq: SavedEventsReq): Call<BookmarkEventResponse>
 
     @GET("audience/{id}")
-    fun getProfile(@Header(Constants.Authorization) tokens: String , @Path("id") id: String): Call<AudienceDataResponse>
+    fun getProfile(@Header(Constants.Authorization) tokens: String, @Path("id") id: String): Call<AudienceDataResponse>
 
     @GET(KeysConstant.TransactionList)
     fun getTransactionlist(@Header(Constants.Authorization) token: String): Call<TransactionListRes>
@@ -198,6 +201,21 @@ interface ApiService {
     fun updateConnectProfilePhoto(@Header(Authorization) token: String,@Path("audience_id")id : String,
                              @Field("profile_images") profile_images : List<String>
                              ) : Call<ProfileRes>?
+
+
+    @GET("/{org_name}/{app_name}/users/{owner_username}/contacts/users")
+    fun chatsList( @Header(Authorization) token: String ,@Path("org_name") org_name: String,@Path("app_name") app_name: String, @Path("owner_username") owner_username: String): Call<Any>?
+
+    @GET(KeysConstant.MYPENDING_REQUEST)
+    fun pendingRequests(@Header(Authorization) tokens: String): Call<PendingRequestResponse>?
+    @GET("connect/acceptRequest/{connect_d}")
+    fun acceptInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
+    @GET("connect/rejectRequest/{connect_d}")
+    fun rejectInvitation(@Header(Authorization) token: String ,@Path("connect_d") connect_d: String): Call<RequestAcceptResponse>?
+    @GET("connect/sentRequest/{audienceId}")
+    fun callInvitationApi(@Header(Authorization) token: String, @Path("audienceId") audienceId:  String) : Call<SendInvitationResponse>
+    @POST("auth/updateAgora")
+    fun getUpdateAgora(@Header(Authorization) token: String?,@Body updateAgoraBdy: UpdateAgoraModel ):Call<UpdateAgoraDetailResponse>?
 
 
 }

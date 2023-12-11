@@ -9,7 +9,7 @@ import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.notification.Notification
 import com.dev.frequenc.databinding.ItemNotificationBinding
 import com.dev.frequenc.util.ImageUtil
-import com.dev.frequenc.util.ItemClickListener
+import com.dev.frequenc.ui_codes.util.ItemClickListener
 
 class NotificationAdapter(private var notificationList: List<Any>,val onItemClickListener: ItemClickListener) : Adapter<NotificationAdapter.MyViewHolder>() {
     class MyViewHolder(val itemNotificationBinding: ItemNotificationBinding) : ViewHolder(itemNotificationBinding.root) {

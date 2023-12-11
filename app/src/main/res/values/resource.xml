@@ -47,4 +47,13 @@
         <item name="android:solidColor"> @color/material_red_100 </item>
     </style>
 
+    <style
+            name="MyCustomTabTextAppearance"
+            parent="Widget.Material3.TabLayout">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textStyle">bold</item>
+
+
+
+    </style>
 </resources>

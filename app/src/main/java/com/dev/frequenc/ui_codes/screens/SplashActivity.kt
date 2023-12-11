@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.screens.Profile.Intro1Activity
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import pl.droidsonroids.gif.GifImageView
 
 class SplashActivity : AppCompatActivity() {

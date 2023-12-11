@@ -1,11 +1,19 @@
-package com.dev.frequenc.ui_codes.screens.utils
+package com.dev.frequenc.ui_codes.util
 
 class KeysConstant {
 
     companion object
     {
 //        const val BASE_URL = "http://192.168.1.17:3001/api/v1/"
+
+        val CHAT_User_Name: String = "Chat_User_Names"
+        val CHAT_TOKEN: String = "Chat_Tokn"
+
+        //        const val BASE_URL = "http://192.168.1.8:3001/api/v1/"
+
         const val BASE_URL = "http://ec2-43-204-108-136.ap-south-1.compute.amazonaws.com:3001/api/v1/"
+
+        const val CHAT_BASE_URL = "a71.chat.agora.io"
 
         const val BROWSE_BY_CAT = "event/category/browse-by-category"
 
@@ -18,6 +26,7 @@ class KeysConstant {
         const val TRENDING_ARTIST_TOKEN = "event/home/trendingartist"
 
         const val ALL_DATA = "event/all-data/all"
+        const val MYPENDING_REQUEST = "connect/myPendingRequest"
 
         const val ALL_DATA_TOKEN = "event/all-data/all"
 

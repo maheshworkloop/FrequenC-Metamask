@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.frequenc.ui_codes.screens.Adapter.SearchAdapter
@@ -17,7 +16,7 @@ import com.dev.frequenc.ui_codes.screens.ArtistDetail.ArtistDetailsActivity
 import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.screens.VenueDetail.VenueDetailActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
-import com.dev.frequenc.util.Constants
+import com.dev.frequenc.ui_codes.util.Constants
 import retrofit2.Call
 import retrofit2.Response
 
