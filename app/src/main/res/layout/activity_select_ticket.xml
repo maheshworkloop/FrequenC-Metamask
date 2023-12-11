@@ -54,75 +54,34 @@
             />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTicket"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSelectTicket"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvNumberofSeatsTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Number of Seats: 1"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            app:layout_constraintTop_toBottomOf="@id/rvTicket"
+            android:layout_height="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/_10sdp"
-            />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSelectTicket"
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTotalSeats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="50 seats"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:textSize="@dimen/_14sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            app:layout_constraintTop_toTopOf="@id/tvNumberofSeatsTag"
-            app:layout_constraintBottom_toBottomOf="@id/tvNumberofSeatsTag"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginLeft="@dimen/_10sdp"
-            />
+            app:layout_constraintBottom_toTopOf="@id/tvAmountTag"
+            >
 
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNumberofSeatsTag"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:progress="1"
-            android:thumb="@drawable/seekbar_thumb"
-            android:min="1"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTicket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvSeekBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:textSize="@dimen/_14sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNumberofSeatsTag"
-            android:layout_marginTop="@dimen/_18sdp"
-            android:textColor="@color/white"
-            android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                />
 
-            />
+
+        </RelativeLayout>
+
+
+
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvAmountTag"
@@ -130,12 +89,12 @@
             android:layout_height="wrap_content"
             android:text="Amount"
             android:textSize="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            app:layout_constraintTop_toBottomOf="@id/tvSeekBar"
+            android:layout_marginBottom="@dimen/_30sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="@dimen/_10sdp"
             android:letterSpacing="0.01"
+            style="@style/textViewRegularBold"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -144,13 +103,13 @@
             android:layout_height="wrap_content"
             android:text="FRQ "
             android:textSize="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            app:layout_constraintTop_toBottomOf="@id/tvSeekBar"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="@dimen/_10sdp"
             android:letterSpacing="0.02"
             android:textColor="@color/font_color"
+            style="@style/textViewRegularBold"
             />
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvAmountEther"
@@ -168,25 +127,24 @@
             />
 
 
+
         <TextView
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:text="Purchase"
-            android:gravity="center"
-            android:textSize="@dimen/_16sdp"
-            android:background="@drawable/bg_btn"
-            android:paddingHorizontal="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_10sdp"
+            android:background="@drawable/bg_book_now"
+            android:paddingHorizontal="@dimen/_28sdp"
+            android:paddingVertical="@dimen/_8sdp"
             android:textColor="@color/white"
-            android:layout_marginRight="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginHorizontal="@dimen/_20sdp"
+            style="@style/textViewRegularBold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:textStyle="bold"
-
             />
 
 

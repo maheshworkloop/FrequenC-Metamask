@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
@@ -18,6 +21,7 @@ import com.dev.frequenc.ui_codes.screens.Stripe.StripePaymentActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
 import com.dev.frequenc.util.Constants
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
@@ -89,11 +93,43 @@ class PaymentDetailActivity : AppCompatActivity() {
 
             Log.d("eventid",eventDetails.eventDetails._id)
             startActivity(intent)
+//           showDialogPayment()
+
         }
 
 
         getProfileApi()
 
+    }
+
+    private fun showDialogPayment() {
+        val dialog = BottomSheetDialog(this)
+        val bottomSheet = layoutInflater.inflate(R.layout.layout_bottom_stripe, null)
+//           .bs_tv_remove .setOnClickListener { dialog.dismiss() }
+
+//        var btnPay =  bottomSheet.findViewById<Button>(R.id.payButton)
+//        var tvRemove =  bottomSheet.findViewById<TextView>(R.id.bs_tv_remove)
+
+//        tvRemove.setOnClickListener {
+//            dialog.dismiss()
+//            savedEventViewModel.callBookmarkEventApi(
+//                position,
+//                sharedPreferences.getString(Constants.Authorization, "").toString()
+//            )
+//        }
+
+//        tvCancel.setOnClickListener {
+//            dialog.dismiss()
+//
+//        }
+
+//        btnPay.setOnClickListener {
+//            Toast.makeText(this,"Stripe",Toast.LENGTH_SHORT).show()
+//        }
+
+
+        dialog.setContentView(bottomSheet)
+        dialog.show()
     }
 
 

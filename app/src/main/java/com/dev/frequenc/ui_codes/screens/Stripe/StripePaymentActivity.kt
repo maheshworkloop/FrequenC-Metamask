@@ -2,13 +2,13 @@ package com.dev.frequenc.ui_codes.screens.Stripe
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
@@ -17,6 +17,7 @@ import com.dev.frequenc.ui_codes.data.EventTicket
 import com.dev.frequenc.ui_codes.data.InitiatePaymentResponse
 import com.dev.frequenc.ui_codes.data.models.BillingInformation
 import com.dev.frequenc.ui_codes.data.models.paymentInitiateReq
+import com.dev.frequenc.ui_codes.data.req.UpdatePaymentRequest
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.Constants
 import com.stripe.android.PaymentConfiguration
@@ -173,11 +174,92 @@ class StripePaymentActivity : AppCompatActivity() {
 
     }
 
+    private fun startCheckout2() {
+
+        sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+
+        authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
+
+
+        var billingInformation  = BillingInformation(
+//            audiencce.fullName,
+            "sumit",
+            "Singh",
+//            audiencce.email,
+            "sumit@gmail.com",
+//            audiencce.mobile_no,
+            "8765454545",
+            "my address",
+            "Delhi",
+            "Noida",
+            "India"
+        )
+
+
+        val billingInformationList = listOf(billingInformation)
+
+        var initiateReq = paymentInitiateReq(
+            item.price * count.toDouble(),
+            eventDetails.eventDetails._id,
+            count.toInt(),
+            item.ticket_type,
+            item.price.toDouble(),
+            billingInformationList
+
+        )
+
+        ApiClient.getInstance()!!.initiatePayment(authorization,initiateReq)!!.
+        enqueue(object : retrofit2.Callback<InitiatePaymentResponse>{
+
+
+            override fun onResponse(
+                call: Call<InitiatePaymentResponse>,
+                response: Response<InitiatePaymentResponse>
+            ) {
+
+                progressDialog.visibility = View.GONE
+                if(response.isSuccessful && response.body()!=null)
+                {
+
+                    val res = response.body()
+
+                    Toast.makeText(this@StripePaymentActivity,res!!.clientSecret,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("client secret",res!!.clientSecret)
+
+                    paymentIntentClientSecret = res!!.clientSecret
+
+                    payButton.setOnClickListener {
+                        cardInputWidget.paymentMethodCreateParams?.let { params ->
+                            val confirmParams = ConfirmPaymentIntentParams
+                                .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret!!)
+                            lifecycleScope.launch {
+                                paymentLauncher.confirm(confirmParams)
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<InitiatePaymentResponse>, t: Throwable) {
+                progressDialog.visibility = View.GONE
+
+            }
+        })
+
+    }
 
     private fun onPaymentResult(paymentResult: PaymentResult) {
+
+
+
         val message = when (paymentResult) {
             is PaymentResult.Completed -> {
+
                 "Completed!"
+
             }
             is PaymentResult.Canceled -> {
                 "Canceled!"
@@ -188,12 +270,55 @@ class StripePaymentActivity : AppCompatActivity() {
                 "Failed: " + paymentResult.throwable.message
             }
         }
+
         Toast.makeText(this,
             "Payment Result:" +
             message,
             Toast.LENGTH_SHORT
         ).show()
+
+
+        if(message.equals("Completed!"))
+        {
+
+            updatePaymenentApi()
+        }
+
+
     }
+
+    private fun updatePaymenentApi()
+    {
+        ApiClient.getInstance()!!.updatePayment(authorization, UpdatePaymentRequest("Success","123456"))!!.
+        enqueue(object : retrofit2.Callback<InitiatePaymentResponse>{
+
+
+            override fun onResponse(
+                call: Call<InitiatePaymentResponse>,
+                response: Response<InitiatePaymentResponse>
+            ) {
+
+                progressDialog.visibility = View.GONE
+                if(response.isSuccessful && response.body()!=null)
+                {
+
+//                    val res = response.body()
+
+                    Log.d("payment","Payment Status Updated")
+
+
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<InitiatePaymentResponse>, t: Throwable) {
+                progressDialog.visibility = View.GONE
+
+            }
+        })
+    }
+
 }
 
 

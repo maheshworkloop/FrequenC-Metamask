@@ -34,6 +34,7 @@ import com.dev.frequenc.ui_codes.data.myconnection.MyConnectionResponse
 import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
+import com.dev.frequenc.ui_codes.data.req.UpdatePaymentRequest
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
 import com.dev.frequenc.ui_codes.screens.utils.KeysConstant
@@ -157,6 +158,10 @@ interface ApiService {
     fun metamaskBalence(@Path("eth_address") et_r: String): Call<WalletBalenceData>?
     @POST(KeysConstant.Initiate_payment)
     fun initiatePayment(@Header(Authorization) tokens : String,   @Body paymentInitiate : paymentInitiateReq): Call<InitiatePaymentResponse>?
+
+    @POST(KeysConstant.Update_Payment)
+    fun updatePayment(@Header(Authorization) tokens : String , @Body updatePaymentRequest : UpdatePaymentRequest): Call<InitiatePaymentResponse>?
+
 
     @GET(KeysConstant.Vibe_Event)
     fun vibeEvent(@Header(Authorization) tokens : String): Call<VibeEventResponse>

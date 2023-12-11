@@ -4,7 +4,7 @@ class KeysConstant {
 
     companion object
     {
-//        const val BASE_URL = "http://192.168.1.6:3001/api/v1/"
+//        const val BASE_URL = "http://192.168.1.17:3001/api/v1/"
         const val BASE_URL = "http://ec2-43-204-108-136.ap-south-1.compute.amazonaws.com:3001/api/v1/"
 
         const val BROWSE_BY_CAT = "event/category/browse-by-category"
@@ -37,6 +37,8 @@ class KeysConstant {
         const val BOOKMARK_EVENT = "bookmark/savedEvents"
         const val Register_attendee = "auth/registerAttendee"
         const val Initiate_payment = "payments/initiate-payment"
+        const val Update_Payment = "payments/update-transaction"
+//        const val Initiate_payment = "payments/create-payment-intent"
 
         const val Vibe_Event = "connect/vibe-event"
 
