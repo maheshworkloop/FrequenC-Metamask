@@ -122,10 +122,10 @@
                      android:layout_width="match_parent"
                      android:layout_height="@dimen/_250sdp"
                      android:layout_weight="1.3"
-                     android:src="@drawable/img_event"
+                     android:src="@drawable/baseline_crop_original_24"
                      android:scaleType="fitXY"
-                     android:background="@drawable/bg_img_profile"
                      android:padding="@dimen/_2sdp"
+                     android:background="@drawable/bg_img_profile"
                      />
          </LinearLayout>
 
@@ -144,10 +144,11 @@
                      android:layout_height="@dimen/_80sdp"
                      android:layout_weight="1.7"
                      android:scaleType="fitXY"
-                     android:src="@drawable/img_connect"
+                     android:src="@drawable/baseline_crop_free_24"
                      android:layout_marginBottom="@dimen/_5sdp"
-                     android:background="@drawable/bg_img_profile"
                      android:padding="@dimen/_2sdp"
+                     android:background="@drawable/bg_img_profile"
+
                      />
 
              <ImageView
@@ -156,8 +157,9 @@
                      android:layout_height="@dimen/_80sdp"
                      android:layout_weight="1.7"
                      android:scaleType="fitXY"
-                     android:src="@drawable/img_connect"
-                     android:layout_marginBottom="@dimen/_5sdp"
+                     android:src="@drawable/baseline_crop_free_24"
+
+                    android:layout_marginBottom="@dimen/_5sdp"
                      android:background="@drawable/bg_img_profile"
                      android:padding="@dimen/_2sdp"
                      />
@@ -168,7 +170,7 @@
                      android:layout_height="@dimen/_80sdp"
                      android:layout_weight="1.7"
                      android:scaleType="fitXY"
-                     android:src="@drawable/add"
+                     android:src="@drawable/baseline_crop_free_24"
                      android:background="@drawable/bg_img_profile"
                      android:padding="@dimen/_2sdp"
                      />
@@ -212,49 +214,49 @@
 
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvAboutMe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="About Me"
-                android:textSize="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                style="@style/textViewRegularBold"
-                app:layout_constraintTop_toBottomOf="@id/viewLine1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textColor="@color/black"
-                />
-
+            android:id="@+id/tvMyBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Bio"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            style="@style/textViewRegularBold"
+            app:layout_constraintTop_toBottomOf="@id/viewLine1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/_10sdp"
+            />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvAboutMeDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Make it easy for others to get a sense of who you are"
-                android:textSize="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvAboutMe"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                style="@style/textViewRegular"
-                />
+            android:id="@+id/tvMyBioIntro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make it easy for others to get a sense of who you are"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvMyBio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            style="@style/textViewRegular"
+            android:layout_marginLeft="@dimen/_10sdp"
+            />
+
 
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etEditDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Share few words about yourself, your interests, and what you are looking in a connection"
+                android:hint="Share few words about yourself"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvAboutMeDescription"
+                app:layout_constraintTop_toBottomOf="@id/tvMyBioIntro"
 
                 android:background="@drawable/bg_edittext"
                 app:boxBackgroundMode="none"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -262,7 +264,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="6"
                 android:minLines="3"
-
+                android:textSize="@dimen/_11sdp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -272,7 +274,7 @@
                 android:id="@+id/tvMydetailsTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Details"
+                android:text="My Basics"
                 android:textSize="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 style="@style/textViewRegularBold"
@@ -291,780 +293,775 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvMydetailsTag"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 >
 
-          <RelativeLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:paddingVertical="@dimen/_5sdp"
-                  android:paddingHorizontal="@dimen/_10sdp"
-                  >
-
-              <ImageView
-                      android:id="@+id/ivMydetailsIcon1"
-                      android:layout_width="@dimen/_22sdp"
-                      android:layout_height="@dimen/_22sdp"
-                      android:src="@drawable/ic_occupation_svg"
-                      android:layout_gravity="center_vertical"
-                      android:scaleType="fitXY"
-                      />
-
-              <com.google.android.material.textview.MaterialTextView
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="Occupation"
-                      android:textSize="@dimen/_15sdp"
-                       android:layout_toLeftOf="@id/tvDesc1"
-                      android:layout_toRightOf="@+id/ivMydetailsIcon1"
-                      android:layout_marginLeft="@dimen/_20sdp"
-                      android:layout_marginRight="@dimen/_5sdp"
-                      style="@style/textViewRegular"
-                      android:layout_gravity="center_vertical"
-                      />
-
-              <com.google.android.material.textview.MaterialTextView
-                      android:id="@+id/tvDesc1"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Add"
-                      android:textSize="@dimen/_15sdp"
-                      android:layout_marginLeft="@dimen/_20sdp"
-                      android:layout_marginRight="@dimen/_10sdp"
-                      style="@style/textViewRegular"
-                      android:layout_gravity="center_vertical"
-                      android:layout_toLeftOf="@id/ivMydetailsArrow1"
-                      />
-
-              <ImageView
-                      android:id="@+id/ivMydetailsArrow1"
-                      android:layout_width="@dimen/_22sdp"
-                      android:layout_height="@dimen/_22sdp"
-                      android:src="@drawable/ic_right_arrow"
-                      android:layout_gravity="center_vertical"
-                      android:padding="@dimen/_5sdp"
-                      app:tint="@color/material_grey_800"
-                      android:layout_alignParentRight="true"
-                      android:layout_marginRight="@dimen/_20sdp"
-                      />
-
-          </RelativeLayout>
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon2"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Gender"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc2"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon2"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Male"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow2"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow2"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="@dimen/_5sdp"
-                android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:gravity="center_vertical"
 
                 >
 
-            <ImageView
-                    android:id="@+id/ivMydetailsIcon3"
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
-                    android:src="@drawable/ic_occupation_svg"
+                <ImageView
+                    android:id="@+id/ivMydetailsIconEmail"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/mail"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     />
 
-            <com.google.android.material.textview.MaterialTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Education"
-                    android:textSize="@dimen/_15sdp"
-                    android:layout_toLeftOf="@id/tvDesc3"
-                    android:layout_toRightOf="@+id/ivMydetailsIcon3"
-                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Email"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvEmailAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIconEmail"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    style="@style/textViewRegular"
+                    style="@style/textViewRegularBold"
                     android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+
                     />
 
-            <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvDesc3"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvEmailAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsDobArrow3"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsDobArrow3"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon2"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/gender"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Gender"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvGenderAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon2"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvGenderAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow2"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow2"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon1"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/briefcase"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:padding="@dimen/_2sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Occupation"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvOccupationAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon1"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvOccupationAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow1"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow1"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon3"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/education"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Education"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvEducationAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon3"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvEducationAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
                     style="@style/textViewRegular"
                     android:layout_gravity="center_vertical"
                     android:layout_toLeftOf="@id/ivMydetailsArrow3"
                     />
 
-            <ImageView
+                <ImageView
                     android:id="@+id/ivMydetailsArrow3"
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:src="@drawable/ic_right_arrow"
                     android:layout_gravity="center_vertical"
                     android:padding="@dimen/_5sdp"
                     app:tint="@color/material_grey_800"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
                     />
 
-        </RelativeLayout>
+            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingVertical="@dimen/_5sdp"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 >
 
-            <ImageView
+                <ImageView
                     android:id="@+id/ivMydetailsIcon4"
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
-                    android:src="@drawable/ic_occupation_svg"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/cityscape"
                     android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp"
                     />
 
-            <com.google.android.material.textview.MaterialTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_18sdp"
                     android:text="Location"
-                    android:textSize="@dimen/_15sdp"
-                    android:layout_toLeftOf="@id/tvDesc4"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvLocationAdd"
                     android:layout_toRightOf="@+id/ivMydetailsIcon4"
-                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_5sdp"
-                    style="@style/textViewRegular"
+                    style="@style/textViewRegularBold"
                     android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
                     />
 
-            <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvDesc4"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvLocationAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delhi"
-                    android:textSize="@dimen/_15sdp"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
                     style="@style/textViewRegular"
                     android:layout_gravity="center_vertical"
                     android:layout_toLeftOf="@id/ivMydetailsArrow4"
                     />
 
-            <ImageView
+                <ImageView
                     android:id="@+id/ivMydetailsArrow4"
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:src="@drawable/ic_right_arrow"
                     android:layout_gravity="center_vertical"
                     android:padding="@dimen/_5sdp"
                     app:tint="@color/material_grey_800"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
                     />
 
-        </RelativeLayout>
+            </RelativeLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvMoreABout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More About Me"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                style="@style/textViewRegularBold"
+                app:layout_constraintTop_toBottomOf="@id/etEditDescription"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textColor="@color/black"
+                />
 
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvMostPeople"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Most People also want to know"
+                    android:text="Cover the things most people are curious about"
                     android:textSize="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintTop_toBottomOf="@id/tvAboutMe"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     style="@style/textViewRegular"
                     />
 
-
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon6"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Height"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc6"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon6"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow6"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow6"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon7"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Smoking"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc7"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon7"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow7"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow7"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon8"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Drinking"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc8"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon8"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow8"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow8"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon9"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pets"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc9"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon9"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow9"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow9"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon10"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Children"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc10"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon10"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow10"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow10"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon11"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Zodiac Sign"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc11"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon11"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow11"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow11"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-
-                    >
-
-                <ImageView
-                        android:id="@+id/ivMydetailsIcon12"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Religion"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvDesc12"
-                        android:layout_toRightOf="@+id/ivMydetailsIcon12"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDesc12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivMydetailsArrow12"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivMydetailsArrow12"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
-
-            </RelativeLayout>
-
-
-
-
-        </LinearLayout>
-
-
-
-        <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvIEnjoy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="I Enjoy"
-                android:textSize="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                style="@style/textViewRegularBold"
-                app:layout_constraintTop_toBottomOf="@id/llMyDetail"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textColor="@color/black"
-                />
-
-        <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvIEnjoyDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Adding your interest is a great way to find like-minded connections"
-                android:textSize="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@id/tvIEnjoy"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                style="@style/textViewRegular"
-                />
-
-        <LinearLayout
-                android:id="@+id/llEnjoy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_below="@id/tvMydetailsTag"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvIEnjoyDescription"
-
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 >
-            <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon6"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ruler"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="@dimen/_2sdp"
                     />
 
-            <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Height"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvHeightAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon6"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
                     />
 
-            <TextView
-
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvHeightAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Non Smoker"
-                    android:background="@drawable/bg_tv_mydetail_blue"
-                    android:textSize="@dimen/_10sdp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
-                    android:textColor="@color/black"
-                    android:paddingVertical="@dimen/_4sdp"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
-
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow6"
                     />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow6"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon7"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/cigarrete"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Smoking"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvSmoke"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon7"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvSmoke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow7"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow7"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon8"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/cheers"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Drinking"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvDrinkAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon8"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    android:gravity="center_vertical"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDrinkAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow8"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow8"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon9"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/pawprint"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Pets"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvPetsAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon9"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPetsAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow9"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow9"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon10"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/children"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Children"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvChildrenAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon10"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvChildrenAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow10"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow10"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon11"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/zodiac"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Zodiac"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvZodiacAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon11"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvZodiacAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow11"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow11"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMydetailsIcon12"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/namaste"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Religion"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvReligionAdd"
+                    android:layout_toRightOf="@+id/ivMydetailsIcon12"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvReligionAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivMydetailsArrow12"
+                    />
+
+                <ImageView
+                    android:id="@+id/ivMydetailsArrow12"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
+
+            </RelativeLayout>
+
+
+
 
 
         </LinearLayout>
@@ -1074,11 +1071,11 @@
                 android:id="@+id/tvICommunicate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="I Communicate in"
+                android:text="Languages I Know"
                 android:textSize="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 style="@style/textViewRegularBold"
-                app:layout_constraintTop_toBottomOf="@id/llEnjoy"
+                app:layout_constraintTop_toBottomOf="@id/llMyDetail"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/black"
@@ -1098,62 +1095,62 @@
 
                 >
             <TextView
-
+                    android:id="@+id/tvEnglish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Non Smoker"
+                    android:text="English"
                     android:background="@drawable/bg_tv_mydetail_blue"
                     android:textSize="@dimen/_10sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
+                    style="@style/textViewRegular"
                     android:textColor="@color/black"
                     android:paddingVertical="@dimen/_4sdp"
                     android:paddingHorizontal="@dimen/_4sdp"
                     android:gravity="center"
-                    android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:drawableStart="@drawable/linguistics"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:drawablePadding="@dimen/_2sdp"
                     />
 
             <TextView
-
+                    android:id="@+id/tvHindi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Non Smoker"
+                    android:text="Hindi"
                     android:background="@drawable/bg_tv_mydetail_blue"
                     android:textSize="@dimen/_10sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
+                    style="@style/textViewRegular"
                     android:textColor="@color/black"
                     android:paddingVertical="@dimen/_4sdp"
                     android:paddingHorizontal="@dimen/_4sdp"
                     android:gravity="center"
                     android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:drawableStart="@drawable/linguistics"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="@dimen/_5sdp"
 
                     />
 
             <TextView
-
+                    android:id="@+id/tvPunjabi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Non Smoker"
+                    android:text="Punjabi"
                     android:background="@drawable/bg_tv_mydetail_blue"
                     android:textSize="@dimen/_10sdp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:fontFamily="@font/epilogueregular"
+                    style="@style/textViewRegular"
                     android:textColor="@color/black"
                     android:paddingVertical="@dimen/_4sdp"
                     android:paddingHorizontal="@dimen/_4sdp"
                     android:gravity="center"
                     android:drawablePadding="@dimen/_2sdp"
-                    android:drawableStart="@drawable/baseline_wine_bar_24"
+                    android:drawableStart="@drawable/linguistics"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="@dimen/_5sdp"
 
@@ -1189,37 +1186,42 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 >
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                     >
 
                 <ImageView
                         android:id="@+id/ivSocialIcon1"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/instagram"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="2dp"
                         />
+
+
 
                 <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_18sdp"
                         android:text="Instagram"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:layout_toLeftOf="@id/tvSocialDesc1"
                         android:layout_toRightOf="@+id/ivSocialIcon1"
-                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
+                        style="@style/textViewRegularBold"
                         android:layout_gravity="center_vertical"
+                        android:textColor="@color/material_grey_700"
                         />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -1227,9 +1229,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Add"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_3sdp"
                         style="@style/textViewRegular"
                         android:layout_gravity="center_vertical"
                         android:layout_toLeftOf="@id/ivSocialArrow1"
@@ -1237,135 +1239,169 @@
 
                 <ImageView
                         android:id="@+id/ivSocialArrow1"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
                         android:src="@drawable/ic_right_arrow"
                         android:layout_gravity="center_vertical"
                         android:padding="@dimen/_5sdp"
                         app:tint="@color/material_grey_800"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
                         />
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivSocialIcon2"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/facebook"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp"
+                    />
+
+
+
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Facebbok"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvSocialDesc2"
+                    android:layout_toRightOf="@+id/ivSocialIcon2"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvSocialDesc2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    >
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivSocialArrow2"
+                    />
 
                 <ImageView
-                        android:id="@+id/ivSocialIcon2"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Facebook"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvSocialDesc2"
-                        android:layout_toRightOf="@+id/ivSocialIcon2"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvSocialDesc2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivSocialArrow2"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivSocialArrow2"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
+                    android:id="@+id/ivSocialArrow2"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
 
             </RelativeLayout>
 
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivSocialIcon3"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/twitter"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:padding="2dp"
+                    />
+
+
+
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
+                    android:layout_height="@dimen/_18sdp"
+                    android:text="Twitter"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_toLeftOf="@id/tvSocialDesc3"
+                    android:layout_toRightOf="@+id/ivSocialIcon3"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    style="@style/textViewRegularBold"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/material_grey_700"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvSocialDesc3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    >
+                    android:text="Add"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    style="@style/textViewRegular"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/ivSocialArrow3"
+                    />
 
                 <ImageView
-                        android:id="@+id/ivSocialIcon3"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_occupation_svg"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Twitter"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_toLeftOf="@id/tvSocialDesc3"
-                        android:layout_toRightOf="@+id/ivSocialIcon3"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        />
-
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvSocialDesc3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_20sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        style="@style/textViewRegular"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/ivSocialArrow3"
-                        />
-
-                <ImageView
-                        android:id="@+id/ivSocialArrow3"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_gravity="center_vertical"
-                        android:padding="@dimen/_5sdp"
-                        app:tint="@color/material_grey_800"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_20sdp"
-                        />
+                    android:id="@+id/ivSocialArrow3"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_right_arrow"
+                    android:layout_gravity="center_vertical"
+                    android:padding="@dimen/_5sdp"
+                    app:tint="@color/material_grey_800"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    />
 
             </RelativeLayout>
 
 
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:background="@drawable/bg_book_now"
+            android:paddingHorizontal="@dimen/_28sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            style="@style/textViewRegularBold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llLinkedAccount"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            />
 
 
 

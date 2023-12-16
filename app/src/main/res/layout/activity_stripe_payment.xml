@@ -7,9 +7,51 @@
         android:orientation="vertical"
         tools:context=".ui_codes.screens.Stripe.StripePaymentActivity">
 
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBackBtn"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
+            android:src="@drawable/icon_left_arrow"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvPaymentDetailTag"
+            app:layout_constraintBottom_toBottomOf="@id/tvPaymentDetailTag"
+            android:layout_marginLeft="@dimen/_15sdp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPaymentDetailTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stripe Payment"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            style="@style/textViewRegular"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_300sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/cardpay"
+            />
         <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="@dimen/_50sdp"
@@ -20,21 +62,60 @@
                 android:layout_centerInParent="true"
                 />
 
-        <com.stripe.android.view.CardInputWidget
-            android:id="@+id/cardInputWidget"
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPayMoney"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Pay Money to Book Ticket"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/textViewRegular"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_below="@+id/ivPay"
             />
 
-        <Button
-            android:text="Pay"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:background="@drawable/bg_pg_stripe"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_below="@+id/tvPayMoney"
+            >
+
+
+
+            <com.stripe.android.view.CardInputWidget
+                android:id="@+id/cardInputWidget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
             android:id="@+id/payButton"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:layout_below="@id/cardInputWidget"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:background="@drawable/bg_book_now"
+            android:paddingHorizontal="@dimen/_28sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            style="@style/textViewRegularBold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_alignParentBottom="true"
             />
 
     </RelativeLayout>

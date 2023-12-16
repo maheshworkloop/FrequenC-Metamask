@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -47,12 +49,13 @@ class StripePaymentActivity : AppCompatActivity() {
     lateinit var progressDialog : ProgressBar
     lateinit var authorization : String
     private lateinit var sharedPreferences: SharedPreferences
-    lateinit var payButton : Button
+    lateinit var payButton : TextView
     lateinit var cardInputWidget : CardInputWidget
 
     lateinit var count : String
     lateinit var eventDetails : EventResponse
     lateinit var item : EventTicket
+    lateinit var ivBackBtn : ImageView
     lateinit var audiencce :AudienceDataResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +69,7 @@ class StripePaymentActivity : AppCompatActivity() {
 
         eventDetails = intent.getSerializableExtra("eventDetail") as EventResponse
 
-
+        ivBackBtn = findViewById(R.id.ivBackBtn)
 
         item = intent.getSerializableExtra("item") as EventTicket
 
@@ -75,6 +78,9 @@ class StripePaymentActivity : AppCompatActivity() {
 
 
 
+      ivBackBtn.setOnClickListener {
+          onBackPressedDispatcher.onBackPressed()
+      }
 
         PaymentConfiguration.init(
             applicationContext,

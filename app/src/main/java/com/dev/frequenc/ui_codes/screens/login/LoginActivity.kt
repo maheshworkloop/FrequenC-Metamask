@@ -155,8 +155,8 @@ class LoginActivity : AppCompatActivity(), DataChangeListener {
 
 
     private fun backToHome() {
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        finish()
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
     }
 
     override fun onDataChange(data: Any, use_type: String) {
@@ -170,9 +170,10 @@ class LoginActivity : AppCompatActivity(), DataChangeListener {
                 } else if (data.equals("2") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
                     addFragment("UserTypeFragment", UserTypeFragment())
                 }
-                else if (data.equals("3") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
+                else if (data == "-2") {
                     val intent = Intent(this,IntroduceYourselfActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 else {
                     if (!data.toString().isNullOrEmpty() && data.equals("-1")) {

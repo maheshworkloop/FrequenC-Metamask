@@ -36,6 +36,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 
+import com.dev.frequenc.BuildConfig;
 import com.dev.frequenc.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -46,6 +47,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 /**
@@ -81,6 +83,130 @@ public final class CommonUtils {
 
         return new String(buffer, "UTF-8");
     }
+
+
+    public static void showPopUpForImagePic(final Activity context, final CommonInterface commonInterface) {
+        final BottomSheetDialog imagePicdialog = new BottomSheetDialog(context);
+        imagePicdialog.setCancelable(true);
+        imagePicdialog.setCanceledOnTouchOutside(true);
+        imagePicdialog.setContentView(R.layout.bottom_sheet_select_image);
+
+        TextView galleryBtn = imagePicdialog.findViewById(R.id.txtGallery);
+        TextView cameraBtn = imagePicdialog.findViewById(R.id.txtCamera);
+    /*   // Button cancelBtn = view.findViewById(R.id.cancel_btn);
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagePicdialog.dismiss();
+            }
+        });*/
+
+        galleryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagePicdialog.dismiss();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+                    if (ContextCompat.checkSelfPermission(context, READ_MEDIA_IMAGES) ==
+                            PackageManager.PERMISSION_GRANTED) {
+
+                       /* if (ActivityCompat.shouldShowRequestPermissionRationale(context,
+                                READ_MEDIA_IMAGES)) {
+                            Toast.makeText(context, " Permission required", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            ActivityCompat.requestPermissions(context,
+                                    new String[]{android.Manifest.permission.READ_MEDIA_IMAGES},
+                                    Constants.READ_STORAGE_PERMISSION_REQUEST);
+                        }*/
+                        Intent galleryIntent = new Intent();
+                        galleryIntent.setType("image/*");
+                        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                        context.startActivityForResult(Intent.createChooser(galleryIntent, "select picture"), Constants.PICK_IMAGE_GALLERY);
+
+
+                    } else {
+
+                        PermissionUtils.requestPermissions(context, new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                                Constants.READ_STORAGE_PERMISSION_REQUEST);
+                    }
+                } else {
+                    if (PermissionUtils.hasPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        Intent galleryIntent = new Intent();
+                        galleryIntent.setType("image/*");
+                        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                        context.startActivityForResult(Intent.createChooser(galleryIntent, "select picture"), Constants.PICK_IMAGE_GALLERY);
+
+                    } else {
+                        PermissionUtils.requestPermissions(context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                Constants.READ_STORAGE_PERMISSION_REQUEST);
+                    }
+
+                }
+
+            }
+        });
+
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagePicdialog.dismiss();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+                    if (PermissionUtils.hasPermission(context, Manifest.permission.CAMERA)
+                            && PermissionUtils.hasPermission(context, Manifest.permission.READ_MEDIA_IMAGES)) {
+
+                        Intent capturePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        File f = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + "IMAGE.jpg");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            Uri uriForFile = FileProvider.getUriForFile(Objects.requireNonNull(context.getApplicationContext()),
+                                    BuildConfig.APPLICATION_ID + ".provider", f);
+                            capturePic.putExtra(MediaStore.EXTRA_OUTPUT, uriForFile);
+                            capturePic.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        } else {
+                            capturePic.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+                        }
+                        commonInterface.setImageUri(f.getAbsolutePath());
+//                    image_path = f.getAbsolutePath();
+//                    Log.d("TAGIMG", "onClick: "+image_path);
+                        context.startActivityForResult(capturePic, Constants.PICK_IMAGE_CAMERA);
+
+                    } else {
+
+                        PermissionUtils.requestPermissions(context, new String[]{Manifest.permission.CAMERA,Manifest.permission.READ_MEDIA_IMAGES},
+                                Constants.READ_STORAGE_PERMISSION_REQUEST);
+                    }
+                } else {
+                    if (PermissionUtils.hasPermission(context, Manifest.permission.CAMERA) && PermissionUtils.hasPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        Intent capturePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        File f = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + "IMAGE.jpg");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            Uri uriForFile = FileProvider.getUriForFile(context, "com.dev.frequenc", f);
+                            capturePic.putExtra(MediaStore.EXTRA_OUTPUT, uriForFile);
+                            capturePic.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        } else {
+                            capturePic.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+                        }
+                        commonInterface.setImageUri(f.getAbsolutePath());
+//                    image_path = f.getAbsolutePath();
+//                    Log.d("TAGIMG", "onClick: "+image_path);
+                        context.startActivityForResult(capturePic, Constants.PICK_IMAGE_CAMERA);
+                    } else if (!PermissionUtils.hasPermission(context, Manifest.permission.CAMERA) || !PermissionUtils.hasPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                        PermissionUtils.requestPermissions(context, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.CAMERA_PERMISSION_REQUEST);
+                }
+
+            }
+        });
+
+        imagePicdialog.show();
+
+    }
+
+
 
     public static ProgressDialog showLoadingDialog(Context context) {
         ProgressDialog progressDialog = new ProgressDialog(context);

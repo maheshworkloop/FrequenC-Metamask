@@ -4,22 +4,21 @@
 
         <shape android:shape="rectangle"
             >
-            <corners android:bottomLeftRadius="@dimen/_10sdp"
-                android:topLeftRadius="@dimen/_10sdp"
+            <corners android:radius="@dimen/_30sdp"
                 />
-
+            <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp" />
         </shape>
     </item>
     <item
         android:bottom="-80dp"
-        android:left="-180dp"
+        android:left="-450dp"
         android:right="0dp"
         android:top="-80dp">
         <shape android:shape="oval">
            <solid android:color="#F5F5F5"/>
+            <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp" />
 
-        <corners android:bottomLeftRadius="@dimen/_10sdp"
-            android:topLeftRadius="@dimen/_10sdp"
+        <corners android:radius="@dimen/_30sdp"
             />
         </shape>
     </item>

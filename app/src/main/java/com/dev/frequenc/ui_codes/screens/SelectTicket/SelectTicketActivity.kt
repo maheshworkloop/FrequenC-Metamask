@@ -156,5 +156,8 @@ class SelectTicketActivity : AppCompatActivity(),SelectTicketNewAdapter.ListAdap
 
         binding.tvAmount.text = "FRQ  ${price.toString().toInt() * count}"
 
+        Log.d("count5",count.toString())
+        Log.d("count5",item.price.toString())
+
     }
 }

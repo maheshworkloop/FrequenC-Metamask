@@ -29,14 +29,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
+
         <ImageView
             android:id="@+id/ivBackBtn"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_13sdp"
+            android:layout_height="@dimen/_13sdp"
             android:src="@drawable/icon_left_arrow"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="@id/tvSelectTicket"
+            app:layout_constraintBottom_toBottomOf="@id/tvSelectTicket"
             android:layout_marginLeft="@dimen/_15sdp"
             />
 
@@ -45,9 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ticket Details"
-            android:textSize="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:fontFamily="@font/robotocondensed_bold"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            style="@style/textViewRegular"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -61,7 +62,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSelectTicket"
 
-            app:layout_constraintBottom_toTopOf="@id/tvAmountTag"
+            app:layout_constraintBottom_toTopOf="@id/cvPurchase"
             >
 
             <androidx.recyclerview.widget.RecyclerView
@@ -82,71 +83,90 @@
 
 
 
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvAmountTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Amount"
-            android:textSize="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
-            app:layout_constraintBottom_toTopOf="@id/btnLogin"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:letterSpacing="0.01"
-            style="@style/textViewRegularBold"
-            />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FRQ "
-            android:textSize="@dimen/_25sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            app:layout_constraintBottom_toTopOf="@id/btnLogin"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:letterSpacing="0.02"
-            android:textColor="@color/font_color"
-            style="@style/textViewRegularBold"
-            />
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvAmountEther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(0.5 Ether)"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:fontFamily="@font/robotocondensed_bold"
-            app:layout_constraintTop_toBottomOf="@id/tvAmount"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:letterSpacing="0.05"
-            android:visibility="gone"
-            />
-
-
-
-        <TextView
-            android:id="@+id/btnLogin"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPurchase"
             android:layout_width="match_parent"
-            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Purchase"
-            android:background="@drawable/bg_book_now"
-            android:paddingHorizontal="@dimen/_28sdp"
-            android:paddingVertical="@dimen/_8sdp"
-            android:textColor="@color/white"
-            style="@style/textViewRegularBold"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/_20sdp"
-            />
+            app:cardElevation="@dimen/_15sdp"
+            android:elevation="@dimen/_15sdp"
+            android:layout_alignParentBottom="true"
+            >
 
+        <RelativeLayout
+            android:id="@+id/rlPurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_5sdp"
+            >
+
+
+            <ImageView
+                android:id="@+id/ivwallet"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/wallet"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                >
+
+            </ImageView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAmount"
+                android:layout_toRightOf="@id/ivwallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/font_color3"
+                android:layout_centerVertical="true"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvOnwardsTag"
+                android:layout_toRightOf="@id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Onwards"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_toLeftOf="@+id/btnLogin"
+                android:layout_marginTop="@dimen/_10sdp"
+                style="@style/textViewRegularBold"
+                android:textColor="@color/material_grey_700"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purchase"
+                android:background="@drawable/bg_book_now"
+                android:paddingHorizontal="@dimen/_28sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/_15sdp"
+                style="@style/textViewRegularBold"
+                android:layout_alignParentRight="true"
+                android:layout_marginVertical="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:textSize="@dimen/_12sdp"
+                />
+
+        </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
 

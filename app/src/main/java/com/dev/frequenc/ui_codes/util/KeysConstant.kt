@@ -4,7 +4,7 @@ class KeysConstant {
 
     companion object
     {
-//        const val BASE_URL = "http://192.168.1.17:3001/api/v1/"
+//        const val BASE_URL = "http://192.168.1.22:3001/api/v1/"
 
         val CHAT_User_Name: String = "Chat_User_Names"
         val CHAT_TOKEN: String = "Chat_Tokn"

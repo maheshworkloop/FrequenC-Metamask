@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.dev.agorademo2.PermissionsManager
 import com.dev.frequenc.R
 import com.dev.frequenc.databinding.ActivityMainBinding
+import com.dev.frequenc.ui_codes.connect.Profile.EditProfileActivity
 import com.dev.frequenc.ui_codes.connect.chat.AllChatListViewModel
 import com.dev.frequenc.ui_codes.connect.chat.AllChatUserFragment
 import com.dev.frequenc.ui_codes.connect.home.ConnectHomeFragment
@@ -739,7 +740,7 @@ class MainActivity : AppCompatActivity() {
                             binding.navbar.llNavDetails.setOnClickListener {
                                 closeDrawer()
                                 val intent =
-                                    Intent(this@MainActivity, AudienceProfileActivity::class.java)
+                                    Intent(this@MainActivity, EditProfileActivity::class.java)
                                 intent.putExtra("item", item as Serializable)
                                 startActivity(intent)
                             }

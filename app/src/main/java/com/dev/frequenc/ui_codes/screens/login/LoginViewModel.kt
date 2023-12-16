@@ -169,7 +169,7 @@ class LoginViewModel : ViewModel() {
 //                                                    audienceId =
 //                                                        response.body()!!.data.user.venue_id[0].toString()
 //                                                }
-//                                                moveToHome()
+                                                moveToHome()
                                             } else if (response.body()!!.data.user.user_type.equals(
                                                     "artist"
                                                 )
@@ -179,7 +179,7 @@ class LoginViewModel : ViewModel() {
 //                                                    audienceId =
 //                                                        response.body()!!.data.user.audience_id
 //                                                }
-//                                                moveToHome()
+                                                moveToHome()
                                             } else if (response.body()!!.data.user.user_type.equals(
                                                     "vendor"
                                                 )
@@ -189,7 +189,7 @@ class LoginViewModel : ViewModel() {
 //                                                    audienceId =
 //                                                        response.body()!!.data.user.audience_id
 //                                                }
-//                                                moveToHome()
+                                                moveToHome()
                                             } else {
                                                 isUserTypeRegistered = false
                                                 callUpdateUserTypeApi(
@@ -299,7 +299,7 @@ class LoginViewModel : ViewModel() {
                                         }
                                         //                    if (!response.body()!!.data.isUserType.toString().isNullOrEmpty()) {
                                         //                    }
-                                        moveToHome()
+                                        _currentFragmentTag.value = "-2"
 //                                    val intent = Intent()
 
                                     } else {

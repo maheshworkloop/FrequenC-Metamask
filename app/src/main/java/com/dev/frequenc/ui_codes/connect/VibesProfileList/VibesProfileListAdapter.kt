@@ -44,7 +44,7 @@ class VibesProfileListAdapter(val mList : List<MatchVibeData>,val mListener : Li
         val day = dateParts[2]
         val month = dateParts[1]
         val year = dateParts[0]
-//        item.dob
+
         holder.tvAge.text = getAge(year.toInt(), month.toInt(),day.toInt()).toString()
 
         holder.clCard.setOnClickListener { mListener.onClickAtProfile(item) }
