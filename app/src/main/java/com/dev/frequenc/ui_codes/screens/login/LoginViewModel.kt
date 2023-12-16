@@ -28,6 +28,7 @@ class LoginViewModel : ViewModel() {
     var isAgoraRegistered = false
     var _receivedToken = "--1"
     var isUserTypeRegistered = false
+    var isFirstTime = false
 //    private val mobile_no: LiveData<String> get() =  _mob_no
 //    private val otp : MutableLiveData<String> get() = _otp
 
@@ -133,8 +134,7 @@ class LoginViewModel : ViewModel() {
                                 run {
                                     __isApiCalled.value = false
                                     if (response.isSuccessful) {
-                                        _receivedToken =
-                                            response.headers().get(Constants.Authorization)
+                                        _receivedToken = response.headers().get(Constants.Authorization)
                                                 .toString()
                                         try {
                                             isAgoraRegistered  = response.body()!!.data.isAgoraId
@@ -299,7 +299,7 @@ class LoginViewModel : ViewModel() {
                                         }
                                         //                    if (!response.body()!!.data.isUserType.toString().isNullOrEmpty()) {
                                         //                    }
-                                        moveToHome()
+                                        _currentFragmentTag.postValue("-2")
 //                                    val intent = Intent()
 
                                     } else {
@@ -325,6 +325,10 @@ class LoginViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    private fun moveToIntroduce() {
+
     }
 
     fun callResendOtpApi(phone_no: String) {

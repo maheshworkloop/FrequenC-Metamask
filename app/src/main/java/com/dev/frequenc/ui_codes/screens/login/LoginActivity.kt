@@ -170,7 +170,7 @@ class LoginActivity : AppCompatActivity(), DataChangeListener {
                 } else if (data.equals("2") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
                     addFragment("UserTypeFragment", UserTypeFragment())
                 }
-                else if (data.equals("3") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
+                else if (data.equals("-2") && !sharedPreferences.getBoolean( Constants.isUserTypeRegistered, false)) {
                     val intent = Intent(this,IntroduceYourselfActivity::class.java)
                     startActivity(intent)
                 }

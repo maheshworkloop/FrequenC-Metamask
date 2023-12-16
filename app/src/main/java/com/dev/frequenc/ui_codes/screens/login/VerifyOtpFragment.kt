@@ -25,8 +25,7 @@ class VerifyOtpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sharedPreferences =
-            activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
+        sharedPreferences = activity?.getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
         verifyOtpBinding = FragmentVerifyOtpBinding.inflate(layoutInflater, container, false)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         activity?.runOnUiThread {
@@ -34,7 +33,7 @@ class VerifyOtpFragment : Fragment() {
                 Log.d("token", "onCreateView: ${loginViewModel._receivedToken}")
                 it.let {
                     if (!loginViewModel._receivedToken.isNullOrEmpty() && loginViewModel._receivedToken != "--1"
-                        && loginViewModel._receivedToken != "-1"
+                        && loginViewModel._receivedToken != "-1" && loginViewModel._receivedToken != "-2"
                     ) {
                         closeKeyboard()
                         sharedPreferences.edit().putBoolean(

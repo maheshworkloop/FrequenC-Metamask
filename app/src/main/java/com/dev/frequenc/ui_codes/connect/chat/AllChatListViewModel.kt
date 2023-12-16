@@ -1,6 +1,8 @@
 package com.dev.frequenc.ui_codes.connect.chat
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,13 +22,15 @@ import io.agora.ValueCallBack
 import io.agora.chat.ChatClient
 import io.agora.chat.Conversation
 import io.agora.chat.Presence
-import kotlinx.coroutines.CoroutineScope
+import io.agora.chat.UserInfo
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.time.Period
 
 
 class AllChatListViewModel : ViewModel() {
@@ -127,11 +131,27 @@ class AllChatListViewModel : ViewModel() {
                                     } catch (exs: Exception) {
                                         exs.printStackTrace()
                                     }
+                                    var personAge: String = ""
+                                    try {
+                                        val dateParts: List<String> = data.from_user_id.audience_id.dob.split("-")
+                                        val day:String = dateParts[2]
+                                        val month = dateParts[1]
+                                        val year = dateParts[0]
+//        item.dob
+                                        @RequiresApi(Build.VERSION_CODES.O)
+                                        personAge = getAge(year.toInt(), month.toInt(),day.toInt()).toString()
+                                    }
+                                    catch (ex: Exception) {
+                                        ex.printStackTrace()
+                                    }
                                     adapterLists.add(
                                         ConnectionResponse(
                                             images,
-                                            data.from_user_id.fullName,
-                                            data.from_user_id._id
+                                            data.from_user_id.audience_id.fullName,
+                                            data.from_user_id._id,
+                                            personAge,
+                                            null,
+                                            data.from_user_id.audience_id.gender
                                         )
                                     )
                                     userIdsLst.add(data.id)
@@ -162,8 +182,6 @@ class AllChatListViewModel : ViewModel() {
                 })
         }
     }
-
-
     suspend fun callMyRequestApi(token: String) {
         coroutineScope {
             __isApiCalled.postValue(true)
@@ -242,24 +260,29 @@ class AllChatListViewModel : ViewModel() {
                             )
                             userLists.add(userName)
                         }
-//
-//                        ChatClient.getInstance().userInfoManager().fetchUserInfoByUserId(userLists.toArray() as Array<out String>?, object : ValueCallBack<Map<String, UserInfo>> {
-//                            override fun onSuccess(value: Map<String, UserInfo>?) {
-//                                value?.values?.forEachIndexed{ profileIndex, profileInfos ->
-//                                    chatListVals[profileIndex].chatPersonImage = profileInfos.avatarUrl.toString()
-//                                }
-//                            }
-//
-//                            override fun onError(error: Int, errorMsg: String?) {
-//                                Log.d("ds", "onError: ")
-//                            }
-//                        })
+
+                        ChatClient.getInstance().userInfoManager().fetchUserInfoByUserId(userLists.toArray() as Array<out String>?, object : ValueCallBack<Map<String, UserInfo>> {
+                            override fun onSuccess(value: Map<String, UserInfo>?) {
+                                value?.values?.forEachIndexed{ profileIndex, profileInfos ->
+                                    chatListVals[profileIndex].chatPersonImage = profileInfos.avatarUrl.toString()
+                                }
+                            }
+
+                            override fun onError(error: Int, errorMsg: String?) {
+                                Log.d("ds", "onError: ")
+                            }
+                        })
                     }
                     _chatCount.postValue(chatListVals.size)
 
                     _userListsData.postValue(chatListVals)
                     __isApiCalled.postValue(false)
-                    setDataFound(true)
+                    if (chatListVals.size> 0) {
+                        setDataFound(true)
+                    }
+                    else{
+                        setDataFound(false)
+                    }
                 } else {
                     _userListsData.postValue(ArrayList())
                     _chatCount.postValue(0)
@@ -487,4 +510,11 @@ class AllChatListViewModel : ViewModel() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
+    }
 }

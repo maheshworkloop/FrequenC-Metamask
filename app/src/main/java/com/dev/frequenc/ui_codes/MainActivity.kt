@@ -46,7 +46,6 @@ import io.agora.chat.ChatOptions
 import io.agora.chat.uikit.EaseUIKit
 import io.agora.cloud.HttpClientManager
 import io.agora.cloud.HttpClientManager.Method_POST
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -61,11 +60,14 @@ import java.io.Serializable
 class MainActivity : AppCompatActivity() {
 
     private lateinit var allChatListViewModel: AllChatListViewModel
-    private var pwd: String? = "skkfjdsd"
 
-//                private var username: String? = "skkfjdsd"
+    //    private var pwd: String? = "skkfjdsd"
+    private var pwd: String? = null
+
+    //                private var username: String? = "skkfjdsd"
 //    private var username: String? = "7777444422"
-    private var username: String? = "52452423324234"
+//    private var username: String? = "52452423324234"
+    private var username: String? = null
     val requestcode = 101
     var latitude = ""
     var longitude = ""
@@ -80,10 +82,17 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val NEW_LOGIN = "NEW_LOGIN"
         private const val RENEW_TOKEN = "RENEW_TOKEN"
-        private const val LOGIN_URL = "https://a41.chat.agora.io/app/chat/user/login"
-        private const val REGISTER_URL = "https://a41.chat.agora.io/app/chat/user/register"
+        private const val LOGIN_URL = "https://a61.chat.agora.io/app/chat/user/login"
+
+        //        private const val REGISTER_URL = "https://a61.chat.agora.io/app/chat/user/register"
+        private const val REGISTER_URL = "https://a61.chat.agora.io/611070665/1250094/users"
+
+        //        private const val REGISTER_URL = "https://a61.chat.agora.io/app/chat/token"
+        private const val REGISTER_USER_URL = "https://a61.chat.agora.io/611070665/1250094/users"
+
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -94,11 +103,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.drawerLayout.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
 
-        allChatListViewModel = ViewModelProvider(this).get(AllChatListViewModel::class.java)
+        allChatListViewModel =
+            ViewModelProvider(this@MainActivity)[AllChatListViewModel::class.java]
 //        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
 
-        val allChatUserFragment = AllChatUserFragment()
         val connectFragment = ConnectHomeFragment()
         val marketPlace = MarketPlaceFragment()
         val walletFragment = WalletFragment()
@@ -108,14 +117,27 @@ class MainActivity : AppCompatActivity() {
         setCurrentFragment(marketPlace, "MarketPlaceFragment")
 
 
+        try {
+            username = sharedPreferences.getString(Constants.User_Id, null)
+            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
+            pwd = username!!.substring(
+                (username!!.lastIndex - 5),
+                (username!!.lastIndex)
+            ) + "@${mob_no!!.substring(mob_no.lastIndex - 5, mob_no.lastIndex)}"
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_marketplace ->
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
 
-                R.id.bottom_chat ->
-//                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
+                R.id.bottom_chat -> {
+                    //                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
+                    val allChatUserFragment = AllChatUserFragment(allChatListViewModel)
                     setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
+                }
 
                 R.id.bottom_connect ->
 //                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
@@ -123,24 +145,15 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(connectFragment, "ConnectFragment")
 
                 R.id.bottom_wallet ->
-                    Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show()
 
-//                    startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
+                    startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
 //                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
             }
 
             true
         }
 
-
-        try {
-//            val generatedUsername = sharedPreferences.getString(Constants.User_Id, null)
-//            val mob_no = sharedPreferences.getString(Constants.PhoneNo, null)
-//            pwd= username!!.substring(generatedUsername!!.lastIndex-5, generatedUsername!!.lastIndex) + "@" + mob_no!!.substring(mob_no.lastIndex-5, mob_no.lastIndex)
-//            username = generatedUsername
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
 
         val userRegistered = sharedPreferences.getBoolean(Constants.isUserTypeRegistered, false)
 
@@ -178,11 +191,43 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-//            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered, false)) {
+            if (!sharedPreferences.getBoolean(Constants.Is_AgoraRegistered, false)) {
             signUp()
-//            } else {
-//            getTokenFromAppServer(NEW_LOGIN)
-//            }
+
+            callRegisterUserApis()
+            } else {
+            getTokenFromAppServer(NEW_LOGIN)
+            }
+
+//            loginChatSdk()
+            this.runOnUiThread {
+                allChatListViewModel.toastMessage.observe(this@MainActivity)
+                { observr ->
+                    run {
+                        if (!observr.isNullOrEmpty()) {
+                            Toast.makeText(this, observr, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+
+            GlobalScope.launch {
+                sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
+                    allChatListViewModel.callConnectionApi(token)
+                }
+            }
+
+            this?.runOnUiThread {
+                allChatListViewModel.isApiCalled.observe(this@MainActivity) {
+                    if (it == true) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
+            }
+
         } else {
             runOnUiThread {
                 Toast.makeText(this, "User Not Logged in", Toast.LENGTH_SHORT).show()
@@ -193,6 +238,7 @@ class MainActivity : AppCompatActivity() {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             }
+
         }
 
 
@@ -284,6 +330,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun callRegisterUserApis() {
+
+        val headers: MutableMap<String, String> =
+            HashMap()
+        headers["Content-Type"] = "application/json"
+        val request = JSONObject()
+        request.putOpt("userAccount", username)
+        request.putOpt("userPassword", pwd)
+
+        val response = HttpClientManager.httpExecute(
+            REGISTER_USER_URL,
+            headers,
+            request.toString(),
+            Method_POST
+        )
+
+        Log.d("Codes", "callRegisterUserApis: " + response)
+    }
+
 
     private fun requestPermissions() {
         checkPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, 110)
@@ -368,13 +433,14 @@ class MainActivity : AppCompatActivity() {
                 val request = JSONObject()
                 request.putOpt("userAccount", username)
                 request.putOpt("userPassword", pwd)
+//                request.put("")
                 Log.d(Constants.TAG_CHAT, "begin to signUp...")
 //                LogUtils.showErrorLog(binding.tvLog, "begin to signUp...")
                 val response = HttpClientManager.httpExecute(
                     REGISTER_URL,
                     headers,
                     request.toString(),
-                    HttpClientManager.Method_POST
+                    Method_POST
                 )
                 val code = response.code
                 val responseInfo = response.content
@@ -421,23 +487,25 @@ class MainActivity : AppCompatActivity() {
                     }
                     getTokenFromAppServer(NEW_LOGIN)
                 } else {
-                    if (code >= 400 && code < 500) {
+                    Log.d(Constants.TAG_CHAT, responseInfo)
+//                    LogUtils.showErrorLog(binding.tvLog, responseInfo)
+                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, false).apply()
+                    if (code in 400..499) {
                         sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, true)
                             .apply()
                         getTokenFromAppServer(NEW_LOGIN)
                     }
-                    Log.d(Constants.TAG_CHAT, responseInfo)
-//                    LogUtils.showErrorLog(binding.tvLog, responseInfo)
-                    sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, false).apply()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d(Constants.TAG_CHAT, e.message.toString())
 //                LogUtils.showErrorLog(binding.tvLog, e.message)
             }
+
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun getTokenFromAppServer(requestType: String) {
         if (ChatClient.getInstance().options.autoLogin && ChatClient.getInstance().isLoggedInBefore) {
             Log.d(Constants.TAG_CHAT, getString(R.string.has_login_before))
@@ -483,8 +551,11 @@ class MainActivity : AppCompatActivity() {
                 if (code == 200) {
                     if (responseInfo != null && responseInfo.length > 0) {
                         val `object` = JSONObject(responseInfo)
-                        val token = `object`.getString("accessToken")
+//                        var token = `object`.getString("accessToken")
+val token = "007eJxTYNCtNA9f/4trd+n9440K82RWmmdN6zX5v+xWnXP3kYt39wUpMBhbGFsaGKZYGpgZG5kkGltYpFiappmnWlqaGiSbmRgl3lOsTW0IZGRQfzybgZGBFYiZGEB8BgYAwKceXQ=="
+
                         if (TextUtils.equals(requestType, NEW_LOGIN)) {
+
                             ChatClient.getInstance()
                                 .loginWithAgoraToken(username, token, object : CallBack {
                                     override fun onSuccess() {
@@ -504,6 +575,9 @@ class MainActivity : AppCompatActivity() {
                                                 getString(R.string.sign_in_success),
                                                 Toast.LENGTH_SHORT
                                             ).show()
+                                        }
+                                        GlobalScope.launch {
+                                        allChatListViewModel.fetchPresenceStateLists()
                                         }
                                     }
 
@@ -662,7 +736,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setCurrentFragment(fragment: Fragment, fragmetsTag: String) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, fragment, fragmetsTag)
+            replace(binding.flFragment.id, fragment, fragmetsTag)
             addToBackStack(fragmetsTag)
             commit()
         }
