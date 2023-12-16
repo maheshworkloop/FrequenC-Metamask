@@ -23,18 +23,20 @@ import com.dev.frequenc.ui_codes.data.ChatUserModel
 import com.dev.frequenc.ui_codes.data.ConnectionResponse
 import com.dev.frequenc.ui_codes.screens.notification.NotificationActivity
 import com.dev.frequenc.ui_codes.util.Constants
+import io.agora.CallBack
 import io.agora.ContactListener
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
+class AllChatUserFragment(private var allChatListViewModel: AllChatListViewModel) : Fragment(),
+    ChatListAdapter.ItemListListener,
     ConnectionAdapter.ListAdapterListener {
 
     private var currentActivity: FragmentActivity? = null
     lateinit var binding: FragmentAllChatUserBinding
-    lateinit var allChatListViewModel: AllChatListViewModel
+
+    //    lateinit var allChatListViewModel: AllChatListViewModel
     private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
@@ -61,8 +63,8 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             ex.printStackTrace()
         }
 
-        allChatListViewModel =
-            ViewModelProvider(requireActivity())[AllChatListViewModel::class.java]
+//        allChatListViewModel =
+//            ViewModelProvider(requireActivity())[AllChatListViewModel::class.java]
         return binding.root
 
     }
@@ -120,15 +122,6 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
             }
         }
 
-        activity?.runOnUiThread {
-            allChatListViewModel.isApiCalled.observe(viewLifecycleOwner) {
-                if (it == true) {
-                    binding.progressBar.visibility = View.VISIBLE
-                } else {
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-        }
 
         activity?.runOnUiThread {
             allChatListViewModel.userListsData?.observe(viewLifecycleOwner) { it23 ->
@@ -190,25 +183,22 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                 }
                 if (it.isNullOrEmpty()) {
                     binding.connectionNotFoundLay.visibility = View.VISIBLE
-                    binding.rvConnection.visibility = View.INVISIBLE
-                    binding.tvConnectionTag.text = "Connection"
+                    binding.rlConnectionList.visibility = View.INVISIBLE
+                    binding.tvConnectionTag.text = "Connection(0)"
                 } else {
-                    binding.rvConnection.visibility = View.VISIBLE
-                    binding.connectionNotFoundLay.visibility = View.GONE
+                    binding.rlConnectionList.visibility = View.VISIBLE
+                    binding.connectionNotFoundLay.visibility = View.INVISIBLE
                     binding.tvConnectionTag.text = "Connection (${it.size})"
                 }
                 connectionAdapter.update(it)
 
             }
+
+
         }
 
-        GlobalScope.launch {
-            sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
-                allChatListViewModel.callConnectionApi(token)
-            }
-        }
 
-        activity?.runOnUiThread {
+//        activity?.runOnUiThread {
             allChatListViewModel.isDataFound.observe(viewLifecycleOwner) {
                 if (it) {
                     binding.dataNotFoundLay.noDataLay.visibility = View.INVISIBLE
@@ -218,7 +208,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                     binding.dataNotFoundLay.noDataLay.visibility = View.VISIBLE
                 }
             }
-        }
+//        }
 
         binding.tvRequestsTag.setOnClickListener {
             allChatListViewModel.setConnectionTab(false)
@@ -236,32 +226,24 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         allChatListViewModel.setConnectionTab(true)
 
-        GlobalScope.launch {
-            allChatListViewModel.setOnPresenceChange()
-        }
-
-        activity?.runOnUiThread {
-            allChatListViewModel.toastMessage.observe(viewLifecycleOwner)
-            { observr ->
-                run {
-                    if (!observr.isNullOrEmpty()) {
-                        Toast.makeText(context, observr, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
 
         activity?.runOnUiThread {
             allChatListViewModel.setContactChangeListener(
                 object : ContactListener {
 
                     override fun onFriendRequestAccepted(username: String) {
-                        Log.d(Constants.TAG_CHAT, "onFriendRequestAccepted:username=> $username")
+                        Log.d(
+                            Constants.TAG_CHAT,
+                            "onFriendRequestAccepted:username=> $username"
+                        )
                     }
 
                     //contact request is rejected
                     override fun onFriendRequestDeclined(username: String) {
-                        Log.d(Constants.TAG_CHAT, "onFriendRequestDeclined:username=> $username")
+                        Log.d(
+                            Constants.TAG_CHAT,
+                            "onFriendRequestDeclined:username=> $username"
+                        )
                     }
 
                     //Received contact invitation
@@ -283,6 +265,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                     }
                 })
         }
+
     }
 
     private fun showPendingRequestsSubTab(
@@ -344,12 +327,14 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
     override fun onClickAtConnection(item: ConnectionResponse) {
         try {
             val bundle = Bundle()
-            bundle.putString("Connection_id", item.id)
-            val chatFragment = ChatFragment()
-            chatFragment.arguments = bundle
-            currentActivity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.flFragment, chatFragment, "ChatFragment")
-                ?.commit()
+            bundle.putString("profileId", item.id)
+            bundle.putString("profileName", item.name)
+            bundle.putString("profileImage", item.image)
+            bundle.putString("profileDesignation", item.professions)
+            bundle.putString("profileSirName", item.gender)
+            bundle.putString("profileAge", item.age)
+
+            performClickAction("goChat", bundle)
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -360,18 +345,30 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
         when (useType) {
             ItemUserListLay -> {
+                try {
+                val chatItem: ConnectionResponse =
+                    allChatListViewModel.connectionList.value?.get(itemPosition) as ConnectionResponse
                 bundle.putString(
-                    "audience_id",
-                    (allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel).toChatUser
+                    "profileId",
+                    chatItem.id
                 )
-//                val chatItem = allChatListViewModel.userListsData.value?.get(itemPosition) as ChatUserModel
-                performClickAction(action, bundle)
+                bundle.putString("profileName", chatItem.name)
+                bundle.putString("audience_id", chatItem.id)
+                bundle.putString("profileImage", chatItem.image)
+                bundle.putString("profileDesignation", chatItem.professions)
+                bundle.putString("profileSirName", chatItem.gender)
+                bundle.putString("profileAge", chatItem.age)
+                    performClickAction(action, bundle)
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
             }
 
             ItemUserChatPendingListLay -> {
                 try {
-                    val dataItem = (allChatListViewModel.userListsData.value?.get(itemPosition) as com.dev.frequenc.ui_codes.data.pending_request.Data)
-                    bundle.putString("Connection_id", dataItem.from_user_id._id)
+                    val dataItem =
+                        (allChatListViewModel.userListsData.value?.get(itemPosition) as com.dev.frequenc.ui_codes.data.pending_request.Data)
+                    bundle.putString("audience_id", dataItem.from_user_id._id)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -424,7 +421,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                         GlobalScope.launch {
                             allChatListViewModel.callAcceptApi(
                                 token = it,
-                                bundle?.getString("Connection_id", null).toString()
+                                bundle?.getString("audience_id", null).toString()
                             )
                         }
                     }
@@ -436,7 +433,7 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
                         GlobalScope.launch {
                             allChatListViewModel.callRejectApi(
                                 token = it,
-                                bundle?.getString("Connection_id", null).toString()
+                                bundle?.getString("audience_id", null).toString()
                             )
                         }
                     }
@@ -447,13 +444,6 @@ class AllChatUserFragment : Fragment(), ChatListAdapter.ItemListListener,
 
     override fun onDestroy() {
         super.onDestroy()
-//        allChatListViewModel.removePresenceListener( object : CallBack {
-//            override fun onSuccess() {
-//
-//            }
-//            override fun onError(errorCode: Int, errorMsg: String) {
-//
-//            }}
-//        )
+
     }
 }

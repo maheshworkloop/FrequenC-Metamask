@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/drawerLayout"
         tools:openDrawer="start"
         tools:context=".ui_codes.MainActivity">
 
-    <RelativeLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-        <FrameLayout
+            <FrameLayout
                 android:id="@+id/flFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -27,7 +33,7 @@
                 />
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+            <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 style="@style/BottomNavigationView"
                 android:layout_width="match_parent"
@@ -46,7 +52,7 @@
                 app:itemIconTint="@color/bnv_icon_color_selector"
                 app:menu="@menu/menu_bottom_nav" />
 
-        <androidx.cardview.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_30sdp"
@@ -55,11 +61,11 @@
                 android:layout_centerVertical="true"
                 app:cardCornerRadius="@dimen/_7sdp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <TextView
+                    <TextView
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,7 +76,7 @@
                         android:fontFamily="@font/robotocondensed_bold"
                         android:layout_marginTop="@dimen/_10sdp" />
 
-                <TextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/headMetamask"
@@ -79,7 +85,7 @@
                         android:text="It seems you are not connected to the metamask . It is required to connect to metamask in order to use metamask wallet .\n Do You want to Connect: "
                         android:id="@+id/tvConnectDesc" />
 
-                <TextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Connect"
@@ -96,7 +102,7 @@
                         android:paddingVertical="5dp"
                         app:layout_constraintBottom_toBottomOf="parent" />
 
-                <TextView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Skip"
@@ -114,16 +120,27 @@
                         app:layout_constraintBottom_toBottomOf="@id/btnConnect" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
 
-    <include
+            <ProgressBar
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+
+        <include
             layout="@layout/layout_navigation"
             android:id="@+id/navbar"
 
             />
 
-</androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
