@@ -2,6 +2,7 @@ package com.dev.frequenc.ui_codes.connect.VibesProfileList
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,6 +36,8 @@ import pl.droidsonroids.gif.GifImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.time.Period
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -283,7 +287,28 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
                                     } catch (exs: Exception) {
                                         exs.printStackTrace()
                                     }
-                                    adapterLists.add(ConnectionResponse(images, data.to_user_id.fullName, data.id))
+
+                                    var personAge: String = ""
+                                    try {
+                                        val dateParts: List<String> = data.from_user_id.audience_id.dob.split("-")
+                                        val day:String = dateParts[2]
+                                        val month = dateParts[1]
+                                        val year = dateParts[0]
+//        item.dob
+                                        @RequiresApi(Build.VERSION_CODES.O)
+                                        personAge = getAge(year.toInt(), month.toInt(),day.toInt()).toString()
+                                    }
+                                    catch (ex: Exception) {
+                                        ex.printStackTrace()
+                                    }
+                                    adapterLists.add(ConnectionResponse(
+                                        images,
+                                        data.from_user_id.fullName,
+                                        data.from_user_id._id,
+                                        personAge,
+                                        null,
+                                        data.from_user_id.gender,
+                                    ))
 
                                 }
 
@@ -360,5 +385,12 @@ class VibesUserListFragment : Fragment(), VibesProfileListAdapter.ListAdapterLis
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAge(year: Int, month: Int, dayOfMonth: Int): Int {
+        return Period.between(
+            LocalDate.of(year, month, dayOfMonth),
+            LocalDate.now()
+        ).years
+    }
 
 }

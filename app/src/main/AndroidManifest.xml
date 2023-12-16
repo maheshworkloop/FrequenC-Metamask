@@ -37,6 +37,10 @@
         android:usesCleartextTraffic="true"
         tools:remove="android:appComponentFactory"
         tools:targetApi="31">
+<!--         <activity-->
+<!--         android:name=".ui_codes.Chats"-->
+<!--         android:exported="true"  >-->
+<!--         </activity>-->
         <activity
             android:name=".ui_codes.screens.TicketDetail.TicketDetailActivity"
             android:exported="false" />
@@ -63,13 +67,13 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.MetaMaskAndroidSDKClient">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- <activity -->
+
         <!-- android:name=".ui_codes.connect.home.ConnectHomeActivity" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -116,11 +120,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".ui_codes.MainActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/Theme.Material3.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -161,6 +172,11 @@
                 android:resource="@xml/provider_paths"
                 tools:replace="android:resource" />
         </provider>
+
+        <meta-data
+            android:name="io.agora.rtc.APP_ID"
+            android:value="fa1561507b6d4e43804c70577eb59e3d" />
+
     </application>
 
 </manifest>

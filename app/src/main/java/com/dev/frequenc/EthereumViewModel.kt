@@ -89,15 +89,17 @@ class EthereumViewModel @Inject constructor(
     ) {
         val params: MutableMap<String, Any> = mutableMapOf(
             "from" to from,
-            "to" to to,
+                "to" to to,
             "amount" to amount
         )
+
 
         val transactionRequest = EthereumRequest(
             UUID.randomUUID().toString(),
             EthereumMethod.ETH_SEND_TRANSACTION.value,
             listOf(params)
         )
+
 
         ethereum.sendRequest(transactionRequest) { result ->
             if (result is RequestError) {
@@ -112,7 +114,6 @@ class EthereumViewModel @Inject constructor(
 
     fun getBalence(callback: ((Any?) -> Unit)?) {
         viewModelScope.launch {
-//            val tokenContractAddress = "0x2f930D27e0502Ef690A418D03CF037d0509000c7"
             val ethereumAddress = ethereum.selectedAddress
 //
 //            val balanceOfFunctionSignature = calculateFunctionSignature("balanceOf(address)")

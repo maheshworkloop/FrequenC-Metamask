@@ -47,6 +47,7 @@ class ConnectionAdapter(
                 ImageUtil.loadImage(holder.ivImage, item.image)
             }
 
+            holder.tvName.text = item.name
             holder.clConnection.setOnClickListener {
                 mListener.onClickAtConnection(item)
             }

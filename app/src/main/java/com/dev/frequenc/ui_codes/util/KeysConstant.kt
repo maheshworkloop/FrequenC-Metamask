@@ -13,7 +13,7 @@ class KeysConstant {
 
         const val BASE_URL = "http://ec2-43-204-108-136.ap-south-1.compute.amazonaws.com:3001/api/v1/"
 
-        const val CHAT_BASE_URL = "a71.chat.agora.io"
+        const val CHAT_BASE_URL = "a61.chat.agora.io"
 
         const val BROWSE_BY_CAT = "event/category/browse-by-category"
 
