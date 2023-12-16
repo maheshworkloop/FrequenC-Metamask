@@ -38,10 +38,13 @@ import com.dev.frequenc.ui_codes.data.myrequests.MyRequestsResponse
 import com.dev.frequenc.ui_codes.data.notification.NotificationResponse
 import com.dev.frequenc.ui_codes.data.pending_request.PendingRequestResponse
 import com.dev.frequenc.ui_codes.data.req.SavedEventsReq
+import com.dev.frequenc.ui_codes.data.req.UpdatePaymentRequest
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponse
 import com.dev.frequenc.ui_codes.data.transactionlist.TransactionListRes
 import com.dev.frequenc.ui_codes.data.update_user_type.UpdateUserTypeResponse
 import com.dev.frequenc.ui_codes.util.Constants.Companion.Authorization
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
@@ -49,12 +52,13 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface ApiService {
-
 
 
     @POST(KeysConstant.Register_User)
@@ -161,6 +165,10 @@ interface ApiService {
     @POST(KeysConstant.Initiate_payment)
     fun initiatePayment(@Header(Authorization) tokens : String,   @Body paymentInitiate : paymentInitiateReq): Call<InitiatePaymentResponse>?
 
+    @POST(KeysConstant.Update_Payment)
+    fun updatePaymentStatus(@Header(Authorization) tokens : String , @Body updatePaymentRequest : UpdatePaymentRequest): Call<InitiatePaymentResponse>?
+
+
     @GET(KeysConstant.Vibe_Event)
     fun vibeEvent(@Header(Authorization) tokens : String): Call<VibeEventResponse>
     @GET(KeysConstant.GET_VIBE_CATEGORY)
@@ -191,10 +199,10 @@ interface ApiService {
 
                              ) : Call<ProfileRes>?
 
-    @FormUrlEncoded
+    @Multipart
     @PUT(KeysConstant.UPDATE_CONNECT_PROFILE)
     fun updateConnectProfilePhoto(@Header(Authorization) token: String,@Path("audience_id")id : String,
-                             @Field("profile_images") profile_images : List<String>
+                             @Part profile_images : List<MultipartBody.Part>
                              ) : Call<ProfileRes>?
 
 
@@ -212,5 +220,69 @@ interface ApiService {
     @POST("auth/updateAgora")
     fun getUpdateAgora(@Header(Authorization) token: String?,@Body updateAgoraBdy: UpdateAgoraModel ):Call<UpdateAgoraDetailResponse>?
 
+/*
+    @FormUrlEncoded
+    @PUT("audience/update-mobile-profile/{id}")
+    fun updateMobileProfile(
+        @Header(Constants.Authorization) token : String,
+        @Path("id") id : String,
+        @Field("profile_images") profile_images: List<String>,
+        @Field("description") description : String,
+        @Field("occupation") occupation : String,
+        @Field("gender") gender : String,
+        @Field("education") education : String,
+        @Field("location") location : String,
+        @Field("height") height : String,
+        @Field("smoking") smoking : String,
+        @Field("drinking") drinking : String,
+        @Field("pets") pets : String,
+        @Field("zodiac_sign") zodiac_sign : String,
+        @Field("religion") religion : String,
+        @Field("language") language : ArrayList<String>
+    )
+            : Call<ProfileSuccessResponse>
+*/
+
+    @Multipart
+    @PUT("audience/update-mobile-profile/{id}")
+    fun updateMobileProfile(
+        @Header(Constants.Authorization) token : String,
+        @Path("id") id : String,
+        @Part profile_images : List<MultipartBody.Part>,
+        @Part("description") description : RequestBody,
+        @Part("occupation") occupation : RequestBody,
+        @Part("gender") gender : RequestBody,
+        @Part("education") education : RequestBody,
+        @Part("location") location : RequestBody,
+        @Part("height") height : RequestBody,
+        @Part("smoking") smoking : RequestBody,
+        @Part("drinking") drinking : RequestBody,
+        @Part("pets") pets : RequestBody,
+        @Part("zodiac_sign") zodiac_sign : RequestBody,
+        @Part("religion") religion : RequestBody,
+//        @Part("language") language : RequestBody
+    )
+            : Call<ProfileSuccessResponse>
+
+    @Multipart
+    @PUT("audience/update-mobile-profile/{id}")
+    fun updateMobileProfile2(
+        @Header(Constants.Authorization) token : String,
+        @Path("id") id : String,
+        @Part("profile_images") profile_images : List<String>,
+        @Part("description") description : RequestBody,
+        @Part("occupation") occupation : RequestBody,
+        @Part("gender") gender : RequestBody,
+        @Part("education") education : RequestBody,
+        @Part("location") location : RequestBody,
+        @Part("height") height : RequestBody,
+        @Part("smoking") smoking : RequestBody,
+        @Part("drinking") drinking : RequestBody,
+        @Part("pets") pets : RequestBody,
+        @Part("zodiac_sign") zodiac_sign : RequestBody,
+        @Part("religion") religion : RequestBody,
+//        @Part("language") language : RequestBody
+    )
+            : Call<ProfileSuccessResponse>
 
 }

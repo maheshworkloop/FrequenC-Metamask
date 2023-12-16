@@ -17,6 +17,10 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- For Android 12, you need to add the following line to apply for the alarm clock permission. For Agora Chat 1.0.9 or later, this permission is optional. -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:name=".MetaMaskDappApplication"
@@ -37,6 +41,9 @@
 <!--         android:name=".ui_codes.Chats"-->
 <!--         android:exported="true"  >-->
 <!--         </activity>-->
+        <activity
+            android:name=".ui_codes.screens.TicketDetail.TicketDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui_codes.screens.Profile.Intro1Activity"
             android:exported="false" />
@@ -66,8 +73,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- <activity -->
+
         <!-- android:name=".ui_codes.connect.home.ConnectHomeActivity" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -155,9 +161,22 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.dev.frequenc.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="android:resource" />
+        </provider>
+
         <meta-data
             android:name="io.agora.rtc.APP_ID"
             android:value="fa1561507b6d4e43804c70577eb59e3d" />
+
     </application>
 
 </manifest>

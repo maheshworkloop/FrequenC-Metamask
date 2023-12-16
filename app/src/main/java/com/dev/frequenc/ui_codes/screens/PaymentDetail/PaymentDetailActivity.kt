@@ -7,17 +7,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.AudienceDataResponse
 import com.dev.frequenc.ui_codes.data.EventResponse
 import com.dev.frequenc.ui_codes.data.EventTicket
 import com.dev.frequenc.databinding.ActivityPaymentDetailBinding
-import com.dev.frequenc.ui_codes.screens.Profile.AudienceProfileActivity
 import com.dev.frequenc.ui_codes.screens.Stripe.StripePaymentActivity
 
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.dev.frequenc.ui_codes.util.Constants
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
@@ -81,18 +87,91 @@ class PaymentDetailActivity : AppCompatActivity() {
         binding.btnConfirm.setOnClickListener {
 //            goToMetamask()
 
-            val intent = Intent(this,StripePaymentActivity::class.java)
-            intent.putExtra("item",item as Serializable)
-            intent.putExtra("count",count)
-            intent.putExtra("audience",audience as Serializable)
-            intent.putExtra("eventDetail", eventDetails as Serializable)
 
-            Log.d("eventid",eventDetails.eventDetails._id)
-            startActivity(intent)
+           showDialogPayment()
+
         }
 
 
         getProfileApi()
+
+    }
+
+    private fun showDialogPayment() {
+        val dialog = BottomSheetDialog(this)
+        val bottomSheet = layoutInflater.inflate(R.layout.layout_bottom_payment, null)
+
+        dialog.behavior.peekHeight = 800
+
+
+
+
+//        var ivRazor = dialog.findViewById<ImageView>(R.id.rlRazor)
+//           .bs_tv_remove .setOnClickListener { dialog.dismiss() }
+
+//        var btnPay =  bottomSheet.findViewById<Button>(R.id.payButton)
+//        var tvRemove =  bottomSheet.findViewById<TextView>(R.id.bs_tv_remove)
+
+//        tvRemove.setOnClickListener {
+//            dialog.dismiss()
+//            savedEventViewModel.callBookmarkEventApi(
+//                position,
+//                sharedPreferences.getString(Constants.Authorization, "").toString()
+//            )
+//        }
+
+//        tvCancel.setOnClickListener {
+//            dialog.dismiss()
+//
+//        }
+
+//        btnPay.setOnClickListener {
+//            Toast.makeText(this,"Stripe",Toast.LENGTH_SHORT).show()
+//        }
+
+
+
+
+        dialog.setContentView(bottomSheet)
+        dialog.show()
+
+        var tvConfirm = dialog.findViewById<TextView>(R.id.btnConfirm)
+        var rbRazor = dialog.findViewById<RadioButton>(R.id.rbRazor)
+        var rbStripe = dialog.findViewById<RadioButton>(R.id.rbStripe)
+
+
+        rbRazor!!.setOnClickListener {
+            rbRazor.isChecked = true
+            rbStripe!!.isChecked = false
+
+            tvConfirm!!.isEnabled = true
+        }
+
+        rbStripe!!.setOnClickListener {
+            rbStripe.isChecked = true
+            rbRazor!!.isChecked = false
+
+            tvConfirm!!.isEnabled = true
+
+        }
+
+        tvConfirm!!.setOnClickListener {
+
+            if(rbStripe.isChecked || rbRazor.isChecked)
+            {
+                val intent = Intent(this,StripePaymentActivity::class.java)
+                intent.putExtra("item",item as Serializable)
+                intent.putExtra("count",count)
+                intent.putExtra("audience",audience as Serializable)
+                intent.putExtra("eventDetail", eventDetails as Serializable)
+
+                Log.d("eventid",eventDetails.eventDetails._id)
+                startActivity(intent)
+                dialog.hide()
+            }
+            else
+                Toast.makeText(this,"Please select one payment method",Toast.LENGTH_SHORT).show()
+        }
 
     }
 

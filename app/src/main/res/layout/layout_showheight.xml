@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/_20sdp">
+
+    <RelativeLayout
+        android:id="@+id/rlLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/bg_anim"
+        android:layout_centerHorizontal="true"
+        >
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/ivAnimSplash"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:scaleType="fitCenter"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_8sdp"
+
+            />
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/rlIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlLogo"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        >
+
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/ruler"
+            android:layout_alignParentLeft="true"
+            android:padding="@dimen/_5sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Your Height ?"
+
+            android:textSize="@dimen/_14sdp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            android:layout_below="@id/ivIcon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/textViewRegular"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:background="@drawable/bg_spinner"
+        android:layout_below="@id/rlIcon"
+        android:layout_marginTop="@dimen/_20sdp"
+        >
+        <Spinner
+            android:id="@+id/spData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_below="@id/rlData"
+        android:layout_marginTop="@dimen/_30sdp"
+        >
+
+        <TextView
+            android:id="@+id/btnOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:gravity="center"
+            android:background="@drawable/bg_book_now"
+            android:paddingVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/_15sdp"
+            style="@style/textViewRegularBold"
+            android:layout_alignParentRight="true"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:textSize="@dimen/_12sdp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            />
+
+
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:gravity="center"
+            android:background="@drawable/bg_book_now"
+            android:paddingVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:layout_marginRight="@dimen/_15sdp"
+            style="@style/textViewRegularBold"
+            android:layout_alignParentRight="true"
+            android:layout_marginVertical="@dimen/_2sdp"
+            android:textSize="@dimen/_12sdp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

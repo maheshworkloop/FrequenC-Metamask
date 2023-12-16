@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_80sdp"
     android:background="@drawable/rv_select_ticket"
@@ -7,54 +7,180 @@
     android:layout_marginBottom="@dimen/_10sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="@dimen/_40sdp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@drawable/select_teicket"
-        />
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_bg_outer"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/bg_outer_radius"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rl_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginEnd="@dimen/_1sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
+
+            android:background="@drawable/not_select_ticket"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RelativeLayout>
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvTicketType"
+        android:id="@+id/tvCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gold"
-        android:textSize="@dimen/_18sdp"
-        app:layout_constraintLeft_toRightOf="@+id/ivCheckBox"
+        android:text="0"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="@id/rl_bg_outer"
+        app:layout_constraintEnd_toEndOf="@id/rl_bg_outer"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginLeft="@dimen/_5sdp"
         android:letterSpacing="0.05"
-        android:textColor="@color/font_color"
-        style="@style/textViewRegularBold"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/black"
+        style="@style/textViewRegular"
+        android:layout_marginRight="@dimen/_5sdp"
+
         />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivCheckBox"
-        android:layout_width="@dimen/_16sdp"
-        android:layout_height="@dimen/_16sdp"
-        android:src="@drawable/ic_unselected_ticket"
-        style="@style/Circular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTicketType"
-        app:layout_constraintBottom_toBottomOf="@id/tvTicketType"
-        android:layout_marginLeft="@dimen/_10sdp"
-        />
-
-
-
-    <ImageView
-        android:id="@+id/ivTriangle"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_triangle"
-        android:visibility="invisible"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/rl_bg_outer"
+        android:layout_marginLeft="@dimen/_10sdp"
+        >
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTicketType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gold"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:letterSpacing="0.05"
+            android:textColor="@color/font_color"
+            style="@style/textViewRegularBold"
+            />
+
+
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSeats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- spaces left"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="@id/tvTicketType"
+            app:layout_constraintTop_toBottomOf="@id/tvTicketType"
+            android:textColor="@color/material_red_500"
+            android:layout_marginTop="@dimen/_5sdp"
+            style="@style/textViewRegularBold"
+            />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="@id/tvTicketType"
+            app:layout_constraintTop_toBottomOf="@id/tvSeats"
+            android:layout_marginTop="@dimen/_3sdp"
+            style="@style/textViewRegularBold"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlPlus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/rlMinus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/view"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+        <ImageView
+                android:id="@+id/ivPlus"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:src="@drawable/plus"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+
+        <View
+          android:id="@+id/view"
+          android:layout_width="@dimen/_36sdp"
+          android:layout_height="@dimen/_1sdp"
+          android:background="@color/material_grey2_400"
+          app:layout_constraintTop_toBottomOf="@+id/ivPlus"
+          app:layout_constraintBottom_toTopOf="@id/ivMinus"
+          app:layout_constraintRight_toRightOf="parent"
+          android:layout_marginRight="@dimen/_3sdp"
+          />
+
+
+            <ImageView
+                android:id="@+id/ivMinus"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:src="@drawable/minus"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:paddingHorizontal="@dimen/_1sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                />
+
 
     <ImageView
         android:id="@+id/ivStar"
@@ -94,10 +220,11 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:textColor="@color/black"
             android:letterSpacing="0.05"
+            android:visibility="invisible"
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvPrice"
+            android:id="@+id/tvPriceAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="48"
@@ -105,6 +232,7 @@
             android:fontFamily="@font/robotocondensed_bold"
             android:layout_marginLeft="@dimen/_5sdp"
             android:textColor="@color/font_color"
+            android:visibility="invisible"
             />
 
         <com.google.android.material.textview.MaterialTextView
@@ -120,26 +248,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginLeft="@dimen/_5sdp"
             android:textColor="@color/black"
+            android:visibility="invisible"
             />
 
 
     </LinearLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSeats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="35 Left / 50 Seats"
-        android:textSize="@dimen/_11sdp"
-        android:fontFamily="@font/robotocondensed_regular"
-        app:layout_constraintEnd_toEndOf="@id/llPrice"
-        app:layout_constraintTop_toBottomOf="@id/llPrice"
-        android:textColor="@color/black"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_3sdp"
-        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

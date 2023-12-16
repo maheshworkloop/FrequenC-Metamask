@@ -17,7 +17,7 @@ import com.dev.frequenc.ui_codes.screens.login.LoginActivity
 import com.dev.frequenc.ui_codes.util.Constants
 import java.io.Serializable
 
-class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapterListener {
+class SelectTicketActivity : AppCompatActivity(),SelectTicketNewAdapter.ListAdapterListener {
 
 //    private lateinit var selectedDate: String
     lateinit var binding : ActivitySelectTicketBinding
@@ -48,17 +48,17 @@ class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapter
         setContentView(binding.root)
 
         binding.ivBackBtn.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        binding.tvAmount.text = "FRQ  ${price.toString()}"
+        binding.tvAmount.text = "FRQ  0"
 
 
-        binding.seekBar.max = item.left_tickets
+//        binding.seekBar.max = item.left_tickets
 
-        binding.seekBar.progress = 1
+//        binding.seekBar.progress = 1
 
-        binding.tvTotalSeats.text = item.left_tickets.toString() + " Seats"
+//        binding.tvTotalSeats.text = item.left_tickets.toString() + " Seats"
 
         binding.rvTicket.apply {
-            adapter = SelectTicketAdapter(list,this@SelectTicketActivity,item.ticket_type)
+            adapter = SelectTicketNewAdapter(list,this@SelectTicketActivity,item.ticket_type)
             layoutManager= LinearLayoutManager(this@SelectTicketActivity,LinearLayoutManager.VERTICAL,false)
         }
 
@@ -89,7 +89,7 @@ class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapter
         }
 
 
-
+/*
 
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -119,6 +119,8 @@ class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapter
 
         } )
 
+ */
+
     }
 
     override fun onClickAtTicket(mitem: EventTicket) {
@@ -126,14 +128,14 @@ class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapter
 
 //        if(item.ticket_type!= mitem.ticket_type)
 //        {
-            binding.rvTicket.adapter = SelectTicketAdapter(list,this@SelectTicketActivity,mitem.ticket_type)
-            binding.seekBar.max = mitem.left_tickets
-            binding.tvTotalSeats.text = mitem.left_tickets.toString() + " Seats"
-            binding.seekBar.progress = 1
+//            binding.rvTicket.adapter = SelectTicketNewAdapter(list,this@SelectTicketActivity,mitem.ticket_type)
+//            binding.seekBar.max = mitem.left_tickets
+//            binding.tvTotalSeats.text = mitem.left_tickets.toString() + " Seats"
+//            binding.seekBar.progress = 1
 
-            price = mitem.price.toInt()
+//            price = mitem.price.toInt()
 
-            binding.tvAmount.text = "FRQ  ${price.toString()}"
+//            binding.tvAmount.text = "FRQ  ${price.toString()}"
 
 
 //        }
@@ -143,6 +145,19 @@ class SelectTicketActivity : AppCompatActivity(),SelectTicketAdapter.ListAdapter
 //        }
 
 
+
+    }
+
+    override fun onClickAtCount(item: EventTicket, count: Int) {
+
+        binding.btnLogin.text = "Purchase"
+
+        price = item.price.toInt()
+
+        binding.tvAmount.text = "FRQ  ${price.toString().toInt() * count}"
+
+        Log.d("count5",count.toString())
+        Log.d("count5",item.price.toString())
 
     }
 }

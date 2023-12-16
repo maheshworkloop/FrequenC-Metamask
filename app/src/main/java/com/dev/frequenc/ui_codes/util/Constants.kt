@@ -22,6 +22,12 @@ class Constants {
         val TAG_CHAT: String = "Chats"
         val SharedPreference: String = "mySharePreference"
 
+        const val PICK_IMAGE_GALLERY = 100
+        const val CAMERA_PERMISSION_REQUEST = 300
+        const val PICK_IMAGE_CAMERA = 400
+        const val READ_STORAGE_PERMISSION_REQUEST = 200
+        const val PERMISSION_REQUEST_CODE = 10001
+        const val WRITE_STORAGE_PERMISSION_REQUEST = 500
     }
 
 

@@ -2,7 +2,8 @@ package com.dev.frequenc.ui_codes.data
 
 class InitiatePaymentResponse (
     val stripePayment: StripePayment,
-    val ephemeralKey: EphemeralKey
+    val ephemeralKey: EphemeralKey,
+    val clientSecret : String
 )
 
 data class StripePayment(

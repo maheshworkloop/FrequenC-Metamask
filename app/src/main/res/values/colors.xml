@@ -59,6 +59,8 @@
     <color name="material_grey_700">#ff717171</color>
     <color name="material_grey_800">#424242</color>
     <color name="colorBg">#80B0C4DE</color>
+    <color name="bordercolor">#d1d1d1</color>
+
 
     <color name="app_color">#1e3c72</color>
     <color name="bg_icon_color">#E7EFFF</color>
@@ -67,6 +69,8 @@
 
 
     <color name="material_blue_grey_300">#ff90a4ae</color>
+    <color name="material_grey_300">#E0E0E0</color>
+    <color name="material_grey2_400">#BDBDBD</color>
     <color name="material_blue_grey_500">#ff607d8b</color>
 
     <color name="light_blue">#CCD7FF</color>

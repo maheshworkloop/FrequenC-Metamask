@@ -23,11 +23,16 @@ import com.dev.frequenc.databinding.ActivityPresentationBinding
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.data.ProfileRes
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
+import com.dev.frequenc.ui_codes.util.CommonUtils
 import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.util.ImageUtil
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.io.IOException
 import java.nio.ByteBuffer
 
@@ -39,7 +44,8 @@ class PresentationActivity : AppCompatActivity() {
     var encoded_img_2: String = ""
     var fromImageView = ""
     private val PERMISSION_REQUEST_CODE = 200
-
+    lateinit var mImagePath1 : String
+    lateinit var mImagePath2 : String
     lateinit var binding : ActivityPresentationBinding
 
     var flagProfile1 = false
@@ -49,7 +55,8 @@ class PresentationActivity : AppCompatActivity() {
     lateinit var audience_id : String
     private lateinit var sharedPreferences: SharedPreferences
 
-    lateinit var profile_images : List<String>
+    var profile_images = ArrayList<MultipartBody.Part>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +100,26 @@ class PresentationActivity : AppCompatActivity() {
             {
                 Toast.makeText(this,"All done",Toast.LENGTH_SHORT).show()
 
-                profile_images = listOf( encoded_img_1,encoded_img_2)
+                var profileImage1: MultipartBody.Part? = null
+
+                    val file1 = File(mImagePath1)
+                    profileImage1 = MultipartBody.Part.createFormData(
+                        "profile_images",
+                        file1.name,
+                        RequestBody.create("image/*".toMediaTypeOrNull(), file1)
+                    )
+
+
+                var profileImage2: MultipartBody.Part? = null
+                val file2 = File(mImagePath2)
+                profileImage2 = MultipartBody.Part.createFormData(
+                    "profile_images",
+                    file2.name,
+                    RequestBody.create("image/*".toMediaTypeOrNull(), file2)
+                )
+
+                profile_images.add(profileImage1)
+                profile_images.add(profileImage2)
 
                callProfileUpdateApi()
 
@@ -107,7 +133,6 @@ class PresentationActivity : AppCompatActivity() {
         }
 
         sharedPreferences = getSharedPreferences(Constants.SharedPreference, Context.MODE_PRIVATE)!!
-
         authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
         audience_id = sharedPreferences.getString(Constants.AudienceId,"-1").toString()
 
@@ -209,6 +234,7 @@ class PresentationActivity : AppCompatActivity() {
                     {
                         binding.ivProfile1.setImageBitmap(bitmap)
                         encoded_img_1 = ImageUtil.convert(bitmap!!)
+                        mImagePath1 = CommonUtils.getPath(this, data.data)
 
                         val byteBuffer = ByteBuffer.allocate(bitmap.byteCount)
                         bitmap.copyPixelsToBuffer(byteBuffer)
@@ -234,6 +260,7 @@ class PresentationActivity : AppCompatActivity() {
                     {
                         binding.ivProfile2.setImageBitmap(bitmap)
                         encoded_img_2 = ImageUtil.convert(bitmap!!)
+                        mImagePath2 = CommonUtils.getPath(this, data.data)
 
                         binding.ivProfile2.scaleType = ImageView.ScaleType.FIT_XY
 

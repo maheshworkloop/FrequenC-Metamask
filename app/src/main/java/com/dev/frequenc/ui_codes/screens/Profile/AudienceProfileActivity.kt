@@ -28,6 +28,7 @@ import com.dev.frequenc.ui_codes.data.CountryResponse
 import com.dev.frequenc.ui_codes.data.ProfileSuccessResponse
 import com.dev.frequenc.ui_codes.data.StateResponse
 import com.dev.frequenc.databinding.ActivityAudienceProfileBinding
+import com.dev.frequenc.ui_codes.connect.Profile.EditProfileActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.util.AppCommonMethods
 import com.dev.frequenc.ui_codes.util.Constants
@@ -36,6 +37,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.io.Serializable
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -91,6 +93,8 @@ class AudienceProfileActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences(Constants.SharedPreference ,Context.MODE_PRIVATE)
 
         authorization =  sharedPreferences.getString(Constants.Authorization, "-1").toString()
+
+
 
 
         if(!item.fullName.isNullOrEmpty())
@@ -209,6 +213,17 @@ class AudienceProfileActivity : AppCompatActivity() {
             {
                 requestPermission()
             }
+        }
+
+
+        binding.ivEdit.setOnClickListener {
+            val bundle = Bundle()
+            val intent = Intent(this,EditProfileActivity::class.java)
+            bundle.putString("authorization",authorization)
+            bundle.putString("id",item.id)
+            intent.putExtra("item",item as Serializable)
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
 
 //        Log.e("countryId",item.country)

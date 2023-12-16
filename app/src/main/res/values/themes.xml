@@ -12,6 +12,11 @@
         <item name="fontFamily">@font/robotoregular</item>
     </style>
 
+    <style name="SpinnerBg">
+        <item name="fontFamily">@font/robotoregular</item>
+        <item name="android:radius">@dimen/_8sdp</item>
+    </style>
+
     <style name="textViewRegularBold">
         <item name="fontFamily">@font/roboto_bold</item>
     </style>

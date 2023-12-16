@@ -4,7 +4,7 @@ class KeysConstant {
 
     companion object
     {
-//        const val BASE_URL = "http://192.168.1.6:3001/api/v1/"
+//        const val BASE_URL = "http://192.168.1.22:3001/api/v1/"
 
         val CHAT_User_Name: String = "Chat_User_Names"
         val CHAT_TOKEN: String = "Chat_Tokn"
@@ -46,6 +46,8 @@ class KeysConstant {
         const val BOOKMARK_EVENT = "bookmark/savedEvents"
         const val Register_attendee = "auth/registerAttendee"
         const val Initiate_payment = "payments/initiate-payment"
+        const val Update_Payment = "payments/update-transaction"
+//        const val Initiate_payment = "payments/create-payment-intent"
 
         const val Vibe_Event = "connect/vibe-event"
 

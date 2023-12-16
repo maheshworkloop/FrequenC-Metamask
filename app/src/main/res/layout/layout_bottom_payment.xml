@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        >
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:elevation="@dimen/_5sdp"
+            android:indeterminateTint="@color/grey"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rlStripe"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/bg_recycler_pg"
+            android:layout_marginBottom="@dimen/_10sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rlIcon"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bg_recycler_pg_rl"
+                android:layout_centerVertical="true"
+                >
+
+
+                <ImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/stripe" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/rlIcon"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPgName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stripe"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/textViewRegularBold"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPgDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Credit/Debit card with Easier way to pay online and on your mobile."
+                    android:layout_toLeftOf="@id/rbStripe"
+                    android:layout_below="@id/tvPgName"
+                    android:textSize="@dimen/_12sdp"
+                    style="@style/textViewRegular"
+                    android:textColor="@color/material_grey_700"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbStripe"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_centerVertical="true"
+                    />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlRazor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/bg_recycler_pg"
+            android:layout_marginBottom="@dimen/_10sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rlIconRazor"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bg_recycler_pg_rl"
+                android:layout_centerVertical="true"
+                >
+
+
+                <ImageView
+                    android:id="@+id/ivIconRazor"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/razorpay" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/rlIconRazor"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPgNameRazor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Razor Pay"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/textViewRegularBold"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvPgDescRazor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Card, UPI, Net Banking, Wallet (PhonePe, Amazon Pay)"
+                    android:layout_toLeftOf="@id/rbRazor"
+                    android:layout_below="@id/tvPgNameRazor"
+                    android:textSize="@dimen/_12sdp"
+                    style="@style/textViewRegular"
+                    android:textColor="@color/material_grey_700"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbRazor"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_centerVertical="true"
+                    />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btnConfirm"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:background="@drawable/bg_book_now"
+            android:paddingHorizontal="@dimen/_28sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:textColor="@color/white"
+            style="@style/textViewRegularBold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
