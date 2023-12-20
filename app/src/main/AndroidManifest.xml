@@ -73,6 +73,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
 
         <!-- android:name=".ui_codes.connect.home.ConnectHomeActivity" -->
         <!-- android:exported="false" /> -->

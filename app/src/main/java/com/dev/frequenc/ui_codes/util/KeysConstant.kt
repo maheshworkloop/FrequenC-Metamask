@@ -6,14 +6,12 @@ class KeysConstant {
     {
 //        const val BASE_URL = "http://192.168.1.22:3001/api/v1/"
 
-        val CHAT_User_Name: String = "Chat_User_Names"
-        val CHAT_TOKEN: String = "Chat_Tokn"
 
         //        const val BASE_URL = "http://192.168.1.8:3001/api/v1/"
 
         const val BASE_URL = "http://ec2-43-204-108-136.ap-south-1.compute.amazonaws.com:3001/api/v1/"
 
-        const val CHAT_BASE_URL = "a61.chat.agora.io"
+        const val CHAT_BASE_URL = ""
 
         const val BROWSE_BY_CAT = "event/category/browse-by-category"
 
@@ -30,37 +28,37 @@ class KeysConstant {
 
         const val ALL_DATA_TOKEN = "event/all-data/all"
 
-        const val Register_User = "auth/registerUser"
-        const val ConfirmUserOtp = "auth/confirmUserOtp"
+        const val Register_User = ""
+        const val ConfirmUserOtp = ""
 
-        const val UpdateUserType = "auth/updateUserType"
+        const val UpdateUserType = ""
 
 
         const val Event_Detail = "event"
         const val Notification = "notification"
-        const val SavedEvents = "bookmark/event"
+        const val SavedEvents = ""
 
         const val ARTIST_DETAIL_BY_ID = "artist"
-        const val TransactionList = "payments/transaction-list"
+        const val TransactionList = ""
 
-        const val BOOKMARK_EVENT = "bookmark/savedEvents"
-        const val Register_attendee = "auth/registerAttendee"
-        const val Initiate_payment = "payments/initiate-payment"
-        const val Update_Payment = "payments/update-transaction"
+        const val BOOKMARK_EVENT = ""
+        const val Register_attendee = ""
+        const val Initiate_payment = ""
+        const val Update_Payment = ""
 //        const val Initiate_payment = "payments/create-payment-intent"
 
-        const val Vibe_Event = "connect/vibe-event"
+        const val Vibe_Event = ""
 
-        const val GET_VIBE_CATEGORY = "connect/vibe-categories"
+        const val GET_VIBE_CATEGORY = ""
 
-        const val MATCH_VIBE_USER_LIST = "connect/match-vibe/{category}"
+        const val MATCH_VIBE_USER_LIST = ""
 
-        const val My_Request = "connect/myRequest"
-        const val MyConnection = "connect/myConnection"
+        const val My_Request = ""
+        const val MyConnection = ""
 
-        const val GET_QUOTE = "connect/quote"
+        const val GET_QUOTE = ""
 
-        const val UPDATE_CONNECT_PROFILE = "audience/update-mobile-profile/{audience_id}"
+        const val UPDATE_CONNECT_PROFILE = ""
     }
 
 

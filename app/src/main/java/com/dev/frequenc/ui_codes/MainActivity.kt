@@ -135,21 +135,23 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(marketPlace, "MarketPlaceFragment")
 
                 R.id.bottom_chat -> {
+                    Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show()
+
                     //                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
-                    val allChatUserFragment = AllChatUserFragment(allChatListViewModel)
-                    setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
+//                    setCurrentFragment(allChatUserFragment, "AllChatUserFragment")
                 }
 
                 R.id.bottom_connect ->
 //                    Toast.makeText(this,"Releasing soon",Toast.LENGTH_SHORT).show()
 
-                    setCurrentFragment(connectFragment, "ConnectFragment")
+//                    setCurrentFragment(connectFragment, "ConnectFragment")
+                    Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show()
 
-                R.id.bottom_wallet ->
+
 //                    Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show()
 
-                    startActivity(Intent(this@MainActivity, com.dev.frequenc.MainActivity:: class.java))
-//                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
+                R.id.bottom_wallet -> setCurrentFragment(walletFragment, "WalletFragment")
+
             }
 
             true
@@ -162,8 +164,6 @@ class MainActivity : AppCompatActivity() {
         audience_id = sharedPreferences.getString(Constants.AudienceId, "-1").toString()
 
         requestPermissions()
-        initSDK()
-        addConnectionListener()
 
         if (userRegistered && !(authorization == "-1") && !(audience_id == "-1")) {
 
@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity() {
 
             callRegisterUserApis()
             } else {
-            getTokenFromAppServer(NEW_LOGIN)
+//            getTokenFromAppServer(NEW_LOGIN)
             }
 
 //            loginChatSdk()
@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity() {
 
             GlobalScope.launch {
                 sharedPreferences?.getString(Constants.Authorization, null)?.let { token ->
-                    allChatListViewModel.callConnectionApi(token)
+//                    allChatListViewModel.callConnectionApi(token)
                 }
             }
 
@@ -355,70 +355,7 @@ class MainActivity : AppCompatActivity() {
         checkPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, 110)
     }
 
-    private fun initSDK() {
-        val options = ChatOptions()
-        // Set your appkey applied from Agora Console
-        val sdkAppkey = getString(R.string.app_key_chats)
-        if (TextUtils.isEmpty(sdkAppkey)) {
-            Toast.makeText(
-                this@MainActivity,
-                "You should set your AppKey first!",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-        // Set your appkey to options
-        options.appKey = sdkAppkey
-        // Set whether confirmation of delivery is required by the recipient. Default: false
-        options.requireDeliveryAck = true
-        // Set not to log in automatically
-        options.autoLogin = false
-        // Use UI Samples to initialize Chat SDK
-        EaseUIKit.getInstance().init(this, options)
-        // Make Chat SDK debuggable
-        ChatClient.getInstance().setDebugMode(true)
-    }
 
-    private fun addConnectionListener() {
-        connectionListener = object : ConnectionListener {
-            override fun onConnected() {}
-            override fun onDisconnected(error: Int) {
-                if (error == Error.USER_REMOVED) {
-                    onUserException("account_removed")
-                } else if (error == Error.USER_LOGIN_ANOTHER_DEVICE) {
-                    onUserException("account_conflict")
-                } else if (error == Error.SERVER_SERVICE_RESTRICTED) {
-                    onUserException("account_forbidden")
-                } else if (error == Error.USER_KICKED_BY_CHANGE_PASSWORD) {
-                    onUserException("account_kicked_by_change_password")
-                } else if (error == Error.USER_KICKED_BY_OTHER_DEVICE) {
-                    onUserException("account_kicked_by_other_device")
-                } else if (error == Error.USER_BIND_ANOTHER_DEVICE) {
-                    onUserException("user_bind_another_device")
-                } else if (error == Error.USER_DEVICE_CHANGED) {
-                    onUserException("user_device_changed")
-                } else if (error == Error.USER_LOGIN_TOO_MANY_DEVICES) {
-                    onUserException("user_login_too_many_devices")
-                } else {
-                    onUserException(error.toString())
-                }
-            }
-
-            override fun onTokenExpired() {
-                //login again
-                getTokenFromAppServer(NEW_LOGIN)
-                Log.d(Constants.TAG_CHAT, "ConnectionListener onTokenExpired")
-//                LogUtils.showLog(binding.tvLog, "ConnectionListener onTokenExpired")
-            }
-
-            override fun onTokenWillExpire() {
-                getTokenFromAppServer(RENEW_TOKEN)
-                Log.d(Constants.TAG_CHAT, "ConnectionListener onTokenWillExpire")
-            }
-        }
-        // Call removeConnectionListener(connectionListener) when the activity is destroyed
-        ChatClient.getInstance().addConnectionListener(connectionListener)
-    }
 
     private fun signUp() {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
@@ -468,7 +405,7 @@ class MainActivity : AppCompatActivity() {
                             } catch (ex: Exception) {
                                 ex.printStackTrace()
                             }
-                            callUpdateAgoraApi(username, pwd)
+//                            callUpdateAgoraApi(username, pwd)
                         } else {
                             val errorInfo = `object`.getString("errorInfo")
                             Log.d(Constants.TAG_CHAT, errorInfo)
@@ -486,7 +423,7 @@ class MainActivity : AppCompatActivity() {
                         }
 //                        LogUtils.showErrorLog(binding.tvLog, responseInfo)
                     }
-                    getTokenFromAppServer(NEW_LOGIN)
+//                    getTokenFromAppServer(NEW_LOGIN)
                 } else {
                     Log.d(Constants.TAG_CHAT, responseInfo)
 //                    LogUtils.showErrorLog(binding.tvLog, responseInfo)
@@ -494,7 +431,7 @@ class MainActivity : AppCompatActivity() {
                     if (code in 400..499) {
                         sharedPreferences.edit().putBoolean(Constants.Is_AgoraRegistered, true)
                             .apply()
-                        getTokenFromAppServer(NEW_LOGIN)
+//                        getTokenFromAppServer(NEW_LOGIN)
                     }
                 }
             } catch (e: Exception) {
@@ -506,205 +443,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    private fun getTokenFromAppServer(requestType: String) {
-        if (ChatClient.getInstance().options.autoLogin && ChatClient.getInstance().isLoggedInBefore) {
-            Log.d(Constants.TAG_CHAT, getString(R.string.has_login_before))
-            runOnUiThread {
-                Toast.makeText(
-                    applicationContext,
-                    getString(R.string.has_login_before),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            return
-        }
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
-//            showErrorToast(this@MainActivity, tv_log, getString(R.string.username_or_pwd_miss))
-            Log.d(Constants.TAG_CHAT, getString(R.string.username_or_pwd_miss))
-            runOnUiThread {
-                Toast.makeText(
-                    applicationContext,
-                    getString(R.string.username_or_pwd_miss),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            return
-        }
-        execute {
-            try {
-                val headers: MutableMap<String, String> =
-                    HashMap()
-                headers["Content-Type"] = "application/json"
-                val request = JSONObject()
-                request.putOpt("userAccount", username)
-                request.putOpt("userPassword", pwd)
-//                showErrorLog(tv_log, "begin to getTokenFromAppServer ...")
-                Log.d(Constants.TAG_CHAT, "begin to getTokenFromAppServer ...")
-                val response = HttpClientManager.httpExecute(
-                    LOGIN_URL,
-                    headers,
-                    request.toString(),
-                    Method_POST
-                )
-                val code = response.code
-                val responseInfo = response.content
-                if (code == 200) {
-                    if (responseInfo != null && responseInfo.length > 0) {
-                        val `object` = JSONObject(responseInfo)
-//                        var token = `object`.getString("accessToken")
-val token = "007eJxTYNCtNA9f/4trd+n9440K82RWmmdN6zX5v+xWnXP3kYt39wUpMBhbGFsaGKZYGpgZG5kkGltYpFiappmnWlqaGiSbmRgl3lOsTW0IZGRQfzybgZGBFYiZGEB8BgYAwKceXQ=="
 
-                        if (TextUtils.equals(requestType, NEW_LOGIN)) {
-
-                            ChatClient.getInstance()
-                                .loginWithAgoraToken(username, token, object : CallBack {
-                                    override fun onSuccess() {
-//                                        showToast(
-//                                            this@MainActivity,
-//                                            tv_log,
-//                                            getString(R.string.sign_in_success)
-//                                        )
-                                        Log.d(
-                                            Constants.TAG_CHAT,
-                                            getString(R.string.sign_in_success)
-                                        )
-                                        callUpdateAgoraApi(username, pwd)
-                                        runOnUiThread {
-                                            Toast.makeText(
-                                                applicationContext,
-                                                getString(R.string.sign_in_success),
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
-                                        GlobalScope.launch {
-                                        allChatListViewModel.fetchPresenceStateLists()
-                                        }
-                                    }
-
-                                    override fun onError(code: Int, error: String) {
-//                                        showErrorToast(
-//                                            this@MainActivity,
-//                                            tv_log,
-//                                            "Login failed! code: $code error: $error"
-//                                        )
-                                        Log.d(
-                                            Constants.TAG_CHAT,
-                                            "Login failed! code: $code error: $error"
-                                        )
-                                        runOnUiThread {
-                                            Toast.makeText(
-                                                applicationContext,
-                                                "Login failed! code: $code error: $error",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
-                                    }
-
-                                    override fun onProgress(
-                                        progress: Int,
-                                        status: String
-                                    ) {
-                                    }
-                                })
-                        } else if (TextUtils.equals(requestType, RENEW_TOKEN)) {
-                            ChatClient.getInstance().renewToken(token)
-                        }
-                    } else {
-//                        showErrorToast(
-//                            this@MainActivity,
-//                            tv_log,
-//                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
-//                        )
-                        runOnUiThread {
-                            Log.d(
-                                Constants.TAG_CHAT,
-                                "getTokenFromAppServer failed! code: $code error: $responseInfo"
-                            )
-
-
-                            Toast.makeText(
-                                applicationContext,
-                                "getTokenFromAppServer failed! code: $code error: $responseInfo",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                } else {
-//                    showErrorToast(
-//                        this@MainActivity,
-//                        tv_log,
-//                        "getTokenFromAppServer failed! code: $code error: $responseInfo"
-//                    )
-                    runOnUiThread {
-                        Log.d(
-                            Constants.TAG_CHAT,
-                            "getTokenFromAppServer failed! code: $code error: $responseInfo"
-                        )
-                        Toast.makeText(
-                            applicationContext,
-                            "getTokenFromAppServer failed! code: $code error: $responseInfo",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-//                showErrorToast(
-//                    this@MainActivity,
-//                    tv_log,
-//                    "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message
-//                )
-                Log.d(
-                    Constants.TAG_CHAT,
-                    "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message
-                )
-                runOnUiThread {
-                    Toast.makeText(
-                        applicationContext,
-                        "getTokenFromAppServer failed! code: " + 0 + " error: " + e.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    private fun callUpdateAgoraApi(username: String?, pwd: String?) {
-        GlobalScope.launch {
-            username?.let { it ->
-                pwd?.let { pwd ->
-                    ApiClient.getInstance()?.getUpdateAgora(
-                        sharedPreferences.getString(Constants.Authorization, null),
-                        UpdateAgoraModel(it, pwd)
-                    )?.enqueue(object : Callback<UpdateAgoraDetailResponse> {
-                        override fun onResponse(
-                            call: Call<UpdateAgoraDetailResponse>,
-                            response: Response<UpdateAgoraDetailResponse>
-                        ) {
-                            try {
-                                Toast.makeText(
-                                    applicationContext,
-                                    response.body()?.message,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } catch (e: Exception) {
-                                Log.e(Constants.ApiError, "onResponse:callUpdateAgoraApi ", e)
-                            }
-                        }
-
-                        override fun onFailure(
-                            call: Call<UpdateAgoraDetailResponse>,
-                            t: Throwable
-                        ) {
-                            Log.e(Constants.ApiError, "onFailure:callUpdateAgoraApi ", t)
-                        }
-                    })
-                }
-            }
-        }
-    }
 
     fun onUserException(exception: String) {
 //        LogUtils.showLog(binding.tvLog, "onUserException: $exception")
@@ -719,9 +458,6 @@ val token = "007eJxTYNCtNA9f/4trd+n9440K82RWmmdN6zX5v+xWnXP3kYt39wUpMBhbGFsaGKZY
 
     override fun onDestroy() {
         super.onDestroy()
-        if (connectionListener != null) {
-            ChatClient.getInstance().removeConnectionListener(connectionListener)
-        }
     }
 
     private fun checkPermissions(permission: String, requestCode: Int): Boolean {

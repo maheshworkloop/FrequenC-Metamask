@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dev.frequenc.ui_codes.data.TrendingEventsResponse
 import com.dev.frequenc.databinding.ActivityViewAllCategoryBinding
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.screens.ViewAllTrendingEvents.TrendingEventAdapterViewAll
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
@@ -122,12 +121,7 @@ class ViewAllCategoryActivity : AppCompatActivity(), TrendingEventAdapterViewAll
 
 
     override fun onClickAtCard(item: TrendingEventsResponse) {
-        val intent = Intent(this, EventDetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putString("eventid",item._id)
-        Log.d("eventid",item._id)
-        intent.putExtras(bundle)
-        startActivity(intent)
+
     }
 
     override fun onClickAtBookmark(item: TrendingEventsResponse) {

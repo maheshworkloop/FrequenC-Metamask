@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dev.frequenc.ui_codes.data.AllDataResponse
 import com.dev.frequenc.databinding.ActivityViewAllAllBinding
 import com.dev.frequenc.ui_codes.screens.Adapter.AllDataAdapter
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 
 class ViewAllAllActivity : AppCompatActivity(),AllDataAdapter.ListAdapterListener {
 
@@ -34,10 +33,6 @@ class ViewAllAllActivity : AppCompatActivity(),AllDataAdapter.ListAdapterListene
     }
 
     override fun onClickAtEvent(item: AllDataResponse) {
-        val intent = Intent(this, EventDetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putString("eventid",item.eventid)
-        intent.putExtras(bundle)
-        startActivity(intent)
+
     }
 }

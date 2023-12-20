@@ -44,8 +44,6 @@ import com.dev.frequenc.ui_codes.screens.Adapter.AllDataAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.CategoryAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingArtistAdapter
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingEventAdapter
-import com.dev.frequenc.ui_codes.screens.ArtistDetail.ArtistDetailsActivity
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.MainActivity
 import com.dev.frequenc.ui_codes.connect.Profile.EditProfileActivity
 import com.dev.frequenc.ui_codes.screens.intro.IntroduceYourselfActivity
@@ -215,8 +213,8 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
         }
 
         loginBtn.setOnClickListener {
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(requireContext(), LoginActivity::class.java)
+//            startActivity(intent)
         }
 
         ivNotification.setOnClickListener {
@@ -264,7 +262,7 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
 
             isLogin =false
 
-            (activity as MainActivity).binding.bottomNavigationView.visibility = View.GONE
+            (activity as MainActivity).binding.bottomNavigationView.visibility = View.VISIBLE
 
 //            Log.e("Bearer",authorization)
         }
@@ -642,24 +640,9 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
     override fun onClickAtArtist(item: TrendingArtistResponse) {
 //        Toast.makeText(mContext,"Artist Clicked",Toast.LENGTH_SHORT).show()
 
-        val bundle = Bundle()
-        val intent = Intent(requireContext(),ArtistDetailsActivity::class.java)
-        bundle.putString("artist_id",item._id)
-        intent.putExtras(bundle)
-        startActivity(intent)
-
     }
 
     override fun onClickAtCard(item: TrendingEventsResponse) {
-//        Toast.makeText(mContext,"Event Clicked",Toast.LENGTH_SHORT).show()
-
-        val intent = Intent(mContext,EventDetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putString("eventid",item._id)
-        Log.d("eventid",item._id)
-
-        intent.putExtras(bundle)
-        startActivity(intent)
 
     }
 
@@ -739,11 +722,6 @@ class MarketPlaceFragment : Fragment(), TrendingArtistAdapter.ListAdapterListene
 
     override fun onClickAtEvent(item: AllDataResponse) {
 
-        val intent = Intent(requireContext(),EventDetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putString("eventid",item.eventid)
-        intent.putExtras(bundle)
-        startActivity(intent)
 
     }
 

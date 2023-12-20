@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.VibeEventResponse
 import com.dev.frequenc.ui_codes.data.VibeResponse
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
 import retrofit2.Call
@@ -170,13 +169,6 @@ class EventsFragment : Fragment(),VibesEventAdapter.ListAdapterListener {
 
     override fun onClickAtVibe(item: VibeResponse) {
 
-        val intent = Intent(requireContext(),EventDetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putString("eventid",item._id)
-        Log.d("eventid",item._id)
-
-        intent.putExtras(bundle)
-        startActivity(intent)
 
     }
 

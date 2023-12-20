@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.frequenc.ui_codes.screens.Adapter.SearchAdapter
 import com.dev.frequenc.ui_codes.data.SearchResponse
 import com.dev.frequenc.databinding.ActivitySearchBinding
-import com.dev.frequenc.ui_codes.screens.ArtistDetail.ArtistDetailsActivity
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
-import com.dev.frequenc.ui_codes.screens.VenueDetail.VenueDetailActivity
 import com.dev.frequenc.ui_codes.screens.utils.ApiClient
 import com.dev.frequenc.ui_codes.util.Constants
 import retrofit2.Call
@@ -118,28 +115,15 @@ class SearchActivity : AppCompatActivity(),SearchAdapter.ListAdapterLister {
 //        Toast.makeText(this,"Clicked",Toast.LENGTH_SHORT).show()
         if(item.type.equals("event"))
         {
-            val intent = Intent(this, EventDetailActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("eventid",item.eventid)
-            intent.putExtras(bundle)
-            startActivity(intent)
+
         }
         else if(item.type.equals("venue"))
         {
-            val intent = Intent(this, VenueDetailActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("venue_id", item.id)
-            Log.d("venue_id", item.id)
-            intent.putExtras(bundle)
-            startActivity(intent)
+
         }
         else if(item.type.equals("artist"))
         {
-            val bundle = Bundle()
-            val intent = Intent(this, ArtistDetailsActivity::class.java)
-            bundle.putString("artist_id",item.id)
-            intent.putExtras(bundle)
-            startActivity(intent)
+
         }
     }
 

@@ -8,7 +8,6 @@ import com.dev.frequenc.ui_codes.data.TrendingArtistResponse
 import com.dev.frequenc.databinding.ActivityViewAllTrendingArtistBinding
 import com.dev.frequenc.databinding.ActivityViewAllTrendingEventsBinding
 import com.dev.frequenc.ui_codes.screens.Adapter.TrendingArtistAdapter
-import com.dev.frequenc.ui_codes.screens.ArtistDetail.ArtistDetailsActivity
 
 class ViewAllTrendingArtistActivity : AppCompatActivity(),TrendingArtistAdapter.ListAdapterListener {
 
@@ -35,11 +34,7 @@ class ViewAllTrendingArtistActivity : AppCompatActivity(),TrendingArtistAdapter.
 
 
     override fun onClickAtArtist(item: TrendingArtistResponse) {
-        val bundle = Bundle()
-        val intent = Intent(this, ArtistDetailsActivity::class.java)
-        bundle.putString("artist_id",item._id)
-        intent.putExtras(bundle)
-        startActivity(intent)
+
 
     }
 

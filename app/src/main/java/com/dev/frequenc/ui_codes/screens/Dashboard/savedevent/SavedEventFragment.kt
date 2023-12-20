@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.dev.frequenc.R
 import com.dev.frequenc.ui_codes.data.saved_event.SavedEventResponseItem
 import com.dev.frequenc.databinding.FragmentSavedEventBinding
-import com.dev.frequenc.ui_codes.screens.EventDetail.EventDetailActivity
 import com.dev.frequenc.ui_codes.util.Constants
 import com.dev.frequenc.ui_codes.util.ItemClickListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -87,11 +86,6 @@ class SavedEventFragment : Fragment(), ItemClickListener {
     }
 
     private fun moveToEventDetailsPage(position: Int) {
-        if (position != -1) {
-            val intent = Intent(activity,EventDetailActivity::class.java)
-            intent.putExtra("eventid", savedEventViewModel.savedEventResponse.value?.get(position)?._id)
-            activity?.startActivity(intent)
-        }
 
     }
 

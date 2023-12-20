@@ -57,29 +57,12 @@
     <string name="sign_in_first">Please sign in first</string>
     <string name="not_find_send_name">Please enter the username who you want to send first!</string>
 
-    <string name="org_name_chats">611066503</string>
-    <string name="app_name_chats">1247460</string>
+    <string name="org_name_chats"></string>
+    <string name="app_name_chats"></string>
     <string name="camera">Camera\n</string>
     <string name="gallery">Gallery</string>
   
-    <!--    <string name="app_key_chats">611066503#1247460</string>-->
-    <!--    <string name="app_key_chats">711066503#1245981</string>-->
-    <!--    <string name="org_name_chats">711066503</string>-->
-    <!--    <string name="app_name_chats">1245981</string>-->
-    <!--    <string name="app_key_chats">611066503#1247460</string>-->
-    <!--    <string name="org_name_chats">611066503</string>-->
-    <!--    <string name="app_name_chats">1247460</string>-->
-
-
-    <!--    <string name="app_key_chats">611070665#1250094</string>-->
-    <!--    <string name="app_key_chats">41879113#1059072</string>-->
-    <!--    <string name="app_key_chats">611070665#1250094</string>-->
-    <!--    <string name="app_key_chats">611070665#1249732</string>-->
-    <!--    <string name="org_name_chats">611070665</string>-->
-    <!--    <string name="app_name_chats">1250094</string>-->
-    <!--    <string name="app_id_chats">383901d906324a388d95f7e9950c642a</string>-->
-    <!--    <string name="app_certificate_chats">148a034119c14c19a9daf790ee869e1a</string>-->
-    <!--    <string name="app_token_chats">007eJxTYIj7bTpZeJGbmPHDACVhloM1D/d8NjhSsOBRv/Sfx9r3L65SYDC2MLY0MEyxNDAzNjJJNLawSLE0TTNPtbQ0NUg2MzFKnOJfkdoQyMhQqaPKzMjAysDIwMQA4jMwAACBLxzu</string>-->
+        <string name="app_key_chats"></string>
 
 
 </resources>

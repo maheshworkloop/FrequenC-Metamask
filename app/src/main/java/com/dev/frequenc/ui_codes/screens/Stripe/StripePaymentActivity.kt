@@ -36,9 +36,9 @@ import retrofit2.Response
 
 class StripePaymentActivity : AppCompatActivity() {
 
-    val STRIPE_PUBLISHABLE_KEY="pk_test_51Msg80SDrSIXwtthzwmV8YXpzPbxhk0M1atGmMxtyf0ZlmpA6cWKdRiIZijNimCwD9vLiC21yFkYhhLbvDKG86y800dgr69PR1"
-    val STRIPE_SECRET_KEY="sk_test_51Msg80SDrSIXwtthWlqKansXTFnhImdlF6IHkSSJEpzNRdhfRcRB3yW8kDHE8lxGepKYodzrQrrxwKR1JaSTJCJt00r8N3nAaT"
-    val STRIPE_ACCOUNT_ID = "acct_1Msg80SDrSIXwtth"
+    val STRIPE_PUBLISHABLE_KEY=""
+    val STRIPE_SECRET_KEY=""
+    val STRIPE_ACCOUNT_ID = ""
 
     var client_scret = ""
 

@@ -109,79 +109,79 @@ class AllChatListViewModel : ViewModel() {
         }
     }
 
-    suspend fun callConnectionApi(token: String) {
-        coroutineScope {
-            __isApiCalled.postValue(true)
-            ApiClient.getInstance()?.connectionList(token)
-                ?.enqueue(object : Callback<MyConnectionResponse> {
-                    override fun onResponse(
-                        call: Call<MyConnectionResponse>,
-                        response: Response<MyConnectionResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            if (response.body() != null && response.body()?.data != null && response.body()?.data?.size!! > 0) {
-                                val adapterLists = ArrayList<ConnectionResponse>()
-                                val userIdsLst = ArrayList<String>()
-                                for (data: Data in response.body()?.data!!) {
-//                            adapterLists.add(ConnectionResponse(data.to_user_id,data.status))
-//                                _countNumber.postValue(CountNumber.value.put("C"))
-                                    var images: String = ""
-                                    try {
-                                        images = data.from_user_id.audience_id.profile_pic
-                                    } catch (exs: Exception) {
-                                        exs.printStackTrace()
-                                    }
-                                    var personAge: String = ""
-                                    try {
-                                        val dateParts: List<String> = data.from_user_id.audience_id.dob.split("-")
-                                        val day:String = dateParts[2]
-                                        val month = dateParts[1]
-                                        val year = dateParts[0]
-//        item.dob
-                                        @RequiresApi(Build.VERSION_CODES.O)
-                                        personAge = getAge(year.toInt(), month.toInt(),day.toInt()).toString()
-                                    }
-                                    catch (ex: Exception) {
-                                        ex.printStackTrace()
-                                    }
-                                    adapterLists.add(
-                                        ConnectionResponse(
-                                            images,
-                                            data.from_user_id.audience_id.fullName,
-                                            data.from_user_id._id,
-                                            personAge,
-                                            null,
-                                            data.from_user_id.audience_id.gender
-                                        )
-                                    )
-                                    userIdsLst.add(data.id)
-                                }
-                                userLists = userIdsLst
-                                try {
-                                    _connectionList.postValue(adapterLists)
-                                    _requestCount.postValue(response.body()!!.requestCount)
-                                } catch (ex: Exception) {
-                                }
-
-                            } else {
-                                _connectionList.postValue(ArrayList())
-                            }
-                        } else {
-                            Log.d(
-                                Constants.Error,
-                                "onResponse:callConnectionApi() ${response.body()}"
-                            )
-                        }
-                        __isApiCalled.postValue(false)
-                    }
-
-                    override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
-                        Log.e(Constants.Error, "onFailure:callConnectionApi() ", t)
-                        __isApiCalled.postValue(false)
-                    }
-                })
-        }
-    }
+//    suspend fun callConnectionApi(token: String) {
+//        coroutineScope {
+//            __isApiCalled.postValue(true)
+//            ApiClient.getInstance()?.connectionList(token)
+//                ?.enqueue(object : Callback<MyConnectionResponse> {
+//                    override fun onResponse(
+//                        call: Call<MyConnectionResponse>,
+//                        response: Response<MyConnectionResponse>
+//                    ) {
+//                        if (response.isSuccessful) {
+//                            if (response.body() != null && response.body()?.data != null && response.body()?.data?.size!! > 0) {
+//                                val adapterLists = ArrayList<ConnectionResponse>()
+//                                val userIdsLst = ArrayList<String>()
+//                                for (data: Data in response.body()?.data!!) {
+////                            adapterLists.add(ConnectionResponse(data.to_user_id,data.status))
+////                                _countNumber.postValue(CountNumber.value.put("C"))
+//                                    var images: String = ""
+//                                    try {
+//                                        images = data.from_user_id.audience_id.profile_pic
+//                                    } catch (exs: Exception) {
+//                                        exs.printStackTrace()
+//                                    }
+//                                    var personAge: String = ""
+//                                    try {
+//                                        val dateParts: List<String> = data.from_user_id.audience_id.dob.split("-")
+//                                        val day:String = dateParts[2]
+//                                        val month = dateParts[1]
+//                                        val year = dateParts[0]
+////        item.dob
+//                                        @RequiresApi(Build.VERSION_CODES.O)
+//                                        personAge = getAge(year.toInt(), month.toInt(),day.toInt()).toString()
+//                                    }
+//                                    catch (ex: Exception) {
+//                                        ex.printStackTrace()
+//                                    }
+//                                    adapterLists.add(
+//                                        ConnectionResponse(
+//                                            images,
+//                                            data.from_user_id.audience_id.fullName,
+//                                            data.from_user_id._id,
+//                                            personAge,
+//                                            null,
+//                                            data.from_user_id.audience_id.gender
+//                                        )
+//                                    )
+//                                    userIdsLst.add(data.id)
+//                                }
+//                                userLists = userIdsLst
+//                                try {
+//                                    _connectionList.postValue(adapterLists)
+//                                    _requestCount.postValue(response.body()!!.requestCount)
+//                                } catch (ex: Exception) {
+//                                }
+//
+//                            } else {
+//                                _connectionList.postValue(ArrayList())
+//                            }
+//                        } else {
+//                            Log.d(
+//                                Constants.Error,
+//                                "onResponse:callConnectionApi() ${response.body()}"
+//                            )
+//                        }
+//                        __isApiCalled.postValue(false)
+//                    }
+//
+//                    override fun onFailure(call: Call<MyConnectionResponse>, t: Throwable) {
+//                        Log.e(Constants.Error, "onFailure:callConnectionApi() ", t)
+//                        __isApiCalled.postValue(false)
+//                    }
+//                })
+//        }
+//    }
     suspend fun callMyRequestApi(token: String) {
         coroutineScope {
             __isApiCalled.postValue(true)
